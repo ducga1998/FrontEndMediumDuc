@@ -29,8 +29,8 @@ export default function Article({ avatar, titleArticle, content, totalClap, time
                 </ButtonGroup>
             </ButtonToolbar>
         </$DetailArticle>
-        <$TotalClap>{totalClap}</$TotalClap>
-        <$TotalComment>{totalComment}</$TotalComment>
+        <$TotalClap><i className="fa fa-bookmark" />{totalClap}</$TotalClap>
+        <$TotalComment><i className="fa fa-comment" />{totalComment}</$TotalComment>
     </$Article>
 }
 const $TotalClap = styled.div`

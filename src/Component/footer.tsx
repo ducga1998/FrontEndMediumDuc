@@ -8,9 +8,10 @@ const Footer = () => {
     const [value, setValue] = React.useState(0);
     return <Row style={
         {
-            backgroundColor: 'yellow'
+            backgroundColor: 'Mariner'
         }
     }>
+
         <Col xs={12}>
             <button onClick={e => {
                 setValue(value + 1)
