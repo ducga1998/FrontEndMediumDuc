@@ -34,10 +34,12 @@ export default function Article({ avatar, titleArticle, content, totalClap, time
     </$Article>
 }
 const $TotalClap = styled.div`
-    flex : 1
+    flex : 1;
+    font-size : 20px;
 `
 const $TotalComment = styled.div`
-flex : 1;
+    flex : 1;
+    font-size : 20px;
 `
 const $Avatar = styled.div`
     background-color : "red";
@@ -49,10 +51,13 @@ const $Avatar = styled.div`
 `
 const $DetailArticle = styled.div`
     flex : 8;
+    padding : 20px;
 `
 const $Article = styled.div<any>`
     position :relative;
     display : flex;
+    border-bottom: 1px solid #d9d5d5;
+    margin-bottom: 13px;
     ${$Avatar} {
             flex : 1;
     }

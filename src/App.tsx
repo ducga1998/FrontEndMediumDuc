@@ -10,17 +10,16 @@ import styled from 'styled-components';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { Provider } from 'unstated-x';
-import Author from './Component/Author';
 class App extends React.Component {
   public render() {
     return <>
       <Provider>
-        <Layout>
-          <Author />
-          <$BoxAlgin>
-            <AppRouter />
-          </$BoxAlgin>
-        </Layout>
+        {/* <Layout> */}
+        {/* <Author /> */}
+        <$BoxAlgin>
+          <AppRouter />
+        </$BoxAlgin>
+        {/* </Layout> */}
         <ToastContainer autoClose={4000} />
       </Provider>
     </>

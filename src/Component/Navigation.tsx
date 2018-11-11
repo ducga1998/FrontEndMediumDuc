@@ -5,6 +5,7 @@ import { Col, Navbar, Nav, MenuItem, NavDropdown, NavItem, Row } from 'react-boo
 import DropDown from '../UI/UIDropDown';
 import { SubscribeOne, Subscribe } from 'unstated-x';
 import userContainer from '../Container/userContainer';
+import { Link } from 'react-router-dom'
 class Navication extends React.Component<any>{
     public render() {
         return <Row><Navbar fluid collapseOnSelect style={{
@@ -19,11 +20,11 @@ class Navication extends React.Component<any>{
             <Navbar.Collapse>
                 <Nav>
                     <NavItem eventKey={1} href="#">
-                        Home
-            </NavItem>
-                    <NavItem eventKey={2} href="#">
+                        <Link to="/home" > Home</Link>
+                    </NavItem>
+                    {/* <NavItem eventKey={2} href="#">
                         Article
-            </NavItem>
+            </NavItem> */}
                     {/* <NavDropdown eventKey={3} title="Dropdown" id="basic-nav-dropdown">
                         <MenuItem eventKey={3.1}>Action</MenuItem>
                         <MenuItem eventKey={3.2}>Another action</MenuItem>
@@ -33,6 +34,9 @@ class Navication extends React.Component<any>{
                     </NavDropdown> */}
                 </Nav>
                 <Nav pullRight>
+                    <NavItem eventKey={1} href="#">
+                        <Link to="/writearticle" > Write Article</Link>
+                    </NavItem>
                     <Subscribe to={[userContainer]} >
                         {
                             container => {

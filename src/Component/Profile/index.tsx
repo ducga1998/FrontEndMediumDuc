@@ -1,21 +1,17 @@
-// import * as React from 'react'
-// import { Row, Col } from 'react-bootstrap';
-// const Footer = () => {
-//     React.useEffect(() => {
-//         console.log('ahihi')
-//         return () => { console.log('cascasn') }
-//     })
-//     const [value, setValue] = React.useState(0);
-//     return <$Layout>
-//         <$Avatar>
+import * as React from 'react'
+import { Row, Col } from 'react-bootstrap';
+import styled from 'styled-components';
+const Profile = () => {
+    React.useEffect(() => {
+        console.log('ahihi')
+        return () => { console.log('cascasn') }
+    })
+    const [value, setValue] = React.useState(0);
+    return <$Content>
 
-//         </$Avatar>
-//         <$InfomationUser>
-//             <$Follow >
+    </$Content>
+}
+const $Content = styled.div`
 
-//             </$Follow>
-
-//         </$InfomationUser>
-//     </$Layout>
-// }
-// export default Footer
+`
+export default Profile

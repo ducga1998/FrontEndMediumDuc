@@ -4,7 +4,10 @@ import * as React from "react";
 
 import Login from './Component/Form/login'
 import Register from "./Component/Form/register";
-
+import Author from './Component/Author/index'
+import Home from "./Component/Home";
+import Layout from './Component/Layout';
+import WriteArticle from './Component/WriteArticle'
 const Index = ({ history }) => {
     console.log('history', history)
     return <h2>Home</h2>;
@@ -21,7 +24,7 @@ const AppRouter = () => {
         return null
     }
     return <Router>
-        <div>
+        <Layout>
             <Route path="/" exact component={Index} />
             <Route path="/about/" component={About} />
             <Route path="/users/:id" component={Users} />
@@ -29,9 +32,11 @@ const AppRouter = () => {
             <Route path="/login" component={Login} />
             <Route path="/logout" />
             <Route path="/register" component={Register} />
-            {/* <Route path =""/> */}
-            <Route path="/profile" />
-        </div>
+            <Route path="/home" component={Home} />
+            <Route path="/profile" component={Author} />
+            <Route path="/writearticle" component={WriteArticle} />
+            WriteArticle
+        </Layout>
     </Router>
 }
 

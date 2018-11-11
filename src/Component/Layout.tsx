@@ -6,26 +6,11 @@ import { Grid, Row, Col } from 'react-bootstrap';
 import Footer from './footer'
 
 export default function Layout({ children }) {
-    return <Grid fluid componentClass="div" >
-        {/* <Header /> */}
+    return <Grid fluid componentClass="div" style={{
+        width: '100%'
+    }} >
         <Navigation />
-        <section>
-            {/* <Row style={{
-                // backgroundColor: 'red',
-                height: '600px'
-            }}> */}
-            {/* <Col xs={8} style={{
-                    backgroundColor: '#89c4f4',
-                    height: '700px'
-                }} > */}
-            {children}
-            {/* </Col> */}
-            {/* <Col xs={4} style={{
-                    backgroundColor: '#59abe3',
-                    height: '700px'
-                }} ></Col> */}
-            {/* </Row> */}
-        </section>
+        {children}
         <Footer />
     </Grid>;
 }

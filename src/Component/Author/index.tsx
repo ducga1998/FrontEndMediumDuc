@@ -1,6 +1,7 @@
 import * as React from 'react'
-import { Row, Col } from 'react-bootstrap';
+// import { Row, Col } from 'react-bootstrap';
 import './index.css'
+import { Link } from "react-router-dom"
 const Author = ({ }) => {
     React.useEffect(() => {
         console.log('ahihi')
@@ -9,9 +10,8 @@ const Author = ({ }) => {
     const [value, setValue] = React.useState(0);
     return <div className="meta-profile item">
         <div className="left floated ui bigger avatar image">
-            <a href="/users/NguyenMinhDuc11111/mypage">
-                <img className="lazy" src="http://graph.facebook.com/1898075403817841/picture" />
-            </a>    </div>
+            <Link to="/profile" ><img className="lazy" src="http://graph.facebook.com/1898075403817841/picture" /></Link>
+        </div>
         <div className="right floated">
             <a className="name" href="/users/NguyenMinhDuc11111/mypage">
                 <h2 className="caption">
