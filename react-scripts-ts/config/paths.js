@@ -16,7 +16,7 @@ const url = require('url');
 // https://github.com/facebookincubator/create-react-app/issues/637
 const appDirectory = fs.realpathSync(process.cwd());
 const resolveApp = relativePath => path.resolve(appDirectory, relativePath);
-
+console.log("resolveApp('config/proxySetup.js')", resolveApp('config/proxySetup.js'))
 const envPublicUrl = process.env.PUBLIC_URL;
 
 function ensureSlash(path, needsSlash) {
@@ -89,6 +89,7 @@ module.exports = {
   servedPath: getServedPath(resolveApp('package.json')),
   // These properties only exist before ejecting:
   ownPath: resolveOwn('.'),
+  proxySetup: resolveApp('react-scripts-ts/config/proxySetup.js'),
   ownNodeModules: resolveOwn('node_modules'), // This is empty on npm 3
 };
 
@@ -98,31 +99,32 @@ const reactScriptsLinked = fs.existsSync(reactScriptsPath) &&
   fs.lstatSync(reactScriptsPath).isSymbolicLink();
 
 // config before publish: we're in ./packages/react-scripts/config/
-if (
-  !reactScriptsLinked &&
-  __dirname.indexOf(path.join('packages', 'react-scripts', 'config')) !== -1
-) {
-  module.exports = {
-    dotenv: resolveOwn('template/.env'),
-    appPath: resolveApp('.'),
-    appBuild: resolveOwn('../../build'),
-    appPublic: resolveOwn('template/public'),
-    appHtml: resolveOwn('template/public/index.html'),
-    appIndexJs: resolveOwn('template/src/index.tsx'),
-    appPackageJson: resolveOwn('package.json'),
-    appSrc: resolveOwn('template/src'),
-    yarnLockFile: resolveOwn('template/yarn.lock'),
-    testsSetup: resolveOwn('template/src/setupTests.ts'),
-    appNodeModules: resolveOwn('node_modules'),
-    appTsConfig: resolveOwn('template/tsconfig.json'),
-    appTsProdConfig: resolveOwn('template/tsconfig.prod.json'),
-    appTsLint: resolveOwn('template/tslint.json'),
-    appTsTestConfig: resolveOwn('template/tsconfig.test.json'),
-    publicUrl: getPublicUrl(resolveOwn('package.json')),
-    servedPath: getServedPath(resolveOwn('package.json')),
-    // These properties only exist before ejecting:
-    ownPath: resolveOwn('.'),
-    ownNodeModules: resolveOwn('node_modules'),
-  };
-}
+// if (
+//   !reactScriptsLinked &&
+//   __dirname.indexOf(path.join('packages', 'react-scripts', 'config')) !== -1
+// ) {
+//   module.exports = {
+//     dotenv: resolveOwn('template/.env'),
+//     appPath: resolveApp('.'),
+//     appBuild: resolveOwn('../../build'),
+//     appPublic: resolveOwn('template/public'),
+//     appHtml: resolveOwn('template/public/index.html'),
+//     appIndexJs: resolveOwn('template/src/index.tsx'),
+//     appPackageJson: resolveOwn('package.json'),
+//     appSrc: resolveOwn('template/src'),
+//     yarnLockFile: resolveOwn('template/yarn.lock'),
+//     testsSetup: resolveOwn('template/src/setupTests.ts'),
+//     proxySetup: resolveApp('config/proxySetup.js'),
+//     appNodeModules: resolveOwn('node_modules'),
+//     appTsConfig: resolveOwn('template/tsconfig.json'),
+//     appTsProdConfig: resolveOwn('template/tsconfig.prod.json'),
+//     appTsLint: resolveOwn('template/tslint.json'),
+//     appTsTestConfig: resolveOwn('template/tsconfig.test.json'),
+//     publicUrl: getPublicUrl(resolveOwn('package.json')),
+//     servedPath: getServedPath(resolveOwn('package.json')),
+//     // These properties only exist before ejecting:
+//     ownPath: resolveOwn('.'),
+//     ownNodeModules: resolveOwn('node_modules'),
+//   };
+// }
 // @remove-on-eject-end

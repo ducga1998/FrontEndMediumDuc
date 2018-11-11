@@ -29,12 +29,12 @@ export function addUser(user: any) {
 }
 //QUERY
 export function checkLoginUser(user: any) {
-    const { login, password } = user;
+    const { username, password } = user;
     return new Promise(resolve => {
         const data = client.query({
             query: gql`
                 query {
-                checklogin( username :"${login}" , password :"${password}" ){
+                checklogin( username :"${username}" , password :"${password}" ){
                 password,
                 login,
                 decentraliz,
@@ -43,5 +43,6 @@ export function checkLoginUser(user: any) {
             }
             `
         })
+        resolve(data)
     })
 }

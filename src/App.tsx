@@ -9,22 +9,21 @@ import AppRouter from './route'
 import styled from 'styled-components';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { Provider } from 'unstated-x';
+import Author from './Component/Author';
 class App extends React.Component {
   public render() {
-    return <><Layout>
-      <$BoxAlgin>
-        <AppRouter />
-      </$BoxAlgin>
-
-    </Layout>
-      <ToastContainer autoClose={4000} />
+    return <>
+      <Provider>
+        <Layout>
+          <Author />
+          <$BoxAlgin>
+            <AppRouter />
+          </$BoxAlgin>
+        </Layout>
+        <ToastContainer autoClose={4000} />
+      </Provider>
     </>
-    // return <Layout>
-    //   {/* <Article totalClap={10} totalComment={90909} hashTag={[{ name: "javascript" }, { name: "typescript" }]} titleArticle="titlte" time="123" avatar="https://webpack.js.org/e0b5805d423a4ec9473ee315250968b2.svg" content="caslcascnaskncjasnjkcnasjkcnjkasncjas" />
-    //   <UIForm />
-    //   <Login /> */}
-    //   <AppRouter />
-    // </Layout>
   }
 }
 const $BoxAlgin = styled.div`

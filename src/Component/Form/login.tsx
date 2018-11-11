@@ -8,7 +8,7 @@ import styled from 'styled-components';
 import UIModal from '../../UI/UIModal'
 import { BrowserRouter as Router, Route, Link } from "react-router-dom"
 import UIButton from '../../UI/UIButton';
-
+import userContainer from '../../Container/userContainer'
 function CheckUser(user, password) {
     if (user === 'admin' && password === 'admin') {
         console.log('ok')
@@ -26,7 +26,8 @@ export default function Login() {
         <UIField titleField="Password" placeholder="Password .... " value={password} onChange={(value) => {
             setValuePassword(value)
         }} />
-        <UIButton onChange={() => {
+        <UIButton onChange={async () => {
+            await userContainer.login({ username: name, password })
 
         }}>Login</UIButton>
         <UIButton  ><Link to='/register'>Register</Link></UIButton>

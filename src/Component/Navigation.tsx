@@ -3,6 +3,8 @@ import * as React from 'react'
 import AppRouter from '../route'
 import { Col, Navbar, Nav, MenuItem, NavDropdown, NavItem, Row } from 'react-bootstrap';
 import DropDown from '../UI/UIDropDown';
+import { SubscribeOne, Subscribe } from 'unstated-x';
+import userContainer from '../Container/userContainer';
 class Navication extends React.Component<any>{
     public render() {
         return <Row><Navbar fluid collapseOnSelect style={{
@@ -31,16 +33,20 @@ class Navication extends React.Component<any>{
                     </NavDropdown> */}
                 </Nav>
                 <Nav pullRight>
-                    <NavDropdown eventKey={3} title="Setting" id="basic-nav-dropdown">
-                        <MenuItem eventKey={3.1}>Action</MenuItem>
-                        <MenuItem eventKey={3.2}>Another action</MenuItem>
-                        <MenuItem eventKey={3.3}>Something else here</MenuItem>
-                        <MenuItem divider />
-                        <MenuItem eventKey={3.3}>Separated link</MenuItem>
-                    </NavDropdown>
-                    <NavItem eventKey={2} href="#">
+                    <Subscribe to={[userContainer]} >
+                        {
+                            container => {
+                                return container.state.login ? "nguyen minh duc" : <NavDropdown eventKey={3} title="Setting" id="basic-nav-dropdown">
+                                    <MenuItem eventKey={3.1}>Action</MenuItem>
+                                    <MenuItem eventKey={3.2}>Another action</MenuItem>
+                                    <MenuItem eventKey={3.3}>Something else here</MenuItem>
+                                    <MenuItem divider />
+                                    <MenuItem eventKey={3.3}>Separated link</MenuItem>
+                                </NavDropdown>
+                            }
+                        }
+                    </Subscribe>
 
-                    </NavItem>
                 </Nav>
             </Navbar.Collapse>
         </Navbar> </Row>
