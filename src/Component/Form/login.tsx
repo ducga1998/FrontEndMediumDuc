@@ -8,6 +8,7 @@ import styled from 'styled-components';
 import UIModal from '../../UI/UIModal'
 import { BrowserRouter as Router, Route, Link } from "react-router-dom"
 import UIButton from '../../UI/UIButton';
+
 function CheckUser(user, password) {
     if (user === 'admin' && password === 'admin') {
         console.log('ok')
@@ -26,12 +27,12 @@ export default function Login() {
             setValuePassword(value)
         }} />
         <UIButton onChange={() => {
-            console.log(name, password)
+
         }}>Login</UIButton>
         <UIButton  ><Link to='/register'>Register</Link></UIButton>
-        <UIModal trigger={<button>click</button>}>
+        {/* <UIModal trigger={<button>click</button>}>
             casnjkcnaskjnckasnkjcnkajsccalkcmasklmcamscmkalsmcklamskl
-        </UIModal>
+        </UIModal> */}
     </$Form>
 }
 const $Form = styled.div`

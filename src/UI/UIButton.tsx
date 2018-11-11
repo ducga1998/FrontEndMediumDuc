@@ -28,6 +28,7 @@ const $Button = styled.a<{ width?: string, height?: string }>`
     border: 1px solid transparent;
     text-decoration: none;
     user-select: none;
+
 `
 const $Primary = styled($Button)`
     color: #e3f2fd;

@@ -25,7 +25,7 @@ export default class UIField extends React.Component<IUIField, any> {
         return (
             <form>
                 <FormGroup
-                    controlId="formBasicText"
+                    // controlId="formBasicText"
                     validationState={this.getValidationState()}
                 >
                     {label ? <ControlLabel>{label}</ControlLabel> : null}

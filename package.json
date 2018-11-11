@@ -5,13 +5,19 @@
   "dependencies": {
     "@types/react-bootstrap": "^0.32.14",
     "@types/styled-components": "^4.0.3",
+    "apollo-boost": "^0.1.20",
+    "eslint-plugin-graphql": "^2.1.1",
+    "graphql": "^14.0.2",
     "react": "^16.7.0-alpha.0",
+    "react-apollo": "^2.2.4",
     "react-bootstrap": "^0.32.4",
     "react-dom": "^16.7.0-alpha.0",
     "react-router-dom": "^4.3.1",
     "react-scripts-ts": "3.1.0",
+    "react-toastify": "^4.4.1",
     "styled-components": "^4.0.3",
-    "unstated-x": "^0.1.1"
+    "unstated-x": "^0.1.1",
+    "uuid": "^3.3.2"
   },
   "scripts": {
     "start": "react-scripts-ts start",
