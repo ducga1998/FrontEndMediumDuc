@@ -1,44 +1,132 @@
 import * as React from 'react';
-import MediumEditter from 'medium-editor'
+import MediumEditer from 'medium-editor'
 import styled from 'styled-components';
 import Author from '../Author';
+function Config(title) {
+    return {
+        toolbar: {
+            allowMultiParagraphSelection: true,
+            diffLeft: 0,
+            diffTop: -10,
+            firstButtonClass: 'medium-editor-button-first',
+            lastButtonClass: 'medium-editor-button-last',
+            relativeContainer: null,
+            standardizeSelectionStart: false,
+            static: false,
+            /* options which only apply when static is true */
+            align: 'center',
+            sticky: false,
+            updateOnEmptySelection: false,
+            imageDragging: true,
+            buttons: [
+                'bold',
+                'italic',
+                "justifyLeft",
+                "justifyCenter",
+                "justifyRight",
+                "justifyFull",
+                {
+                    name: 'h1',
+                    action: 'append-h2',
+                    aria: 'header type 1',
+                    tagNames: ['h2'],
+                    contentDefault: '<b>H1</b>',
+                    classList: ['custom-class-h1'],
+                    attrs: {
+                        'data-custom-attr': 'attr-value-h1'
+                    }
+                },
+                {
+                    name: 'h2',
+                    action: 'append-h3',
+                    aria: 'header type 2',
+                    tagNames: ['h3'],
+                    contentDefault: '<b>H2</b>',
+                    classList: ['custom-class-h2'],
+                    attrs: {
+                        'data-custom-attr': 'attr-value-h2'
+                    }
+                },
+                "image",
+                'quote',
+                'anchor',
+                "removeFormat"
+            ]
+        },
+        anchor: {
+            placeholderText: 'Title',
+            customClassOption: 'btn',
+            customClassOptionText: 'Create Button'
+        },
+        paste: {
+            cleanPastedHTML: true,
+            cleanAttrs: ['style', 'dir'],
+            cleanTags: ['label', 'meta'],
+            unwrapTags: ['sub', 'sup']
+        },
+        anchorPreview: {
+            hideDelay: 300
+        },
+        placeholder: {
+            text: title
+        },
+        keyboardCommands: {
+            /* This example includes the default options for keyboardCommands,
+               if nothing is passed this is what it used */
+            commands: [
+                {
+                    command: 'bold',
+                    key: 'B',
+                    meta: true,
+                    shift: false,
+                    alt: false
+                },
+                {
+                    command: 'italic',
+                    key: 'I',
+                    meta: true,
+                    shift: false,
+                    alt: false
+                },
+                {
+                    command: 'underline',
+                    key: 'U',
+                    meta: true,
+                    shift: false,
+                    alt: false
+                }
+            ],
+        }
+    }
+}
 const WriteArticle = () => {
+    const textPlaceholder = Config('Write something you want .......');
+    const titlePlaceholder = Config('Title');
     const inputEl = React.useRef(null);
+    const refTitlte = React.useRef(null)
     React.useEffect(() => {
-        const text = new MediumEditter(inputEl.current, {
-            toolbar: {
-
-                allowMultiParagraphSelection: true,
-                buttons: ['bold', 'italic', 'underline', 'anchor', 'h2', 'h3', 'quote'],
-                diffLeft: 0,
-                diffTop: -10,
-                firstButtonClass: 'medium-editor-button-first',
-                lastButtonClass: 'medium-editor-button-last',
-                relativeContainer: null,
-                standardizeSelectionStart: false,
-                static: false,
-                /* options which only apply when static is true */
-                align: 'center',
-                sticky: false,
-                updateOnEmptySelection: false
-            }
-        })
-
-
+        const text = new MediumEditer(inputEl.current, textPlaceholder)
+        const title = new MediumEditer(refTitlte.current, titlePlaceholder)
+        text.subscribe('editableInput', function (event, editable) {
+            // Do some work
+            console.log('dsv', event)
+        });
         return () => { console.log('cascasn') }
     })
     // const [value, setValue] = React.useState(0);
     return <$Align>
         <div style={{
-            width: '90%'
+            width: '70%'
         }}>
             <Author />
+            <$Title ref={refTitlte} />
             <$WriteContent ref={inputEl} />
 
         </div>
     </$Align>
 
 }
+
 const $Align = styled.div`
         display : flex;
         width : 100%;
@@ -46,6 +134,7 @@ const $Align = styled.div`
         /* flex-direction : column; */
         justify-content : center;
 `
+
 const $WriteContent = styled.div`
     margin-top : 10px;
     :focus {
@@ -111,7 +200,7 @@ const $WriteContent = styled.div`
     }
 
     pre {
-        font-family: 'Menlo', monospace;
+        font-family: medium-content-sans-serif-font,"Lucida Grande","Lucida Sans Unicode","Lucida Sans",Geneva,Arial,sans-serif;
         font-size: 15px;
         background-color: #f0f0f0;
         padding: 15px;
@@ -160,5 +249,9 @@ const $WriteContent = styled.div`
         right: 0;
         border: 0;
     }
+`
+const $Title = styled($WriteContent)`
+    height : 100px;
+    font-size : 2em;
 `
 export default WriteArticle 

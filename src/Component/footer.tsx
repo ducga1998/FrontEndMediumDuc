@@ -6,17 +6,6 @@ const Footer = () => {
         return () => { console.log('cascasn') }
     })
     const [value, setValue] = React.useState(0);
-    return <Row style={
-        {
-            backgroundColor: 'Mariner'
-        }
-    }>
-
-        <Col xs={12}>
-            <button onClick={e => {
-                setValue(value + 1)
-            }}> {value}</button>
-        </Col>
-    </Row>
+    return <div></div>
 }
 export default Footer
