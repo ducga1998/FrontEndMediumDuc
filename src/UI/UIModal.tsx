@@ -15,6 +15,7 @@ export default function UIModal({ trigger, children, title }: IUIModal) {
         onClick: () => {
             setOpen(!open)
         },
+
     })
     return <>{button} <UIWidget> <$Background onMouseDown={() => {
         setOpen(false)
