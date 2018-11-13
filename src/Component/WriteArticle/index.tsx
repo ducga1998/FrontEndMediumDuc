@@ -103,10 +103,10 @@ const WriteArticle = () => {
     const textPlaceholder = Config('Write something you want .......');
     const titlePlaceholder = Config('Title');
     const inputEl = React.useRef(null);
-    const refTitlte = React.useRef(null)
+    const refTitle = React.useRef(null)
     React.useEffect(() => {
         const text = new MediumEditer(inputEl.current, textPlaceholder)
-        const title = new MediumEditer(refTitlte.current, titlePlaceholder)
+        const title = new MediumEditer(refTitle.current, titlePlaceholder)
         text.subscribe('editableInput', function (event, editable) {
             // Do some work
             console.log('dsv', event)
@@ -119,7 +119,7 @@ const WriteArticle = () => {
             width: '70%'
         }}>
             <Author />
-            <$Title ref={refTitlte} />
+            <$Title ref={refTitle} />
             <$WriteContent ref={inputEl} />
 
         </div>

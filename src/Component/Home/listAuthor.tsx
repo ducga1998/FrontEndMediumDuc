@@ -5,7 +5,7 @@ import { Link } from "react-router-dom"
 import Author from '../Author';
 const ListAuthor = ({ }) => {
     React.useEffect(() => {
-        console.log('ahihi')
+        // console.log('ahihi')
         return () => { console.log('cascasn') }
     })
     const [value, setValue] = React.useState(0);

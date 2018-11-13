@@ -8,6 +8,8 @@ interface IUIField {
     placeholder?: String
     value?: String | any
     type?: String
+    minLength?: number
+    maxLength?: number
 }
 export default class UIField extends React.Component<IUIField, any> {
     static defaultProps = {
@@ -21,7 +23,7 @@ export default class UIField extends React.Component<IUIField, any> {
         return null;
     }
     render() {
-        const { help, titleField, label, onChange, placeholder, value, type } = this.props
+        const { help, titleField, label, onChange, placeholder, value, type, minLength, maxLength } = this.props
         return (
             <form>
                 <FormGroup
@@ -37,6 +39,8 @@ export default class UIField extends React.Component<IUIField, any> {
                         onChange={(e: any) => {
                             onChange(e.target.value)
                         }}
+                        minLength={minLength || undefined}
+                        maxLength={maxLength || undefined}
                     />
                     <FormControl.Feedback />
                     {help ? <HelpBlock>Validation is based on string length.</HelpBlock> : null}

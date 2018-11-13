@@ -5,9 +5,11 @@ import { Redirect } from 'react-router';
 class UserContainer extends Container<any>{
     async login({ username, password }) {
         const { data: { checklogin } } = await checkLoginUser({ username, password }) as any
+        console.log('checkLogin', checklogin)
         if (checklogin) {
-            await this.setState({ login: true })
-            window.location.href = "/regveds"
+            await this.setState({ login: true, dataUser: checklogin })
+            // await this.setState({ dataUser: checklogin })
+            // window.location.href = "/"
             // browserHistory.push('/register')
             return checklogin
         }
@@ -18,8 +20,9 @@ class UserContainer extends Container<any>{
     }
 }
 const userContainer = new UserContainer({
-    login: false
+    login: false,
+    dataUser: null
 })
-// window.user = userContainer
+window['user'] = userContainer
 export default userContainer
 

@@ -1,8 +1,23 @@
-// import { Container } from 'unstated-x'
-// class ArticleContainer extends Container<any>{
+import { Container } from 'unstated-x'
+interface dataArticle {
+    idUser: String
+    idArticle: String
+    hashTag: String
+    category: String
+    comment: String
+    totalClap: Number
+    // notification: String
+}
+export interface IArticleContainer {
+    isPublicArticle: Boolean
+    dataArticle: dataArticle
+}
+class ArticleContainer extends Container<IArticleContainer>{
 
-// }
+}
 
-// export default container = new ArticleContainer({
-//     data: null
-// })
+const articleContainer = new ArticleContainer({
+    dataArticle: null,
+    isPublicArticle: Boolean
+})
+export default articleContainer;

@@ -4,9 +4,10 @@ const client = new ApolloClient({
     uri: "http://localhost:3000/graphql"
 })
 export function addUser(user: any) {
-    const { idUser, login, password, decentraliz } = user
+    const { idUser, login, password, decentraliz, avatarLink, name } = user
+    console.log('userrr', user)
     const input = {
-        idUser, login, password, decentraliz
+        idUser, login, password, decentraliz, avatarLink, name
     }
     return new Promise(resolve => {
         const data = client.mutate({
@@ -17,6 +18,8 @@ export function addUser(user: any) {
                     login
                     password
                     decentraliz
+                    name
+                    avatarLink
                 }
             }
             `,

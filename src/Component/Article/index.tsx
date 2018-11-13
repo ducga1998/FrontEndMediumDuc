@@ -21,6 +21,7 @@ export default function Article({ avatar, titleArticle, content, totalClap, time
             <h2>{titleArticle}</h2>
             <small>{time}</small>
             <p>{content}</p>
+
             <ButtonToolbar>
                 <ButtonGroup>
                     {hashTag.map((item: any, key: number) => {

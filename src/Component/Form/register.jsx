@@ -17,41 +17,44 @@ function CheckUser(user, password) {
     return false
 }
 export default function Register() {
-    const [name, setValueName] = useState('')
+    const [login, setValueLogin] = useState('')
     const [password, setValuePassword] = useState('')
+    const [name, setValueName] = useState('')
+    const [avatarLink, setValueAvatarLink] = useState('')
     const [isRegister, setRegister] = useState(false)
     return <$Form>
         <h2 className="center">Register</h2>
         {!isRegister && name.length > 0 && password > 0 && password < 7 ? <Alert bsStyle="success"> Register Success </Alert> : <Alert bsStyle="warning">Register error </Alert>}
 
-        <UIField titleField="Email and Name" placeholder="Email ..." value={name} onChange={(value) => { setValueName(value) }} />
-        <UIField type="password" titleField="Password" placeholder="Password .... " value={password} onChange={(value) => {
+        <UIField minLength={9} titleField="Email and Name" placeholder="Email ..." value={login} onChange={(value) => { setValueLogin(value) }} />
+        <UIField minLength={6} type="password" titleField="Password" placeholder="Password .... " value={password} onChange={(value) => {
             setValuePassword(value)
         }} />
-        <UIField type="password" titleField=" Rely Password" placeholder="Password .... " value={password} onChange={(value) => {
-            setValuePassword(value)
+        <UIField minLength={6} type="text" titleField="Name Your... " placeholder="Name Your... " value={name} onChange={(value) => {
+            setValueName(value)
+        }} />
+        <UIField type="text" titleField="Link avatar" placeholder="Link avatar .... " value={avatarLink} onChange={(value) => {
+            setValueAvatarLink(value)
         }} />
 
         <UIButton onChange={async () => {
 
             const user = {
                 idUser: uuid(),
-                login: name,
+                login,
                 password,
-                decentraliz: 1
+                decentraliz: 1,
+                name,
+                avatarLink
             }
-            console.log('infomation usre', user)
             const { data: { addNewUser } } = await addUser(user)
-            if (addNewUser && addNewUser.idUser) {
+            if (name.length > 6 && password.length > 6 && addNewUser && addNewUser.idUser) {
                 toast.success("Register success !!");
             }
             else {
                 toast.error("Register error !");
             }
         }}>Register</UIButton>
-        <button onClick={() => {
-            toast.success('csackasjnckcsac')
-        }}>casasca</button>
         <UIButton> <Link to='/login'> Back </Link> </UIButton>
     </$Form>
 }
