@@ -49,3 +49,25 @@ export function checkLoginUser(user: any) {
         resolve(data)
     })
 }
+export function addArticleToClient(article: any) {
+    return new Promise(resolve => {
+        const data = client.mutate({
+            mutation: gql`
+            mutation AddArticle($input : ArticleInput) {
+                addArticle(input : $input) {
+                    idUser
+                    hashTag
+                    category
+                    comment
+                    totalClap
+                    notification
+                }
+            }
+          `,
+            variables: {
+                article
+            }
+        })
+        resolve(data)
+    })
+}

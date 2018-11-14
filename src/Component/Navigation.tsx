@@ -6,6 +6,7 @@ import DropDown from '../UI/UIDropDown';
 import { SubscribeOne, Subscribe } from 'unstated-x';
 import userContainer from '../Container/userContainer';
 import { Link } from 'react-router-dom'
+import articleContainer from '../Container/articleContainer';
 class Navication extends React.Component<any>{
     public render() {
         return <Row><Navbar fluid collapseOnSelect style={{
@@ -39,6 +40,16 @@ class Navication extends React.Component<any>{
                     <NavItem eventKey={1} href="#">
                         <Link to="/writearticle" > Write Article</Link>
                     </NavItem>
+                    <Subscribe to={[articleContainer]}>
+                        {
+                            (container: any) => {
+                                const { isPublicArticle } = container.state
+                                return isPublicArticle ? <MenuItem onClick={() => {
+                                    container.addArticle()
+                                }}>Public Article</MenuItem> : null
+                            }
+                        }
+                    </Subscribe>
 
                     <Subscribe to={[userContainer]} >
                         {
@@ -46,6 +57,7 @@ class Navication extends React.Component<any>{
                             container => {
                                 const { login, dataUser } = container.state
                                 return !login ? <Link to="/login">Login</Link> : <NavDropdown eventKey={3} title="Setting" id="basic-nav-dropdown">
+
                                     <MenuItem eventKey={3.1}><Link to="/profile" > Profile</Link></MenuItem>
                                     <MenuItem eventKey={3.2}><Link to="/writearticle" >Write Article</Link></MenuItem>
                                     <MenuItem eventKey={3.3}></MenuItem>

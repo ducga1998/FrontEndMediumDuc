@@ -7,7 +7,7 @@ import Register from "./Component/Form/register";
 import Author from './Component/Author/index'
 import Home from "./Component/Home";
 import Layout from './Component/Layout';
-import WriteArticle from './Component/WriteArticle'
+import WriteArticle from './Component//Article/WriteArticle'
 const Index = ({ history }) => {
     console.log('history', history)
     return <h2>Home</h2>;

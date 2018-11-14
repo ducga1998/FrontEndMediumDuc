@@ -1,7 +1,9 @@
 import * as React from 'react';
 import MediumEditer from 'medium-editor'
 import styled from 'styled-components';
-import Author from '../Author';
+import Author from '../../Author';
+import debouce from 'lodash/debounce'
+import articleContainer from '../../../Container/articleContainer';
 function Config(title) {
     return {
         toolbar: {
@@ -99,6 +101,12 @@ function Config(title) {
         }
     }
 }
+
+const CallWhenWrite = debouce(async (value, content) => {
+    console.log('asc')
+    await articleContainer.setState({ isPublicArticle: true, [value]: content })
+}, 5000)
+
 const WriteArticle = () => {
     const textPlaceholder = Config('Write something you want .......');
     const titlePlaceholder = Config('Title');
@@ -108,9 +116,11 @@ const WriteArticle = () => {
         const text = new MediumEditer(inputEl.current, textPlaceholder)
         const title = new MediumEditer(refTitle.current, titlePlaceholder)
         text.subscribe('editableInput', function (event, editable) {
-            // Do some work
-            console.log('dsv', event)
+            CallWhenWrite('contentArticle', event.srcElement.innerHTML)
         });
+        title.subscribe('editableInput', function (event, editable) {
+            CallWhenWrite('titleArticle', event.srcElement.innerHTML)
+        })
         return () => { console.log('cascasn') }
     })
     // const [value, setValue] = React.useState(0);

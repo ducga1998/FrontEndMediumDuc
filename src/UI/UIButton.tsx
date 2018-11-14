@@ -35,5 +35,4 @@ const $Primary = styled($Button)`
     border-color: #1e88e5;
     background: linear-gradient(to bottom, #64b5f6 0%, #42a5f5 100%);
     box-shadow: inset 0 1px #bbdefb, 0 1px 2px rgba(0, 0, 0, 0.2);
-}
 `
