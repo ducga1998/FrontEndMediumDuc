@@ -1,5 +1,5 @@
 import * as React from 'react';
-import Navigation from './Navigation';
+import Navigation from './Navigation/index';
 // import styled from 'styled-components'
 // import Footer from './Component/footer'
 import { Grid, Row, Col } from 'react-bootstrap';

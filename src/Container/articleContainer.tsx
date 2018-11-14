@@ -18,14 +18,14 @@ export interface IArticleContainer {
 
 }
 class ArticleContainer extends Container<IArticleContainer>{
-    async addArticle() {
+    async addArticle(hashTag = []) {
         const { contentArticle, titleArticle } = this.state
         const { dataUser } = userContainer.state as any
         const idArticle = uuid()
         if (dataUser) {
             const { idUser } = dataUser
             console.log('OK')
-            await addArticleToClient({ contentArticle, titleArticle, idUser, idArticle })
+            await addArticleToClient({ contentArticle, titleArticle, idUser, idArticle, hashTag })
         }
     }
 }

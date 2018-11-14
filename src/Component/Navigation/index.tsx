@@ -1,16 +1,15 @@
 import * as React from 'react'
-// import { Aside, Header, Layout, Main, Nav, SubHeader } from '../UI/styled/layout'
-import AppRouter from '../route'
+import AppRouter from '../../route'
 import { Col, Navbar, Nav, MenuItem, NavDropdown, NavItem, Row, Glyphicon, Button, ListGroup, ListGroupItem } from 'react-bootstrap';
-import DropDown from '../UI/UIDropDown';
+import DropDown from '../../UI/UIDropDown';
 import { SubscribeOne, Subscribe } from 'unstated-x';
-import userContainer from '../Container/userContainer';
+import userContainer from '../../Container/userContainer';
 import { Link } from 'react-router-dom'
-import articleContainer from '../Container/articleContainer';
-import UIModal from '../UI/UIModal';
-import UIField from '../UI/UIField';
+import articleContainer from '../../Container/articleContainer';
+import UIModal from '../../UI/UIModal';
+import UIField from '../../UI/UIField';
 import { FormGroup, ControlLabel, FormControl, HelpBlock, } from "react-bootstrap";
-import UIButton from '../UI/UIButton';
+import UIButton from '../../UI/UIButton';
 import styled from 'styled-components';
 import { toast } from 'react-toastify';
 class Navication extends React.Component<any, any>{
@@ -62,31 +61,32 @@ class Navication extends React.Component<any, any>{
                             (container: any) => {
                                 const { isPublicArticle } = container.state
                                 const { arrHashTag, nameHashTag }: any = this.state
-                                return isPublicArticle ? <UIModal title="Hash Tag" height="700px" width="600px" trigger={<MenuItem>Public Article</MenuItem>}>
-                                    {arrHashTag.length > 0 ? <Grid><ListGroup style={{ flex: '6' }}>
-                                        {arrHashTag.map(item => {
-                                            return <ListGroupItem>{item}<Button onClick={() => {
-                                                const arrHasBeenDelete = arrHashTag.filter(itemHashTag => itemHashTag !== item)
-                                                this.setState({ arrHashTag: arrHasBeenDelete })
-                                            }}><Glyphicon glyph="remove" /> </Button>
-                                            </ListGroupItem>
-                                        })}
-                                    </ListGroup>
-                                    </Grid> : null}
-                                    <FormGroup style={{ display: 'flex' }}>
-                                        <FormControl
-                                            type="text"
-                                            value={nameHashTag}
-                                            placeholder="Enter text"
-                                            onChange={(e: any) => this.setState({ nameHashTag: e.target.value })}
-                                        />
-                                        <Button onClick={this.handleAddHashTag}>
-                                            <Glyphicon glyph="plus" /> </Button>
-                                    </FormGroup>
-                                    <UIButton onChange={async () => {
-                                        await container.addArticle()
-                                    }}> submit </UIButton>
-                                </UIModal> : null
+                                return isPublicArticle ?
+                                    (<UIModal title="Hash Tag" height="700px" width="600px" trigger={<MenuItem>Public Article</MenuItem>}>
+                                        {arrHashTag.length > 0 ? <Grid><ListGroup style={{ flex: '6' }}>
+                                            {arrHashTag.map(item => {
+                                                return <ListGroupItem>{item}<Button onClick={() => {
+                                                    const arrHasBeenDelete = arrHashTag.filter(itemHashTag => itemHashTag !== item)
+                                                    this.setState({ arrHashTag: arrHasBeenDelete })
+                                                }}><Glyphicon glyph="remove" /> </Button>
+                                                </ListGroupItem>
+                                            })}
+                                        </ListGroup>
+                                        </Grid> : null}
+                                        <FormGroup style={{ display: 'flex' }}>
+                                            <FormControl
+                                                type="text"
+                                                value={nameHashTag}
+                                                placeholder="Enter text"
+                                                onChange={(e: any) => this.setState({ nameHashTag: e.target.value })}
+                                            />
+                                            <Button onClick={this.handleAddHashTag}>
+                                                <Glyphicon glyph="plus" /> </Button>
+                                        </FormGroup>
+                                        <UIButton onChange={async () => {
+                                            await container.addArticle(this.state.arrHashTag)
+                                        }}> submit </UIButton>
+                                    </UIModal>) : null
                             }
                         }
                     </Subscribe>
