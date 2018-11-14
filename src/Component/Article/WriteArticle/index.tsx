@@ -104,8 +104,15 @@ function Config(title) {
 
 const CallWhenWrite = debouce(async (value, content) => {
     console.log('asc')
-    await articleContainer.setState({ isPublicArticle: true, [value]: content })
-}, 5000)
+
+    console.log(content)
+    if (content === '<p><br></p>') {
+        await articleContainer.setState({ isPublicArticle: false })
+    }
+    else {
+        await articleContainer.setState({ isPublicArticle: true, [value]: content })
+    }
+}, 3000)
 
 const WriteArticle = () => {
     const textPlaceholder = Config('Write something you want .......');
@@ -118,8 +125,8 @@ const WriteArticle = () => {
         text.subscribe('editableInput', function (event, editable) {
             CallWhenWrite('contentArticle', event.srcElement.innerHTML)
         });
-        title.subscribe('editableInput', function (event, editable) {
-            CallWhenWrite('titleArticle', event.srcElement.innerHTML)
+        title.subscribe('editableInput', async function (event, editable) {
+            await articleContainer.setState({ isPublicArticle: true, titleArticle: event.srcElement.innerHTML })
         })
         return () => { console.log('cascasn') }
     })

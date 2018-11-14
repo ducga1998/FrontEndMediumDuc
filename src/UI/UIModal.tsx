@@ -7,8 +7,10 @@ interface IUIModal {
     trigger: any
     title?: string
     children?: any
+    width?: string
+    height?: string
 }
-export default function UIModal({ trigger, children, title }: IUIModal) {
+export default function UIModal({ trigger, children, title, width, height }: IUIModal) {
 
     const [open, setOpen] = useState(false)
     const button = React.cloneElement(trigger, {
@@ -23,7 +25,7 @@ export default function UIModal({ trigger, children, title }: IUIModal) {
             e.stopPropagation();
         }} >
             <$Header>{title ? title : 'Header Modal '}</$Header>
-            <$Content> {children}</$Content>
+            <$Content height={height} width={width}> {children}</$Content>
 
             <$Footer>
                 <UIButton width="100px" onChange={(e: any) => { e.stopPropagation(); setOpen(false) }}> Close </UIButton>
@@ -51,9 +53,10 @@ background-color : white;
 border-top: 1px solid black;
 padding: 10px;
 `
-const $Content = styled.div<{ height?: string }>`
+const $Content = styled.div<{ height?: string, width?: string }>`
 padding : 10px;
 height : ${props => props.height ? props.height : '500px'};
+width : ${props => props.width ? props.width : 'auto'};
 background-color: white;
 `
 const $Background = styled.div<{ open: Boolean }>`

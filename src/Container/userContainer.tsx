@@ -5,9 +5,9 @@ import { Redirect } from 'react-router';
 class UserContainer extends Container<any>{
     async login({ username, password }) {
         const { data: { checklogin } } = await checkLoginUser({ username, password }) as any
-        console.log('checkLogin', checklogin)
         if (checklogin) {
             await this.setState({ login: true, dataUser: checklogin })
+            localStorage.setItem('duc-app-medium-login', JSON.stringify(checklogin))
             // await this.setState({ dataUser: checklogin })
             // window.location.href = "/"
             // browserHistory.push('/register')

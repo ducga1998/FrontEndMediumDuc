@@ -1,13 +1,40 @@
 import * as React from 'react'
 // import { Aside, Header, Layout, Main, Nav, SubHeader } from '../UI/styled/layout'
 import AppRouter from '../route'
-import { Col, Navbar, Nav, MenuItem, NavDropdown, NavItem, Row } from 'react-bootstrap';
+import { Col, Navbar, Nav, MenuItem, NavDropdown, NavItem, Row, Glyphicon, Button, ListGroup, ListGroupItem } from 'react-bootstrap';
 import DropDown from '../UI/UIDropDown';
 import { SubscribeOne, Subscribe } from 'unstated-x';
 import userContainer from '../Container/userContainer';
 import { Link } from 'react-router-dom'
 import articleContainer from '../Container/articleContainer';
-class Navication extends React.Component<any>{
+import UIModal from '../UI/UIModal';
+import UIField from '../UI/UIField';
+import { FormGroup, ControlLabel, FormControl, HelpBlock, } from "react-bootstrap";
+import UIButton from '../UI/UIButton';
+import styled from 'styled-components';
+import { toast } from 'react-toastify';
+class Navication extends React.Component<any, any>{
+    state = {
+        arrHashTag: [],
+        nameHashTag: ''
+    }
+    handleAddHashTag = async () => {
+        const { arrHashTag, nameHashTag }: any = this.state;
+        if (arrHashTag.length > 6) {
+            toast.error('Maximum 6 hash tag!!!!');
+            return
+        }
+        if (arrHashTag.includes(nameHashTag)) {
+            toast.error('Name exites!!!');
+            return
+        }
+        if (nameHashTag.length === 0) {
+            toast.error('Name hash tag not empty!!!');
+            return
+        }
+
+        arrHashTag.push(nameHashTag); await this.setState({ arrHashTag, nameHashTag: '' })
+    }
     public render() {
         return <Row><Navbar fluid collapseOnSelect style={{
             backgroundColor: '#6bb9f0'
@@ -25,16 +52,6 @@ class Navication extends React.Component<any>{
                     <NavItem eventKey={1} href="#">
                         <Link to="/home" > Home</Link>
                     </NavItem>
-                    {/* <NavItem eventKey={2} href="#">
-                        Article
-            </NavItem> */}
-                    {/* <NavDropdown eventKey={3} title="Dropdown" id="basic-nav-dropdown">
-                        <MenuItem eventKey={3.1}>Action</MenuItem>
-                        <MenuItem eventKey={3.2}>Another action</MenuItem>
-                        <MenuItem eventKey={3.3}>Something else here</MenuItem>
-                        <MenuItem divider />
-                        <MenuItem eventKey={3.3}>Separated link</MenuItem>
-                    </NavDropdown> */}
                 </Nav>
                 <Nav pullRight>
                     <NavItem eventKey={1} href="#">
@@ -44,9 +61,32 @@ class Navication extends React.Component<any>{
                         {
                             (container: any) => {
                                 const { isPublicArticle } = container.state
-                                return isPublicArticle ? <MenuItem onClick={() => {
-                                    container.addArticle()
-                                }}>Public Article</MenuItem> : null
+                                const { arrHashTag, nameHashTag }: any = this.state
+                                return isPublicArticle ? <UIModal title="Hash Tag" height="700px" width="600px" trigger={<MenuItem>Public Article</MenuItem>}>
+                                    {arrHashTag.length > 0 ? <Grid><ListGroup style={{ flex: '6' }}>
+                                        {arrHashTag.map(item => {
+                                            return <ListGroupItem>{item}<Button onClick={() => {
+                                                const arrHasBeenDelete = arrHashTag.filter(itemHashTag => itemHashTag !== item)
+                                                this.setState({ arrHashTag: arrHasBeenDelete })
+                                            }}><Glyphicon glyph="remove" /> </Button>
+                                            </ListGroupItem>
+                                        })}
+                                    </ListGroup>
+                                    </Grid> : null}
+                                    <FormGroup style={{ display: 'flex' }}>
+                                        <FormControl
+                                            type="text"
+                                            value={nameHashTag}
+                                            placeholder="Enter text"
+                                            onChange={(e: any) => this.setState({ nameHashTag: e.target.value })}
+                                        />
+                                        <Button onClick={this.handleAddHashTag}>
+                                            <Glyphicon glyph="plus" /> </Button>
+                                    </FormGroup>
+                                    <UIButton onChange={async () => {
+                                        await container.addArticle()
+                                    }}> submit </UIButton>
+                                </UIModal> : null
                             }
                         }
                     </Subscribe>
@@ -75,4 +115,7 @@ class Navication extends React.Component<any>{
 
     }
 }
+const Grid = styled.div`
+    display : 'flex';
+`
 export default Navication

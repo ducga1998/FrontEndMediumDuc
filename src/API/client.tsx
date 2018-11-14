@@ -49,7 +49,10 @@ export function checkLoginUser(user: any) {
         resolve(data)
     })
 }
+
 export function addArticleToClient(article: any) {
+    let input: any = article;
+    console.log(input)
     return new Promise(resolve => {
         const data = client.mutate({
             mutation: gql`
@@ -65,7 +68,7 @@ export function addArticleToClient(article: any) {
             }
           `,
             variables: {
-                article
+                input
             }
         })
         resolve(data)
