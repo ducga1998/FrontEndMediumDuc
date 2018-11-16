@@ -1,6 +1,6 @@
 import ApolloClient from "apollo-boost";
 import gql from "graphql-tag";
-const client = new ApolloClient({
+export const client = new ApolloClient({
     uri: "http://localhost:3000/graphql"
 })
 export function addUser(user: any) {

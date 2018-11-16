@@ -30,7 +30,7 @@ export default function Login({ history }) {
         <UIButton onChange={async () => {
             const dataUser = await userContainer.login({ username: name, password })
             if (!dataUser) {
-                toast.error('login false, please check user name and passwod')
+                toast.error('Login false, please check user name and passwod')
             }
             else {
                 // console.log(history)

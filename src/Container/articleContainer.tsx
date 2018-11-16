@@ -1,5 +1,6 @@
 import { Container } from 'unstated-x';
 import uuid from 'uuid';
+import { updateArticleToClient } from '../API/articleAPI';
 import { addArticleToClient } from '../API/client';
 import userContainer from './userContainer';
 interface dataArticle {
@@ -24,8 +25,19 @@ class ArticleContainer extends Container<IArticleContainer>{
         const idArticle = uuid()
         if (dataUser) {
             const { idUser } = dataUser
-            console.log('OK')
+            console.log('run func addArticle')
             return await addArticleToClient({ contentArticle, titleArticle, idUser, idArticle, hashTag })
+        }
+    }
+    async updateAricle(hashTag = [], idArticle) {
+        const { contentArticle, titleArticle } = this.state
+        const { dataUser } = userContainer.state as any
+        // const idArticle = uuid()
+        console.log('idArticle', idArticle)
+        if (dataUser) {
+            const { idUser } = dataUser
+            console.log('run func updateAricle')
+            return await updateArticleToClient({ contentArticle, titleArticle, idUser, idArticle, hashTag })
         }
     }
 }
@@ -33,7 +45,8 @@ class ArticleContainer extends Container<IArticleContainer>{
 const articleContainer = new ArticleContainer({
     contentArticle: '',
     titleArticle: '',
-    isPublicArticle: false
+    isPublicArticle: false,
 })
+
 window['article'] = articleContainer
 export default articleContainer;

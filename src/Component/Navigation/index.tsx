@@ -1,37 +1,11 @@
 import * as React from 'react';
-import { Button, FormControl, FormGroup, Glyphicon, ListGroup, ListGroupItem, MenuItem, Nav, Navbar, NavDropdown, NavItem, Row } from 'react-bootstrap';
+import { MenuItem, Nav, Navbar, NavDropdown, NavItem, Row } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
-import { toast } from 'react-toastify';
-import styled from 'styled-components';
 import { Subscribe } from 'unstated-x';
-import articleContainer from '../../Container/articleContainer';
 import userContainer from '../../Container/userContainer';
-import UIButton from '../../UI/UIButton';
-import UIModal from '../../UI/UIModal';
+import ButtonArticle from './buttonWriteArticle';
 class Navication extends React.Component<any, any>{
-    state = {
-        arrHashTag: [],
-        nameHashTag: '',
-        open : false
-    }
-    refUIModal: any = React.createRef()
-    handleAddHashTag = async () => {
-        const { arrHashTag, nameHashTag }: any = this.state;
-        if (arrHashTag.length > 6) {
-            toast.error('Maximum 6 hash tag!!!!');
-            return
-        }
-        if (arrHashTag.includes(nameHashTag)) {
-            toast.error('Name exites!!!');
-            return
-        }
-        if (nameHashTag.length === 0) {
-            toast.error('Name hash tag not empty!!!');
-            return
-        }
 
-        arrHashTag.push(nameHashTag); await this.setState({ arrHashTag, nameHashTag: '' })
-    }
     public render() {
         return <Row><Navbar fluid collapseOnSelect style={{
             backgroundColor: '#6bb9f0'
@@ -54,65 +28,13 @@ class Navication extends React.Component<any, any>{
                     <NavItem eventKey={1} href="#">
                         <Link to="/writearticle" > Write Article</Link>
                     </NavItem>
-                    <Subscribe to={[articleContainer]}>
-                        {
-                            (container: any) => {
-                                const { isPublicArticle } = container.state
-                                const { arrHashTag, nameHashTag  , open}: any = this.state
-                                return isPublicArticle ?
-                                    (<UIModal open={open} openModal = {() => {
-                                        this.setState({open : true})
-                                    }}
-                                    closeMoDal= {() => {
-                                        this.setState({open : false})
-                                    }} 
-                                    onClickOutSide= {() => {
-                                        this.setState({open : false})
-                                    }}
-                                     title="Hash Tag" width="600px" trigger={<MenuItem>Public Article</MenuItem>}>
-                                        {arrHashTag.length > 0 ? <Grid><ListGroup style={{ flex: '6' }}>
-                                            {arrHashTag.map(item => {
-                                                return <ListGroupItem>{item}<Button onClick={() => {
-                                                    const arrHasBeenDelete = arrHashTag.filter(itemHashTag => itemHashTag !== item)
-                                                    this.setState({ arrHashTag: arrHasBeenDelete })
-                                                }}><Glyphicon glyph="remove" /> </Button>
-                                                </ListGroupItem>
-                                            })}
-                                        </ListGroup>
-                                        </Grid> : null}
-                                        <FormGroup style={{ display: 'flex' }}>
-                                            <FormControl
-                                                type="text"
-                                                value={nameHashTag}
-                                                placeholder="Enter text"
-                                                onChange={(e: any) => this.setState({ nameHashTag: e.target.value })}
-                                            />
-                                            <Button onClick={this.handleAddHashTag}>
-                                                <Glyphicon glyph="plus" /> </Button>
-                                        </FormGroup>
-                                        <UIButton onChange={async () => {
-                                            const newArticle = await container.addArticle(this.state.arrHashTag)
-                                            console.log('new Article ', newArticle)
-                                            if (newArticle) {
-                                                toast.success('Public article success !!!!')
-                                                await this.setState({open : false})
-                                            }
-                                            else {
-                                                toast.error(":( Error , just kidding me, FUCKING CODE FOR ME")
-                                            }
-                                        }}> submit </UIButton>
-                                    </UIModal>) : null
-                            }
-                        }
-                    </Subscribe>
+                    <ButtonArticle />
 
                     <Subscribe to={[userContainer]} >
                         {
-
                             container => {
                                 const { login, dataUser } = container.state
                                 return !login ? <Link to="/login">Login</Link> : <NavDropdown eventKey={3} title="Setting" id="basic-nav-dropdown">
-
                                     <MenuItem eventKey={3.1}><Link to="/profile" > Profile</Link></MenuItem>
                                     <MenuItem eventKey={3.2}><Link to="/writearticle" >Write Article</Link></MenuItem>
                                     <MenuItem eventKey={3.3}></MenuItem>
@@ -130,7 +52,4 @@ class Navication extends React.Component<any, any>{
 
     }
 }
-const Grid = styled.div`
-    display : 'flex';
-`
 export default Navication

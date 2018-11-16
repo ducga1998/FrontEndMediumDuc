@@ -15,19 +15,10 @@ interface IUIModal {
     onClickOutSide: () => any
 }
 export default function UIModal({ trigger, children, title, width, height, closeMoDal, openModal, open, onClickOutSide }: IUIModal) {
-
-
     const button = React.cloneElement(trigger, {
         onClick: () => {
             openModal()
         },
-    })
-    React.useEffect(() => {
-
-    })
-    React.useEffect(() => {
-        console.log('component did update  ???')
-        // return () => { console.log('didUnMount 2') }
     })
     return <>{button} <UIWidget> <$Background onMouseDown={onClickOutSide} open={open}>
         <$Modal onMouseDown={(e: any) => {
@@ -60,10 +51,10 @@ border-top: 1px solid black;
 padding: 10px;
 `
 const $Content = styled.div<{ height?: string, width?: string }>`
-padding : 10px;
-height : ${props => props.height ? props.height : '500px'};
-width : ${props => props.width ? props.width : 'auto'};
-background-color: white;
+    padding : 10px;
+    height : ${props => props.height ? props.height : '500px'};
+    width : ${props => props.width ? props.width : 'auto'};
+    background-color: white;
 `
 const $Background = styled.div<{ open: Boolean }>`
     top: 0px;

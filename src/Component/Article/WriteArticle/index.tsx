@@ -1,9 +1,9 @@
+import debouce from 'lodash/debounce';
+import MediumEditer from 'medium-editor';
 import * as React from 'react';
-import MediumEditer from 'medium-editor'
 import styled from 'styled-components';
-import Author from '../../Author';
-import debouce from 'lodash/debounce'
 import articleContainer from '../../../Container/articleContainer';
+import Author from '../../Author';
 function Config(title) {
     return {
         toolbar: {
