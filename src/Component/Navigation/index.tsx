@@ -102,7 +102,7 @@ class Navication extends React.Component<any, any>{
                                     <MenuItem eventKey={3.2}><Link to="/writearticle" >Write Article</Link></MenuItem>
                                     <MenuItem eventKey={3.3}></MenuItem>
                                     <MenuItem divider />
-                                    <MenuItem eventKey={3.4}><Link to="/login" >Logout</Link></MenuItem>
+                                    <MenuItem eventKey={3.4}><Link to="/logout" >Logout</Link></MenuItem>
                                 </NavDropdown>
                             }
                         }

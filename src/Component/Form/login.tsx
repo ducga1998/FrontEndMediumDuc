@@ -18,7 +18,7 @@ function CheckUser(user, password) {
     }
     return false
 }
-export default function Login() {
+export default function Login({ history }) {
     const [name, setValueName] = useState('')
     const [password, setValuePassword] = useState('')
     const refLink: any = useRef(null)
@@ -35,7 +35,8 @@ export default function Login() {
                 toast.error('login false, please check user name and passwod')
             }
             else {
-                refLink.current.context.router.history.push('/home')
+                // console.log(history)
+                history.push('/home')
             }
             // console.log(RouterContext)
             // refLink.current.

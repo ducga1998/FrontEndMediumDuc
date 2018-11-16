@@ -1,7 +1,7 @@
-import * as React from 'react'
-import styled from 'styled-components'
-import UIWidget from './UIWidget';
+import * as React from 'react';
+import styled from 'styled-components';
 import UIButton from './UIButton';
+import UIWidget from './UIWidget';
 const { useEffect, useState } = React
 interface IUIModal {
     trigger: any
@@ -18,9 +18,10 @@ export default function UIModal({ trigger, children, title, width, height }: IUI
             setOpen(!open)
         },
     })
-    return <>{button} <UIWidget> <$Background onMouseDown={() => {
+    const close = () => {
         setOpen(false)
-    }} open={open}>
+    }
+    return <>{button} <UIWidget> <$Background onMouseDown={close} open={open}>
         <$Modal onMouseDown={(e: any) => {
             e.stopPropagation();
         }} >

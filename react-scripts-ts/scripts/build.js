@@ -62,7 +62,7 @@ measureFileSizesBeforeBuild(paths.appBuild)
   .then(
     ({ stats, previousFileSizes, warnings }) => {
       if (warnings.length) {
-        console.log(chalk.yellow('Compiled with warnings.\n'));
+        console.log(chalk.yellow('waring roi ennnnnnnnnnnnnnnnnnnnnnn eiiiiiiiiii.\n'));
         console.log(warnings.join('\n\n'));
         console.log(
           '\nSearch for the ' +
