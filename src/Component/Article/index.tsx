@@ -1,7 +1,7 @@
-import * as React from 'react'
+import * as React from 'react';
 // import { Aside, Header, Layout, Main, Nav, SubHeader } from '../UI/styled/layout'
 // import AppRouter from '../route'
-import { Col, Navbar, Nav, MenuItem, NavDropdown, NavItem, ButtonToolbar, ButtonGroup, Button } from 'react-bootstrap';
+import { Button, ButtonGroup, ButtonToolbar } from 'react-bootstrap';
 import styled from 'styled-components';
 export interface IArticle {
     avatar: String;
@@ -47,7 +47,6 @@ const $Avatar = styled.div`
     img {
         width :100%;
         flex : 1;
-     
  }
 `
 const $DetailArticle = styled.div`
@@ -62,7 +61,4 @@ const $Article = styled.div<any>`
     ${$Avatar} {
             flex : 1;
     }
-
-
-    
 `

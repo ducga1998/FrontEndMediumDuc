@@ -1,15 +1,13 @@
-import * as React from 'react'
+import * as React from 'react';
+import { Link } from "react-router-dom";
+import { toast } from 'react-toastify';
+import styled from 'styled-components';
+import userContainer from '../../Container/userContainer';
+import UIButton from '../../UI/UIButton';
+import UIField from '../../UI/UIField';
 // import { Aside, Header, Layout, Main, Nav, SubHeader } from '../UI/styled/layout'
 // import AppRouter from '../route'
 const { useState, useEffect, useRef } = React
-import { Col, Navbar, Nav, MenuItem, NavDropdown, NavItem, Button } from 'react-bootstrap';
-import UIField from '../../UI/UIField'
-import styled from 'styled-components';
-import UIModal from '../../UI/UIModal'
-import { BrowserRouter as Router, Route, Link } from "react-router-dom"
-import UIButton from '../../UI/UIButton';
-import userContainer from '../../Container/userContainer'
-import { toast } from 'react-toastify';
 // import { __RouterContext } from "react-router";
 function CheckUser(user, password) {
     if (user === 'admin' && password === 'admin') {
@@ -58,6 +56,4 @@ const $Form = styled.div`
     text-transform: uppercase;
     font-size: 3em;
     }
-   
-    
 `

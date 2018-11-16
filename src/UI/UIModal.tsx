@@ -8,20 +8,28 @@ interface IUIModal {
     title?: string
     children?: any
     width?: string
-    height?: string
+    height?: string,
+    closeMoDal: () => any,
+    openModal: () => any,
+    open: boolean,
+    onClickOutSide: () => any
 }
-export default function UIModal({ trigger, children, title, width, height }: IUIModal) {
+export default function UIModal({ trigger, children, title, width, height, closeMoDal, openModal, open, onClickOutSide }: IUIModal) {
 
-    const [open, setOpen] = useState(false)
+
     const button = React.cloneElement(trigger, {
         onClick: () => {
-            setOpen(!open)
+            openModal()
         },
     })
-    const close = () => {
-        setOpen(false)
-    }
-    return <>{button} <UIWidget> <$Background onMouseDown={close} open={open}>
+    React.useEffect(() => {
+
+    })
+    React.useEffect(() => {
+        console.log('component did update  ???')
+        // return () => { console.log('didUnMount 2') }
+    })
+    return <>{button} <UIWidget> <$Background onMouseDown={onClickOutSide} open={open}>
         <$Modal onMouseDown={(e: any) => {
             e.stopPropagation();
         }} >
@@ -29,14 +37,11 @@ export default function UIModal({ trigger, children, title, width, height }: IUI
             <$Content height={height} width={width}> {children}</$Content>
 
             <$Footer>
-                <UIButton width="100px" onChange={(e: any) => { e.stopPropagation(); setOpen(false) }}> Close </UIButton>
+                <UIButton width="100px" onChange={(e: any) => { e.stopPropagation(); closeMoDal() }}> Close </UIButton>
             </$Footer>
         </$Modal>
-
     </$Background>
-
     </UIWidget> </>
-
 }
 const $Header = styled.div`
     background-color: #57aff5;

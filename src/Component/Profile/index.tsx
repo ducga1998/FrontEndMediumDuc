@@ -1,5 +1,4 @@
-import * as React from 'react'
-import { Row, Col } from 'react-bootstrap';
+import * as React from 'react';
 import styled from 'styled-components';
 /* 
         idUser: String
@@ -25,6 +24,5 @@ const Profile = ({ name, avatarLink, totalFollow, followOtherPeople, bookMark })
 }
 const $Content = styled.div`
  display : flex;
- 
 `
 export default Profile

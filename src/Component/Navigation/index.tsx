@@ -1,22 +1,20 @@
-import * as React from 'react'
-import AppRouter from '../../route'
-import { Col, Navbar, Nav, MenuItem, NavDropdown, NavItem, Row, Glyphicon, Button, ListGroup, ListGroupItem } from 'react-bootstrap';
-import DropDown from '../../UI/UIDropDown';
-import { SubscribeOne, Subscribe } from 'unstated-x';
-import userContainer from '../../Container/userContainer';
-import { Link } from 'react-router-dom'
-import articleContainer from '../../Container/articleContainer';
-import UIModal from '../../UI/UIModal';
-import UIField from '../../UI/UIField';
-import { FormGroup, ControlLabel, FormControl, HelpBlock, } from "react-bootstrap";
-import UIButton from '../../UI/UIButton';
-import styled from 'styled-components';
+import * as React from 'react';
+import { Button, FormControl, FormGroup, Glyphicon, ListGroup, ListGroupItem, MenuItem, Nav, Navbar, NavDropdown, NavItem, Row } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
 import { toast } from 'react-toastify';
+import styled from 'styled-components';
+import { Subscribe } from 'unstated-x';
+import articleContainer from '../../Container/articleContainer';
+import userContainer from '../../Container/userContainer';
+import UIButton from '../../UI/UIButton';
+import UIModal from '../../UI/UIModal';
 class Navication extends React.Component<any, any>{
     state = {
         arrHashTag: [],
-        nameHashTag: ''
+        nameHashTag: '',
+        open : false
     }
+    refUIModal: any = React.createRef()
     handleAddHashTag = async () => {
         const { arrHashTag, nameHashTag }: any = this.state;
         if (arrHashTag.length > 6) {
@@ -60,9 +58,18 @@ class Navication extends React.Component<any, any>{
                         {
                             (container: any) => {
                                 const { isPublicArticle } = container.state
-                                const { arrHashTag, nameHashTag }: any = this.state
+                                const { arrHashTag, nameHashTag  , open}: any = this.state
                                 return isPublicArticle ?
-                                    (<UIModal title="Hash Tag" height="700px" width="600px" trigger={<MenuItem>Public Article</MenuItem>}>
+                                    (<UIModal open={open} openModal = {() => {
+                                        this.setState({open : true})
+                                    }}
+                                    closeMoDal= {() => {
+                                        this.setState({open : false})
+                                    }} 
+                                    onClickOutSide= {() => {
+                                        this.setState({open : false})
+                                    }}
+                                     title="Hash Tag" width="600px" trigger={<MenuItem>Public Article</MenuItem>}>
                                         {arrHashTag.length > 0 ? <Grid><ListGroup style={{ flex: '6' }}>
                                             {arrHashTag.map(item => {
                                                 return <ListGroupItem>{item}<Button onClick={() => {
@@ -84,7 +91,15 @@ class Navication extends React.Component<any, any>{
                                                 <Glyphicon glyph="plus" /> </Button>
                                         </FormGroup>
                                         <UIButton onChange={async () => {
-                                            await container.addArticle(this.state.arrHashTag)
+                                            const newArticle = await container.addArticle(this.state.arrHashTag)
+                                            console.log('new Article ', newArticle)
+                                            if (newArticle) {
+                                                toast.success('Public article success !!!!')
+                                                await this.setState({open : false})
+                                            }
+                                            else {
+                                                toast.error(":( Error , just kidding me, FUCKING CODE FOR ME")
+                                            }
                                         }}> submit </UIButton>
                                     </UIModal>) : null
                             }

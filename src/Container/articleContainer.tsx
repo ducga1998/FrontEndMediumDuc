@@ -1,7 +1,7 @@
-import { Container } from 'unstated-x'
-import { addArticleToClient } from '../API/client'
-import userContainer from './userContainer'
-import uuid from 'uuid'
+import { Container } from 'unstated-x';
+import uuid from 'uuid';
+import { addArticleToClient } from '../API/client';
+import userContainer from './userContainer';
 interface dataArticle {
     idUser: String
     idArticle: String
@@ -25,7 +25,7 @@ class ArticleContainer extends Container<IArticleContainer>{
         if (dataUser) {
             const { idUser } = dataUser
             console.log('OK')
-            await addArticleToClient({ contentArticle, titleArticle, idUser, idArticle, hashTag })
+            return await addArticleToClient({ contentArticle, titleArticle, idUser, idArticle, hashTag })
         }
     }
 }

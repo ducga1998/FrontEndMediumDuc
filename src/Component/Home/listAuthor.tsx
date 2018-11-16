@@ -1,7 +1,6 @@
-import * as React from 'react'
+import * as React from 'react';
 // import { Row, Col } from 'react-bootstrap';
 // import './index.css'
-import { Link } from "react-router-dom"
 import Author from '../Author';
 const ListAuthor = ({ }) => {
     React.useEffect(() => {
