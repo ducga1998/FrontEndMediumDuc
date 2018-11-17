@@ -25,7 +25,7 @@ export default function Article({ avatar, titleArticle, content, totalClap, time
             <ButtonToolbar>
                 <ButtonGroup>
                     {hashTag.map((item: any, key: number) => {
-                        return <Button>{item.name}</Button>
+                        return <Button>{item}</Button>
                     })}
                 </ButtonGroup>
             </ButtonToolbar>

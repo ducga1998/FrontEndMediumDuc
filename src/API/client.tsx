@@ -64,6 +64,7 @@ export function addArticleToClient(article: any) {
                     comment
                     totalClap
                     notification
+                    createTime
                 }
             }
           `,

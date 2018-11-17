@@ -18,7 +18,9 @@ export interface IArticleContainer {
     titleArticle: String
 
 }
+let createTime = new Date().toUTCString()
 class ArticleContainer extends Container<IArticleContainer>{
+
     async addArticle(hashTag = []) {
         const { contentArticle, titleArticle } = this.state
         const { dataUser } = userContainer.state as any
@@ -26,7 +28,7 @@ class ArticleContainer extends Container<IArticleContainer>{
         if (dataUser) {
             const { idUser } = dataUser
             console.log('run func addArticle')
-            return await addArticleToClient({ contentArticle, titleArticle, idUser, idArticle, hashTag })
+            return await addArticleToClient({ contentArticle, titleArticle, idUser, idArticle, hashTag, createTime })
         }
     }
     async updateAricle(hashTag = [], idArticle) {
@@ -37,7 +39,7 @@ class ArticleContainer extends Container<IArticleContainer>{
         if (dataUser) {
             const { idUser } = dataUser
             console.log('run func updateAricle')
-            return await updateArticleToClient({ contentArticle, titleArticle, idUser, idArticle, hashTag })
+            return await updateArticleToClient({ contentArticle, titleArticle, idUser, idArticle, hashTag, createTime })
         }
     }
 }

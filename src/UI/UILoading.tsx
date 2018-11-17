@@ -25,7 +25,9 @@ const $Background = styled.div`
     justify-content: center;
     height: 100%;
     position: fixed;
-    width: 100%;      
+    width: 100%;  
+    top : 0px;
+    opacity : 0.5;    
 `
 const $ImageLoading = styled.div`
     width: 100px;

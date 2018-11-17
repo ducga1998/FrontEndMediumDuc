@@ -15,6 +15,7 @@ export function updateArticleToClient(article: any) {
                     comment
                     totalClap
                     notification
+                    createTime
                 }
             }
           `,
@@ -30,15 +31,24 @@ export function getAllArticle() {
     return new Promise(resolve => {
         const data = client.query({
             query: gql`
-                query {
-                getAllArticle( id  : 1){
-                password,
-                login,
-                decentraliz,
-                idUser
-                }
-            `
+                    query {
+                        getAllArticle( id  : ""){
+                            idUser
+                    hashTag
+                    category
+                    comment
+                    totalClap
+                    notification
+                    contentArticle
+                    imageArticle
+                    titleArticle
+                    createTime
+                    }
+                    }
+                    `
+
+
         })
         resolve(data)
     })
-}       
+} 
