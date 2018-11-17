@@ -3,6 +3,7 @@ import MediumEditer from 'medium-editor';
 import * as React from 'react';
 import styled from 'styled-components';
 import articleContainer from '../../../Container/articleContainer';
+import userContainer from '../../../Container/userContainer';
 import Author from '../../Author';
 function Config(title) {
     return {
@@ -119,6 +120,7 @@ const WriteArticle = () => {
     const titlePlaceholder = Config('Title');
     const inputEl = React.useRef(null);
     const refTitle = React.useRef(null)
+    const { avatarLink, name, articles } = userContainer.state.dataUser
     React.useEffect(() => {
         const text = new MediumEditer(inputEl.current, textPlaceholder)
         const title = new MediumEditer(refTitle.current, titlePlaceholder)
@@ -135,7 +137,7 @@ const WriteArticle = () => {
         <div style={{
             width: '70%'
         }}>
-            <Author />
+            <Author avatarLink={avatarLink} totalFollow={10} name={name} totalArticle={articles.length} />
             <$Title ref={refTitle} />
             <$WriteContent ref={inputEl} />
 

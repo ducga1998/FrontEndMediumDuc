@@ -38,10 +38,23 @@ export function checkLoginUser(user: any) {
             query: gql`
                 query {
                 checklogin( username :"${username}" , password :"${password}" ){
-                password,
-                login,
-                decentraliz,
-                idUser
+                    idUser
+                    password
+                    login
+                    name
+                    avatarLink
+                    articles{
+                        idArticle
+                        hashTag
+                        category
+                        comment 
+                        totalClap
+                        notification
+                        contentArticle  
+                        titleArticle  
+                        imageArticle 
+                        createTime 
+                    }
                 }
             }
             `

@@ -18,9 +18,12 @@ const Profile = ({ name, avatarLink, totalFollow, followOtherPeople, bookMark })
         return () => { console.log('cascasn') }
     })
     const [value, setValue] = React.useState(0);
-    return <$Content>
+    // const { avatarLink, name, articles } = userContainer.state.dataUser as any
+    return < $Content >
+        {/* <Author avatarLink={avatarLink} totalFollow={totalFollow} name={name} totalArticle={articles.length} /> */}
 
-    </$Content>
+
+    </$Content >
 }
 const $Content = styled.div`
  display : flex;

@@ -19,7 +19,7 @@ const path = require('path');
 const chalk = require('chalk');
 const spawn = require('react-dev-utils/crossSpawn');
 
-module.exports = function(
+module.exports = function (
   appPath,
   appName,
   verbose,
@@ -173,8 +173,8 @@ module.exports = function(
   console.log(`Success! Created ${appName} at ${appPath}`);
   console.log('Inside that directory, you can run several commands:');
   console.log();
-  console.log(chalk.cyan(`  ${displayedCommand} start`));
-  console.log('    Starts the development server.');
+  console.log(chalk.cyan(`: )))))) product made in nguyen minh duc`));
+  console.log('    can fuck man.');
   console.log();
   console.log(
     chalk.cyan(`  ${displayedCommand} ${useYarn ? '' : 'run '}build`)
@@ -194,7 +194,7 @@ module.exports = function(
     '    and scripts into the app directory. If you do this, you can’t go back!'
   );
   console.log();
-  console.log('We suggest that you begin by typing:');
+  console.log('We suggcascacascaest that you begin by typing:');
   console.log();
   console.log(chalk.cyan('  cd'), cdpath);
   console.log(`  ${chalk.cyan(`${displayedCommand} start`)}`);

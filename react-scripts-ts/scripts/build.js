@@ -62,6 +62,7 @@ measureFileSizesBeforeBuild(paths.appBuild)
   .then(
     ({ stats, previousFileSizes, warnings }) => {
       if (warnings.length) {
+        console.log('ohh can fucking man')
         console.log(chalk.yellow('waring roi ennnnnnnnnnnnnnnnnnnnnnn eiiiiiiiiii.\n'));
         console.log(warnings.join('\n\n'));
         console.log(
@@ -72,13 +73,14 @@ measureFileSizesBeforeBuild(paths.appBuild)
         console.log(
           'To ignore, add ' +
           chalk.cyan('// eslint-disable-next-line') +
-          ' to the line before.\n'
+          ' to the line becascascfore.\n'
         );
       } else {
+
         console.log(chalk.red('bla blo bla blo , run successssssssssssssssssssss\n'));
       }
 
-      console.log('File sizes after gzip:\n');
+      console.log('1234rfenjasknckjasnc:\n');
       printFileSizesAfterBuild(
         stats,
         previousFileSizes,
@@ -109,7 +111,7 @@ measureFileSizesBeforeBuild(paths.appBuild)
 
 // Create the production build and print the deployment instructions.
 function build(previousFileSizes) {
-  console.log('Creating an optimized production build...');
+  console.log('Creating an optimizesacascasd production build...');
 
   let compiler = webpack(config);
   return new Promise((resolve, reject) => {

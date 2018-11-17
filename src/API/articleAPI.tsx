@@ -37,28 +37,26 @@ export function getAllArticle() {
                     query {
                         getAllArticle( id  : ""){
                             idUser
-                    hashTag
-                    category
-                    comment
-                    totalClap
-                    notification
-                    contentArticle
-                    imageArticle
-                    titleArticle
-                    createTime
-                    user {
-      idUser
-      login
-      password
-      decentraliz
-      name
-      avatarLink
-    }
-                    }
+                            hashTag
+                            category
+                            comment
+                            totalClap
+                            notification
+                            contentArticle
+                            imageArticle
+                            titleArticle
+                            createTime
+                            user {
+                                idUser
+                                login
+                                password
+                                decentraliz
+                                name
+                                avatarLink
+                            }
+                        }
                     }
                     `
-
-
         })
         resolve(data)
     })

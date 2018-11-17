@@ -11,12 +11,17 @@
 const path = require('path');
 const fs = require('fs');
 const url = require('url');
-
+const chalk = require('chalk');
 // Make sure any symlinks in the project folder are resolved:
 // https://github.com/facebookincubator/create-react-app/issues/637
 const appDirectory = fs.realpathSync(process.cwd());
 const resolveApp = relativePath => path.resolve(appDirectory, relativePath);
 console.log("resolveApp('config/proxySetup.js')", resolveApp('config/proxySetup.js'))
+console.log('learn cluster nodejs  ')
+console.log('learn file system  and child proccess nodejs')
+console.log(chalk.cyan(
+  `ohhhh yeahhhh RUN PROCCESS ,ARE YOU READYYYYY `
+))
 const envPublicUrl = process.env.PUBLIC_URL;
 
 function ensureSlash(path, needsSlash) {

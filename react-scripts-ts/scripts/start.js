@@ -50,15 +50,16 @@ if (!checkRequiredFiles([paths.appHtml, paths.appIndexJs])) {
 // Tools like Cloud9 rely on this.
 const DEFAULT_PORT = parseInt(process.env.PORT, 10) || 3000;
 const HOST = process.env.HOST || '0.0.0.0';
-
+console.log('casbjhcbasjhcbjasb')
 if (process.env.HOST) {
   console.log(
     chalk.cyan(
-      `Attempting to bind to HOST environment variable: ${chalk.yellow(
-        chalk.bold(process.env.HOST)
+      `Attempting to bind to HOST cascasenvironment variable: ${chalk.yellow(
+        // chalk.bold(process.env.HOST)
       )}`
     )
   );
+  console.log('cascasnckjasncjknasc')
   console.log(
     `If this was unintentional, check that you haven't mistakenly set it in your shell.`
   );
@@ -96,12 +97,13 @@ choosePort(HOST, DEFAULT_PORT)
       if (isInteractive) {
         clearConsole();
       }
-      console.log(chalk.cyan('Starting the development server...\n'));
+      console.log(chalk.cyan('Start cai server stupid , Product design by Nguyen Minh Duc : )))) , git : github.com/ducga1998.\n'));
       openBrowser(urls.localUrlForBrowser);
     });
 
-    ['SIGINT', 'SIGTERM'].forEach(function(sig) {
-      process.on(sig, function() {
+    console.log('cascascbjashbchbashcbhjasbhcas');
+    ['SIGINT', 'SIGTERM'].forEach(function (sig) {
+      process.on(sig, function () {
         devServer.close();
         process.exit();
       });

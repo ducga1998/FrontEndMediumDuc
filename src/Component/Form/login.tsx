@@ -49,6 +49,7 @@ export default function Login({ history }) {
 }
 const $Form = styled.div`
     width : 500px;
+    margin : auto;
     .center {
         text-align : center;
         font-family: 'Ubuntu', sans-serif;

@@ -56,15 +56,15 @@ inquirer
         chalk.red(
           'This git repository has untracked files or uncommitted changes:'
         ) +
-          '\n\n' +
-          gitStatus
-            .split('\n')
-            .map(line => line.match(/ .*/g)[0].trim())
-            .join('\n') +
-          '\n\n' +
-          chalk.red(
-            'Remove untracked files, stash or commit any changes, and try again.'
-          )
+        '\n\n' +
+        gitStatus
+          .split('\n')
+          .map(line => line.match(/ .*/g)[0].trim())
+          .join('\n') +
+        '\n\n' +
+        chalk.red(
+          'Remove untracked files, stash or commit any changes, and try again.'
+        )
       );
       process.exit(1);
     }
@@ -78,9 +78,9 @@ inquirer
       if (fs.existsSync(path.join(appPath, file))) {
         console.error(
           `\`${file}\` already exists in your app folder. We cannot ` +
-            'continue as you would lose all the changes in that file or directory. ' +
-            'Please move or delete it (maybe make a copy for backup) and run this ' +
-            'command again.'
+          'continue as you would lose all the changes in that file or directory. ' +
+          'Please move or delete it (maybe make a copy for backup) and run this ' +
+          'command again.'
         );
         process.exit(1);
       }

@@ -1,14 +1,13 @@
-import * as React from 'react'
-const { useState, useEffect } = React
-import { Col, Navbar, Nav, MenuItem, NavDropdown, NavItem, Button, Alert } from 'react-bootstrap';
-import UIField from '../../UI/UIField'
-import styled from 'styled-components';
-import { Link } from "react-router-dom"
-import UIModal from '../../UI/UIModal'
-import UIButton from '../../UI/UIButton'
-import uuid from 'uuid/v1'
-import { addUser } from '../../API/client'
+import * as React from 'react';
+import { Alert } from 'react-bootstrap';
+import { Link } from "react-router-dom";
 import { toast } from 'react-toastify';
+import styled from 'styled-components';
+import uuid from 'uuid/v1';
+import { addUser } from '../../API/client';
+import UIButton from '../../UI/UIButton';
+import UIField from '../../UI/UIField';
+const { useState, useEffect } = React
 function CheckUser(user, password) {
     if (user === 'admin' && password === 'admin') {
         console.log('ok')
@@ -60,6 +59,7 @@ export default function Register() {
 }
 const $Form = styled.div`
     width : 500px;
+    margin : auto;
     .center {
         text-align : center;
         font-family: 'Ubuntu', sans-serif;
