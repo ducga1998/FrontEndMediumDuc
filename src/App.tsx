@@ -1,15 +1,9 @@
 import * as React from 'react';
-import Layout from './Component/Layout';
-import { Grid, Row, Col } from 'react-bootstrap';
-import Footer from './Component/footer'
-import Article from './Component/Article';
-import UIForm from './UI/UIField'
-import Login from './Component/Form/login';
-import AppRouter from './route'
-import styled from 'styled-components';
-import { ToastContainer, toast } from 'react-toastify';
+import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import styled from 'styled-components';
 import { Provider } from 'unstated-x';
+import AppRouter from './route';
 class App extends React.Component {
   public render() {
     return <>

@@ -6,7 +6,8 @@ import { Subscribe } from 'unstated-x';
 import ArticleContainer from '../../Container/articleContainer';
 import UIButton from '../../UI/UIButton';
 import UIModal from '../../UI/UIModal';
-export default function ButtonArticle() {
+export default function ButtonArticle({ history }: any) {
+
     const [newArticle, setNewArticle] = React.useState(false) as any
     const [open, setOpen] = React.useState(false)
     const [arrHashTag, setArrHashTag] = React.useState([]) as any
@@ -31,65 +32,69 @@ export default function ButtonArticle() {
         await setNameHashTag('')
 
     }
-    return <Subscribe to={[ArticleContainer]}>
-        {
-            (container: any) => {
-                const { isPublicArticle } = container.state
-                return isPublicArticle ?
-                    (<UIModal open={open} openModal={() => {
-                        setOpen(true)
-                    }}
-                        closeMoDal={() => {
-                            setOpen(false)
+    if (window.location.pathname === "/writearticle") {
+        return <Subscribe to={[ArticleContainer]}>
+            {
+                (container: any) => {
+                    const { isPublicArticle } = container.state
+                    return isPublicArticle ?
+                        (<UIModal open={open} openModal={() => {
+                            setOpen(true)
                         }}
-                        onClickOutSide={() => {
-                            setOpen(false)
-                        }}
-                        title="Hash Tag" width="600px" trigger={<MenuItem>Public Article</MenuItem>}>
-                        {arrHashTag.length > 0 ? <Grid><ListGroup style={{ flex: '6' }}>
-                            {arrHashTag.map((item, key) => {
-                                return <ListGroupItem key={key}>{item}<Button onClick={() => {
-                                    const arrHasBeenDelete = arrHashTag.filter(itemHashTag => itemHashTag !== item)
-                                    setArrHashTag(arrHasBeenDelete)
-                                }}><Glyphicon glyph="remove" /> </Button>
-                                </ListGroupItem>
-                            })}
-                        </ListGroup>
+                            closeMoDal={() => {
+                                setOpen(false)
+                            }}
+                            onClickOutSide={() => {
+                                setOpen(false)
+                            }}
+                            title="Hash Tag" width="600px" trigger={<MenuItem>Public Article</MenuItem>}>
+                            {arrHashTag.length > 0 ? <Grid><ListGroup style={{ flex: '6' }}>
+                                {arrHashTag.map((item, key) => {
+                                    return <ListGroupItem key={key}>{item}<Button onClick={() => {
+                                        const arrHasBeenDelete = arrHashTag.filter(itemHashTag => itemHashTag !== item)
+                                        setArrHashTag(arrHasBeenDelete)
+                                    }}><Glyphicon glyph="remove" /> </Button>
+                                    </ListGroupItem>
+                                })}
+                            </ListGroup>
 
-                        </Grid> : null}
-                        <FormGroup style={{ display: 'flex' }}>
-                            <FormControl
-                                type="text"
-                                value={nameHashTag}
-                                placeholder="Enter text"
-                                onChange={(e: any) => setNameHashTag(e.target.value)}
-                            />
-                            <Button onClick={handleAddHashTag}>
-                                <Glyphicon glyph="plus" /> </Button>
-                        </FormGroup>
-                        {checkPublicArticle ? <UIButton onChange={async () => {
-                            const newArticle = await container.addArticle(arrHashTag)
-                            await setNewArticle(newArticle)
-                            if (newArticle) {
-                                toast.success('Public article success !!!!')
-                                await setOpen(false) // close modal 
-                                await setCheckPublicArticle(false) //  mode public article  =>  update article 
-                            }
-                            else {
-                                toast.error(":( Error , just kidding me, FUCKING CODE FOR ME")
-                            }
-                        }}> Public Article  </UIButton> : <UIButton onChange={async () => {
-                            if (newArticle) {
-                                const { idUser } = newArticle.data.addArticle
-                                await container.updateAricle(arrHashTag, idUser)
-                                toast.success('Update aricle success !!!! ')
-                            }
-                        }} >Update Article</UIButton>}
+                            </Grid> : null}
+                            <FormGroup style={{ display: 'flex' }}>
+                                <FormControl
+                                    type="text"
+                                    value={nameHashTag}
+                                    placeholder="Enter text"
+                                    onChange={(e: any) => setNameHashTag(e.target.value)}
+                                />
+                                <Button onClick={handleAddHashTag}>
+                                    <Glyphicon glyph="plus" /> </Button>
+                            </FormGroup>
+                            {checkPublicArticle ? <UIButton onChange={async () => {
+                                const newArticle = await container.addArticle(arrHashTag)
+                                await setNewArticle(newArticle)
+                                if (newArticle) {
+                                    toast.success('Public article success !!!!')
+                                    await setOpen(false) // close modal 
+                                    await setCheckPublicArticle(false) //  mode public article  =>  update article 
+                                }
+                                else {
+                                    toast.error(":( Error , just kidding me, FUCKING CODE FOR ME")
+                                }
+                            }}> Public Article  </UIButton> : <UIButton onChange={async () => {
+                                if (newArticle) {
+                                    const { idUser } = newArticle.data.addArticle
+                                    await container.updateAricle(arrHashTag, idUser)
+                                    toast.success('Update aricle success !!!! ')
+                                }
+                            }} >Update Article</UIButton>}
 
-                    </UIModal>) : null
+                        </UIModal>) : null
+                }
             }
-        }
-    </Subscribe>
+        </Subscribe>
+    }
+    return null
+
 }
 const Grid = styled.div`
     display : 'flex';

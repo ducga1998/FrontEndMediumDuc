@@ -43,7 +43,9 @@ class ArticleContainer extends Container<IArticleContainer>{
         }
     }
 }
+() => {
 
+}
 const articleContainer = new ArticleContainer({
     contentArticle: '',
     titleArticle: '',

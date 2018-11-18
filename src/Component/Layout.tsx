@@ -1,9 +1,9 @@
 import * as React from 'react';
-import Navigation from './Navigation/index';
 // import styled from 'styled-components'
 // import Footer from './Component/footer'
-import { Grid, Row, Col } from 'react-bootstrap';
-import Footer from './footer'
+import { Grid } from 'react-bootstrap';
+import Footer from './footer';
+import Navigation from './Navigation/index';
 
 export default function Layout({ children }) {
     return <Grid fluid componentClass="div" style={{

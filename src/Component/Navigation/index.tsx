@@ -25,16 +25,16 @@ class Navication extends React.Component<any, any>{
                     </NavItem>
                 </Nav>
                 <Nav pullRight>
-                    <NavItem eventKey={1} href="#">
+                    {window.location.pathname === '/home' ? <NavItem eventKey={1} href="#">
                         <Link to="/writearticle" > Write Article</Link>
-                    </NavItem>
+                    </NavItem> : null}
                     <ButtonArticle />
 
                     <Subscribe to={[userContainer]} >
                         {
                             container => {
                                 const { login, dataUser } = container.state
-                                return !login ? <Link to="/login">Login</Link> : <NavDropdown eventKey={3} title="Setting" id="basic-nav-dropdown">
+                                return !login ? <NavItem> <Link to="/login">Login</Link> </NavItem> : <NavDropdown eventKey={3} title="Setting" id="basic-nav-dropdown">
                                     <MenuItem eventKey={3.1}><Link to="/profile" > Profile</Link></MenuItem>
                                     <MenuItem eventKey={3.2}><Link to="/writearticle" >Write Article</Link></MenuItem>
                                     <MenuItem eventKey={3.3}></MenuItem>

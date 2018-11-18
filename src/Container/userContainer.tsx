@@ -1,6 +1,5 @@
-import { Container } from 'unstated-x'
+import { Container } from 'unstated-x';
 import { checkLoginUser } from '../API/client';
-import { Redirect } from 'react-router';
 // import {  } from 'react-router';
 class UserContainer extends Container<any>{
     async login({ username, password }) {
@@ -15,9 +14,6 @@ class UserContainer extends Container<any>{
         if (checklogin) {
             await this.setState({ login: true, dataUser: checklogin })
             localStorage.setItem('duc-app-medium-login', JSON.stringify(checklogin))
-            // await this.setState({ dataUser: checklogin })
-            // window.location.href = "/"
-            // browserHistory.push('/register')
             return checklogin
         }
         else {

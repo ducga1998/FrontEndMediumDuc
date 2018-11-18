@@ -3,12 +3,12 @@ import { Switch } from "react-router";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import { SubscribeOne } from "unstated-x";
 import WriteArticle from './Component//Article/WriteArticle';
-import Author from './Component/Author/index';
 // import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import Login from './Component/Form/login';
 import Register from "./Component/Form/register";
 import Home from "./Component/Home";
 import Layout from './Component/Layout';
+import Profile from './Component/Profile/common';
 import userContainer from "./Container/userContainer";
 import UILoading from "./UI/UILoading";
 const About = () => <h2>About</h2>;
@@ -34,7 +34,7 @@ const AppRouter = () => {
         }
         return <Router >
             <Switch>
-                <Layout>
+                <Layout >
                     {/* <Route path="/" component={Home} /> */}
                     <Route path="/about/" component={isAuth(About)} />
                     <Route path="/users/:id" component={isAuth(Users)} />
@@ -43,7 +43,7 @@ const AppRouter = () => {
                     <Route path="/logout" component={logout} />
                     <Route path="/register" component={Register} />
                     <Route path="/home" component={isAuth(Home)} />
-                    <Route path="/profile" component={isAuth(Author)} />
+                    <Route path="/profile" component={isAuth(Profile)} />
                     <Route path="/writearticle" component={isAuth(WriteArticle)} />
                     WriteArticle
             </Layout>

@@ -1,13 +1,11 @@
 import * as React from 'react';
-// import styled from 'styled-components'
-// import Footer from './Component/footer'
-import { Grid, Row, Col } from 'react-bootstrap';
 import styled from 'styled-components';
-import ListAuthor from './listAuthor';
 import ListArticle from './listArticle';
+import ListAuthor from './listAuthor';
 // import Footer from './footer'
 
-export default function Home({ children }) {
+export default function Home({ children, history, match }) {
+    console.log('match', match)
     return <$Content>
         <$ListArticle >
             <ListArticle />

@@ -26,9 +26,7 @@ export function updateArticleToClient(article: any) {
         resolve(data)
     })
 }
-export function A() {
 
-}
 //get all article in database
 export function getAllArticle() {
     return new Promise(resolve => {
