@@ -1,5 +1,4 @@
 import * as React from 'react';
-import { Alert } from 'react-bootstrap';
 import { Link } from "react-router-dom";
 import { toast } from 'react-toastify';
 import styled from 'styled-components';
@@ -23,8 +22,6 @@ export default function Register() {
     const [isRegister, setRegister] = useState(false)
     return <$Form>
         <h2 className="center">Register</h2>
-        {!isRegister && name.length > 0 && password > 0 && password < 7 ? <Alert bsStyle="success"> Register Success </Alert> : <Alert bsStyle="warning">Register error </Alert>}
-
         <UIField minLength={9} titleField="Email and Name" placeholder="Email ..." value={login} onChange={(value) => { setValueLogin(value) }} />
         <UIField minLength={6} type="password" titleField="Password" placeholder="Password .... " value={password} onChange={(value) => {
             setValuePassword(value)
