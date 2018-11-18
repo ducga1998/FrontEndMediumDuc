@@ -43,7 +43,7 @@ export function checkLoginUser(user: any) {
                     login
                     name
                     avatarLink
-                    articles{
+                    articles {
                         idArticle
                         hashTag
                         category
