@@ -26,7 +26,41 @@ export function updateArticleToClient(article: any) {
         resolve(data)
     })
 }
-
+export function getArticleById(id) {
+    return new Promise(resolve => {
+        const data = client.query({
+            query: gql`
+                    query {
+                        getArticleById( id  : "${id}"){
+                            idArticle
+                            idUser
+                            hashTag
+                            category
+                            comment
+                            totalClap
+                            notification
+                            contentArticle
+                            imageArticle
+                            titleArticle
+                            createTime
+                            user {
+                                idUser
+                                login
+                                password
+                                decentraliz
+                                name
+                                avatarLink
+                                articles {
+                                    idArticle
+                                }
+                            }
+                        }
+                    }
+                    `
+        })
+        resolve(data)
+    })
+}
 //get all article in database
 export function getAllArticle() {
     return new Promise(resolve => {
@@ -34,6 +68,7 @@ export function getAllArticle() {
             query: gql`
                     query {
                         getAllArticle( id  : ""){
+                            idArticle
                             idUser
                             hashTag
                             category

@@ -14,7 +14,7 @@ export default function ButtonArticle({ history }: any) {
     const [nameHashTag, setNameHashTag] = React.useState('')
     const [checkPublicArticle, setCheckPublicArticle] = React.useState(true)
     const handleAddHashTag = async () => {
-        if (arrHashTag.length > 6 || arrHashTag < 1) {
+        if (arrHashTag.length > 6 || arrHashTag < 0) {
             toast.error('Maximum 6 hash tag and Min > 0!!!!');
             return
         }

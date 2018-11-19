@@ -2,6 +2,8 @@ import * as React from 'react';
 // import { Aside, Header, Layout, Main, Nav, SubHeader } from '../UI/styled/layout'
 // import AppRouter from '../route'
 import { Button, ButtonGroup, ButtonToolbar } from 'react-bootstrap';
+import renderHTML from 'react-render-html';
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 export interface IArticle {
     avatar: String;
@@ -11,16 +13,17 @@ export interface IArticle {
     time: String;
     hashTag: any[],
     totalComment: number
+    idArticle: string
 }
-export default function Article({ avatar, titleArticle, content, totalClap, time, hashTag, totalComment }: IArticle) {
+export default function Article({ idArticle, avatar, titleArticle, content, totalClap, time, hashTag, totalComment }: IArticle) {
     return <$Article>
         <$Avatar>
             <img src={`${avatar}`} />
         </$Avatar>
         <$DetailArticle>
-            <h2>{titleArticle}</h2>
+            <h2><Link to={`/article/${idArticle}`}>{renderHTML(titleArticle)}</Link></h2>
             <small>{time}</small>
-            <p>{content}</p>
+            <p>{renderHTML(content)}</p>
 
             <ButtonToolbar>
                 <ButtonGroup>

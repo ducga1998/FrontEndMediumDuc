@@ -1,5 +1,6 @@
 import gql from "graphql-tag";
 import { client } from "./client";
+
 export function getAllInfomationUserFollowYour(idUser: string) {
     return new Promise(resolve => {
         const data = client.query({

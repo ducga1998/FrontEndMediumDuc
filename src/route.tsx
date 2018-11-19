@@ -3,6 +3,7 @@ import { Switch } from "react-router";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import { SubscribeOne } from "unstated-x";
 import WriteArticle from './Component//Article/WriteArticle';
+import ReadArticle from './Component/Article/ReadArticle';
 // import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import Login from './Component/Form/login';
 import Register from "./Component/Form/register";
@@ -42,6 +43,7 @@ const AppRouter = () => {
                     <Route path="/login" component={Login} />
                     <Route path="/logout" component={logout} />
                     <Route path="/register" component={Register} />
+                    <Route path="/article/:id" component={ReadArticle} />
                     <Route path="/home" component={isAuth(Home)} />
                     <Route path="/profile" component={isAuth(Profile)} />
                     <Route path="/writearticle" component={isAuth(WriteArticle)} />
