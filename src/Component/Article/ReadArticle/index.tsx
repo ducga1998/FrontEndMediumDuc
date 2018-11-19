@@ -46,10 +46,10 @@ export default class ReadArticle extends React.Component<IReadArticleType> {
 
                     <p>{createTime}</p>
                     <$Title>
-                        {renderHTML(titleArticle)}
+                        {renderHTML(titleArticle.trim().replace(' ', ''))}
                     </$Title>
                     <$WriteContent >
-                        {renderHTML(contentArticle)}
+                        {renderHTML(contentArticle.trim().replace(' ', ''))}
                     </$WriteContent>
 
                 </div>

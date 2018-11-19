@@ -11,6 +11,7 @@ export default class ListArticle extends React.Component<any> {
     }
 
     async componentDidMount() {
+        // this is function get all data article, in have data user
         const dataFake = await getAllArticle()
         // console.log('dataFake', dataFake)
         if (dataFake) {
@@ -26,8 +27,8 @@ export default class ListArticle extends React.Component<any> {
         return <$ListArticle>{
             allArticleData.map((item: any, key) => {
                 console.log('itemmm', item)
-                const { hashTag, isUSer, contentArticle, titleArticle, createTime, idArticle } = item
-                return <Article idArticle={idArticle} key={key} hashTag={hashTag} time={createTime} content={contentArticle} totalClap={8} totalComment={9} titleArticle={titleArticle} avatar={`https://picsum.photos/200/200/?a${item}`} />
+                const { hashTag, isUSer, contentArticle, titleArticle, createTime, idArticle, user } = item
+                return <Article user={user} idArticle={idArticle} key={key} hashTag={hashTag} time={createTime} content={contentArticle} totalClap={8} totalComment={9} titleArticle={titleArticle} avatar={`https://picsum.photos/200/200/?a${item}`} />
             })
         }</$ListArticle>
     }

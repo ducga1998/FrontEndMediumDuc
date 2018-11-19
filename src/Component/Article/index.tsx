@@ -14,17 +14,20 @@ export interface IArticle {
     hashTag: any[],
     totalComment: number
     idArticle: string
+    user: any
 }
-export default function Article({ idArticle, avatar, titleArticle, content, totalClap, time, hashTag, totalComment }: IArticle) {
+// => view list Article  =>  you check file listArticle is view props data and function call api to backend
+export default function Article({ idArticle, avatar, titleArticle, content, totalClap, time, hashTag, totalComment, user }: IArticle) {
+    const { name, avatarLink, idUser } = user
     return <$Article>
         <$Avatar>
-            <img src={`${avatar}`} />
+            <img src={`${avatarLink ? avatarLink : avatar}`} />
         </$Avatar>
         <$DetailArticle>
             <h2><Link to={`/article/${idArticle}`}>{renderHTML(titleArticle)}</Link></h2>
-            <small>{time}</small>
-            <p>{renderHTML(content)}</p>
-
+            <small>Create at : {time}</small>
+            <p><b>Content : </b>{renderHTML(content)}</p>
+            <p>Write by : <b><Link to={`/user/${idUser}`}>{name === '' ? 'NO NAME' : name}</Link></b></p>
             <ButtonToolbar>
                 <ButtonGroup>
                     {hashTag.map((item: any, key: number) => {
@@ -33,8 +36,8 @@ export default function Article({ idArticle, avatar, titleArticle, content, tota
                 </ButtonGroup>
             </ButtonToolbar>
         </$DetailArticle>
-        <$TotalClap><i className="fa fa-bookmark" />{totalClap}</$TotalClap>
-        <$TotalComment><i className="fa fa-comment" />{totalComment}</$TotalComment>
+        <$TotalClap><i className="fa fa-bookmark" /> {totalClap}</$TotalClap>
+        <$TotalComment><i className="fa fa-comment" /> {totalComment}</$TotalComment>
     </$Article>
 }
 const $TotalClap = styled.div`

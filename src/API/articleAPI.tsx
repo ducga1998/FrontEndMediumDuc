@@ -46,8 +46,8 @@ export function getArticleById(id) {
                             user {
                                 idUser
                                 login
-                                password
-                                decentraliz
+                        
+                
                                 name
                                 avatarLink
                                 articles {

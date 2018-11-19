@@ -10,6 +10,7 @@ import Register from "./Component/Form/register";
 import Home from "./Component/Home";
 import Layout from './Component/Layout';
 import Profile from './Component/Profile/common';
+import ViewUser from './Component/Profile/profileUserCommon';
 import userContainer from "./Container/userContainer";
 import UILoading from "./UI/UILoading";
 const About = () => <h2>About</h2>;
@@ -38,8 +39,7 @@ const AppRouter = () => {
                 <Layout >
                     {/* <Route path="/" component={Home} /> */}
                     <Route path="/about/" component={isAuth(About)} />
-                    <Route path="/users/:id" component={isAuth(Users)} />
-                    <Route path="/article/:id" component={isAuth(Users)} />
+                    <Route path="/user/:id" component={isAuth(ViewUser)} />
                     <Route path="/login" component={Login} />
                     <Route path="/logout" component={logout} />
                     <Route path="/register" component={Register} />

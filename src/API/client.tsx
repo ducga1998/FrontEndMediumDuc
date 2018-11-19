@@ -31,6 +31,41 @@ export function addUser(user: any) {
     })
 }
 //QUERY
+export function getAllInformationUser(idUser: string) {
+
+    return new Promise(resolve => {
+        const data = client.query({
+            query: gql`
+                query {
+                    getAllInformationUser( id : "${idUser}" ){
+                    idUser
+                    name
+                    avatarLink
+                    articles {
+                        idArticle
+                        hashTag
+                        category
+                        comment 
+                        totalClap
+                        notification
+                        contentArticle  
+                        titleArticle  
+                        imageArticle 
+                        createTime 
+                        user {
+                                idUser
+                                login
+                                name
+                                avatarLink
+                            }
+                    }
+                }
+            }
+            `
+        })
+        resolve(data)
+    })
+}
 export function checkLoginUser(user: any) {
     const { username, password } = user;
     return new Promise(resolve => {
