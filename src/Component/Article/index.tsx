@@ -26,7 +26,7 @@ export default function Article({ idArticle, avatar, titleArticle, content, tota
         <$DetailArticle>
             <h2><Link to={`/article/${idArticle}`}>{renderHTML(titleArticle)}</Link></h2>
             <small>Create at : {time}</small>
-            <p><b>Content : </b>{renderHTML(content)}</p>
+            <b>Content : </b>{renderHTML(content)}
             <p>Write by : <b><Link to={`/user/${idUser}`}>{name === '' ? 'NO NAME' : name}</Link></b></p>
             <ButtonToolbar>
                 <ButtonGroup>

@@ -25,6 +25,7 @@ export function getAllInfomationUserFollowYour(idUser) {
 //MUTATION
 // define input  => idUser and idUserFollow 
 export function follow(input: any) {
+    console.log('input follow', input)
     return new Promise(resolve => {
         const data = client.mutate({
             mutation: gql`

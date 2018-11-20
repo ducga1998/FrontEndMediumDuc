@@ -38,8 +38,8 @@ export default class ReadArticle extends React.Component<IReadArticleType> {
 
                     <Author avatarLink={avatarLink} totalFollow={10} name={name} totalArticle={213} />
                     <$HashTag>
-                        HashTag :  {hashTag.map(item => {
-                            return <Label style={{ fontSize: '15px', margin: ' 0px' }}>{item}</Label>
+                        HashTag :  {hashTag.map((item, key) => {
+                            return <Label key={key} style={{ fontSize: '15px', margin: ' 0px' }}>{item}</Label>
                         })}
                     </$HashTag>
 

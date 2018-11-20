@@ -1,29 +1,30 @@
 import gql from "graphql-tag";
 import { client } from "./client";
 
-export function getAllInfomationUserFollowYour(idUser: string) {
-    return new Promise(resolve => {
-        const data = client.query({
-            query: gql`
-                    query {
-                        getAllInfomationUserFollowYour( id  : "${idUser}"){
-                            idUser
-                            idUserFollow
-                            userComment {
-                                name
-                                avatarLink
-                            }
-                            articleComment {
-                                idUser
-                                createTime
-                            }
-                        }
-                    }
-                    `
-        })
-        resolve(data)
-    })
-}
+// export function getAllInfomationUserFollowYour(idUser: string) {
+//     console.log('999', idUser)
+//     return new Promise(resolve => {
+//         const data = client.query({
+//             query: gql`
+//                     query {
+//                         getAllInfomationUserFollowYour( id  : "${idUser}"){
+//                             idUser
+//                             idUserFollow
+//                             userComment {
+//                                 name
+//                                 avatarLink
+//                             }
+//                             articleComment {
+//                                 idUser
+//                                 createTime
+//                             }
+//                         }
+//                     }
+//                     `
+//         })
+//         resolve(data)
+//     })
+// }
 //MUATION 
 // this is function felp we add comment into a article , 
 // input : idArticle and  content comment ?  . Iam not sure  :v 

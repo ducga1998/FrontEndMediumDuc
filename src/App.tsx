@@ -8,12 +8,9 @@ class App extends React.Component {
   public render() {
     return <>
       <Provider>
-        {/* <Layout> */}
-        {/* <Author /> */}
         <$BoxAlgin>
           <AppRouter />
         </$BoxAlgin>
-        {/* </Layout> */}
         <ToastContainer autoClose={4000} />
       </Provider>
     </>
@@ -28,6 +25,15 @@ const $BoxAlgin = styled.div`
   &  a:hover {
     text-decoration : none;
   }
+  & button:focus {
+    outline : none;
+  }
+  & button:active{
+    outline : none;
+  }
+  & button.btn.btn-info:active {
+    outline: none;
+}
 `
 
 export default App;
