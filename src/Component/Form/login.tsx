@@ -5,10 +5,8 @@ import styled from 'styled-components';
 import userContainer from '../../Container/userContainer';
 import UIButton from '../../UI/UIButton';
 import UIField from '../../UI/UIField';
-// import { Aside, Header, Layout, Main, Nav, SubHeader } from '../UI/styled/layout'
-// import AppRouter from '../route'
+
 const { useState, useEffect, useRef } = React
-// import { __RouterContext } from "react-router";
 function CheckUser(user, password) {
     if (user === 'admin' && password === 'admin') {
         console.log('ok')
@@ -33,18 +31,12 @@ export default function Login({ history }) {
                 toast.error('Login false, please check user name and passwod')
             }
             else {
-                // console.log(history)
                 history.push('/home')
             }
-            // console.log(RouterContext)
-            // refLink.current.
 
             console.log(dataUser)
         }}>Login</UIButton>
         <UIButton  ><Link to='/register'>Register</Link></UIButton>
-        {/* <UIModal trigger={<button>click</button>}>
-            casnjkcnaskjnckasnkjcnkajsccalkcmasklmcamscmkalsmcklamskl
-        </UIModal> */}
     </$Form>
 }
 const $Form = styled.div`

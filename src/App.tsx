@@ -20,11 +20,14 @@ class App extends React.Component {
   }
 }
 const $BoxAlgin = styled.div`
-width : '100%';
-height : '500px';
-display: flex;
-align-items : center;
-justify-content: center;
+  width : '100%';
+  height : '500px';
+  display: flex;
+  align-items : center;
+  justify-content: center;
+  &  a:hover {
+    text-decoration : none;
+  }
 `
 
 export default App;

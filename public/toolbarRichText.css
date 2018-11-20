@@ -79,3 +79,6 @@
   
   .medium-editor-toolbar-actions li, .medium-editor-toolbar-actions button {
     border-radius: 50px; }
+    a :hover {
+      text-decoration: none;
+    }
