@@ -26,12 +26,13 @@ const { useEffect } = React
 class ViewUserDetail extends React.Component<IViewUserDetail> {
     state = {
         dataUser: null,
-        dataUserFollow: null,
+        dataUserFollow: [],
         isFollow: false
     }
-    async  componentDidMount() {
+    async componentDidMount() {
         const { match: { params: { id } } } = this.props
         const data = await getAllInformationUser(id)
+        // get all information user has been follow
         const dataFollow = await getAllInfomationUserFollowYour(id)
         const dataUserFollow = dataFollow['data']['getAllInfomationUserFollowYour']
         // this , beause object in data same name function =.=
@@ -41,7 +42,6 @@ class ViewUserDetail extends React.Component<IViewUserDetail> {
             this.setState({ isFollow: true })
         }
         await this.setState({ dataUser, dataUserFollow })
-
     }
     //     articles: (15) [{…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}]
     // avatarLink: null
@@ -58,7 +58,7 @@ class ViewUserDetail extends React.Component<IViewUserDetail> {
         await unFollow({ idUser, idUserFollow })
     }
     render() {
-        const { dataUser, isFollow } = this.state
+        const { dataUser, isFollow, dataUserFollow } = this.state
         if (dataUser) {
             const { articles, avatarLink, name, idUser } = dataUser as any;
             console.log('articles', articles)
@@ -76,7 +76,13 @@ class ViewUserDetail extends React.Component<IViewUserDetail> {
                     <Right>
                         {isFollow ? <Button bsStyle="danger" onClick={async () => { await this.unfollow(idUser) }}>Unfollow</Button> : <Button bsStyle="info" onClick={async () => { await this.follow(idUser) }}> Follow </Button>}
 
+                        {dataUserFollow && dataUserFollow.length > 0 ? <$ListAvatarUserFollow>
+                            {dataUserFollow.map((item: any, key) => {
+                                const { avatarLink, name } = item.userFollow
+                                return <img data-tooltip={name} src={`${avatarLink ? avatarLink : srcImg}`} />
+                            })}
 
+                        </$ListAvatarUserFollow> : "No user Follow :(("}
                     </Right>
                 </$Content >
                 <hr />
@@ -98,6 +104,16 @@ class ViewUserDetail extends React.Component<IViewUserDetail> {
     }
 }
 //"idArticle", "hashTag", "category", "comment", "totalClap", "notification", "contentArticle", "titleArticle", "imageArticle", "createTime", "__typename"
+const $ListAvatarUserFollow = styled.div`
+    margin : 10px;
+    & img {
+        width : 40px;
+        height : 40px;
+        margin-left : 3px;
+        border-radius:50%;
+    }
+
+`
 const Img = styled.img`
 
 width : 200px;

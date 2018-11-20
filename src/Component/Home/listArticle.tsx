@@ -17,7 +17,6 @@ export default class ListArticle extends React.Component<any> {
         if (dataFake) {
             const { data: { getAllArticle } } = dataFake as { data: { getAllArticle: any[] } }
             this.setState({ allArticleData: getAllArticle })
-
         }
     }
 

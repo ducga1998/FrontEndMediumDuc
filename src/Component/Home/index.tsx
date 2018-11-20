@@ -5,7 +5,6 @@ import ListAuthor from './listAuthor';
 // import Footer from './footer'
 
 export default function Home({ children, history, match }) {
-    console.log('match', match)
     return <$Content>
         <$ListArticle >
             <ListArticle />

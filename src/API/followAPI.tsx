@@ -11,9 +11,6 @@ export function getAllInfomationUserFollowYour(idUser) {
                             userFollow {
                                 name
                                 avatarLink
-                                articles {
-                                    idArticle
-                                }
                             }
                         }
                     }
