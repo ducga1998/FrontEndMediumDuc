@@ -1,7 +1,9 @@
 import MediumEditer from 'medium-editor';
 import * as React from 'react';
+import { toast } from 'react-toastify';
 import styled from 'styled-components';
 import { addComment, getAllCommentinArtcileCurrent } from '../../../API/commentAPI';
+import userContainer from '../../../Container/userContainer';
 import UIButton from '../../../UI/UIButton';
 import { Config } from '../WriteArticle/index';
 const config = Config('Comment something now  . . . . . . . ')
@@ -33,33 +35,41 @@ export default class WriteComment extends React.Component<IWriteComment> {
         });
     }
     handleAddComment = async () => {
+
         // console.log(this.state.content)
-        const { imgSrc, name, idUser, idArticle } = this.props
+        const { imgSrc, idArticle } = this.props
         const { content } = this.state
+        if (content === ' <p><br></p>' || content === '') {
+            toast.error('Comment not empty !!!. Please write something ')
+            return
+        }
+        const { idUser, name, avatarLink } = userContainer.state
         const input = {
             content,
             idUser,
             idArticle,
 
         }
-
+        console.log('content', content)
 
         let { data: {
             addCommentIntoArticle
         } }: any = await addComment(input)
         let newComment = addCommentIntoArticle
         newComment.userComment = {
-            avatarLink: imgSrc,
+            avatarLink,
             name
         }
 
         console.log('newComment', newComment)
         await this.props.onChange(newComment)
+        this.refComment.current.innerHTML = ''
     }
     render() {
-        const { imgSrc, name, idUser, idArticle } = this.props
+        const { idUser, idArticle } = this.props
+        const { name, avatarLink } = userContainer.state
         return <>< $Comment>
-            <$Img src={imgSrc ? imgSrc : IMAGE_SOURCE_DEFAULT} /> <b>{name}</b>
+            <$Img src={avatarLink ? avatarLink : IMAGE_SOURCE_DEFAULT} /> <b>{name}</b>
             <$Content ref={this.refComment} />
             <UIButton onChange={this.handleAddComment} >Comment</UIButton>
         </$Comment>
@@ -69,7 +79,7 @@ export default class WriteComment extends React.Component<IWriteComment> {
 
 const $Content = styled.div`
     &:focus {
-    background-color: #c3c0c0;
+    background-color: #f3f3f3;
     transition: 0.5s;
     outline: none;
     border-radius: 10px;

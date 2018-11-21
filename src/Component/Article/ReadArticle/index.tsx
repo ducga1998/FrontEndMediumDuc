@@ -24,7 +24,7 @@ export default class ReadArticle extends React.Component<IReadArticleType> {
         const allComment = await getAllCommentinArtcileCurrent(id)
         if (allComment) {
             const { data: { getAllCommentInTheArticle } } = allComment as any
-            this.setState({ allCommentInArticle: getAllCommentInTheArticle })
+            await this.setState({ allCommentInArticle: getAllCommentInTheArticle })
         }
         console.log('allComment', allComment)
         const dataArticle = await getArticleById(id) as any
@@ -39,7 +39,7 @@ export default class ReadArticle extends React.Component<IReadArticleType> {
     //idArticle", "idUser", "hashTag", "category", "comment", "totalClap", "notification", "contentArticle", "imageArticle", "titleArticle", "createTime", "user", "__typename"
     render() {
         const { article, allCommentInArticle }: any = this.state
-        console.log('update update')
+        console.log('update update', article, allCommentInArticle)
         if (article) {
             const { user: { idUser, avatarLink, name, articles, }, contentArticle, titleArticle, hashTag, createTime } = article
             return <$Align>
@@ -47,7 +47,7 @@ export default class ReadArticle extends React.Component<IReadArticleType> {
                     width: '70%'
                 }}>
 
-                    <Author avatarLink={avatarLink} totalFollow={10} name={name} totalArticle={213} />
+                    <Author idUser={idUser} avatarLink={avatarLink} totalFollow={10} name={name} totalArticle={213} />
                     <$HashTag>
                         HashTag :  {hashTag.map((item, key) => {
                             return <Label key={key} style={{ fontSize: '15px', margin: ' 0px' }}>{item}</Label>
@@ -57,7 +57,7 @@ export default class ReadArticle extends React.Component<IReadArticleType> {
 
                     <p>{createTime}</p>
                     <$Title>
-                        {renderHTML(titleArticle.trim().replace(' ', ''))}
+                        <h1> {renderHTML(titleArticle.trim().replace(' ', ''))}</h1>
                     </$Title>
                     <$ContentArticle >
                         {renderHTML(contentArticle.trim().replace(' ', ''))}
@@ -228,7 +228,10 @@ const $ContentArticle = styled.div`
         border: 0;
     }
 `
-const $Title = styled($ContentArticle)`
+const $Title = styled.div`
     height : 100px;
-    font-size : 2em;
+    &:focus {
+        outline : none;
+    }
+    
 `

@@ -120,7 +120,7 @@ const WriteArticle = () => {
     const titlePlaceholder = Config('Title');
     const inputEl = React.useRef(null);
     const refTitle = React.useRef(null)
-    const { avatarLink, name, articles } = userContainer.state.dataUser
+    const { avatarLink, name, articles, idUser } = userContainer.state.dataUser
     React.useEffect(() => {
         const text = new MediumEditer(inputEl.current, textPlaceholder)
         const title = new MediumEditer(refTitle.current, titlePlaceholder)
@@ -137,8 +137,8 @@ const WriteArticle = () => {
         <div style={{
             width: '70%'
         }}>
-            <Author avatarLink={avatarLink} totalFollow={10} name={name} totalArticle={articles.length} />
-            <$Title ref={refTitle} />
+            <Author idUser={idUser} avatarLink={avatarLink} totalFollow={10} name={name} totalArticle={articles.length} />
+            <h1>  <$Title ref={refTitle} /></h1>
             <$WriteContent ref={inputEl} />
 
         </div>
@@ -269,8 +269,11 @@ const $WriteContent = styled.div`
         border: 0;
     }
 `
-const $Title = styled($WriteContent)`
+const $Title = styled.div`
     height : 100px;
-    font-size : 2em;
+    &:focus {
+        outline : none;
+    }
+    
 `
 export default WriteArticle 

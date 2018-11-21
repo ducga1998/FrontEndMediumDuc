@@ -5,6 +5,7 @@ import { Button, ButtonGroup, ButtonToolbar } from 'react-bootstrap';
 import renderHTML from 'react-render-html';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
+import { filterStringHTML } from '../../help/help';
 export interface IArticle {
     avatar: String;
     titleArticle: String;
@@ -16,6 +17,7 @@ export interface IArticle {
     idArticle: string
     user: any
 }
+
 // => view list Article  =>  you check file listArticle is view props data and function call api to backend
 export default function Article({ idArticle, avatar, titleArticle, content, totalClap, time, hashTag, totalComment, user }: IArticle) {
     const { name, avatarLink, idUser } = user
@@ -24,9 +26,9 @@ export default function Article({ idArticle, avatar, titleArticle, content, tota
             <img src={`${avatarLink ? avatarLink : avatar}`} />
         </$Avatar>
         <$DetailArticle>
-            <h2><Link to={`/article/${idArticle}`}>{renderHTML(titleArticle)}</Link></h2>
-            <small>Create at : {time}</small>
-            <b>Content : </b>{renderHTML(content)}
+            <h2><Link to={`/article/${idArticle}`}>{renderHTML(filterStringHTML(titleArticle, true))}</Link></h2>
+            <small>Create at : {time}</small> <br />
+            <b >Content : </b>{renderHTML(filterStringHTML(content))}<Link to={`/article/${idArticle}`}> Read more ...</Link>
             <p>Write by : <b><Link to={`/user/${idUser}`}>{name === '' ? 'NO NAME' : name}</Link></b></p>
             <ButtonToolbar>
                 <ButtonGroup>
@@ -59,12 +61,17 @@ const $DetailArticle = styled.div`
     flex : 8;
     padding : 20px;
 `
-const $Article = styled.div<any>`
+const $Article = styled.div`
     position :relative;
     display : flex;
     border-bottom: 1px solid #d9d5d5;
     margin-bottom: 13px;
+    transition : 0.3s;
     ${$Avatar} {
             flex : 1;
+    }
+    &:hover {
+        background-color: #f8f8f8;
+        transition : 0.3s;
     }
 `

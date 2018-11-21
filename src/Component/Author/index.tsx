@@ -2,15 +2,15 @@ import * as React from 'react';
 import { Link } from "react-router-dom";
 import { Subscribe } from 'unstated-x';
 import userContainer from '../../Container/userContainer';
-// import { Row, Col } from 'react-bootstrap';
 import './index.css';
 interface IAuthor {
     name: string,
     totalFollow: number,
     totalArticle: number,
-    avatarLink?: string
+    avatarLink?: string,
+    idUser: string
 }
-const Author = ({ name, totalFollow, totalArticle, avatarLink }: IAuthor) => {
+const Author = ({ name, totalFollow, totalArticle, avatarLink, idUser }: IAuthor) => {
     const src = avatarLink ? avatarLink : "http://graph.facebook.com/1898075403817841/picture"
     return <Subscribe to={[userContainer]}>
         {
@@ -21,17 +21,17 @@ const Author = ({ name, totalFollow, totalArticle, avatarLink }: IAuthor) => {
                         <Link to="/profile" ><img className="lazy" src={src} /></Link>
                     </div>
                     <div className="right floated">
-                        <a className="name" href="/users/NguyenMinhDuc11111/mypage">
+                        <Link className="name" to={`/user/${idUser}`}>
                             <h2 className="caption">
                                 {name}
                             </h2>
-                        </a>        <div className="extra">
-                            <a href="/users/NguyenMinhDuc11111/mypage">{totalArticle}</a>
+                        </Link>        <div className="extra">
+                            <b>{totalArticle} </b>
                             Article
                          <br />
-                            <a href="/users/NguyenMinhDuc11111/mypage">{totalFollow}</a>
-                            Pepole Follow
-                      </div>
+
+                            <b> {totalFollow} Pepole Follow</b>
+                        </div>
                     </div>
                 </div>
             }

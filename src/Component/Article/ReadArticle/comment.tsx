@@ -26,21 +26,21 @@ export default class ViewComment extends React.Component<IViewComment> {
 
         console.log(comments)
         return <div>
-            {comments.map((item: any, key) => {
+            {comments.length > 0 ? comments.reverse().map((item: any, key) => {
                 const { userComment: { avatarLink, name } } = item
                 return <$Comment key={key} >
 
                     <$Img data-tooltip={name} src={avatarLink ? avatarLink : IMAGE_SOURCE_DEFAULT} />
                     <$Content >{renderHTML(item.content)}</$Content>
                 </$Comment>
-            })}
+            }) : <h2 style={{ textAlign: 'center', color: 'gray' }}> NO  Comment,  : ))) cmt vào cho vui đi thằng ngu</h2>}
         </div>
     }
 }
 const $Content = styled.div`
     &:focus {
-    background-color: #c3c0c0;
-    transition: 0.5s;
+    background-color: #f3f3f3;
+    transition: 0.2s;
     outline: none;
     border-radius: 10px;
     color: black;
@@ -48,9 +48,11 @@ const $Content = styled.div`
     font-size: 20px;
     }
     & {
+        flex : 10;
+        margin-top : 20px;
         margin-left: 30px;
         margin-bottom : 10px;
-        transition: 0.5s;
+        transition: 0.2s;
     }
 `
 const $Img = styled.img`

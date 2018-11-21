@@ -1,6 +1,5 @@
 import * as React from 'react';
 import styled from 'styled-components';
-import Author from '../Author';
 /* 
         idUser: String
         login: String
@@ -30,7 +29,7 @@ const Profile = ({ avatarLink, name, totalFollow, dataArticle, listPeopleFollow 
     // const { avatarLink, name, articles } = userContainer.state.dataUser as any
     return <$Content >
         <Left>
-            <Author avatarLink={avatarLink} totalFollow={totalFollow} name={name} totalArticle={dataArticle.length} />
+            {/* <Author avatarLink={avatarLink} totalFollow={totalFollow} name={name} totalArticle={dataArticle.length} /> */}
         </Left>
         dataArticle
             <Right>

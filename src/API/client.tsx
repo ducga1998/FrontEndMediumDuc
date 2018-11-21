@@ -45,7 +45,10 @@ export function getAllInformationUser(idUser: string) {
                         idArticle
                         hashTag
                         category
-                        comment 
+                        comment {
+                            idUser
+                            idArticle
+                        }
                         totalClap
                         notification
                         contentArticle  
@@ -82,7 +85,10 @@ export function checkLoginUser(user: any) {
                         idArticle
                         hashTag
                         category
-                        comment 
+                        comment {
+                            idUser
+                            idArticle
+                        } 
                         totalClap
                         notification
                         contentArticle  
@@ -109,7 +115,10 @@ export function addArticleToClient(article: any) {
                     idUser
                     hashTag
                     category
-                    comment
+                    comment {
+                            idUser
+                            idArticle
+                        }
                     totalClap
                     notification
                     createTime

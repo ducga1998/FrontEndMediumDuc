@@ -12,7 +12,6 @@ export function updateArticleToClient(article: any) {
                     idUser
                     hashTag
                     category
-                    comment
                     totalClap
                     notification
                     createTime
@@ -31,12 +30,16 @@ export function getArticleById(id) {
         const data = client.query({
             query: gql`
                     query {
-                        getArticleById( id  : "${id}"){
+                        getArticleById(id :"${id}"){
                             idArticle
                             idUser
                             hashTag
                             category
-                            comment
+                            comment {
+                                idUser
+                                idArticle
+                                content
+                            }
                             totalClap
                             notification
                             contentArticle
@@ -72,7 +75,11 @@ export function getAllArticle() {
                             idUser
                             hashTag
                             category
-                            comment
+                            comment {
+                                idUser
+                                idArticle
+                                content
+                            }
                             totalClap
                             notification
                             contentArticle

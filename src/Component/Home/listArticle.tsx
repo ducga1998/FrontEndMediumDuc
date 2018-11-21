@@ -26,8 +26,8 @@ export default class ListArticle extends React.Component<any> {
         return <$ListArticle>{
             allArticleData.map((item: any, key) => {
                 console.log('itemmm', item)
-                const { hashTag, isUSer, contentArticle, titleArticle, createTime, idArticle, user } = item
-                return <Article user={user} idArticle={idArticle} key={key} hashTag={hashTag} time={createTime} content={contentArticle} totalClap={8} totalComment={9} titleArticle={titleArticle} avatar={`https://picsum.photos/200/200/?a${item}`} />
+                const { hashTag, isUSer, contentArticle, titleArticle, createTime, idArticle, user, comment } = item
+                return <Article user={user} idArticle={idArticle} key={key} hashTag={hashTag} time={createTime} content={contentArticle} totalClap={8} totalComment={comment.length} titleArticle={titleArticle} avatar={`https://picsum.photos/200/200/?a${item}`} />
             })
         }</$ListArticle>
     }
