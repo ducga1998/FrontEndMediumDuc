@@ -4,23 +4,22 @@ import styled from 'styled-components';
 import { IMAGE_SOURCE_DEFAULT } from './writeComment';
 interface IViewComment {
     idArticle: string,
-    comments: any[]
+    comments: any[],
+
 }
 export default class ViewComment extends React.Component<IViewComment> {
     state = {
         comments: []
     }
     async componentDidMount() {
-        const { idArticle } = this.props
-        // const allComment = await getAllCommentinArtcileCurrent(idArticle)
-        // await this.setState({ allComment })
-        // console.log('allComment', allComment)
-        const { comments } = this.props
+        const { comments, idArticle } = this.props
         await this.setState({ comments })
     }
     async componentDidUpdate(preState, preProps) {
-        // const { comments } = this.props
-        // await this.setState({ comments })
+        if (preProps.comments !== this.props.comments) {
+            const { comments } = this.props
+            this.setState({ comments })
+        }
     }
     render() {
         const { comments } = this.state
@@ -29,10 +28,10 @@ export default class ViewComment extends React.Component<IViewComment> {
         return <div>
             {comments.map((item: any, key) => {
                 const { userComment: { avatarLink, name } } = item
-                return <$Comment >
+                return <$Comment key={key} >
 
                     <$Img data-tooltip={name} src={avatarLink ? avatarLink : IMAGE_SOURCE_DEFAULT} />
-                    <$Content key={key}>{renderHTML(item.content)}</$Content>
+                    <$Content >{renderHTML(item.content)}</$Content>
                 </$Comment>
             })}
         </div>
@@ -49,6 +48,7 @@ const $Content = styled.div`
     font-size: 20px;
     }
     & {
+        margin-left: 30px;
         margin-bottom : 10px;
         transition: 0.5s;
     }
@@ -62,6 +62,7 @@ const $Comment = styled.div`
         height : 50px;
         border-radius : 50%;
     }
+    border-bottom: 1px solid #e8e6e6;
     display : flex;
     margin : 30px 0px;
     padding: 30px;

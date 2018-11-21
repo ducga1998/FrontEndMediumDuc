@@ -39,6 +39,7 @@ export default class ReadArticle extends React.Component<IReadArticleType> {
     //idArticle", "idUser", "hashTag", "category", "comment", "totalClap", "notification", "contentArticle", "imageArticle", "titleArticle", "createTime", "user", "__typename"
     render() {
         const { article, allCommentInArticle }: any = this.state
+        console.log('update update')
         if (article) {
             const { user: { idUser, avatarLink, name, articles, }, contentArticle, titleArticle, hashTag, createTime } = article
             return <$Align>
@@ -63,12 +64,23 @@ export default class ReadArticle extends React.Component<IReadArticleType> {
                     </$ContentArticle>
                     <$WriteComment>
                         {/* component assign  add new Comment */}
-                        <WriteComment idUser={idUser} idArticle={article.idArticle} imgSrc={avatarLink} name={name} />
+                        <WriteComment
+                            onChange={async (comment) => {
+                                allCommentInArticle.push(comment);
+                                console.log('new data', allCommentInArticle)
+                                console.log('new Data')
+                                await this.setState({ allCommentInArticle })
+                            }}
+                            idUser={idUser}
+                            idArticle={article.idArticle}
+                            imgSrc={avatarLink} name={name} />
                     </$WriteComment>
                     <h2>All Comment Article</h2>
                     <$ViewComment>
                         {/* view comment component */}
-                        <CommentArticle comments={allCommentInArticle} idArticle={article.idArticle} />
+                        <CommentArticle
+
+                            comments={allCommentInArticle} idArticle={article.idArticle} />
                     </$ViewComment>
 
                 </div>

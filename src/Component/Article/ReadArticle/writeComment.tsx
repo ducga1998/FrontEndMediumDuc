@@ -10,11 +10,12 @@ interface IWriteComment {
     idArticle: string,
     imgSrc?: any,
     name: string,
-    idUser: string
+    idUser: string,
+    onChange: (e: any) => any
 }
 export default class WriteComment extends React.Component<IWriteComment> {
     state = {
-        content: ''
+        content: '',
     }
     refComment: any = React.createRef()
     async componentDidMount() {
@@ -31,22 +32,36 @@ export default class WriteComment extends React.Component<IWriteComment> {
 
         });
     }
+    handleAddComment = async () => {
+        // console.log(this.state.content)
+        const { imgSrc, name, idUser, idArticle } = this.props
+        const { content } = this.state
+        const input = {
+            content,
+            idUser,
+            idArticle,
+
+        }
+
+
+        let { data: {
+            addCommentIntoArticle
+        } }: any = await addComment(input)
+        let newComment = addCommentIntoArticle
+        newComment.userComment = {
+            avatarLink: imgSrc,
+            name
+        }
+
+        console.log('newComment', newComment)
+        await this.props.onChange(newComment)
+    }
     render() {
         const { imgSrc, name, idUser, idArticle } = this.props
         return <>< $Comment>
             <$Img src={imgSrc ? imgSrc : IMAGE_SOURCE_DEFAULT} /> <b>{name}</b>
             <$Content ref={this.refComment} />
-            <UIButton onChange={async () => {
-                console.log(this.state.content)
-                const { content } = this.state
-                const input = {
-                    content,
-                    idUser,
-                    idArticle
-                }
-                const newComment = await addComment(input)
-
-            }} >Comment</UIButton>
+            <UIButton onChange={this.handleAddComment} >Comment</UIButton>
         </$Comment>
         </>
     }
