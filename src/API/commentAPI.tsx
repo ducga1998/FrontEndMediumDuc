@@ -29,15 +29,15 @@ export function getAllCommentinArtcileCurrent(idUser: string) {
 //MUATION 
 // this is function felp we add comment into a article , 
 // input : idArticle and  content comment ?  . Iam not sure  :v 
-export function addComment(input: { idUser: string, idUserFollow: string }) {
+export function addComment(input: { idUser: string, idArticle: string, content: string }) {
     return new Promise(resolve => {
         const data = client.mutate({
             mutation: gql`
               mutation AddCommentIntoArticle($input: CommentInput) {
                 addCommentIntoArticle(input: $input) {
                     idUser
-                    idUserFollow
-                    userComment
+                    idArticle
+                    content
                     userComment {
                         name
                         avatarLink

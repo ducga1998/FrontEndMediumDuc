@@ -1,23 +1,25 @@
 import MediumEditer from 'medium-editor';
 import * as React from 'react';
 import styled from 'styled-components';
-import { getAllCommentinArtcileCurrent } from '../../../API/commentAPI';
+import { addComment, getAllCommentinArtcileCurrent } from '../../../API/commentAPI';
 import UIButton from '../../../UI/UIButton';
 import { Config } from '../WriteArticle/index';
 const config = Config('Comment something now  . . . . . . . ')
-const IMAGE_SOURCE_DEFAULT = 'https://scontent.fhan5-2.fna.fbcdn.net/v/t1.0-9/30710734_1894791530812895_692578444441026560_n.jpg?_nc_cat=102&_nc_ht=scontent.fhan5-2.fna&oh=46b63236752f0608bb45efcd83a59d05&oe=5C75BB19'
-interface ICommentArtiwriteCommentcleType {
+export const IMAGE_SOURCE_DEFAULT = 'https://scontent.fhan5-2.fna.fbcdn.net/v/t1.0-9/30710734_1894791530812895_692578444441026560_n.jpg?_nc_cat=102&_nc_ht=scontent.fhan5-2.fna&oh=46b63236752f0608bb45efcd83a59d05&oe=5C75BB19'
+interface IWriteComment {
     idArticle: string,
     imgSrc?: any,
-    name: string
+    name: string,
+    idUser: string
 }
-export default class WriteComment extends React.Component<ICommentArtiwriteCommentcleType> {
+export default class WriteComment extends React.Component<IWriteComment> {
     state = {
         content: ''
     }
     refComment: any = React.createRef()
     async componentDidMount() {
         const { idArticle } = this.props
+
         const allComment = await getAllCommentinArtcileCurrent(idArticle)
         console.log('allComment', allComment)
         const title = new MediumEditer(this.refComment.current, config)
@@ -30,12 +32,19 @@ export default class WriteComment extends React.Component<ICommentArtiwriteComme
         });
     }
     render() {
-        const { imgSrc, name } = this.props
+        const { imgSrc, name, idUser, idArticle } = this.props
         return <>< $Comment>
             <$Img src={imgSrc ? imgSrc : IMAGE_SOURCE_DEFAULT} /> <b>{name}</b>
             <$Content ref={this.refComment} />
-            <UIButton onChange={() => {
+            <UIButton onChange={async () => {
                 console.log(this.state.content)
+                const { content } = this.state
+                const input = {
+                    content,
+                    idUser,
+                    idArticle
+                }
+                const newComment = await addComment(input)
 
             }} >Comment</UIButton>
         </$Comment>

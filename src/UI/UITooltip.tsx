@@ -12,16 +12,18 @@ export default class UITooltip extends React.Component<any> {
 
         if (dom.getAttribute('data-tooltip')) {
             const text = dom.getAttribute('data-tooltip')
+            dom.scroll
             const domToolTip = this.refToolTip.current
             // console.log(domToolTip, text)
             domToolTip.innerHTML = text
             const { top, left } = dom.getBoundingClientRect()
-
+            const view = dom.ownerDocument.defaultView
+            const scrollTop = view.scrollY
             // console.log('cascnkj', width)
             domToolTip.style.display = "inline-block"
             const { width } = domToolTip.getBoundingClientRect()
             domToolTip.style.left = `${left - (width / 2)}px`;
-            domToolTip.style.top = `${top - 40}px`
+            domToolTip.style.top = `${top - 40 + scrollTop}px`
         }
     }
     handleMouseLeave = (e) => {

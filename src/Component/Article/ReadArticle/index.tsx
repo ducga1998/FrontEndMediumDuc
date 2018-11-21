@@ -3,6 +3,7 @@ import { Label } from 'react-bootstrap';
 import renderHTML from 'react-render-html';
 import styled from 'styled-components';
 import { getArticleById } from '../../../API/articleAPI';
+import { getAllCommentinArtcileCurrent } from '../../../API/commentAPI';
 import UILoading from '../../../UI/UILoading';
 import Author from '../../Author';
 import CommentArticle from './comment';
@@ -15,10 +16,17 @@ interface IReadArticleType {
 }
 export default class ReadArticle extends React.Component<IReadArticleType> {
     state = {
-        article: null
+        article: null,
+        allCommentInArticle: []
     }
     async componentDidMount() {
         const { match: { params: { id } } } = this.props
+        const allComment = await getAllCommentinArtcileCurrent(id)
+        if (allComment) {
+            const { data: { getAllCommentInTheArticle } } = allComment as any
+            this.setState({ allCommentInArticle: getAllCommentInTheArticle })
+        }
+        console.log('allComment', allComment)
         const dataArticle = await getArticleById(id) as any
         // console.log('dataArticle', dataArticle)
         if (dataArticle) {
@@ -30,9 +38,9 @@ export default class ReadArticle extends React.Component<IReadArticleType> {
     //idUser", "login", "password", "decentraliz", "name", "avatarLink", "__typename"]
     //idArticle", "idUser", "hashTag", "category", "comment", "totalClap", "notification", "contentArticle", "imageArticle", "titleArticle", "createTime", "user", "__typename"
     render() {
-        const { article }: any = this.state
+        const { article, allCommentInArticle }: any = this.state
         if (article) {
-            const { user: { avatarLink, name, articles, }, contentArticle, titleArticle, hashTag, createTime } = article
+            const { user: { idUser, avatarLink, name, articles, }, contentArticle, titleArticle, hashTag, createTime } = article
             return <$Align>
                 <div style={{
                     width: '70%'
@@ -54,10 +62,13 @@ export default class ReadArticle extends React.Component<IReadArticleType> {
                         {renderHTML(contentArticle.trim().replace(' ', ''))}
                     </$ContentArticle>
                     <$WriteComment>
-                        <WriteComment idArticle={article.idArticle} imgSrc={avatarLink} name={name} />
+                        {/* component assign  add new Comment */}
+                        <WriteComment idUser={idUser} idArticle={article.idArticle} imgSrc={avatarLink} name={name} />
                     </$WriteComment>
+                    <h2>All Comment Article</h2>
                     <$ViewComment>
-                        <CommentArticle idArticle={article.idArticle} />
+                        {/* view comment component */}
+                        <CommentArticle comments={allCommentInArticle} idArticle={article.idArticle} />
                     </$ViewComment>
 
                 </div>
@@ -71,6 +82,8 @@ const $ViewComment = styled.div`
 
 `
 const $WriteComment = styled.div`
+border-bottom : 1px solid gray;
+padding-bottom : 10px;
 `
 const $HashTag = styled.div`
     font-family : 'Helvetica Neue', Helvetica, Arial, sans-serif;
