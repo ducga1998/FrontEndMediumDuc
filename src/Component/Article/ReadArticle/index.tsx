@@ -5,6 +5,8 @@ import styled from 'styled-components';
 import { getArticleById } from '../../../API/articleAPI';
 import UILoading from '../../../UI/UILoading';
 import Author from '../../Author';
+import CommentArticle from './comment';
+import WriteComment from './writeComment';
 interface IReadArticleType {
     title: String,
     content: String,
@@ -48,9 +50,15 @@ export default class ReadArticle extends React.Component<IReadArticleType> {
                     <$Title>
                         {renderHTML(titleArticle.trim().replace(' ', ''))}
                     </$Title>
-                    <$WriteContent >
+                    <$ContentArticle >
                         {renderHTML(contentArticle.trim().replace(' ', ''))}
-                    </$WriteContent>
+                    </$ContentArticle>
+                    <$WriteComment>
+                        <WriteComment idArticle={article.idArticle} imgSrc={avatarLink} name={name} />
+                    </$WriteComment>
+                    <$ViewComment>
+                        <CommentArticle idArticle={article.idArticle} />
+                    </$ViewComment>
 
                 </div>
             </$Align>
@@ -59,6 +67,11 @@ export default class ReadArticle extends React.Component<IReadArticleType> {
 
     }
 }
+const $ViewComment = styled.div`
+
+`
+const $WriteComment = styled.div`
+`
 const $HashTag = styled.div`
     font-family : 'Helvetica Neue', Helvetica, Arial, sans-serif;
     font-stretch : 700;
@@ -75,7 +88,7 @@ const $Align = styled.div`
         justify-content : center;
 `
 
-const $WriteContent = styled.div`
+const $ContentArticle = styled.div`
     margin-top : 10px;
     :focus {
         outline: none;
@@ -190,7 +203,7 @@ const $WriteContent = styled.div`
         border: 0;
     }
 `
-const $Title = styled($WriteContent)`
+const $Title = styled($ContentArticle)`
     height : 100px;
     font-size : 2em;
 `

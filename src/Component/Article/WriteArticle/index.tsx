@@ -5,7 +5,7 @@ import styled from 'styled-components';
 import articleContainer from '../../../Container/articleContainer';
 import userContainer from '../../../Container/userContainer';
 import Author from '../../Author';
-function Config(title) {
+export function Config(title) {
     return {
         toolbar: {
             allowMultiParagraphSelection: true,
