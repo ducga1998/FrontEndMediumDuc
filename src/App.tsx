@@ -1,24 +1,26 @@
 import * as React from 'react';
-import { ToastContainer } from 'react-toastify';
+import {ToastContainer} from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import styled from 'styled-components';
-import { Provider } from 'unstated-x';
+import {Provider} from 'unstated-x';
 import AppRouter from './route';
 import UITooltip from './UI/UITooltip';
+
 class App extends React.Component {
-  public render() {
-    return <>
-      <UITooltip>
-        <Provider>
-          <$BoxAlgin>
-            <AppRouter />
-          </$BoxAlgin>
-          <ToastContainer autoClose={4000} />
-        </Provider>
-      </UITooltip>
-    </>
-  }
+    public render() {
+        return <>
+            <UITooltip>
+                <Provider>
+                    <$BoxAlgin>
+                        <AppRouter/>
+                    </$BoxAlgin>
+                    <ToastContainer autoClose={4000}/>
+                </Provider>
+            </UITooltip>
+        </>
+    }
 }
+
 const $BoxAlgin = styled.div`
   width : '100%';
   height : '500px';

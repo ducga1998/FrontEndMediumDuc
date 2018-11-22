@@ -1,16 +1,17 @@
 import * as React from 'react';
 import styled from 'styled-components';
-interface IUIButton {
+
+interface IUIButtonProps {
     width?: string
     height?: string
     children?: any
     onChange?: (e: any) => any
 }
-export default function UIButton({
-    children, width, height, onChange
-}: IUIButton) {
-    return <$Primary onMouseDown={onChange} width={width} height={height}>{children}</$Primary>
-}
+
+export const UIButton: React.FunctionComponent<IUIButtonProps> = props => {
+    return <$Primary onMouseDown={props.onChange} width={props.width} height={props.height}>{props.children}</$Primary>
+};
+
 const $Button = styled.a<{ width?: string, height?: string }>`
     width : ${props => props.width ? props.width : 'auto'};
     height: ${props => props.height ? props.height : 'auto'};
