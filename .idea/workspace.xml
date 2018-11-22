@@ -2,20 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="5bb1a900-6572-46fd-a8b2-1261a99f387c" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/react-scripts-ts/scripts/utils/createJestConfig.js" beforeDir="false" afterPath="$PROJECT_DIR$/react-scripts-ts/scripts/utils/createJestConfig.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/App.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Component/Article/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Component/Article/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Container/articleContainer.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Container/articleContainer.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Container/commentContainer.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Container/commentContainer.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Container/userContainer.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Container/userContainer.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/UI/UIButton.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/UI/UIButton.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/UI/UIDropDown.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/UI/UIDropDown.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/UI/UIField.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/UI/UIField.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/UI/UILoading.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/UI/UILoading.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/UI/UIModal.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/UI/UIModal.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/UI/UITooltip.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/UI/UITooltip.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/UI/UIWidget.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/UI/UIWidget.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/help/help.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/Helpers/help.ts" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -29,10 +18,10 @@
   <component name="FileEditorManager">
     <leaf>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/Container/commentContainer.tsx">
+        <entry file="file://$PROJECT_DIR$/.gitignore">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="225">
-              <caret line="15" column="1" lean-forward="true" selection-start-line="15" selection-start-column="1" selection-end-line="15" selection-end-column="1" />
+            <state relative-caret-position="315">
+              <caret line="21" column="5" lean-forward="true" selection-start-line="21" selection-start-column="5" selection-end-line="21" selection-end-column="5" />
             </state>
           </provider>
         </entry>
@@ -59,9 +48,10 @@
         <option value="$PROJECT_DIR$/src/UI/UIWidget.tsx" />
         <option value="$PROJECT_DIR$/src/UI/UIModal.tsx" />
         <option value="$PROJECT_DIR$/src/App.tsx" />
+        <option value="$PROJECT_DIR$/src/Container/commentContainer.tsx" />
         <option value="$PROJECT_DIR$/src/Container/articleContainer.tsx" />
         <option value="$PROJECT_DIR$/src/Container/userContainer.tsx" />
-        <option value="$PROJECT_DIR$/src/Container/commentContainer.tsx" />
+        <option value="$PROJECT_DIR$/.gitignore" />
       </list>
     </option>
   </component>
@@ -86,6 +76,12 @@
               <item name="FrontEndMediumDuc" type="b2602c69:ProjectViewProjectNode" />
               <item name="FrontEndMediumDuc" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="FrontEndMediumDuc" type="b2602c69:ProjectViewProjectNode" />
+              <item name="FrontEndMediumDuc" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="Component" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="FrontEndMediumDuc" type="b2602c69:ProjectViewProjectNode" />
@@ -132,12 +128,12 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1542906709754</updated>
-      <workItem from="1542906711891" duration="1273000" />
+      <workItem from="1542906711891" duration="1537000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="1273000" />
+    <option name="totallyTimeSpent" value="1537000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1440" height="900" extended-state="0" />
@@ -264,30 +260,38 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/Container/commentContainer.tsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="225">
+          <caret line="15" column="1" lean-forward="true" selection-start-line="15" selection-start-column="1" selection-end-line="15" selection-end-column="1" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Component/Layout.tsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="195">
+          <caret line="15" column="1" lean-forward="true" selection-start-line="15" selection-start-column="1" selection-end-line="15" selection-end-column="1" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/Container/userContainer.tsx">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="270">
+        <state relative-caret-position="255">
           <caret line="18" lean-forward="true" selection-start-line="18" selection-end-line="18" />
-          <folding>
-            <element signature="e#0#39#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Container/articleContainer.tsx">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="298">
-          <caret line="32" column="45" lean-forward="true" selection-start-line="32" selection-start-column="45" selection-end-line="32" selection-end-column="45" />
-          <folding>
-            <element signature="e#0#39#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="508">
+          <caret line="47" column="5" lean-forward="true" selection-start-line="47" selection-start-column="5" selection-end-line="47" selection-end-column="5" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Container/commentContainer.tsx">
+    <entry file="file://$PROJECT_DIR$/.gitignore">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="225">
-          <caret line="15" column="1" lean-forward="true" selection-start-line="15" selection-start-column="1" selection-end-line="15" selection-end-column="1" />
+        <state relative-caret-position="315">
+          <caret line="21" column="5" lean-forward="true" selection-start-line="21" selection-start-column="5" selection-end-line="21" selection-end-column="5" />
         </state>
       </provider>
     </entry>

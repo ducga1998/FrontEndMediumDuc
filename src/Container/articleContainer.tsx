@@ -17,6 +17,7 @@ interface dataArticle {
 export interface IArticleContainerState {
     contentArticle: string;
     titleArticle: string;
+    isPublicArticle: boolean;
 }
 
 const createTime = new Date().toUTCString();

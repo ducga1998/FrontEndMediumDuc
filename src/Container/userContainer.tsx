@@ -5,7 +5,7 @@ import {checkLoginUser} from '../API/client';
 
 export interface IUserContainerState {
     login: boolean;
-    dataUser: any;
+    dataUser: any; // Should type dataUser as well
 }
 
 class UserContainer extends Container<IUserContainerState> {
