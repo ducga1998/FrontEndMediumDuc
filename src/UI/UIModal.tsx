@@ -1,9 +1,9 @@
 import * as React from 'react';
 import styled from 'styled-components';
-import UIButton from './UIButton';
-import UIWidget from './UIWidget';
-const { useEffect, useState } = React
-interface IUIModal {
+import {UIButton} from './UIButton';
+import {UIWidget} from './UIWidget';
+
+interface IUIModalProps {
     trigger: any
     title?: string
     children?: any
@@ -14,26 +14,35 @@ interface IUIModal {
     open: boolean,
     onClickOutSide: () => any
 }
-export default function UIModal({ trigger, children, title, width, height, closeMoDal, openModal, open, onClickOutSide }: IUIModal) {
-    const button = React.cloneElement(trigger, {
-        onClick: () => {
-            openModal()
-        },
-    })
-    return <>{button} <UIWidget> <$Background onMouseDown={onClickOutSide} open={open}>
-        <$Modal onMouseDown={(e: any) => {
-            e.stopPropagation();
-        }} >
-            <$Header>{title ? title : 'Header Modal '}</$Header>
-            <$Content height={height} width={width}> {children}</$Content>
 
-            <$Footer>
-                <UIButton width="100px" onChange={(e: any) => { e.stopPropagation(); closeMoDal() }}> Close </UIButton>
-            </$Footer>
-        </$Modal>
-    </$Background>
-    </UIWidget> </>
-}
+export const UIModal: React.FunctionComponent<IUIModalProps> = props => {
+    const button = React.cloneElement(props.trigger, {
+        onClick: props.openModal
+    });
+
+    return (
+        <>
+            {button}
+            <UIWidget>
+                <$Background onMouseDown={props.onClickOutSide} open={props.open}>
+                    <$Modal onMouseDown={(e: any) => {
+                        e.stopPropagation();
+                    }}>
+                        <$Header>{props.title ? props.title : 'Header Modal '}</$Header>
+                        <$Content height={props.height} width={props.width}> {props.children}</$Content>
+
+                        <$Footer>
+                            <UIButton width="100px" onChange={(e: any) => {
+                                e.stopPropagation();
+                                props.closeMoDal()
+                            }}> Close </UIButton>
+                        </$Footer>
+                    </$Modal>
+                </$Background>
+            </UIWidget>
+        </>
+    )
+};
 const $Header = styled.div`
     background-color: #57aff5;
     font-size: 25px;
@@ -67,12 +76,12 @@ const $Background = styled.div<{ open: Boolean }>`
     width : 100%;
     height : 100%;
     display  : ${(props: any) => {
-        const { open } = props;
-        if (open) {
-            return 'flex';
-        }
-        return 'none';
-    }};
+    const {open} = props;
+    if (open) {
+        return 'flex';
+    }
+    return 'none';
+}};
     align-items : center;
     justify-content : center;
     background: #0000005e;
