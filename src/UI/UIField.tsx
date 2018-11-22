@@ -1,23 +1,20 @@
-import {FormGroup, ControlLabel, FormControl, HelpBlock} from "react-bootstrap";
+import { FormGroup, ControlLabel, FormControl, HelpBlock } from "react-bootstrap";
 import * as React from "react";
-
-interface IUIFieldProps {
-    titleField?: string;
-    help?: boolean;
-    label?: string;
-    onChange: (value: string | any) => void;
-    placeholder?: string;
-    value?: string | any;
-    type?: string;
-    minLength?: number;
-    maxLength?: number;
+interface IUIField {
+    titleField?: String;
+    help?: Boolean;
+    label?: String;
+    onChange: (e: any) => any
+    placeholder?: String
+    value?: String | any
+    type?: String
+    minLength?: number
+    maxLength?: number
 }
-
-export class UIField extends React.Component<IUIFieldProps, any> {
+export default class UIField extends React.Component<IUIField, any> {
     static defaultProps = {
         type: 'text'
-    };
-
+    }
     getValidationState() {
         const length = 10;
         if (length > 10) return 'success';
@@ -25,9 +22,8 @@ export class UIField extends React.Component<IUIFieldProps, any> {
         else if (length > 0) return 'error';
         return null;
     }
-
     render() {
-        const {help, titleField, label, onChange, placeholder, value, type, minLength, maxLength} = this.props;
+        const { help, titleField, label, onChange, placeholder, value, type, minLength, maxLength } = this.props
         return (
             <form>
                 <FormGroup
@@ -46,7 +42,7 @@ export class UIField extends React.Component<IUIFieldProps, any> {
                         minLength={minLength || undefined}
                         maxLength={maxLength || undefined}
                     />
-                    <FormControl.Feedback/>
+                    <FormControl.Feedback />
                     {help ? <HelpBlock>Validation is based on string length.</HelpBlock> : null}
                 </FormGroup>
             </form>

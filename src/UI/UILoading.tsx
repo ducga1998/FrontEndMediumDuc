@@ -1,24 +1,23 @@
+
 import * as React from 'react';
 import styled from 'styled-components';
 import UIWidget from './UIWidget';
-
-interface IUILoadingProps {
+interface IUILoading {
     link?: string
 }
+export default class UILoading extends React.Component<IUILoading> {
 
-export const UILoading: React.FunctionComponent<IUILoadingProps> = props => {
-    return (
-        <UIWidget>
+    render() {
+        return <UIWidget>
             <$Background>
                 <$ImageLoading>
-                    <img
-                        src="https://scontent.fhan5-2.fna.fbcdn.net/v/t1.0-9/30710734_1894791530812895_692578444441026560_n.jpg?_nc_cat=102&_nc_ht=scontent.fhan5-2.fna&oh=46b63236752f0608bb45efcd83a59d05&oe=5C75BB19"/>
+                    <img src="https://scontent.fhan5-2.fna.fbcdn.net/v/t1.0-9/30710734_1894791530812895_692578444441026560_n.jpg?_nc_cat=102&_nc_ht=scontent.fhan5-2.fna&oh=46b63236752f0608bb45efcd83a59d05&oe=5C75BB19" />
                 </$ImageLoading>
             </$Background>
         </UIWidget>
-    );
-};
 
+    }
+}
 const $Background = styled.div`
     background-color: black;
     display: flex;
@@ -29,7 +28,7 @@ const $Background = styled.div`
     width: 100%;  
     top : 0px;
     opacity : 0.5;    
-`;
+`
 const $ImageLoading = styled.div`
     width: 100px;
     height: 100px;
@@ -49,4 +48,4 @@ const $ImageLoading = styled.div`
     img {
         width : 100%
     }
-`;
+`
