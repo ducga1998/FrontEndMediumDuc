@@ -1,6 +1,6 @@
+
 import * as React from 'react';
 import styled from 'styled-components';
-
 export default class UITooltip extends React.Component<any> {
     refToolTip: any = React.createRef()
     handleMouseDown = (e) => {
@@ -8,35 +8,34 @@ export default class UITooltip extends React.Component<any> {
     }
     handleMouseOver = (e) => {
         // console.log(e.target)
-        const dom = e.target;
+        const dom = e.target
 
         if (dom.getAttribute('data-tooltip')) {
             const text = dom.getAttribute('data-tooltip')
-            dom.scroll;
+            dom.scroll
             const domToolTip = this.refToolTip.current
             // console.log(domToolTip, text)
             domToolTip.innerHTML = text
-            const {top, left} = dom.getBoundingClientRect()
+            const { top, left } = dom.getBoundingClientRect()
             const view = dom.ownerDocument.defaultView
             const scrollTop = view.scrollY
             // console.log('cascnkj', width)
             domToolTip.style.display = "inline-block"
-            const {width} = domToolTip.getBoundingClientRect()
+            const { width } = domToolTip.getBoundingClientRect()
             domToolTip.style.left = `${left - (width / 2)}px`;
             domToolTip.style.top = `${top - 40 + scrollTop}px`
         }
-    };
+    }
     handleMouseLeave = (e) => {
         const domToolTip = this.refToolTip.current
         domToolTip.style.display = "none"
-    };
-
+    }
     render() {
         return <div onMouseDownCapture={this.handleMouseDown}
-                    onMouseOverCapture={this.handleMouseOver}
-                    onMouseOutCapture={this.handleMouseLeave}
+            onMouseOverCapture={this.handleMouseOver}
+            onMouseOutCapture={this.handleMouseLeave}
         >
-            <$ToolTip ref={this.refToolTip}/>
+            <$ToolTip ref={this.refToolTip} />
             {this.props.children}
         </div>
     }

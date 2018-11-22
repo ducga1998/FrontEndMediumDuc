@@ -5,7 +5,7 @@ import { Button, ButtonGroup, ButtonToolbar } from 'react-bootstrap';
 import renderHTML from 'react-render-html';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
-import { filterStringHTML } from '../../Helpers/help';
+import { filterStringHTML } from '../../help/help';
 export interface IArticle {
     avatar: String;
     titleArticle: String;

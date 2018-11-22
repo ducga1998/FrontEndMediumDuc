@@ -1,6 +1,10 @@
+
 import * as React from 'react'
 import * as  ReactDOM from 'react-dom'
+export default class UIWidget extends React.Component<any> {
 
-export const UIWidget: React.FunctionComponent = props => {
-    return ReactDOM.createPortal(props.children, document.body);
+    render() {
+        return ReactDOM.createPortal(this.props.children, document.body)
+
+    }
 }
