@@ -27,9 +27,7 @@ export default class WriteComment extends React.Component<IWriteComment> {
         console.log('allComment', allComment)
         const title = new MediumEditer(this.refComment.current, config)
         title.subscribe('editableInput', (event, editable) => {
-            console.log('casc', event.srcElement.innerHTML)
             const content = event.srcElement.innerHTML
-            console.log('cotent', content)
             this.setState({ content })
 
         });
@@ -43,15 +41,14 @@ export default class WriteComment extends React.Component<IWriteComment> {
             toast.error('Comment not empty !!!. Please write something ')
             return
         }
-        const { idUser, name, avatarLink } = userContainer.state
+        let { idUser, name, avatarLink } = userContainer.state.dataUser
         const input = {
             content,
             idUser,
             idArticle,
 
         }
-        console.log('content', content)
-
+        avatarLink = (avatarLink ? avatarLink : IMAGE_SOURCE_DEFAULT)
         let { data: {
             addCommentIntoArticle
         } }: any = await addComment(input)
@@ -63,11 +60,12 @@ export default class WriteComment extends React.Component<IWriteComment> {
 
         console.log('newComment', newComment)
         await this.props.onChange(newComment)
-        this.refComment.current.innerHTML = ''
+        await this.setState({ content: '' })
+        this.refComment.current.innerHTML = '<p><br /></p>'
     }
     render() {
-        const { idUser, idArticle } = this.props
         const { name, avatarLink } = userContainer.state
+        console.log('avatarLink', avatarLink)
         return <>< $Comment>
             <$Img src={avatarLink ? avatarLink : IMAGE_SOURCE_DEFAULT} /> <b>{name}</b>
             <$Content ref={this.refComment} />
@@ -88,6 +86,9 @@ const $Content = styled.div`
     font-size: 20px;
     }
     & {
+        background-color : #ededed;
+        border-radius: 5px;
+        padding : 20px  10px;
         margin-bottom : 10px;
         transition: 0.5s;
     }

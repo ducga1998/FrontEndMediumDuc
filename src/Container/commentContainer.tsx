@@ -7,16 +7,16 @@ export interface IArticleContainer {
 }
 let createTime = new Date().toUTCString()
 class CommentContainer extends Container<any>{
-    y
+
 
 
 }
 () => {
 
 }
-const articleContainer = new CommentContainer({
+const commentContainer = new CommentContainer({
 
 })
 
-window['article'] = articleContainer
-export default articleContainer;
+window['article'] = commentContainer
+export default commentContainer;

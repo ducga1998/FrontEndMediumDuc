@@ -5,8 +5,13 @@ import styled from 'styled-components';
 import { Provider } from 'unstated-x';
 import AppRouter from './route';
 import UITooltip from './UI/UITooltip';
+
+var socket = require('socket.io-client')('http://localhost:3000/api');
 class App extends React.Component {
   public render() {
+    socket.on('test', data => {
+      console.log('csacbashcbkasc', data)
+    })
     return <>
       <UITooltip>
         <Provider>

@@ -47,13 +47,17 @@ export default function ButtonArticle({ history }: any) {
                             onClickOutSide={() => {
                                 setOpen(false)
                             }}
-                            title="Hash Tag" width="600px" trigger={<MenuItem>Public Article</MenuItem>}>
+                            title="Hash Tag" width="600px"
+                            trigger={<MenuItem>Public Article</MenuItem>}>
                             {arrHashTag.length > 0 ? <Grid><ListGroup style={{ flex: '6' }}>
                                 {arrHashTag.map((item, key) => {
-                                    return <ListGroupItem key={key}>{item}<Button onClick={() => {
-                                        const arrHasBeenDelete = arrHashTag.filter(itemHashTag => itemHashTag !== item)
-                                        setArrHashTag(arrHasBeenDelete)
-                                    }}><Glyphicon glyph="remove" /> </Button>
+                                    return <ListGroupItem key={key}>{item}
+                                        <Button
+                                            onClick={() => {
+                                                const arrHasBeenDelete = arrHashTag.filter(itemHashTag => itemHashTag !== item)
+                                                setArrHashTag(arrHasBeenDelete)
+                                            }}><Glyphicon glyph="remove" />
+                                        </Button>
                                     </ListGroupItem>
                                 })}
                             </ListGroup>
@@ -67,7 +71,8 @@ export default function ButtonArticle({ history }: any) {
                                     onChange={(e: any) => setNameHashTag(e.target.value)}
                                 />
                                 <Button onClick={handleAddHashTag}>
-                                    <Glyphicon glyph="plus" /> </Button>
+                                    <Glyphicon glyph="plus" />
+                                </Button>
                             </FormGroup>
                             {checkPublicArticle ? <UIButton onChange={async () => {
                                 const newArticle = await container.addArticle(arrHashTag)

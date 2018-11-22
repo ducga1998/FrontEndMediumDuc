@@ -27,7 +27,9 @@ export default class ViewComment extends React.Component<IViewComment> {
         console.log(comments)
         return <div>
             {comments.length > 0 ? comments.reverse().map((item: any, key) => {
+                console.log('cscas', item)
                 const { userComment: { avatarLink, name } } = item
+
                 return <$Comment key={key} >
 
                     <$Img data-tooltip={name} src={avatarLink ? avatarLink : IMAGE_SOURCE_DEFAULT} />
@@ -73,5 +75,4 @@ const $Comment = styled.div`
     transition: 0.3s;
     border-radius: 10px;
     }
-   
 `
