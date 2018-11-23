@@ -13,6 +13,7 @@ import Profile from './Component/Profile/common';
 import ViewUser from './Component/Profile/profileUserCommon';
 import userContainer from "./Container/userContainer";
 import UILoading from "./UI/UILoading";
+import RoomChat from './Component/RoomChat/index'
 const About = () => <h2>About</h2>;
 const Users = () => <h2>Users</h2>;
 
@@ -37,7 +38,7 @@ const AppRouter = () => {
         return <Router >
             <Switch>
                 <Layout >
-                    {/* <Route path="/" component={Home} /> */}
+                    <Route path="/chat" component={RoomChat} />
                     <Route path="/about/" component={isAuth(About)} />
                     <Route path="/user/:id" component={isAuth(ViewUser)} />
                     <Route path="/login" component={Login} />
