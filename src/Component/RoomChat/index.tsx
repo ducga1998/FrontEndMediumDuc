@@ -8,6 +8,7 @@ import srcImg from '../../image/9284571_300x300.jpeg';
 import UILoading from '../../UI/UILoading';
 import Article from '../Article';
 import { socket } from '../../help/help';
+import ListRoom from './listRoom';
 
 interface IRoomChat {
     match: any
@@ -28,6 +29,7 @@ export default class RoomChat extends React.Component<IRoomChat> {
         return <div>
             <input onChange={this.handleOnChange} value={value} />
             <button onClick={this.handleOnClick}> Submit </button>
+            <ListRoom />
         </div>
     }
 }

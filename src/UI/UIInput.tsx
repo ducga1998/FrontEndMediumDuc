@@ -4,16 +4,15 @@ import styled from 'styled-components';
 interface IUIInput {
     onChange: (e: any) => any,
     value: string | number,
-    size: 'xs' | 'ls' | 'sm',
+    size?: 'xs' | 'ls' | 'sm',
 }
 export default class UIInput extends React.Component<IUIInput> {
 
     render() {
-        const { value, onChange = }
+        const { value, onChange } = this.props
         return <$Input
-            onChange={() => {
-
-            }}
+            onChange={e => { onChange(e.target.value) }}
+            value={value}
         />
 
     }

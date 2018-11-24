@@ -8,26 +8,38 @@ import srcImg from '../../image/9284571_300x300.jpeg';
 import UILoading from '../../UI/UILoading';
 import Article from '../Article';
 import { socket } from '../../help/help';
+import UIInput from '../../UI/UIInput';
+import UIButton from '../../UI/UIButton';
 
 interface IListRoom {
-    match: any
+    match?: any
 }
 export default class ListRoom extends React.Component<IListRoom> {
     state = {
-        value: ''
+        value: '',
+        arr: ["1"]
     }
-    handleOnChange = (e: any) => {
-        const { value } = e.target
+    handleOnChange = (value: string) => {
         this.setState({ value })
     }
     handleOnClick = (e: any) => {
-        socket.emit('chat', 'dmmm console di em ei')
+
+        socket.emit('addRoom', 'addRoomText')
+    }
+    componentDidMount() {
+        socket.on('eventAddRoom', data => {
+            const { arr } = this.state
+            arr.push("111")
+            this.setState({ arr })
+        })
     }
     render() {
-        const { value } = this.state
+        const { value, arr } = this.state
+
         return <div>
-            <input onChange={this.handleOnChange} value={value} />
-            <button onClick={this.handleOnClick}> Submit </button>
+            <UIInput onChange={this.handleOnChange} value={value} />
+            <UIButton onChange={this.handleOnClick}> Submit </UIButton>
+            <div>{arr.map(item => <div>Socket no de ra</div>)}</div>
         </div>
     }
 }
