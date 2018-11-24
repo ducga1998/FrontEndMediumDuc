@@ -1,3 +1,12 @@
 import io from 'socket.io-client';
+const DEFAULT_LINK = 'http://localhost:4000'
 
-export const socket = io('')
+export const roomSockets = (function rooms() {
+    const socket = io(`${DEFAULT_LINK}/room`, { transports: ['websocket'] })
+    return socket
+})()
+export const chatsockets = (function chat() {
+    const socket = io(`${DEFAULT_LINK}/chat`, { transports: ['websocket'] })
+    return socket
+})()
+

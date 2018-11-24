@@ -7,7 +7,7 @@ import userContainer from '../../Container/userContainer';
 import srcImg from '../../image/9284571_300x300.jpeg';
 import UILoading from '../../UI/UILoading';
 import Article from '../Article';
-import { socket } from '../../help/help';
+import { roomSockets } from '../../socketClient/socket';
 import UIInput from '../../UI/UIInput';
 import UIButton from '../../UI/UIButton';
 import { Link } from 'react-router-dom';
@@ -26,10 +26,11 @@ export default class ListRoom extends React.Component<IListRoom> {
     handleOnClick = (e: any) => {
         const { title } = this.state
         const { idUser } = userContainer.state.dataUser
-        socket.emit('addRoom', { title, idUser })
+        roomSockets.emit('addRoom', { title, idUser })
     }
     componentDidMount() {
-        socket.on('eventAddRoom', data => {
+
+        roomSockets.on('updateListRooms', data => {
             const { arr } = this.state
             arr.push(data)
             this.setState({ arr })

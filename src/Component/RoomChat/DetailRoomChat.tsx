@@ -7,7 +7,7 @@ import userContainer from '../../Container/userContainer';
 import srcImg from '../../image/9284571_300x300.jpeg';
 import UILoading from '../../UI/UILoading';
 import Article from '../Article';
-import { socket } from '../../help/help';
+import { chatsockets } from '../../socketClient/socket';
 import ListRoom from './listRoom';
 import UIButton from '../../UI/UIButton';
 
@@ -21,15 +21,21 @@ export default class RoomChat extends React.Component<IRoomChat> {
     refWrappInput: any = React.createRef()
     componentDidMount() {
         const { match: { params: { id } } } = this.props
+        const input = {
+            idUser: userContainer.state.dataUser.idUser,
+            idRoom: id
+        }
+        chatsockets.emit('join', input)
+
         const { value } = this.state
         // note ;  on is function await call, and emit is call function
 
-        socket.on('chat2', (data) => {
-            const dom = this.refWrappInput.current
-            const A = document.createElement('div')
-            A.innerHTML = data
-            dom.appendChild(A)
-        })
+        // socket.on('chat2', (data) => {
+        //     const dom = this.refWrappInput.current
+        //     const A = document.createElement('div')
+        //     A.innerHTML = data
+        //     dom.appendChild(A)
+        // })
     }
     handleOnChange = (e: any) => {
         const { value } = e.target
@@ -40,7 +46,7 @@ export default class RoomChat extends React.Component<IRoomChat> {
     }
     handleOnClick = (e: any) => {
         const { value } = this.state
-        socket.emit('chat', value)
+        // socket.emit('chat', value)
     }
     render() {
         return <$WrapperChat>
