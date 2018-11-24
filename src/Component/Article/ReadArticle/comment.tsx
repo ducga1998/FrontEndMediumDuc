@@ -15,7 +15,7 @@ export default class ViewComment extends React.Component<IViewComment> {
         const { comments, idArticle } = this.props
         await this.setState({ comments })
     }
-    async componentDidUpdate(preState, preProps) {
+    async componentDidUpdate(preProps, preState) {
         if (preProps.comments !== this.props.comments) {
             const { comments } = this.props
             this.setState({ comments })
@@ -28,12 +28,12 @@ export default class ViewComment extends React.Component<IViewComment> {
         return <div>
             {comments.length > 0 ? comments.reverse().map((item: any, key) => {
                 console.log('cscas', item)
-                const { userComment: { avatarLink, name } } = item
+                const { userComment: { avatarLink, name }, createdAt } = item
 
-                return <$Comment key={key} >
+                return <$Comment data-tooltip={`Created At : ${new Date(createdAt)}`} key={key} >
 
                     <$Img data-tooltip={name} src={avatarLink ? avatarLink : IMAGE_SOURCE_DEFAULT} />
-                    <$Content >{renderHTML(item.content)}</$Content>
+                    <$Content  >{renderHTML(item.content)}</$Content>
                 </$Comment>
             }) : <h2 style={{ textAlign: 'center', color: 'gray' }}> NO  Comment,  : ))) cmt vào cho vui đi thằng ngu</h2>}
         </div>

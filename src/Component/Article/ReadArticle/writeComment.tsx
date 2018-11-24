@@ -32,6 +32,7 @@ export default class WriteComment extends React.Component<IWriteComment> {
 
         });
     }
+
     handleAddComment = async () => {
 
         // console.log(this.state.content)

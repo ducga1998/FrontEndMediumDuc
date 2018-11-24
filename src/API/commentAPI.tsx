@@ -11,6 +11,7 @@ export function getAllCommentinArtcileCurrent(idUser: string) {
                             idUser
                             idArticle
                             content
+                            createdAt
                             userComment {
                                 name
                                 avatarLink

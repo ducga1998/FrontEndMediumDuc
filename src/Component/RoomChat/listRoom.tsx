@@ -10,43 +10,46 @@ import Article from '../Article';
 import { socket } from '../../help/help';
 import UIInput from '../../UI/UIInput';
 import UIButton from '../../UI/UIButton';
+import { Link } from 'react-router-dom';
 
 interface IListRoom {
     match?: any
 }
 export default class ListRoom extends React.Component<IListRoom> {
     state = {
-        value: '',
+        title: '',
         arr: ["1"]
     }
-    handleOnChange = (value: string) => {
-        this.setState({ value })
+    handleOnChange = (title: string) => {
+        this.setState({ title })
     }
     handleOnClick = (e: any) => {
-
-        socket.emit('addRoom', 'addRoomText')
+        const { title } = this.state
+        const { idUser } = userContainer.state.dataUser
+        socket.emit('addRoom', { title, idUser })
     }
     componentDidMount() {
         socket.on('eventAddRoom', data => {
             const { arr } = this.state
-            arr.push("111")
+            arr.push(data)
             this.setState({ arr })
         })
     }
     render() {
-        const { value, arr } = this.state
+        const { title, arr } = this.state
 
         return <div>
-            <UIInput onChange={this.handleOnChange} value={value} />
+            <h1>Create Room</h1>
+            <UIInput onChange={this.handleOnChange} value={title} />
             <UIButton onChange={this.handleOnClick}> Submit </UIButton>
-            <div>{arr.map(item => <div>Socket no de ra</div>)}</div>
+            <div>{arr.map((item: any, key) => <Link to={`/chatRoom/${item.idRoom}`}>{item.title} <br /> {item.idUser}</Link>)}</div>
         </div>
     }
 }
 const $Input = styled.input`
     padding :20px;
     width
-    &:focus {
+    &   :focus {
         outline : none;
         background-color : gray;
         color : black;

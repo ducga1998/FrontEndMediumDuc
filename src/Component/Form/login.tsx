@@ -21,7 +21,7 @@ export default function Login({ history }) {
     return <$Form>
         <h2 className="center">Login Accout</h2>
         <UIField titleField="Email and Name" placeholder="Email ..." value={name} onChange={(value) => { setValueName(value) }} />
-        <UIField titleField="Password" placeholder="Password .... " value={password} onChange={(value) => {
+        <UIField type="password" titleField="Password" placeholder="Password .... " value={password} onChange={(value) => {
             setValuePassword(value)
         }} />
         <Link to="/home" ref={refLink} />

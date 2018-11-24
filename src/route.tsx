@@ -13,9 +13,11 @@ import Profile from './Component/Profile/common';
 import ViewUser from './Component/Profile/profileUserCommon';
 import userContainer from "./Container/userContainer";
 import UILoading from "./UI/UILoading";
-import RoomChat from './Component/RoomChat/index'
+import AllRoomChat from './Component/RoomChat/listRoom'
+import DetailRoomChat from './Component/RoomChat/DetailRoomChat'
+import { logoutBackend } from './API/client'
 const About = () => <h2>About</h2>;
-const Users = () => <h2>Users</h2>;
+
 
 const { useEffect } = React as any
 const AppRouter = () => {
@@ -38,7 +40,7 @@ const AppRouter = () => {
         return <Router >
             <Switch>
                 <Layout >
-                    <Route path="/chat" component={RoomChat} />
+                    <Route path="/chat" component={AllRoomChat} />
                     <Route path="/about/" component={isAuth(About)} />
                     <Route path="/user/:id" component={isAuth(ViewUser)} />
                     <Route path="/login" component={Login} />
@@ -48,6 +50,7 @@ const AppRouter = () => {
                     <Route path="/home" component={isAuth(Home)} />
                     <Route path="/profile" component={isAuth(Profile)} />
                     <Route path="/writearticle" component={isAuth(WriteArticle)} />
+                    <Route path="/chatRoom/:id" component={isAuth(DetailRoomChat)} />
                     WriteArticle
             </Layout>
             </Switch>
@@ -82,9 +85,11 @@ function redirect(location) {
     }
 }
 function logout({ history }) {
-    React.useEffect(() => {
+    useEffect(async () => {
         localStorage.clear()
         userContainer.setState({ dataUser: null, login: false })
+        const data = await logoutBackend()
+        console.log('logout',data)
         history.push('/login')
     })
     return null

@@ -3,6 +3,20 @@ import gql from "graphql-tag";
 export const client = new ApolloClient({
     uri: "http://localhost:3000/graphql"
 })
+export function logoutBackend() {
+    return new Promise(resolve => {
+        const data = client.query({
+            query: gql`
+                query {
+                    logout(id : "sacscas") {
+                        idUser
+                    }
+                }
+            `
+        })
+        resolve(data)
+    })
+}
 export function addUser(user: any) {
     const { idUser, login, password, decentraliz, avatarLink, name } = user
     console.log('userrr', user)

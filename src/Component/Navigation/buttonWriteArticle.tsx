@@ -90,6 +90,7 @@ export default function ButtonArticle({ history }: any) {
                                     const { idUser } = newArticle.data.addArticle
                                     await container.updateAricle(arrHashTag, idUser)
                                     toast.success('Update aricle success !!!! ')
+                                    await setOpen(false)
                                 }
                             }} >Update Article</UIButton>}
 
