@@ -7,9 +7,10 @@ import userContainer from '../../Container/userContainer';
 import srcImg from '../../image/9284571_300x300.jpeg';
 import UILoading from '../../UI/UILoading';
 import Article from '../Article';
-import { chatsockets } from '../../socketClient/socket';
+import { chatsockets, roomSockets } from '../../socketClient/socket';
 import ListRoom from './listRoom';
 import UIButton from '../../UI/UIButton';
+import io from 'socket.io-client';
 
 interface IRoomChat {
     match: any
@@ -25,7 +26,22 @@ export default class RoomChat extends React.Component<IRoomChat> {
             idUser: userContainer.state.dataUser.idUser,
             idRoom: id
         }
+        chatsockets.on('connect', function () {
+
+        })
         chatsockets.emit('join', input)
+
+        chatsockets.on('addMessage', (data: string) => {
+            // chatsockets.emit('join', input)
+
+            console.log('log to server socket', data)
+            const NewDom = document.createElement('div')
+            NewDom.innerHTML = data
+            this.refWrappInput.current.appendChild(NewDom)
+        })
+        // io('http://localhost:4000/chat').on('addMessage', data => {
+        //     console.log(data)
+        // })
 
         const { value } = this.state
         // note ;  on is function await call, and emit is call function
@@ -45,15 +61,22 @@ export default class RoomChat extends React.Component<IRoomChat> {
         console.log(e)
     }
     handleOnClick = (e: any) => {
+        const { match: { params: { id } } } = this.props
         const { value } = this.state
-        // socket.emit('chat', value)
+        const input = {
+            content: value,
+            idUser: userContainer.state.dataUser.idUser,
+            idRoom: id
+        }
+        chatsockets.emit('newMessage', id, value)
     }
     render() {
+
         return <$WrapperChat>
             <$ViewChat ref={this.refWrappInput} />
             <$WrapperInput >
 
-                <$InputChat onChange={this.handleOnChange} onKeyPressCapture={this.handleKeyUp} />
+                <$InputChat onChange={this.handleOnChange} onKeyPress={this.handleKeyUp} />
                 <UIButton onChange={this.handleOnClick}> Send  </UIButton>
             </$WrapperInput>
 

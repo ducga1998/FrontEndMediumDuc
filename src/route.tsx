@@ -40,7 +40,7 @@ const AppRouter = () => {
         return <Router >
             <Switch>
                 <Layout >
-                    <Route path="/chat" component={AllRoomChat} />
+                    <Route path="/chat" component={isAuth(AllRoomChat)} />
                     <Route path="/about/" component={isAuth(About)} />
                     <Route path="/user/:id" component={isAuth(ViewUser)} />
                     <Route path="/login" component={Login} />
@@ -87,9 +87,9 @@ function redirect(location) {
 function logout({ history }) {
     useEffect(async () => {
         localStorage.clear()
-        userContainer.setState({ dataUser: null, login: false })
-        const data = await logoutBackend()
-        console.log('logout',data)
+        await userContainer.setState({ dataUser: null, login: false })
+        // const data = await logoutBackend()
+        // console.log('logout',data)
         history.push('/login')
     })
     return null
