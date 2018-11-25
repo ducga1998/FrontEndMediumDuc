@@ -50,15 +50,25 @@ export default class ListRoom extends React.Component<IListRoom> {
             <UIInput onChange={this.handleOnChange} value={title} />
             <UIButton onChange={this.handleOnClick}> Submit </UIButton>
             <$Wrapper>
-                <SubscribeOne to={roomContainer} bind={['rooms']}>
+
+                <SubscribeOne to={roomContainer} bind={['rooms', 'roomsToIdUser']}>
                     {
                         container => {
-                            const { rooms } = container.state
-                            return <div>
-                                {rooms.map(item => <div>
+                            const { rooms, roomsToIdUser } = container.state
+                            return <> <TheWord>
+                                <h1>The Word chanel</h1>
+                                {rooms.map((item, key) => <div key={key}>
                                     <Link to={`/chatRoom/${item.idRoom}`}><h3>{item.title}</h3></Link>
                                 </div>)}
-                            </div>
+                            </TheWord>
+                                <Person>
+                                    <h1>Your chanel</h1>
+                                    {roomsToIdUser.map((item, key) => <div key={key} >
+
+                                        <Link to={`/chatRoom/${item.idRoom}`}><h3>{item.title}</h3></Link>
+                                    </div>)}
+                                </Person>
+                            </>
                         }
                     }
                 </SubscribeOne>
@@ -66,5 +76,24 @@ export default class ListRoom extends React.Component<IListRoom> {
         </div>
     }
 }
-
-
+const Person = styled.div`
+flex : 6;
+height : 600px;
+overflow : scroll;
+border : 3px solid black;
+padding : 10px;
+background-color : #f0ece8;
+`
+const TheWord = styled.div`
+flex : 6;
+height : 600px;
+overflow : scroll;
+border : 3px solid black;
+padding : 10px;
+background-color : #f2faf9
+`
+const $Wrapper = styled.div`
+    display : flex;
+    flex-direction : row;
+    border : 3px solid black;
+`

@@ -34,7 +34,7 @@ class RoomContainer extends Container<any>{
 }
 const roomContainer = new RoomContainer({
     rooms: [],
-    roomsToIdUser: null
+    roomsToIdUser: []
 })
 
 window['room'] = roomContainer
