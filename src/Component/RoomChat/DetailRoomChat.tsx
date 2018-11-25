@@ -11,6 +11,7 @@ import { chatsockets, roomSockets } from '../../socketClient/socket';
 import ListRoom from './listRoom';
 import UIButton from '../../UI/UIButton';
 import io from 'socket.io-client';
+import { toast } from 'react-toastify';
 
 interface IRoomChat {
     match: any
@@ -36,22 +37,19 @@ export default class RoomChat extends React.Component<IRoomChat> {
 
             console.log('log to server socket', data)
             const NewDom = document.createElement('div')
+            NewDom.style.backgroundColor = "black";
+            NewDom.style.color = "white"
+            NewDom.style.padding = "20px"
+            NewDom.style.marginTop = "2px"
+            NewDom.style.transition = ".3s"
             NewDom.innerHTML = data
+            toast.success(data)
+            // console.log('marign padding, adding curent')
             this.refWrappInput.current.appendChild(NewDom)
         })
-        // io('http://localhost:4000/chat').on('addMessage', data => {
-        //     console.log(data)
-        // })
-
-        const { value } = this.state
-        // note ;  on is function await call, and emit is call function
-
-        // socket.on('chat2', (data) => {
-        //     const dom = this.refWrappInput.current
-        //     const A = document.createElement('div')
-        //     A.innerHTML = data
-        //     dom.appendChild(A)
-        // })
+        chatsockets.on('loadindKeyBoadUser', name => {
+            this.setState({ loading: true, name })
+        })
     }
     handleOnChange = (e: any) => {
         const { value } = e.target
@@ -70,13 +68,16 @@ export default class RoomChat extends React.Component<IRoomChat> {
         }
         chatsockets.emit('newMessage', id, value)
     }
+    handleFocus = () => {
+        chatsockets.emit('userFocus', userContainer.state.dataUser.name)
+    }
     render() {
 
         return <$WrapperChat>
             <$ViewChat ref={this.refWrappInput} />
             <$WrapperInput >
 
-                <$InputChat onChange={this.handleOnChange} onKeyPress={this.handleKeyUp} />
+                <$InputChat onFocus={this.handleFocus} onChange={this.handleOnChange} onKeyPress={this.handleKeyUp} />
                 <UIButton onChange={this.handleOnClick}> Send  </UIButton>
             </$WrapperInput>
 
@@ -99,6 +100,7 @@ const $ViewChat = styled.div`
         background-color: #e8e7e7;
     width: 100%;
     height: 100%;
+    overflow : scroll;
 `
 const $WrapperInput = styled.div`
     display : flex;
