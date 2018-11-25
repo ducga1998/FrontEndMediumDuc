@@ -11,6 +11,9 @@ import { roomSockets } from '../../socketClient/socket';
 import UIInput from '../../UI/UIInput';
 import UIButton from '../../UI/UIButton';
 import { Link } from 'react-router-dom';
+import { getAllRoomFromBackEnd } from '../../API/roomAPI';
+import roomContainer from '../../Container/roomContainer';
+import { SubscribeOne } from 'unstated-x';
 
 interface IListRoom {
     match?: any
@@ -28,31 +31,40 @@ export default class ListRoom extends React.Component<IListRoom> {
         const { idUser } = userContainer.state.dataUser
         roomSockets.emit('addRoom', { title, idUser })
     }
-    componentDidMount() {
-
+    async componentDidMount() {
+        // console.log(roomContainer.state)
         roomSockets.on('updateListRooms', data => {
             const { arr } = this.state
             arr.push(data)
             this.setState({ arr })
         })
+        const data = await roomContainer.getRoomByIdUser()
+        const allRoom = await getAllRoomFromBackEnd() as any
+        console.log(allRoom.data)
+        // this.setState()
     }
     render() {
         const { title, arr } = this.state
-
         return <div>
             <h1>Create Room</h1>
             <UIInput onChange={this.handleOnChange} value={title} />
             <UIButton onChange={this.handleOnClick}> Submit </UIButton>
-            <div>{arr.map((item: any, key) => <Link to={`/chatRoom/${item.idRoom}`}>{item.title} <br /> {item.idUser}</Link>)}</div>
+            <$Wrapper>
+                <SubscribeOne to={roomContainer} bind={['rooms']}>
+                    {
+                        container => {
+                            const { rooms } = container.state
+                            return <div>
+                                {rooms.map(item => <div>
+                                    <Link to={`/chatRoom/${item.idRoom}`}><h3>{item.title}</h3></Link>
+                                </div>)}
+                            </div>
+                        }
+                    }
+                </SubscribeOne>
+            </$Wrapper>
         </div>
     }
 }
-const $Input = styled.input`
-    padding :20px;
-    width
-    &   :focus {
-        outline : none;
-        background-color : gray;
-        color : black;
-    }
-`
+
+
