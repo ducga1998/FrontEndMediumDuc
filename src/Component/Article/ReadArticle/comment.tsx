@@ -2,6 +2,9 @@ import * as React from 'react';
 import renderHTML from 'react-render-html';
 import styled from 'styled-components';
 import { IMAGE_SOURCE_DEFAULT } from './writeComment';
+import { Subscribe } from 'unstated-x';
+import commentAllContainer from '../../../Container/commentContainer';
+import UILoading from '../../../UI/UILoading';
 interface IViewComment {
     idArticle: string,
     comments: any[],
@@ -22,21 +25,42 @@ export default class ViewComment extends React.Component<IViewComment> {
         }
     }
     render() {
-        const { comments } = this.state
 
-        console.log(comments)
-        return <div>
-            {comments.length > 0 ? comments.reverse().map((item: any, key) => {
-                console.log('cscas', item)
-                const { userComment: { avatarLink, name }, createdAt } = item
+        return <Subscribe to={[commentAllContainer]}>
+            {
+                container => {
+                    const { idArticle } = this.props
+                    const data = container.state.registryComment.find(item => item.idArticle === idArticle)
+                    console.log('dacnkajsncjkanscnkjasnc', data)
+                    if (!data) {
+                        return <UILoading />
+                    }
+                    const { commentContainer } = data
+                    return <Subscribe to={[commentContainer]}>
+                        {
+                            commentContainer => {
+                                const { allComments } = commentContainer.state
+                                return <div>
+                                    {allComments.length > 0 ? allComments.map((item: any, key) => {
+                                        // console.log('cscas', item)
+                                        const { userComment: { avatarLink, name }, createdAt } = item
 
-                return <$Comment data-tooltip={`Created At : ${new Date(createdAt)}`} key={key} >
+                                        return <$Comment data-tooltip={`Created At : ${new Date(createdAt)}`} key={key} >
 
-                    <$Img data-tooltip={name} src={avatarLink ? avatarLink : IMAGE_SOURCE_DEFAULT} />
-                    <$Content  >{renderHTML(item.content)}</$Content>
-                </$Comment>
-            }) : <h2 style={{ textAlign: 'center', color: 'gray' }}> NO  Comment,  : ))) cmt vào cho vui đi thằng ngu</h2>}
-        </div>
+                                            <$Img data-tooltip={name} src={avatarLink ? avatarLink : IMAGE_SOURCE_DEFAULT} />
+                                            <$Content  >{renderHTML(item.content)}</$Content>
+                                        </$Comment>
+                                    }) : <h2 style={{ textAlign: 'center', color: 'gray' }}> NO  Comment,  : ))) cmt vào cho vui đi thằng ngu</h2>}
+                                </div>
+                            }
+                        }
+                    </Subscribe>
+
+
+                }
+            }
+        </Subscribe>
+
     }
 }
 const $Content = styled.div`

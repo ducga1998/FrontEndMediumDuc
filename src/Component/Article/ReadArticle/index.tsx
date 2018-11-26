@@ -8,6 +8,7 @@ import UILoading from '../../../UI/UILoading';
 import Author from '../../Author';
 import CommentArticle from './comment';
 import WriteComment from './writeComment';
+import commentContainer from '../../../Container/commentContainer';
 interface IReadArticleType {
     title: String,
     content: String,
@@ -21,12 +22,8 @@ export default class ReadArticle extends React.Component<IReadArticleType> {
     }
     async componentDidMount() {
         const { match: { params: { id } } } = this.props
-        const allComment = await getAllCommentinArtcileCurrent(id)
-        if (allComment) {
-            const { data: { getAllCommentInTheArticle } } = allComment as any
-            await this.setState({ allCommentInArticle: getAllCommentInTheArticle })
-        }
-        console.log('allComment', allComment)
+        commentContainer.getAllCommentByIdArticle(id)
+        // before refacto articleContainer
         const dataArticle = await getArticleById(id) as any
         // console.log('dataArticle', dataArticle)
         if (dataArticle) {

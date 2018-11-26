@@ -6,6 +6,7 @@ import { addComment, getAllCommentinArtcileCurrent } from '../../../API/commentA
 import userContainer from '../../../Container/userContainer';
 import UIButton from '../../../UI/UIButton';
 import { Config } from '../WriteArticle/index';
+import commentAllContainer from '../../../Container/commentContainer';
 const config = Config('Comment something now  . . . . . . . ')
 export const IMAGE_SOURCE_DEFAULT = 'https://scontent.fhan5-2.fna.fbcdn.net/v/t1.0-9/30710734_1894791530812895_692578444441026560_n.jpg?_nc_cat=102&_nc_ht=scontent.fhan5-2.fna&oh=46b63236752f0608bb45efcd83a59d05&oe=5C75BB19'
 interface IWriteComment {
@@ -23,8 +24,8 @@ export default class WriteComment extends React.Component<IWriteComment> {
     async componentDidMount() {
         const { idArticle } = this.props
 
-        const allComment = await getAllCommentinArtcileCurrent(idArticle)
-        console.log('allComment', allComment)
+        commentAllContainer.getAllCommentByIdArticle(idArticle)
+        // console.log('allComment', allComment)
         const title = new MediumEditer(this.refComment.current, config)
         title.subscribe('editableInput', (event, editable) => {
             const content = event.srcElement.innerHTML
@@ -50,17 +51,19 @@ export default class WriteComment extends React.Component<IWriteComment> {
 
         }
         avatarLink = (avatarLink ? avatarLink : IMAGE_SOURCE_DEFAULT)
-        let { data: {
-            addCommentIntoArticle
-        } }: any = await addComment(input)
-        let newComment = addCommentIntoArticle
-        newComment.userComment = {
-            avatarLink,
-            name
-        }
+        // request to backend  and add comment data to commentContainer
+        // let { data: {
+        //     addCommentIntoArticle
+        // } }: any = await addComment(input)
+        // let newComment = addCommentIntoArticle
+        await commentAllContainer.addCommentInArticle(input)
+        // newComment.userComment = {
+        //     avatarLink,
+        //     name
+        // }
 
-        console.log('newComment', newComment)
-        await this.props.onChange(newComment)
+        // console.log('newComment', newComment)
+        // await this.props.onChange(newComment)
         await this.setState({ content: '' })
         this.refComment.current.innerHTML = '<p><br /></p>'
     }
