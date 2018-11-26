@@ -35,16 +35,11 @@ class ArticleContainer extends Container<IArticleContainer>{
         const { contentArticle, titleArticle } = this.state
         const { dataUser } = userContainer.state as any
         // const idArticle = uuid()
-        console.log('idArticle', idArticle)
         if (dataUser) {
             const { idUser } = dataUser
-            console.log('run func updateAricle')
             return await updateArticleToClient({ contentArticle, titleArticle, idUser, idArticle, hashTag, createTime })
         }
     }
-}
-() => {
-
 }
 const articleContainer = new ArticleContainer({
     contentArticle: '',

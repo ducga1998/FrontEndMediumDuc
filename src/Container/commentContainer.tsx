@@ -11,9 +11,6 @@ class CommentContainer extends Container<any>{
 
 
 }
-() => {
-
-}
 const commentContainer = new CommentContainer({
 
 })

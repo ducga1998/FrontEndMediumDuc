@@ -19,11 +19,16 @@ export default class UIInput extends React.Component<IUIInput> {
 }
 const $Input = styled.input`
     padding :10px;
-    width : 100px;
+    width : 400px;
     &:focus {
-        transition: .3s;
-        outline : none;
-        background-color : gray;
-        color : black;
+
+    -webkit-transition: .3s;
+    transition: .3s;
+    outline: none;
+    background-color: #ddd9d9;
+    color: #454948;
+    font-size: 15px;
+    transition: .3s;
+
     }
 `

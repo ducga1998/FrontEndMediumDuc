@@ -29,6 +29,7 @@ export default class ListRoom extends React.Component<IListRoom> {
     handleOnClick = (e: any) => {
         const { title } = this.state
         const { idUser } = userContainer.state.dataUser
+        // this event emmiter add room to backend
         roomSockets.emit('addRoom', { title, idUser })
     }
     async componentDidMount() {
@@ -57,15 +58,16 @@ export default class ListRoom extends React.Component<IListRoom> {
                             const { rooms, roomsToIdUser } = container.state
                             return <> <TheWord>
                                 <h1>The Word chanel</h1>
-                                {rooms.map((item, key) => <div key={key}>
-                                    <Link to={`/chatRoom/${item.idRoom}`}><h3>{item.title}</h3></Link>
+                                {rooms.reverse().map((item, key) => <div key={key}>
+
+                                    <Link to={`/chatRoom/${item.idRoom}`}><h3><b>Room {key} : </b> {item.title}</h3></Link>
                                 </div>)}
                             </TheWord>
                                 <Person>
                                     <h1>Your chanel</h1>
-                                    {roomsToIdUser.map((item, key) => <div key={key} >
+                                    {roomsToIdUser.reverse().map((item, key) => <div key={key} >
 
-                                        <Link to={`/chatRoom/${item.idRoom}`}><h3>{item.title}</h3></Link>
+                                        <Link to={`/chatRoom/${item.idRoom}`}><h3> <b>Room {key} : </b>{item.title}</h3></Link>
                                     </div>)}
                                 </Person>
                             </>
@@ -77,20 +79,20 @@ export default class ListRoom extends React.Component<IListRoom> {
     }
 }
 const Person = styled.div`
-flex : 6;
-height : 600px;
-overflow : scroll;
-border : 3px solid black;
-padding : 10px;
-background-color : #f0ece8;
+    flex : 6;
+    height : 600px;
+    overflow : scroll;
+    border : 3px solid black;
+    padding : 10px;
+    background-color : #f0ece8;
 `
 const TheWord = styled.div`
-flex : 6;
-height : 600px;
-overflow : scroll;
-border : 3px solid black;
-padding : 10px;
-background-color : #f2faf9
+    flex : 6;
+    height : 600px;
+    overflow : scroll;
+    border : 3px solid black;
+    padding : 10px;
+    background-color : #f2faf9
 `
 const $Wrapper = styled.div`
     display : flex;

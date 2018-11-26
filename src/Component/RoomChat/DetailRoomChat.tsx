@@ -64,9 +64,8 @@ export default class RoomChat extends React.Component<IRoomChat> {
         const input = {
             content: value,
             idUser: userContainer.state.dataUser.idUser,
-            idRoom: id
         }
-        chatsockets.emit('newMessage', id, value)
+        chatsockets.emit('newMessage', id, input)
     }
     handleFocus = () => {
         chatsockets.emit('userFocus', userContainer.state.dataUser.name)

@@ -9,7 +9,6 @@ export default class ListArticle extends React.Component<any> {
         value: '',
         allArticleData: []
     }
-
     async componentDidMount() {
         // this is function get all data article, in have data user
         const dataFake = await getAllArticle()
