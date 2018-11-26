@@ -12,6 +12,7 @@ import ListRoom from './listRoom';
 import UIButton from '../../UI/UIButton';
 import io from 'socket.io-client';
 import { toast } from 'react-toastify';
+import { getMessageByIdRoom } from '../../API/messageAPI';
 
 interface IRoomChat {
     match: any
@@ -21,12 +22,15 @@ export default class RoomChat extends React.Component<IRoomChat> {
         value: ''
     }
     refWrappInput: any = React.createRef()
-    componentDidMount() {
+    async  componentDidMount() {
+
         const { match: { params: { id } } } = this.props
         const input = {
             idUser: userContainer.state.dataUser.idUser,
             idRoom: id
         }
+        const dataMessage = await getMessageByIdRoom(id)
+        console.log('dataMessage', dataMessage)
         chatsockets.on('connect', function () {
 
         })

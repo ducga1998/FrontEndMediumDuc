@@ -30,14 +30,11 @@ export default class WriteComment extends React.Component<IWriteComment> {
         title.subscribe('editableInput', (event, editable) => {
             const content = event.srcElement.innerHTML
             this.setState({ content })
-
         });
     }
 
     handleAddComment = async () => {
-
-        // console.log(this.state.content)
-        const { imgSrc, idArticle } = this.props
+        const { idArticle } = this.props
         const { content } = this.state
         if (content === ' <p><br></p>' || content === '') {
             toast.error('Comment not empty !!!. Please write something ')
@@ -50,26 +47,14 @@ export default class WriteComment extends React.Component<IWriteComment> {
             idArticle,
 
         }
-        avatarLink = (avatarLink ? avatarLink : IMAGE_SOURCE_DEFAULT)
-        // request to backend  and add comment data to commentContainer
-        // let { data: {
-        //     addCommentIntoArticle
-        // } }: any = await addComment(input)
-        // let newComment = addCommentIntoArticle
-        await commentAllContainer.addCommentInArticle(input)
-        // newComment.userComment = {
-        //     avatarLink,
-        //     name
-        // }
-
-        // console.log('newComment', newComment)
-        // await this.props.onChange(newComment)
+        await commentAllContainer.addCommentInArticle(input) // function handle request to backend and add data to commentAllContainer
         await this.setState({ content: '' })
         this.refComment.current.innerHTML = '<p><br /></p>'
     }
     render() {
         const { name, avatarLink } = userContainer.state
         console.log('avatarLink', avatarLink)
+        // here view user write comment 
         return <>< $Comment>
             <$Img src={avatarLink ? avatarLink : IMAGE_SOURCE_DEFAULT} /> <b>{name}</b>
             <$Content ref={this.refComment} />
