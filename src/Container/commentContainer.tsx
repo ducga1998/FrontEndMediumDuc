@@ -12,9 +12,6 @@ export const registryComment = new Map()
 class CommentAllContainer extends Container<any>{
     constructor(state) {
         super(state)
-        // fetach all data article
-
-
     }
 
     async addCommentInArticle(input) {

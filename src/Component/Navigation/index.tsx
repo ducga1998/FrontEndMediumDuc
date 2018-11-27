@@ -21,7 +21,10 @@ class Navication extends React.Component<any, any>{
             <Navbar.Collapse>
                 <Nav>
                     <NavItem eventKey={1} href="#">
-                        <Link to="/home" > Home</Link>
+                        <Link to="/home"> Home</Link>
+                    </NavItem>
+                    <NavItem eventKey={1} href="#">
+                        <Link to="/chat"> Chat</Link>
                     </NavItem>
                 </Nav>
                 <Nav pullRight>
