@@ -40,7 +40,7 @@ const AppRouter = () => {
     })
     const renderRoutes = (user: any) => {
         if (user) {
-            notificationSocket.emit('join', user.idUser)
+
             notificationSocket.on('notificationRun', (data) => {
                 // name, titleArticle , content
                 //     titleArticle,
@@ -49,7 +49,9 @@ const AppRouter = () => {
                 // type
                 // avatarLink
                 const { titleArticle, content, name, type, avatarLink } = data
-                toast.info(`${name} đã ${type} vào bài viết có title : ${titleArticle} với nội dung ${content}`)
+                toast.info(`${name} đã ${type} vào bài viết có title : ${titleArticle} với nội dung ${content}`, {
+                    position: toast.POSITION.BOTTOM_LEFT
+                })
             })
         }
 

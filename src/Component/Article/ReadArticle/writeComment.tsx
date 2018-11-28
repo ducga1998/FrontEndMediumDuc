@@ -24,8 +24,8 @@ export default class WriteComment extends React.Component<IWriteComment> {
     }
     refComment: any = React.createRef()
     async componentDidMount() {
-        const { idArticle } = this.props
-
+        const { idArticle, idUser } = this.props
+        notificationSocket.emit('join', idUser)
         commentAllContainer.getAllCommentByIdArticle(idArticle)
         // console.log('allComment', allComment)
         const title = new MediumEditer(this.refComment.current, config)
