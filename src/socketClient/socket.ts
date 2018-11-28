@@ -9,4 +9,8 @@ export const chatsockets = (function chat() {
     const socket = io(`${DEFAULT_LINK}/chat`, { transports: ['websocket'] })
     return socket
 })()
+export const notificationSocket = (function () {
+    const socket = io(`${DEFAULT_LINK}/notification`, { transports: ['websocket'] })
+    return socket
+})()
 

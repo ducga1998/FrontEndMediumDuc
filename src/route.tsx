@@ -9,14 +9,20 @@ import Login from './Component/Form/login';
 import Register from "./Component/Form/register";
 import Home from "./Component/Home";
 import Layout from './Component/Layout';
-import Profile from './Component/Profile/common';
+import Profile from './Component/Profile/profileUserCurrent';
 import ViewUser from './Component/Profile/profileUserCommon';
 import userContainer from "./Container/userContainer";
 import UILoading from "./UI/UILoading";
 import AllRoomChat from './Component/RoomChat/listRoom'
 import DetailRoomChat from './Component/RoomChat/DetailRoomChat'
 import { logoutBackend } from './API/client'
-const About = () => <h2>About</h2>;
+import { notificationSocket } from "./socketClient/socket";
+import { toast } from "react-toastify";
+const About = () => <div>
+    Web design by Nguyen Minh duc
+    <h5>Facebook : <a>https://www.facebook.com/duc.ceh.cnna</a></h5>
+    <h5>GitHub : <a>https://github.com/ducga1998</a></h5>
+</div>
 
 
 const { useEffect } = React as any
@@ -37,6 +43,10 @@ const AppRouter = () => {
         function isAuth(component) {
             return user != null ? component : redirect('/login')
         }
+        notificationSocket.on('notificationRun', (data) => {
+            const { type, content } = data
+            toast.info(`${type} : ${content} `)
+        })
         return <Router >
             <Switch>
                 <Layout >
@@ -51,8 +61,7 @@ const AppRouter = () => {
                     <Route path="/profile" component={isAuth(Profile)} />
                     <Route path="/writearticle" component={isAuth(WriteArticle)} />
                     <Route path="/chatRoom/:id" component={isAuth(DetailRoomChat)} />
-                    WriteArticle
-            </Layout>
+                </Layout>
             </Switch>
         </Router>
     }

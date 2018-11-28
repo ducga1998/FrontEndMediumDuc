@@ -7,6 +7,7 @@ import userContainer from '../../../Container/userContainer';
 import UIButton from '../../../UI/UIButton';
 import { Config } from '../WriteArticle/index';
 import commentAllContainer from '../../../Container/commentContainer';
+import { notificationSocket } from '../../../socketClient/socket';
 const config = Config('Comment something now  . . . . . . . ')
 export const IMAGE_SOURCE_DEFAULT = 'https://scontent.fhan5-2.fna.fbcdn.net/v/t1.0-9/30710734_1894791530812895_692578444441026560_n.jpg?_nc_cat=102&_nc_ht=scontent.fhan5-2.fna&oh=46b63236752f0608bb45efcd83a59d05&oe=5C75BB19'
 interface IWriteComment {
@@ -36,6 +37,7 @@ export default class WriteComment extends React.Component<IWriteComment> {
     handleAddComment = async () => {
         const { idArticle } = this.props
         const { content } = this.state
+
         if (content === ' <p><br></p>' || content === '') {
             toast.error('Comment not empty !!!. Please write something ')
             return
@@ -47,6 +49,12 @@ export default class WriteComment extends React.Component<IWriteComment> {
             idArticle,
 
         }
+        const inputSocket = {
+            titleArticle: 'casnckjasnckas',
+            idUser,
+            content
+        }
+        notificationSocket.emit('notificationMessage', inputSocket)
         await commentAllContainer.addCommentInArticle(input) // function handle request to backend and add data to commentAllContainer
         await this.setState({ content: '' })
         this.refComment.current.innerHTML = '<p><br /></p>'

@@ -90,18 +90,15 @@ export default class RoomChat extends React.Component<IRoomChat> {
         chatsockets.emit('userFocus', userContainer.state.dataUser.name)
     }
     render() {
-
         return <$WrapperChat>
             <$ViewChat>
                 <$ViewChatUserCurrent ref={this.refUserCurrent} />
                 <$ViewChatOtherUser ref={this.refOtherUser} />
-
             </$ViewChat>
             <$WrapperInput >
                 <$InputChat onFocus={this.handleFocus} onChange={this.handleOnChange} onKeyPress={this.handleKeyUp} />
                 <UIButton onChange={this.handleOnClick}> Send  </UIButton>
             </$WrapperInput>
-
         </$WrapperChat>
     }
 }
@@ -115,13 +112,13 @@ const $ViewChatUserCurrent = styled.div`
     flex : 6;
 `
 const $ViewChatOtherUser = styled.div`
- div {
-    margin-top : 10px;
-}
- .messageOtherUser {
-    margin-top : 10px;
-    background-color: #dcdcea;
-}
+    div {
+        margin-top : 10px;
+    }
+    .messageOtherUser {
+        margin-top : 10px;
+        background-color: #dcdcea;
+    }
     flex : 6;
 `
 const $WrapperChat = styled.div`
@@ -131,9 +128,7 @@ const $WrapperChat = styled.div`
     flex-direction: column;
     height : 700px;
     background-color : #f0eeee;
-    
-    justify-content: flex-end;
-   
+    justify-content: flex-end;  
 `
 const $ViewChat = styled.div`
     /* display : flex;
@@ -143,14 +138,12 @@ const $ViewChat = styled.div`
     width: 100%;
     height: 100%;
     overflow : scroll;
-   
        div {
         padding: 30px;
         font-size: 22px;
         height : 40px;
         border-radius: 40px;
-       }
-    
+    }
 `
 const $WrapperInput = styled.div`
     display : flex;
