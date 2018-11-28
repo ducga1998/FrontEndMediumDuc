@@ -62,6 +62,7 @@ export default class ReadArticle extends React.Component<IReadArticleType> {
                     <$WriteComment>
                         {/* component assign  add new Comment */}
                         <WriteComment
+                            titleArticle={titleArticle}
                             onChange={async (comment) => {
                                 allCommentInArticle.push(comment);
                                 console.log('new data', allCommentInArticle)

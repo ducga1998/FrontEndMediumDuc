@@ -16,6 +16,7 @@ interface IWriteComment {
     name: string,
     idUser: string,
     onChange: (e: any) => any
+    titleArticle?: string
 }
 export default class WriteComment extends React.Component<IWriteComment> {
     state = {
@@ -35,7 +36,7 @@ export default class WriteComment extends React.Component<IWriteComment> {
     }
 
     handleAddComment = async () => {
-        const { idArticle } = this.props
+        const { idArticle, titleArticle } = this.props
         const { content } = this.state
 
         if (content === ' <p><br></p>' || content === '') {
@@ -48,13 +49,16 @@ export default class WriteComment extends React.Component<IWriteComment> {
             idUser,
             idArticle,
 
+
         }
-        const inputSocket = {
-            titleArticle: 'casnckjasnckas',
-            idUser,
-            content
+        const commentSocket = {
+            titleArticle,
+            content,
+            name,
+            type: 'Comment',
+            avatarLink
         }
-        notificationSocket.emit('notificationMessage', inputSocket)
+        notificationSocket.emit('notificationMessage', idUser, commentSocket)
         await commentAllContainer.addCommentInArticle(input) // function handle request to backend and add data to commentAllContainer
         await this.setState({ content: '' })
         this.refComment.current.innerHTML = '<p><br /></p>'

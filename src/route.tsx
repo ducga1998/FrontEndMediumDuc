@@ -39,14 +39,24 @@ const AppRouter = () => {
         }
     })
     const renderRoutes = (user: any) => {
+        if (user) {
+            notificationSocket.emit('join', user.idUser)
+            notificationSocket.on('notificationRun', (data) => {
+                // name, titleArticle , content
+                //     titleArticle,
+                // content,
+                // name,
+                // type
+                // avatarLink
+                const { titleArticle, content, name, type, avatarLink } = data
+                toast.info(`${name} đã ${type} vào bài viết có title : ${titleArticle} với nội dung ${content}`)
+            })
+        }
 
         function isAuth(component) {
             return user != null ? component : redirect('/login')
         }
-        notificationSocket.on('notificationRun', (data) => {
-            const { type, content } = data
-            toast.info(`${type} : ${content} `)
-        })
+
         return <Router >
             <Switch>
                 <Layout >
