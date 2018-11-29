@@ -39,8 +39,9 @@ const AppRouter = () => {
         }
     })
     const renderRoutes = (user: any) => {
-        if (user) {
+        if (user && user.idUser) {
 
+            notificationSocket.emit('join' , user.idUser)
             notificationSocket.on('notificationRun', (data) => {
                 // name, titleArticle , content
                 //     titleArticle,

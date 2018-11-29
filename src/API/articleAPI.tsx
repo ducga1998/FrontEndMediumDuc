@@ -70,30 +70,32 @@ export function getAllArticle() {
         const data = client.query({
             query: gql`
                     query {
-                        getAllArticle( id  : ""){
-                            idArticle
-                            idUser
-                            hashTag
-                            category
-                            comment {
-                                idUser
+                        getAllArticle(id  : ""){
+                            
                                 idArticle
-                                content
-                            }
-                            totalClap
-                            notification
-                            contentArticle
-                            imageArticle
-                            titleArticle
-                            createTime
-                            user {
                                 idUser
-                                login
-                                password
-                                decentraliz
-                                name
-                                avatarLink
-                            }
+                                hashTag
+                                category
+                                comment {
+                                    idUser
+                                    idArticle
+                                    content
+                                }
+                                totalClap
+                                notification
+                                contentArticle
+                                imageArticle
+                                titleArticle
+                                createTime
+                                user {
+                                    idUser
+                                    login
+                                    password
+                                    decentraliz
+                                    name
+                                    avatarLink
+                                }
+                            
                         }
                     }
                     `

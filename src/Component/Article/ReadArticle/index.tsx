@@ -9,19 +9,24 @@ import Author from '../../Author';
 import CommentArticle from './comment';
 import WriteComment from './writeComment';
 import commentContainer from '../../../Container/commentContainer';
+import { Prompt } from 'react-router'
+import { withRouter } from 'react-router'
+
 interface IReadArticleType {
     title: String,
     content: String,
     totalClap: number,
-    match: any
+    match: any,
+    router?: any,
+    route?: any
 }
-export default class ReadArticle extends React.Component<IReadArticleType> {
+class ReadArticle extends React.Component<any> {
     state = {
         article: null,
         allCommentInArticle: []
     }
     async componentDidMount() {
-        const { match: { params: { id } } } = this.props
+        const { match: { params: { id } }, router } = this.props
         commentContainer.getAllCommentByIdArticle(id)
         // before refacto articleContainer
         const dataArticle = await getArticleById(id) as any
@@ -32,13 +37,24 @@ export default class ReadArticle extends React.Component<IReadArticleType> {
             console.log('dataArticle', getArticleById)
             await this.setState({ article: getArticleById })
         }
+        console.log(this.props.router)
+        // this.props.router.setRouteLeaveHook(this.props.route, () => {
+        //     if (true)
+        //         return 'You have unsaved information, are you sure you want to leave this page?'
+        // })
     }
+
+
+    // componentWillMount() {
+    //     console.log('did unmout')
+    // }
     //idUser", "login", "password", "decentraliz", "name", "avatarLink", "__typename"]
     //idArticle", "idUser", "hashTag", "category", "comment", "totalClap", "notification", "contentArticle", "imageArticle", "titleArticle", "createTime", "user", "__typename"
     render() {
         const { article, allCommentInArticle }: any = this.state
-        console.log('update update', article, allCommentInArticle)
+
         if (article) {
+            console.log('update update', article, allCommentInArticle)
             const { user: { idUser, avatarLink, name, articles, }, contentArticle, titleArticle, hashTag, createTime } = article
             return <$Align>
                 <div style={{
@@ -55,7 +71,7 @@ export default class ReadArticle extends React.Component<IReadArticleType> {
 
                     <p>{createTime}</p>
                     <$Title>
-                        <h1> {renderHTML(titleArticle.trim().replace(' ', ''))}</h1>
+                        <h1> {renderHTML(titleArticle)}</h1>
                     </$Title>
                     <$ContentArticle >
                         {renderHTML(contentArticle)}
@@ -89,6 +105,7 @@ export default class ReadArticle extends React.Component<IReadArticleType> {
 
     }
 }
+export default ReadArticle
 const $ViewComment = styled.div`
 
 `

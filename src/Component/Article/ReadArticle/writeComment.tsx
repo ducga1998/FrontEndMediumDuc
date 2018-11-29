@@ -8,6 +8,8 @@ import UIButton from '../../../UI/UIButton';
 import { Config } from '../WriteArticle/index';
 import commentAllContainer from '../../../Container/commentContainer';
 import { notificationSocket } from '../../../socketClient/socket';
+import { Prompt } from 'react-router'
+import { withRouter } from 'react-router'
 const config = Config('Comment something now  . . . . . . . ')
 export const IMAGE_SOURCE_DEFAULT = 'https://scontent.fhan5-2.fna.fbcdn.net/v/t1.0-9/30710734_1894791530812895_692578444441026560_n.jpg?_nc_cat=102&_nc_ht=scontent.fhan5-2.fna&oh=46b63236752f0608bb45efcd83a59d05&oe=5C75BB19'
 interface IWriteComment {
@@ -17,6 +19,7 @@ interface IWriteComment {
     idUser: string,
     onChange: (e: any) => any
     titleArticle?: string
+
 }
 export default class WriteComment extends React.Component<IWriteComment> {
     state = {
@@ -28,11 +31,16 @@ export default class WriteComment extends React.Component<IWriteComment> {
 
         commentAllContainer.getAllCommentByIdArticle(idArticle)
         // console.log('allComment', allComment)
+        notificationSocket.emit('join', idUser)
         const title = new MediumEditer(this.refComment.current, config)
         title.subscribe('editableInput', (event, editable) => {
             const content = event.srcElement.innerHTML
             this.setState({ content })
         });
+
+    }
+    componentWillUnmount() {
+        notificationSocket.emit('leave', this.props.idUser)
     }
 
     handleAddComment = async () => {
@@ -48,11 +56,9 @@ export default class WriteComment extends React.Component<IWriteComment> {
             content,
             idUser,
             idArticle,
-
-
         }
         // this.props.idUser  != userContainer.state.dataUser.idUser
-        notificationSocket.emit('join', this.props.idUser)
+
         const commentSocket = {
             titleArticle,
             content,
@@ -60,7 +66,8 @@ export default class WriteComment extends React.Component<IWriteComment> {
             type: 'Comment',
             avatarLink
         }
-        notificationSocket.emit('notificationMessage', idUser, commentSocket)
+        // must take idUser comment =>  this.props.isUser
+        notificationSocket.emit('notificationMessage', this.props.idUser, commentSocket)
         await commentAllContainer.addCommentInArticle(input) // function handle request to backend and add data to commentAllContainer
         await this.setState({ content: '' })
         this.refComment.current.innerHTML = '<p><br /></p>'

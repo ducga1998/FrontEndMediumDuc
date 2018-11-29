@@ -102,6 +102,7 @@ export default function ButtonArticle({ history }: any) {
     return null
 
 }
+
 const Grid = styled.div`
     display : 'flex';
 `
