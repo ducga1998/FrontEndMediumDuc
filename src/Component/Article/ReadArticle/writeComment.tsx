@@ -40,7 +40,10 @@ export default class WriteComment extends React.Component<IWriteComment> {
 
     }
     componentWillUnmount() {
-        notificationSocket.emit('leave', this.props.idUser)
+        if (this.props.idUser !== userContainer.state.dataUser.idUser) {
+            console.log('khac tai khoan')
+            notificationSocket.emit('leave', this.props.idUser)
+        }
     }
 
     handleAddComment = async () => {
