@@ -111,6 +111,7 @@ const CallWhenWrite = debouce(async (value, content) => {
         await articleContainer.setState({ isPublicArticle: false })
     }
     else {
+        // content = btoa(content)
         await articleContainer.setState({ isPublicArticle: true, [value]: content })
     }
 }, 3000)

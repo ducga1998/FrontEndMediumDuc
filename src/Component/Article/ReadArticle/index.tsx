@@ -28,6 +28,7 @@ export default class ReadArticle extends React.Component<IReadArticleType> {
         // console.log('dataArticle', dataArticle)
         if (dataArticle) {
             const { data: { getArticleById } } = dataArticle
+
             console.log('dataArticle', getArticleById)
             await this.setState({ article: getArticleById })
         }
@@ -57,7 +58,7 @@ export default class ReadArticle extends React.Component<IReadArticleType> {
                         <h1> {renderHTML(titleArticle.trim().replace(' ', ''))}</h1>
                     </$Title>
                     <$ContentArticle >
-                        {renderHTML(contentArticle.trim().replace(' ', ''))}
+                        {renderHTML(contentArticle)}
                     </$ContentArticle>
                     <$WriteComment>
                         {/* component assign  add new Comment */}

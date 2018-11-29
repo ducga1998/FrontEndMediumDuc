@@ -25,7 +25,7 @@ export default class WriteComment extends React.Component<IWriteComment> {
     refComment: any = React.createRef()
     async componentDidMount() {
         const { idArticle, idUser } = this.props
-        notificationSocket.emit('join', idUser)
+
         commentAllContainer.getAllCommentByIdArticle(idArticle)
         // console.log('allComment', allComment)
         const title = new MediumEditer(this.refComment.current, config)
@@ -51,6 +51,8 @@ export default class WriteComment extends React.Component<IWriteComment> {
 
 
         }
+        // this.props.idUser  != userContainer.state.dataUser.idUser
+        notificationSocket.emit('join', this.props.idUser)
         const commentSocket = {
             titleArticle,
             content,
