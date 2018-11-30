@@ -7,18 +7,8 @@ import userContainer from '../../Container/userContainer';
 import srcImg from '../../image/9284571_300x300.jpeg';
 import UILoading from '../../UI/UILoading';
 import Article from '../Article';
-/* 
-        idUser: String
-        login: String
-        password: String
-        decentraliz: Int 
-        name: String
-        avatarLink: String
-        articles: [String]
-        bookMark: [String]
-        totalFollow: [String]
-        followOtherPeople: [String]
-*/
+import followAllContainer from '../../Container/followContainer';
+import { Subscribe } from 'unstated-x';
 interface IViewUserDetail {
     match: any
 }
@@ -26,81 +16,84 @@ const { useEffect } = React
 class ViewUserDetail extends React.Component<IViewUserDetail> {
     state = {
         dataUser: null,
-        dataUserFollow: [],
-        isFollow: false
+        ownProfileId: ''
     }
     async componentDidMount() {
         const { match: { params: { id } } } = this.props
+        followAllContainer.gotoProfileOtherUser(id)
         const data = await getAllInformationUser(id)
-        // get all information user has been follow
-        const dataFollow = await getAllInfomationUserFollowYour(id)
-        const dataUserFollow = dataFollow['data']['getAllInfomationUserFollowYour'] as any[]
-        console.log('dataUserFollow', dataUserFollow)
-        // this , beause object in data same name function =.=
         const dataUser = data['data']['getAllInformationUser']
-        console.log('dataUserFollow', dataUserFollow)
-        if (dataUserFollow && dataUserFollow.length > 0) {
-            this.setState({ isFollow: true })
-        }
-        await this.setState({ dataUser, dataUserFollow })
+        await this.setState({ dataUser, ownProfileId: id })
     }
-    //     articles: (15) [{…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}]
-    // avatarLink: null
-    // idUser: "95d66530-e56a-11e8-b2c5-f1e93ff5b588"
-    // name: "NO NAME"
-    async follow(idUser) {
-        const idUserFollow = userContainer.state.dataUser.idUser
-        await this.setState({ isFollow: true })
-        await follow({ idUser, idUserFollow })
-    }
-    async unfollow(idUser) {
-        const idUserFollow = userContainer.state.dataUser.idUser
-        await this.setState({ isFollow: false })
-        await unFollow({ idUser, idUserFollow })
-    }
+
     render() {
-        const { dataUser, isFollow, dataUserFollow } = this.state
-        if (dataUser) {
-            const { articles, avatarLink, name, idUser } = dataUser as any;
-            console.log('articles', articles)
-            return <$ArticleDetail>
-                <$Content >
-                    <Left>
-                        <$Author>
-                            <Img src={avatarLink ? avatarLink : srcImg} />
-                            <h3>{name}</h3>
-                            <h5> Article : {articles.length}</h5>
-                        </$Author>
-                        {/* <Author avatarLink={avatarLink} totalFollow={10} name={name} totalArticle={articles.length} /> */}
-                    </Left>
-
-                    <Right>
-                        {isFollow ? <Button bsStyle="danger" onClick={async () => { await this.unfollow(idUser) }}>Unfollow</Button> : <Button bsStyle="info" onClick={async () => { await this.follow(idUser) }}> Follow </Button>}
-
-                        {dataUserFollow && dataUserFollow.length > 0 ? <$ListAvatarUserFollow>
-                            {dataUserFollow.map((item: any, key) => {
-                                const { avatarLink, name } = item.userFollow
-                                return <img data-tooltip={name} src={`${avatarLink ? avatarLink : srcImg}`} />
-                            })}
-
-                        </$ListAvatarUserFollow> : "No user Follow :(("}
-                    </Right>
-                </$Content >
-                <hr />
-                <h3> All Article <b style={
-                    {
-                        color: "#4797db"
+        const { ownProfileId, dataUser } = this.state as any
+        console.log('state', this.state)
+        return <Subscribe to={[followAllContainer]}>
+            {
+                followAll => {
+                    const { userFollow } = followAll.state
+                    // iam filter , get followContainer have idUser Ohter
+                    const item = userFollow.find(item => item.ownProfileId === ownProfileId)
+                    if (!item || !dataUser) {
+                        return <UILoading />
                     }
-                } >{name} </b> has write</h3>
-                <$ViewArticle>
-                    {articles && articles.length > 0 ? articles.map((item, key) => {
-                        const { hashTag, isUSer, contentArticle, titleArticle, createTime, idArticle } = item
-                        return <Article user={dataUser} idArticle={idArticle} key={key} hashTag={hashTag} time={createTime} content={contentArticle} totalClap={8} totalComment={9} titleArticle={titleArticle} avatar={`https://picsum.photos/200/200/?a${item}`} />
+                    const { articles, avatarLink, name, idUser } = dataUser as any;
+                    const { followContainer } = item
+                    // console.log(followContainer)
+                    return <Subscribe to={[followContainer]}>
+                        {
+                            container => {
+                                const { allUserFollow, isFollow } = container.state
 
-                    }) : <h2>NO Article  :), fuck own account stupid </h2>}
-                </$ViewArticle>
-            </$ArticleDetail>
-        }
+
+                                return <$ArticleDetail>
+                                    <$Content >
+                                        <Left>
+                                            <$Author>
+                                                <Img src={avatarLink ? avatarLink : srcImg} /> */}
+                                                 <h3>{name}</h3>
+                                                <h5> Article : {articles.length}</h5>
+                                            </$Author>
+                                            {/* <Author avatarLink={avatarLink} totalFollow={10} name={name} totalArticle={articles.length} /> */}
+                                        </Left>
+
+                                        <Right>
+                                            {isFollow ? <Button bsStyle="danger" onClick={async () => { await followAllContainer.unfollow(idUser) }}>Unfollow</Button> :
+                                                <Button bsStyle="info" onClick={async () => { await followAllContainer.follow(idUser) }}> Follow </Button>
+                                            }
+
+
+                                            {allUserFollow && allUserFollow.length > 0 ? <$ListAvatarUserFollow>
+                                                {allUserFollow.map((item: any, key) => {
+                                                    const { avatarLink, name } = item.userFollow
+                                                    return <img key={key} data-tooltip={name} src={`${avatarLink ? avatarLink : srcImg}`} />
+                                                })}
+
+                                            </$ListAvatarUserFollow> : "No user Follow :(("}
+                                        </Right>
+                                    </$Content >
+                                    <hr />
+                                    <h3> All Article <b style={
+                                        {
+                                            color: "#4797db"
+                                        }
+                                    } >{name} </b> has write</h3>
+                                    <$ViewArticle>
+                                        {articles && articles.length > 0 ? articles.map((item, key) => {
+                                            const { hashTag, isUSer, contentArticle, titleArticle, createTime, idArticle } = item
+                                            return <Article user={dataUser} idArticle={idArticle} key={key} hashTag={hashTag} time={createTime} content={contentArticle} totalClap={8} totalComment={9} titleArticle={titleArticle} avatar={`https://picsum.photos/200/200/?a${item}`} />
+
+                                        }) : <h2>NO Article  :), fuck own account stupid </h2>}
+                                    </$ViewArticle>
+                                </$ArticleDetail>
+                            }
+                        }
+                    </Subscribe>
+
+                }
+            }
+        </Subscribe>
         return <UILoading />
     }
 }
