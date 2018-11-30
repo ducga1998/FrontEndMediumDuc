@@ -106,7 +106,7 @@ export function Config(title) {
 const CallWhenWrite = debouce(async (value, content) => {
     console.log('asc')
 
-    console.log(content)
+    // console.log(content)
     if (content === '<p><br></p>') {
         await articleContainer.setState({ isPublicArticle: false })
     }

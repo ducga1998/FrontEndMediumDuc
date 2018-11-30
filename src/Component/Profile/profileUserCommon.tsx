@@ -34,11 +34,12 @@ class ViewUserDetail extends React.Component<IViewUserDetail> {
         const data = await getAllInformationUser(id)
         // get all information user has been follow
         const dataFollow = await getAllInfomationUserFollowYour(id)
-        const dataUserFollow = dataFollow['data']['getAllInfomationUserFollowYour']
+        const dataUserFollow = dataFollow['data']['getAllInfomationUserFollowYour'] as any[]
+        console.log('dataUserFollow', dataUserFollow)
         // this , beause object in data same name function =.=
         const dataUser = data['data']['getAllInformationUser']
         console.log('dataUserFollow', dataUserFollow)
-        if (dataUserFollow) {
+        if (dataUserFollow && dataUserFollow.length > 0) {
             this.setState({ isFollow: true })
         }
         await this.setState({ dataUser, dataUserFollow })

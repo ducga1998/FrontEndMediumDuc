@@ -18,10 +18,11 @@ import DetailRoomChat from './Component/RoomChat/DetailRoomChat'
 import { logoutBackend } from './API/client'
 import { notificationSocket } from "./socketClient/socket";
 import { toast } from "react-toastify";
+import { notificationFuncSocket } from "./socketClient/notificationSocket";
 const About = () => <div>
     Web design by Nguyen Minh duc
-    <h5>Facebook : <a>https://www.facebook.com/duc.ceh.cnna</a></h5>
-    <h5>GitHub : <a>https://github.com/ducga1998</a></h5>
+    <h5>Facebook : <a href="https://www.facebook.com/duc.ceh.cnna">https://www.facebook.com/duc.ceh.cnna</a></h5>
+    <h5>GitHub : <a href="https://github.com/ducga1998">https://github.com/ducga1998</a></h5>
 </div>
 
 
@@ -39,22 +40,8 @@ const AppRouter = () => {
         }
     })
     const renderRoutes = (user: any) => {
-        if (user && user.idUser) {
-
-            notificationSocket.emit('join' , user.idUser)
-            notificationSocket.on('notificationRun', (data) => {
-                // name, titleArticle , content
-                //     titleArticle,
-                // content,
-                // name,
-                // type
-                // avatarLink
-                const { titleArticle, content, name, type, avatarLink } = data
-                toast.info(`${name} đã ${type} vào bài viết có title : ${titleArticle} với nội dung ${content}`, {
-                    position: toast.POSITION.BOTTOM_LEFT
-                })
-            })
-        }
+        // this is function help me catch event socket to backend 
+        notificationFuncSocket(user)
 
         function isAuth(component) {
             return user != null ? component : redirect('/login')
