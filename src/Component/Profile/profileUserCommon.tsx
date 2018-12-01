@@ -70,7 +70,7 @@ class ViewUserDetail extends React.Component<IViewUserDetail> {
                                                     return <img key={key} data-tooltip={name} src={`${avatarLink ? avatarLink : srcImg}`} />
                                                 })}
 
-                                            </$ListAvatarUserFollow> : "No user Follow :(("}
+                                            </$ListAvatarUserFollow> : <p><b>No user Follow :((</b></p>}
                                         </Right>
                                     </$Content >
                                     <hr />

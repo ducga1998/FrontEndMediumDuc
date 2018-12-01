@@ -61,7 +61,6 @@ export default function ButtonArticle({ history }: any) {
                                     </ListGroupItem>
                                 })}
                             </ListGroup>
-
                             </Grid> : null}
                             <FormGroup style={{ display: 'flex' }}>
                                 <FormControl

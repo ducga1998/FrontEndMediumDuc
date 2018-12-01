@@ -28,8 +28,6 @@ class RoomContainer extends Container<any>{
             this.setState({ roomsToIdUser: getRoomByIdUser })
             return getRoomByIdUser
         }
-
-
     }
 }
 const roomContainer = new RoomContainer({
