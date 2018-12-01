@@ -97,10 +97,11 @@ function logout({ history }) {
     useEffect(async () => {
         localStorage.clear()
         await userContainer.setState({ dataUser: null, login: false })
+        history.push('/login')
         await logoutBackend()
         // const data = await logoutBackend()
         // console.log('logout',data)
-        history.push('/login')
+       
     })
     return null
 
