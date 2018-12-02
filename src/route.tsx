@@ -18,6 +18,7 @@ import DetailRoomChat from './Component/RoomChat/DetailRoomChat'
 import { logoutBackend } from './API/client'
 import { notificationFuncSocket } from "./socketClient/notificationSocket";
 import Stories from "./Component/Article/Stories";
+import StoreDetail from "./Component/Article/Stories/Store";
 const About = () => <div>
     Web design by Nguyen Minh duc
     <h5>Facebook : <a href="https://www.facebook.com/duc.ceh.cnna">https://www.facebook.com/duc.ceh.cnna</a></h5>
@@ -57,8 +58,8 @@ const AppRouter = () => {
                     <Route path="/register" component={Register} />
                     <Route path="/article/:id" component={ReadArticle} />
                     <Route path="/home" component={isAuth(Home)} />
-                    <Route path="/storssies" component={isAuth(Stories)} />
-                    <Route path="/stories/:id" component={isAuth(Stories)} />
+                    <Route path="/stories" component={isAuth(Stories)} />
+                    <Route path="/store/:id" component={isAuth(StoreDetail)} />
                     <Route path="/profile" component={isAuth(Profile)} />
                     <Route path="/writearticle" component={isAuth(WriteArticle)} />
                     <Route path="/chatRoom/:id" component={isAuth(DetailRoomChat)} />

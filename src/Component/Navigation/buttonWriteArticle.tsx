@@ -17,10 +17,10 @@ export default function ButtonArticle({ history }: any) {
     const [nameHashTag, setNameHashTag] = React.useState('')
 
     let id = uuid()
-    if (window.location.pathname.match('stories')) {
-        id = window.location.pathname.replace(/[/]stories[/]/, '')
+    if (window.location.pathname.match('store')) {
+        id = window.location.pathname.replace(/[/]store[/]/, '')
     }
-    console.log('id stories ', id)
+    console.log('id store ', id)
 
     // const { idArticleNeedUpdate } = articleContainer.state
     // if (idArticleNeedUpdate.length > 0) {
@@ -50,7 +50,7 @@ export default function ButtonArticle({ history }: any) {
     }
 
 
-    if (window.location.pathname === "/writearticle" || window.location.pathname.match('stories')) {
+    if (window.location.pathname === "/writearticle" || window.location.pathname.match('store')) {
         return <Subscribe to={[articleContainer]}>
             {
                 (container: any) => {

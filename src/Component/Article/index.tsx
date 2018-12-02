@@ -16,24 +16,26 @@ export interface IArticle {
     hashTag: any[],
     totalComment: number
     idArticle: string
-    user: any
+    user: any,
+    typeArticle?: 'store' | 'view'
 }
 
 // => view list Article  =>  you check file listArticle is view props data and function call api to backend
-export default function Article({ idArticle, avatar, titleArticle, content, totalClap, time, hashTag, totalComment, user }: IArticle) {
+export default function Article({ idArticle, avatar, titleArticle, content, totalClap, time, hashTag, totalComment, user, typeArticle }: IArticle) {
     console.log('user', user)
     if (!user) {
         return null
     }
     const { name, avatarLink, idUser } = user
+    const linkSwitchArticle = typeArticle && typeArticle === 'store' ? `/store/${idArticle}` : `/article/${idArticle}`
     return <$Article>
         <$Avatar>
             <img src={`${avatarLink ? avatarLink : avatar}`} />
         </$Avatar>
         <$DetailArticle>
-            <h2><Link to={`/article/${idArticle}`}>{renderHTML(filterStringHTML(titleArticle, true))}</Link></h2>
+            <h2><Link to={linkSwitchArticle}>{renderHTML(filterStringHTML(titleArticle, true))}</Link></h2>
             <small>Create at : {time}</small> <br />
-            <b >Content : </b>{renderHTML(filterStringHTML(content))}<Link to={`/article/${idArticle}`}> Read more ...</Link>
+            <b >Content : </b>{renderHTML(filterStringHTML(content))}<Link to={linkSwitchArticle}> Read more ...</Link>
             <p>Write by : <b><Link to={`/user/${idUser}`}>{name === '' ? 'NO NAME' : name}</Link></b></p>
             <ButtonToolbar>
                 <ButtonGroup>

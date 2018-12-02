@@ -42,7 +42,9 @@ class Navication extends React.Component<any, any>{
                                 const { login, dataUser } = container.state
                                 return !login ? <NavItem> <Link to="/login">Login</Link> </NavItem> : <NavDropdown eventKey={3} title="Setting" id="basic-nav-dropdown">
                                     <MenuItem eventKey={3.1}><Link to="/profile" > Profile</Link></MenuItem>
+                                    <MenuItem eventKey={3.2}><Link to="/stories" >Stories</Link></MenuItem>
                                     <MenuItem eventKey={3.2}><Link to="/writearticle" >Write Article</Link></MenuItem>
+
                                     <MenuItem eventKey={3.3}></MenuItem>
                                     <MenuItem divider />
                                     <MenuItem eventKey={3.4}><Link to="/logout" >Logout</Link></MenuItem>
