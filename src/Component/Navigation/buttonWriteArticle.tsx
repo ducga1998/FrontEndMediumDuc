@@ -6,13 +6,14 @@ import { Subscribe } from 'unstated-x';
 import ArticleContainer from '../../Container/articleContainer';
 import UIButton from '../../UI/UIButton';
 import UIModal from '../../UI/UIModal';
+import articleContainer from '../../Container/articleContainer';
 export default function ButtonArticle({ history }: any) {
 
-    const [newArticle, setNewArticle] = React.useState(false) as any
+    // const [newArticle, setNewArticle] = React.useState(false) as any
     const [open, setOpen] = React.useState(false)
     const [arrHashTag, setArrHashTag] = React.useState([]) as any
     const [nameHashTag, setNameHashTag] = React.useState('')
-    const [checkPublicArticle, setCheckPublicArticle] = React.useState(true)
+    // const { isUpdate } = articleContainer.state
     const handleAddHashTag = async () => {
         if (arrHashTag.length > 6 || arrHashTag < 0) {
             toast.error('Maximum 6 hash tag and Min > 0!!!!');
@@ -32,11 +33,11 @@ export default function ButtonArticle({ history }: any) {
         await setNameHashTag('')
 
     }
-    if (window.location.pathname === "/writearticle") {
+    if (window.location.pathname === "/writearticle" || window.location.pathname.match('stories')) {
         return <Subscribe to={[ArticleContainer]}>
             {
                 (container: any) => {
-                    const { isPublicArticle } = container.state
+                    const { isPublicArticle, isUpdate, newArticle } = container.state
                     return isPublicArticle ?
                         (<UIModal open={open} openModal={() => {
                             setOpen(true)
@@ -73,25 +74,27 @@ export default function ButtonArticle({ history }: any) {
                                     <Glyphicon glyph="plus" />
                                 </Button>
                             </FormGroup>
-                            {checkPublicArticle ? <UIButton onChange={async () => {
-                                const newArticle = await container.addArticle(arrHashTag)
-                                await setNewArticle(newArticle)
+                            {isUpdate ? <UIButton onChange={async () => {
                                 if (newArticle) {
+                                    console.log
+                                    const { idArticle } = newArticle.data.addArticle
+                                    await container.updateAricle(arrHashTag, idArticle)
+                                    toast.success('Update aricle success !!!! ')
+                                    await setOpen(false)
+                                }
+                            }} >Update Article</UIButton> : <UIButton onChange={async () => {
+                                const newArticle = await container.addArticle(arrHashTag)
+
+                                if (newArticle) {
+                                    await container.setState({ newArticle })
                                     toast.success('Public article success !!!!')
                                     await setOpen(false) // close modal 
-                                    await setCheckPublicArticle(false) //  mode public article  =>  update article 
+                                    await container.setState({ isUpdate: true }) //  mode public article  =>  update article 
                                 }
                                 else {
                                     toast.error(":( Error , just kidding me, FUCKING CODE FOR ME")
                                 }
-                            }}> Public Article  </UIButton> : <UIButton onChange={async () => {
-                                if (newArticle) {
-                                    const { idUser } = newArticle.data.addArticle
-                                    await container.updateAricle(arrHashTag, idUser)
-                                    toast.success('Update aricle success !!!! ')
-                                    await setOpen(false)
-                                }
-                            }} >Update Article</UIButton>}
+                            }}> Public Article  </UIButton>}
 
                         </UIModal>) : null
                 }

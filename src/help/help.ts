@@ -5,3 +5,6 @@ export function filterStringHTML(str: any, flag: boolean = false): string {
     }
     return str.replace(/<\/?[^>]+(>|$)/g, "").substring(0, 10);
 }
+export function getVariableNam(variable) {
+    Object.keys({ variable })[0]
+}

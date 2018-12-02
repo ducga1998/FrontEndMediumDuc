@@ -2,14 +2,13 @@ import MediumEditer from 'medium-editor';
 import * as React from 'react';
 import { toast } from 'react-toastify';
 import styled from 'styled-components';
-import { addComment, getAllCommentinArtcileCurrent } from '../../../API/commentAPI';
+// import { addComment, getAllCommentinArtcileCurrent } from '../../../API/commentAPI';
 import userContainer from '../../../Container/userContainer';
 import UIButton from '../../../UI/UIButton';
-import { Config } from '../WriteArticle/index';
+
 import commentAllContainer from '../../../Container/commentContainer';
 import { notificationSocket } from '../../../socketClient/socket';
-import { Prompt } from 'react-router'
-import { withRouter } from 'react-router'
+import { Config } from '../../../help/config';
 const config = Config('Comment something now  . . . . . . . ')
 export const IMAGE_SOURCE_DEFAULT = 'https://scontent.fhan5-2.fna.fbcdn.net/v/t1.0-9/30710734_1894791530812895_692578444441026560_n.jpg?_nc_cat=102&_nc_ht=scontent.fhan5-2.fna&oh=46b63236752f0608bb45efcd83a59d05&oe=5C75BB19'
 interface IWriteComment {

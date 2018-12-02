@@ -6,6 +6,7 @@ import renderHTML from 'react-render-html';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import { filterStringHTML } from '../../help/help';
+import UILoading from '../../UI/UILoading';
 export interface IArticle {
     avatar: String;
     titleArticle: String;
@@ -20,6 +21,10 @@ export interface IArticle {
 
 // => view list Article  =>  you check file listArticle is view props data and function call api to backend
 export default function Article({ idArticle, avatar, titleArticle, content, totalClap, time, hashTag, totalComment, user }: IArticle) {
+    console.log('user', user)
+    if (!user) {
+        return null
+    }
     const { name, avatarLink, idUser } = user
     return <$Article>
         <$Avatar>

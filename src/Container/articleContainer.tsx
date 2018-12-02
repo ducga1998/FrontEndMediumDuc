@@ -16,11 +16,13 @@ export interface IArticleContainer {
     isPublicArticle: Boolean
     contentArticle: String
     titleArticle: String
-
+    isUpdate: Boolean,
+    newArticle: any
 }
 let createTime = new Date().toUTCString()
 class ArticleContainer extends Container<IArticleContainer>{
-
+    //   =>   request to back end 
+    //  => front end alway have stories
     async addArticle(hashTag = []) {
         const { contentArticle, titleArticle } = this.state
         const { dataUser } = userContainer.state as any
@@ -45,6 +47,8 @@ const articleContainer = new ArticleContainer({
     contentArticle: '',
     titleArticle: '',
     isPublicArticle: false,
+    isUpdate: false,
+    newArticle: {}
 })
 
 window['article'] = articleContainer

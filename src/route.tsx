@@ -16,9 +16,8 @@ import UILoading from "./UI/UILoading";
 import AllRoomChat from './Component/RoomChat/listRoom'
 import DetailRoomChat from './Component/RoomChat/DetailRoomChat'
 import { logoutBackend } from './API/client'
-import { notificationSocket } from "./socketClient/socket";
-import { toast } from "react-toastify";
 import { notificationFuncSocket } from "./socketClient/notificationSocket";
+import Stories from "./Component/Article/Stories";
 const About = () => <div>
     Web design by Nguyen Minh duc
     <h5>Facebook : <a href="https://www.facebook.com/duc.ceh.cnna">https://www.facebook.com/duc.ceh.cnna</a></h5>
@@ -51,13 +50,15 @@ const AppRouter = () => {
             <Switch>
                 <Layout >
                     <Route path="/chat" component={isAuth(AllRoomChat)} />
-                    <Route path="/about/" component={isAuth(About)} />
+                    <Route path="/about/" component={About} />
                     <Route path="/user/:id" component={isAuth(ViewUser)} />
                     <Route path="/login" component={Login} />
                     <Route path="/logout" component={logout} />
                     <Route path="/register" component={Register} />
                     <Route path="/article/:id" component={ReadArticle} />
                     <Route path="/home" component={isAuth(Home)} />
+                    <Route path="/storssies" component={isAuth(Stories)} />
+                    <Route path="/stories/:id" component={isAuth(Stories)} />
                     <Route path="/profile" component={isAuth(Profile)} />
                     <Route path="/writearticle" component={isAuth(WriteArticle)} />
                     <Route path="/chatRoom/:id" component={isAuth(DetailRoomChat)} />
@@ -71,7 +72,7 @@ const AppRouter = () => {
                 const { dataUser } = container.state
                 const dataCache = localStorage.getItem('duc-app-medium-login')
                 if (dataCache && !dataUser) {
-                    return <UILoading link="A" />
+                    return <UILoading />
                 }
 
                 return renderRoutes(dataUser)
@@ -101,7 +102,6 @@ function logout({ history }) {
         await logoutBackend()
         // const data = await logoutBackend()
         // console.log('logout',data)
-       
     })
     return null
 
