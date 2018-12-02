@@ -5,12 +5,13 @@ import { Grid } from 'react-bootstrap';
 import Footer from './footer';
 import Navigation from './Navigation/index';
 
-export default function Layout({ children }) {
+export default function Layout(props) {
+    console.log('propspropsprops', props)
     return <Grid fluid componentClass="div" style={{
         width: '100%'
     }} >
         <Navigation />
-        {children}
+        {props.children}
         <Footer />
     </Grid>;
 }

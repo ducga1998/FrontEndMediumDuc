@@ -1,8 +1,9 @@
 import { Container } from 'unstated-x';
 import uuid from 'uuid';
-import { updateArticleToClient } from '../API/articleAPI';
+import { updateArticleToClient, getAllArticle } from '../API/articleAPI';
 import { addArticleToClient } from '../API/client';
 import userContainer from './userContainer';
+import omit from 'lodash/omit'
 interface dataArticle {
     idUser: String
     idArticle: String
@@ -17,16 +18,63 @@ export interface IArticleContainer {
     contentArticle: String
     titleArticle: String
     isUpdate: Boolean,
-    newArticle: any
+    newArticle: any,
+    idArticleNeedUpdate: String
 }
 let createTime = new Date().toUTCString()
+//  when public article then will two action  
+// B1 : add article in registryArticle
+// B2 : send request server
+const registry = new Map()
+
+class AllArticleContainer extends Container<any> {
+    constructor(state) {
+        super(state)
+        state = {
+            registryArticle: []
+        }
+        this.fetchData()
+    }
+    async fetchData() {
+        const dataFake = await getAllArticle()
+        // console.log('dataFake', dataFake)
+        if (dataFake) {
+
+            const { data: { getAllArticle } } = dataFake as { data: { getAllArticle: any[] } }
+            const listContainer = getAllArticle.map(item => {
+                // const data = omit(item, ['comment'])
+                const articleContainer = new Article(item)
+                const { idArticle } = item
+                return {
+                    articleContainer,
+                    idArticle
+                }
+            })
+
+            this.setState({ registryArticle: listContainer })
+        }
+    }
+    // addArticle will structure  {
+    addArticle() {
+
+        //add article in registryArticle 
+
+    }
+}
+export const allArticleContainer = new AllArticleContainer({
+    registryArticle: []
+})
+class Article extends Container<any> {
+
+}
+window['allArticleContainer'] = allArticleContainer
 class ArticleContainer extends Container<IArticleContainer>{
     //   =>   request to back end 
     //  => front end alway have stories
-    async addArticle(hashTag = []) {
+    async addArticle(hashTag = [], idArticle) {
         const { contentArticle, titleArticle } = this.state
         const { dataUser } = userContainer.state as any
-        const idArticle = uuid()
+
         if (dataUser) {
             const { idUser } = dataUser
             console.log('run func addArticle')
@@ -39,16 +87,18 @@ class ArticleContainer extends Container<IArticleContainer>{
         // const idArticle = uuid()
         if (dataUser) {
             const { idUser } = dataUser
+            console.log('input final', { contentArticle, titleArticle, idUser, idArticle, hashTag, createTime })
             return await updateArticleToClient({ contentArticle, titleArticle, idUser, idArticle, hashTag, createTime })
         }
     }
 }
+
 const articleContainer = new ArticleContainer({
     contentArticle: '',
     titleArticle: '',
     isPublicArticle: false,
     isUpdate: false,
-    newArticle: {}
+    idArticleNeedUpdate: ''
 })
 
 window['article'] = articleContainer

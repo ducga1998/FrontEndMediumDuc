@@ -6,13 +6,28 @@ import { Subscribe } from 'unstated-x';
 import ArticleContainer from '../../Container/articleContainer';
 import UIButton from '../../UI/UIButton';
 import UIModal from '../../UI/UIModal';
+import uuid from 'uuid';
 import articleContainer from '../../Container/articleContainer';
 export default function ButtonArticle({ history }: any) {
 
-    // const [newArticle, setNewArticle] = React.useState(false) as any
+    // state support UIModal 
     const [open, setOpen] = React.useState(false)
+    // state support hashTag
     const [arrHashTag, setArrHashTag] = React.useState([]) as any
     const [nameHashTag, setNameHashTag] = React.useState('')
+
+    let id = uuid()
+    if (window.location.pathname.match('stories')) {
+        id = window.location.pathname.replace(/[/]stories[/]/, '')
+    }
+    console.log('id stories ', id)
+
+    // const { idArticleNeedUpdate } = articleContainer.state
+    // if (idArticleNeedUpdate.length > 0) {
+    //     id = idArticleNeedUpdate
+    // }
+    const [idArticle, setIdArticle] = React.useState(id)
+
     // const { isUpdate } = articleContainer.state
     const handleAddHashTag = async () => {
         if (arrHashTag.length > 6 || arrHashTag < 0) {
@@ -33,11 +48,15 @@ export default function ButtonArticle({ history }: any) {
         await setNameHashTag('')
 
     }
+
+
     if (window.location.pathname === "/writearticle" || window.location.pathname.match('stories')) {
-        return <Subscribe to={[ArticleContainer]}>
+        return <Subscribe to={[articleContainer]}>
             {
                 (container: any) => {
-                    const { isPublicArticle, isUpdate, newArticle } = container.state
+                    const { isPublicArticle, isUpdate, idArticleNeedUpdate } = container.state
+
+
                     return isPublicArticle ?
                         (<UIModal open={open} openModal={() => {
                             setOpen(true)
@@ -75,20 +94,21 @@ export default function ButtonArticle({ history }: any) {
                                 </Button>
                             </FormGroup>
                             {isUpdate ? <UIButton onChange={async () => {
-                                if (newArticle) {
-                                    console.log
-                                    const { idArticle } = newArticle.data.addArticle
-                                    await container.updateAricle(arrHashTag, idArticle)
-                                    toast.success('Update aricle success !!!! ')
-                                    await setOpen(false)
-                                }
-                            }} >Update Article</UIButton> : <UIButton onChange={async () => {
-                                const newArticle = await container.addArticle(arrHashTag)
+                                // if (newArticle) {
+                                // console.log
+                                // const { idArticle } = newArticle.data.addArticle
+                                await container.updateAricle(arrHashTag, idArticle)
+                                toast.success('Update aricle success !!!! ')
+                                await setOpen(false)
+                            }
+                            } >Update Article</UIButton> : <UIButton onChange={async () => {
+
+                                const newArticle = await container.addArticle(arrHashTag, idArticle)
 
                                 if (newArticle) {
-                                    await container.setState({ newArticle })
                                     toast.success('Public article success !!!!')
                                     await setOpen(false) // close modal 
+                                    // a here  => help change button 
                                     await container.setState({ isUpdate: true }) //  mode public article  =>  update article 
                                 }
                                 else {

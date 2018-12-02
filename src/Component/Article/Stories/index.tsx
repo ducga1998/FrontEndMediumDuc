@@ -33,7 +33,7 @@ const WriteArticle = ({ match }) => {
         const text = new MediumEditer(inputEl.current, textPlaceholder)
         const title = new MediumEditer(refTitle.current, titlePlaceholder)
         const { params: { id } } = match
-        await articleContainer.setState({ isUpdate: true })
+        await articleContainer.setState({ isUpdate: true, idArticleNeedUpdate: id })
         const dataArticle = await getArticleById(id) as any
         // console.log('dataArticle', dataArticle)
         if (dataArticle) {
