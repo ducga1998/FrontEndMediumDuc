@@ -15,18 +15,18 @@ class RoomContainer extends Container<any>{
         // this.getRoomByIdUser()
     }
     async getAllRooms() {
-        const { data: { getAllRoom } } = await getAllRoomFromBackEnd() as any
+        const rooms = await getAllRoomFromBackEnd() as any
         // console.log('all data in room', getAllRoom)
-        this.setState({ rooms: getAllRoom })
+        this.setState({ rooms })
     }
     async getRoomByIdUser() {
         // console.log(userContainer.state.dataUser)
         const { dataUser } = userContainer.state
         if (dataUser) {
-            const { data: { getRoomByIdUser } } = await getRoomstoIdUser(dataUser.idUser) as any
+            const roomsToIdUser = await getRoomstoIdUser(dataUser.idUser) as any
             console.log("OK")
-            this.setState({ roomsToIdUser: getRoomByIdUser })
-            return getRoomByIdUser
+            this.setState({ roomsToIdUser })
+            return roomsToIdUser
         }
     }
 }

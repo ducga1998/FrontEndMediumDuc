@@ -1,11 +1,12 @@
 import gql from "graphql-tag";
 import { client } from "./client";
+import { convertDataToGraphQL } from "../help/help";
 export function updateArticleToClient(article: any) {
     console.log('article', article)
     let input: any = article;
     console.log(input)
-    return new Promise(resolve => {
-        const data = client.mutate({
+    return new Promise(async resolve => {
+        const API = await client.mutate({
             mutation: gql`
             mutation UpdateArticle($input : ArticleInput) {
                 updateArticle(input : $input) {
@@ -22,12 +23,13 @@ export function updateArticleToClient(article: any) {
                 input
             }
         })
-        resolve(data)
+        if (API) resolve(convertDataToGraphQL(API))
+        resolve({})
     })
 }
 export function getArticleById(id) {
-    return new Promise(resolve => {
-        const data = client.query({
+    return new Promise(async resolve => {
+        const API = await client.query({
             query: gql`
                     query {
                         getArticleById(id :"${id}"){
@@ -61,13 +63,14 @@ export function getArticleById(id) {
                     }
                     `
         })
-        resolve(data)
+        if (API) resolve(convertDataToGraphQL(API))
+        resolve({})
     })
 }
 //get all article in database
 export function getAllArticle() {
-    return new Promise(resolve => {
-        const data = client.query({
+    return new Promise(async resolve => {
+        const API = await client.query({
             query: gql`
                     query {
                         getAllArticle(id  : ""){
@@ -100,6 +103,9 @@ export function getAllArticle() {
                     }
                     `
         })
-        resolve(data)
+        if (API) resolve(convertDataToGraphQL(API))
+        resolve({})
+
     })
+
 } 

@@ -29,12 +29,11 @@ class AllArticleContainer extends Container<any> {
         this.fetchData()
     }
     async fetchData() {
-        const dataFake = await getAllArticle()
+        const allArticle = await getAllArticle() as any
         // console.log('dataFake', dataFake)
-        if (dataFake) {
-
-            const { data: { getAllArticle } } = dataFake as { data: { getAllArticle: any[] } }
-            const listContainer = getAllArticle.map(item => {
+        if (allArticle) {
+            console.log('allArticle', allArticle)
+            const listContainer = allArticle.map(item => {
                 // const data = omit(item, ['comment'])
                 const articleContainer = new Article(item)
                 const { idArticle } = item

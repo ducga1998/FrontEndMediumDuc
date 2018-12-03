@@ -29,13 +29,11 @@ class ReadArticle extends React.Component<any> {
         const { match: { params: { id } }, router } = this.props
         commentContainer.getAllCommentByIdArticle(id)
         // before refacto articleContainer
-        const dataArticle = await getArticleById(id) as any
+        const article = await getArticleById(id)
         // console.log('dataArticle', dataArticle)
-        if (dataArticle) {
-            const { data: { getArticleById } } = dataArticle
+        if (article) {
 
-            console.log('dataArticle', getArticleById)
-            await this.setState({ article: getArticleById })
+            await this.setState({ article })
         }
         console.log(this.props.router)
         // this.props.router.setRouteLeaveHook(this.props.route, () => {

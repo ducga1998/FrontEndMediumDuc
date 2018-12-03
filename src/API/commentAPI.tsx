@@ -1,10 +1,11 @@
 import gql from "graphql-tag";
 import { client } from "./client";
+import { convertDataToGraphQL } from "../help/help";
 //QUERIES 
 export function getAllCommentinArtcileCurrent(idUser: string) {
     console.log('999', idUser)
-    return new Promise(resolve => {
-        const data = client.query({
+    return new Promise(async resolve => {
+        const API = await client.query({
             query: gql`
                     query {
                         getAllCommentInTheArticle(id:"${idUser}"){
@@ -24,15 +25,19 @@ export function getAllCommentinArtcileCurrent(idUser: string) {
                     }
                     `
         })
-        resolve(data)
+        if (API) {
+            resolve(convertDataToGraphQL(API))
+        }
+        resolve({})
+
     })
 }
 //MUATION 
 // this is function felp we add comment into a article , 
 // input : idArticle and  content comment ?  . Iam not sure  :v 
 export function addComment(input: { idUser: string, idArticle: string, content: string }) {
-    return new Promise(resolve => {
-        const data = client.mutate({
+    return new Promise(async resolve => {
+        const API = await client.mutate({
             mutation: gql`
               mutation AddCommentIntoArticle($input: CommentInput) {
                 addCommentIntoArticle(input: $input) {
@@ -54,6 +59,11 @@ export function addComment(input: { idUser: string, idArticle: string, content: 
                 input
             }
         })
-        resolve(data);
+        if (API) {
+            // const { data: { addCommentIntoArticle } } = API
+            resolve(convertDataToGraphQL(API));
+        }
+        resolve({})
+
     })
 }

@@ -1,9 +1,10 @@
 import gql from "graphql-tag";
 import { client } from "./client";
+import { convertDataToGraphQL } from "../help/help";
 //QUERY
 export function getAllRoomFromBackEnd() {
-    return new Promise(resolve => {
-        const data = client.query({
+    return new Promise(async resolve => {
+        const API = await client.query({
             query: gql`
                     query {
                         getAllRoom( id  : "vsdv"){
@@ -18,14 +19,14 @@ export function getAllRoomFromBackEnd() {
                     }
                     `
         })
-        resolve(data)
+        resolve(convertDataToGraphQL(API))
     })
 }
 
 
 export function getRoomstoIdUser(idUser) {
-    return new Promise(resolve => {
-        const data = client.query({
+    return new Promise(async resolve => {
+        const API = await client.query({
             query: gql`
                     query {
                         getRoomByIdUser( id : "${idUser}"){
@@ -40,7 +41,7 @@ export function getRoomstoIdUser(idUser) {
                     }
                     `
         })
-        resolve(data)
+        resolve(convertDataToGraphQL(API))
     })
 }
 //MUTATION

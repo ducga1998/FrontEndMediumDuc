@@ -13,11 +13,11 @@ export default class ListArticle extends React.Component<any> {
     }
     async componentDidMount() {
         // this is function get all data article, in have data user
-        const dataFake = await getAllArticle()
-        // console.log('dataFake', dataFake)
-        if (dataFake) {
-            const { data: { getAllArticle } } = dataFake as { data: { getAllArticle: any[] } }
-            this.setState({ allArticleData: getAllArticle })
+        const allArticleData = await getAllArticle()
+
+        if (allArticleData) {
+
+            this.setState({ allArticleData })
         }
     }
 

@@ -1,5 +1,6 @@
 import ApolloClient from "apollo-boost";
 import gql from "graphql-tag";
+import { convertDataToGraphQL } from "../help/help";
 export const client = new ApolloClient({
     uri: "http://localhost:3000/graphql"
 })
@@ -121,8 +122,8 @@ export function checkLoginUser(user: any) {
 export function addArticleToClient(article: any) {
     let input: any = article;
     console.log(input)
-    return new Promise(resolve => {
-        const data = client.mutate({
+    return new Promise(async resolve => {
+        const API = await client.mutate({
             mutation: gql`
             mutation AddArticle($input : ArticleInput) {
                 addArticle(input : $input) {
@@ -143,6 +144,7 @@ export function addArticleToClient(article: any) {
                 input
             }
         })
-        resolve(data)
+        if (API) resolve(convertDataToGraphQL(API))
+        resolve({})
     })
 }

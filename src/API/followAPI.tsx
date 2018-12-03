@@ -45,6 +45,7 @@ export function follow(input: any) {
                 input
             }
         })
+
         resolve(data);
     })
 }

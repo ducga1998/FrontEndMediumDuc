@@ -19,21 +19,19 @@ class CommentAllContainer extends Container<any>{
         // this is new comment data 
         //request to backend
         // B1 : 
-        let { data: {
-            addCommentIntoArticle
-        } }: any = await addComment(input)
+        let newComment = await addComment(input) as any
         // B2 : 
         const { registryComment } = this.state
         const data = registryComment.find(comment => comment.idArticle === idArticle) // 
         const { commentContainer } = data // this is all Comment
         const { allComments } = commentContainer.state
         let { name, avatarLink } = userContainer.state.dataUser as any
-        addCommentIntoArticle.userComment = {
+        newComment.userComment = {
             avatarLink,
             name,
             idUser
         }
-        allComments.push(addCommentIntoArticle)
+        allComments.push(newComment)
         console.log(allComments)
         await commentContainer.setState({ allComments })
     }
@@ -63,10 +61,10 @@ class CommentInArticleContainer extends Container<any>{
         super(data)
     }
     async getAllCommentByIdArticle(idArticle) {
-        const data = await getAllCommentinArtcileCurrent(idArticle)
-        if (data) {
-            const { data: { getAllCommentInTheArticle } } = data as any
-            await this.setState({ allComments: getAllCommentInTheArticle })
+        const allComments = await getAllCommentinArtcileCurrent(idArticle)
+        if (allComments) {
+
+            await this.setState({ allComments })
         }
     }
 }
