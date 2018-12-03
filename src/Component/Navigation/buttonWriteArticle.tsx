@@ -84,18 +84,13 @@ export default function ButtonArticle({ history }: any) {
                                 </Button>
                             </FormGroup>
                             {isUpdate ? <UIButton onChange={async () => {
-                                // if (newArticle) {
-                                // console.log
-                                // const { idArticle } = newArticle.data.addArticle
                                 if (window.location.pathname.match('store')) {
                                     const id = window.location.pathname.replace(/[/]store[/]/, '')
                                     await container.updateAricle(id)
-
                                 }
                                 else {
                                     await container.updateAricle(idArticle)
                                 }
-
                                 toast.success('Update aricle success !!!! ')
                                 await setOpen(false)
                             }

@@ -28,26 +28,15 @@ class ReadArticle extends React.Component<any> {
     async componentDidMount() {
         const { match: { params: { id } }, router } = this.props
         commentContainer.getAllCommentByIdArticle(id)
-        // before refacto articleContainer
+        // before refactor articleContainer
         const article = await getArticleById(id)
-        // console.log('dataArticle', dataArticle)
         if (article) {
 
             await this.setState({ article })
         }
-        console.log(this.props.router)
-        // this.props.router.setRouteLeaveHook(this.props.route, () => {
-        //     if (true)
-        //         return 'You have unsaved information, are you sure you want to leave this page?'
-        // })
     }
 
 
-    // componentWillMount() {
-    //     console.log('did unmout')
-    // }
-    //idUser", "login", "password", "decentraliz", "name", "avatarLink", "__typename"]
-    //idArticle", "idUser", "hashTag", "category", "comment", "totalClap", "notification", "contentArticle", "imageArticle", "titleArticle", "createTime", "user", "__typename"
     render() {
         const { article, allCommentInArticle }: any = this.state
 
@@ -80,8 +69,6 @@ class ReadArticle extends React.Component<any> {
                             titleArticle={titleArticle}
                             onChange={async (comment) => {
                                 allCommentInArticle.push(comment);
-                                console.log('new data', allCommentInArticle)
-                                console.log('new Data')
                                 await this.setState({ allCommentInArticle })
                             }}
                             idUser={idUser}

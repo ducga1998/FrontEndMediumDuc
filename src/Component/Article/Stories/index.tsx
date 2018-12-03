@@ -44,12 +44,6 @@ class Stories extends React.Component<IStories> {
         </$ArticleDetail>
 
         // console.log(followContainer)
-
-
-
-
-
-
     }
 }
 //"idArticle", "hashTag", "category", "comment", "totalClap", "notification", "contentArticle", "titleArticle", "imageArticle", "createTime", "__typename"

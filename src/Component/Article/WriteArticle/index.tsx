@@ -30,7 +30,8 @@ const WriteArticle = () => {
     React.useEffect(() => {
         const text = new MediumEditer(inputEl.current, textPlaceholder)
         const title = new MediumEditer(refTitle.current, titlePlaceholder)
-
+        // beause when user write new Article then  we reset all setting in new article, avoid case to store
+        articleContainer.setState({ arrHashTag: [] })
         text.subscribe('editableInput', function (event, editable) {
             CallWhenWrite('contentArticle', event.srcElement.innerHTML)
         });

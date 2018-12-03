@@ -2,7 +2,7 @@ import * as React from 'react';
 import styled from 'styled-components';
 import UIButton from './UIButton';
 import UIWidget from './UIWidget';
-const { useEffect, useState } = React
+// const { useEffect, useState } = React
 interface IUIModal {
     trigger: any
     title?: string

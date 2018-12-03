@@ -52,9 +52,6 @@ class CommentAllContainer extends Container<any>{
             this.setState({ registryComment })
         }
     }
-
-
-
 }
 class CommentInArticleContainer extends Container<any>{
     constructor(data) {

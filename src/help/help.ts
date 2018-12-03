@@ -13,6 +13,6 @@ export function convertDataToGraphQL(API: any) {
     if (API && API['data']) {
         // Object.assign()
         return API['data'][Object.keys(API['data'])[0]]
-
     }
+    return {}
 }

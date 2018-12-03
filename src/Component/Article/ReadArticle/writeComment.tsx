@@ -40,7 +40,6 @@ export default class WriteComment extends React.Component<IWriteComment> {
     }
     componentWillUnmount() {
         if (this.props.idUser !== userContainer.state.dataUser.idUser) {
-            console.log('khac tai khoan')
             notificationSocket.emit('leave', this.props.idUser)
         }
     }

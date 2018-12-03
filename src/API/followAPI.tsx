@@ -18,11 +18,9 @@ export function getAllInfomationUserFollowYour(idUser) {
                     }
                     `
         })
-        if (API) {
-            // const { data: { addCommentIntoArticle } } = API
-            resolve(convertDataToGraphQL(API));
-        }
-        resolve({})
+
+        resolve(convertDataToGraphQL(API));
+
     })
 }
 //MUTATION

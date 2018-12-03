@@ -117,8 +117,8 @@ export function checkLoginUser(user: any) {
             }
             `
         })
-        if (API) resolve(convertDataToGraphQL(API))
-        resolve({})
+        resolve(convertDataToGraphQL(API))
+
     })
 }
 
@@ -147,7 +147,7 @@ export function addArticleToClient(article: any) {
                 input
             }
         })
-        if (API) resolve(convertDataToGraphQL(API))
-        resolve({})
+        resolve(convertDataToGraphQL(API))
+
     })
 }
