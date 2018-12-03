@@ -37,10 +37,10 @@ const WriteArticle = ({ match }) => {
         const dataArticle = await getArticleById(id) as any
         // console.log('dataArticle', dataArticle)
         if (dataArticle) {
-            const { data: { getArticleById } } = dataArticle
-            console.log('getArticleById', getArticleById)
-            const { titleArticle, contentArticle, hashTag } = getArticleById
-            articleContainer.setState({ titleArticle, contentArticle, arrHashTag: hashTag })
+
+
+            const { titleArticle, contentArticle, hashTag } = dataArticle
+            articleContainer.setState({ titleArticle, contentArticle, arrHashTag: hashTag, isPublicArticle: true })
             text.setContent(contentArticle, 0)
             title.setContent(titleArticle, 0)
         }
