@@ -12,9 +12,9 @@ class FollowAllContainer extends Container<any>{
     // this function will call when me  into idUser other
     async gotoProfileOtherUser(ownProfileId) {
         const idUserFollow = userContainer.state.dataUser.idUser
-        const fetchData = await getAllInfomationUserFollowYour(ownProfileId)
-        const dataUserFollow = fetchData['data']['getAllInfomationUserFollowYour'] as any[]
-        const followContainer = new FollowContainer({ allUserFollow: dataUserFollow })
+        // fetch data to datbase
+        const allUserFollow = await getAllInfomationUserFollowYour(ownProfileId) as any[]
+        const followContainer = new FollowContainer({ allUserFollow })
         const itemFollow = {
             ownProfileId,
             followContainer
@@ -23,7 +23,7 @@ class FollowAllContainer extends Container<any>{
         if (!userFollow.includes(ownProfileId)) {
             userFollow.push(itemFollow)
         }
-        if (dataUserFollow.find(user => user.idUserFollow === idUserFollow)) {
+        if (allUserFollow.find(user => user.idUserFollow === idUserFollow)) {
             followContainer.setState({ isFollow: true })
         }
         else {

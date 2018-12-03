@@ -1,8 +1,9 @@
 import gql from "graphql-tag";
 import { client } from "./client";
+import { convertDataToGraphQL } from "../help/help";
 export function getAllInfomationUserFollowYour(idUser) {
-    return new Promise(resolve => {
-        const data = client.query({
+    return new Promise(async resolve => {
+        const API = await client.query({
             query: gql`
                     query {
                         getAllInfomationUserFollowYour( id  : "${idUser}"){
@@ -17,15 +18,19 @@ export function getAllInfomationUserFollowYour(idUser) {
                     }
                     `
         })
-        resolve(data)
+        if (API) {
+            // const { data: { addCommentIntoArticle } } = API
+            resolve(convertDataToGraphQL(API));
+        }
+        resolve({})
     })
 }
 //MUTATION
 // define input  => idUser and idUserFollow 
 export function follow(input: any) {
     console.log('input follow', input)
-    return new Promise(resolve => {
-        const data = client.mutate({
+    return new Promise(async resolve => {
+        const API = await client.mutate({
             mutation: gql`
               mutation Follow($input: FollowInput) {
                 follow(input: $input) {
@@ -46,12 +51,16 @@ export function follow(input: any) {
             }
         })
 
-        resolve(data);
+        if (API) {
+            // const { data: { addCommentIntoArticle } } = API
+            resolve(convertDataToGraphQL(API));
+        }
+        resolve({})
     })
 }
 export function unFollow(input: any) {
-    return new Promise(resolve => {
-        const data = client.mutate({
+    return new Promise(async resolve => {
+        const API = await client.mutate({
             mutation: gql`
               mutation UnFollow($input: FollowInput) {
                 unFollow(input: $input) {
@@ -71,6 +80,10 @@ export function unFollow(input: any) {
                 input
             }
         })
-        resolve(data);
+        if (API) {
+            // const { data: { addCommentIntoArticle } } = API
+            resolve(convertDataToGraphQL(API));
+        }
+        resolve({})
     })
 }

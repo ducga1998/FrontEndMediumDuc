@@ -1,12 +1,10 @@
 import * as React from 'react';
 import { Button } from 'react-bootstrap';
-import { getAllInformationUser } from 'src/API/client';
+
 import styled from 'styled-components';
 import { follow, getAllInfomationUserFollowYour, unFollow } from '../../API/followAPI';
 import userContainer from '../../Container/userContainer';
-import srcImg from '../../image/9284571_300x300.jpeg';
-import UILoading from '../../UI/UILoading';
-import Article from '../Article';
+
 import { roomSockets } from '../../socketClient/socket';
 import UIInput from '../../UI/UIInput';
 import UIButton from '../../UI/UIButton';

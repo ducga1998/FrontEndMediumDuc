@@ -24,8 +24,8 @@ export function addUser(user: any) {
     const input = {
         idUser, login, password, decentraliz, avatarLink, name
     }
-    return new Promise(resolve => {
-        const data = client.mutate({
+    return new Promise(async resolve => {
+        const API = client.mutate({
             mutation: gql`
               mutation AddNewUser($input: UserInput) {
                 addNewUser(input: $input) {
@@ -42,14 +42,15 @@ export function addUser(user: any) {
                 input
             }
         })
-        resolve(data);
+        if (API) resolve(convertDataToGraphQL(API))
+        resolve({})
     })
 }
 //QUERY
 export function getAllInformationUser(idUser: string) {
 
-    return new Promise(resolve => {
-        const data = client.query({
+    return new Promise(async resolve => {
+        const API = await client.query({
             query: gql`
                 query {
                     getAllInformationUser( id : "${idUser}" ){
@@ -81,13 +82,14 @@ export function getAllInformationUser(idUser: string) {
             }
             `
         })
-        resolve(data)
+        if (API) resolve(convertDataToGraphQL(API))
+        resolve({})
     })
 }
 export function checkLoginUser(user: any) {
     const { username, password } = user;
-    return new Promise(resolve => {
-        const data = client.query({
+    return new Promise(async resolve => {
+        const API = await client.query({
             query: gql`
                 query {
                 checklogin( username :"${username}" , password :"${password}" ){
@@ -115,7 +117,8 @@ export function checkLoginUser(user: any) {
             }
             `
         })
-        resolve(data)
+        if (API) resolve(convertDataToGraphQL(API))
+        resolve({})
     })
 }
 

@@ -43,8 +43,8 @@ export default function Register() {
                 name,
                 avatarLink
             }
-            const { data: { addNewUser } } = await addUser(user)
-            if (name.length > 6 && password.length > 6 && addNewUser && addNewUser.idUser) {
+            const newUser = await addUser(user)
+            if (name.length > 6 && password.length > 6 && newUser && newUser.idUser) {
                 toast.success("Register success !!");
             }
             else {

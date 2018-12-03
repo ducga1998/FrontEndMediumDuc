@@ -21,8 +21,7 @@ class ViewUserDetail extends React.Component<IViewUserDetail> {
     async componentDidMount() {
         const { match: { params: { id } } } = this.props
         followAllContainer.gotoProfileOtherUser(id)
-        const data = await getAllInformationUser(id)
-        const dataUser = data['data']['getAllInformationUser']
+        const dataUser = await getAllInformationUser(id)
         await this.setState({ dataUser, ownProfileId: id })
     }
 

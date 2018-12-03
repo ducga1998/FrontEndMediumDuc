@@ -1,17 +1,14 @@
 import * as React from 'react';
 import { Button } from 'react-bootstrap';
-import { getAllInformationUser } from 'src/API/client';
+
 import styled from 'styled-components';
-import { follow, getAllInfomationUserFollowYour, unFollow } from '../../API/followAPI';
+
 import userContainer from '../../Container/userContainer';
-import srcImg from '../../image/9284571_300x300.jpeg';
-import UILoading from '../../UI/UILoading';
-import Article from '../Article';
+
 import { chatsockets, roomSockets } from '../../socketClient/socket';
-import ListRoom from './listRoom';
+
 import UIButton from '../../UI/UIButton';
-import io from 'socket.io-client';
-import { toast } from 'react-toastify';
+
 import { getMessageByIdRoom } from '../../API/messageAPI';
 
 interface IRoomChat {

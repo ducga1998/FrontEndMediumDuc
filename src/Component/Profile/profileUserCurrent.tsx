@@ -33,9 +33,7 @@ class ViewUserDetail extends React.Component<IViewUserCurrent> {
     }
     async componentDidMount() {
         const { idUser } = userContainer.state.dataUser
-        const data = await getAllInformationUser(idUser)
-        const dataUser = data['data']['getAllInformationUser']
-
+        const dataUser = await getAllInformationUser(idUser)
         await this.setState({ dataUser })
     }
     handleEdit = (e) => {

@@ -7,8 +7,6 @@ import userContainer from '../../../Container/userContainer';
 import srcImg from '../../image/9284571_300x300.jpeg';
 import UILoading from '../../../UI/UILoading';
 import Article from '../../Article';
-import followAllContainer from '../../../Container/followContainer';
-import { Subscribe } from 'unstated-x';
 interface IStories {
     match: any
 }
@@ -21,8 +19,8 @@ class Stories extends React.Component<IStories> {
     async componentDidMount() {
         const { idUser } = userContainer.state.dataUser
 
-        const data = await getAllInformationUser(idUser)
-        const dataUser = data['data']['getAllInformationUser']
+        const dataUser = await getAllInformationUser(idUser)
+
         await this.setState({ dataUser })
     }
 
