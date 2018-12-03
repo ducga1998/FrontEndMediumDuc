@@ -40,7 +40,8 @@ const WriteArticle = ({ match }) => {
             const { data: { getArticleById } } = dataArticle
 
             console.log('getArticleById', getArticleById)
-            const { titleArticle, contentArticle } = getArticleById
+            const { titleArticle, contentArticle, hashTag } = getArticleById
+            articleContainer.setState({ titleArticle, contentArticle, arrHashTag: hashTag })
             text.setContent(contentArticle, 0)
             title.setContent(titleArticle, 0)
         }

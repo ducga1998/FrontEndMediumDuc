@@ -13,14 +13,7 @@ interface dataArticle {
     totalClap: Number
     // notification: String
 }
-export interface IArticleContainer {
-    isPublicArticle: Boolean
-    contentArticle: String
-    titleArticle: String
-    isUpdate: Boolean,
-    newArticle: any,
-    idArticleNeedUpdate: String
-}
+
 let createTime = new Date().toUTCString()
 //  when public article then will two action  
 // B1 : add article in registryArticle
@@ -67,28 +60,38 @@ export const allArticleContainer = new AllArticleContainer({
 class Article extends Container<any> {
 
 }
+
 window['allArticleContainer'] = allArticleContainer
+export interface IArticleContainer {
+    isPublicArticle: Boolean
+    contentArticle: String
+    titleArticle: String
+    isUpdate: Boolean,
+    newArticle: any,
+    idArticleNeedUpdate: String,
+    arrHashTag: any
+}
 class ArticleContainer extends Container<IArticleContainer>{
     //   =>   request to back end 
     //  => front end alway have stories
-    async addArticle(hashTag = [], idArticle) {
-        const { contentArticle, titleArticle } = this.state
+    async addArticle(idArticle) {
+        const { contentArticle, titleArticle, arrHashTag } = this.state
         const { dataUser } = userContainer.state as any
 
         if (dataUser) {
             const { idUser } = dataUser
             console.log('run func addArticle')
-            return await addArticleToClient({ contentArticle, titleArticle, idUser, idArticle, hashTag, createTime })
+            return await addArticleToClient({ contentArticle, titleArticle, idUser, idArticle, hashTag: arrHashTag, createTime })
         }
     }
-    async updateAricle(hashTag = [], idArticle) {
-        const { contentArticle, titleArticle } = this.state
+    async updateAricle(idArticle) {
+        const { contentArticle, titleArticle, arrHashTag } = this.state
         const { dataUser } = userContainer.state as any
         // const idArticle = uuid()
         if (dataUser) {
             const { idUser } = dataUser
-            console.log('input final', { contentArticle, titleArticle, idUser, idArticle, hashTag, createTime })
-            return await updateArticleToClient({ contentArticle, titleArticle, idUser, idArticle, hashTag, createTime })
+            console.log('input final', { contentArticle, titleArticle, idUser, idArticle, hashTag: arrHashTag, createTime })
+            return await updateArticleToClient({ contentArticle, titleArticle, idUser, idArticle, hashTag: arrHashTag, createTime })
         }
     }
 }
@@ -98,7 +101,8 @@ const articleContainer = new ArticleContainer({
     titleArticle: '',
     isPublicArticle: false,
     isUpdate: false,
-    idArticleNeedUpdate: ''
+    idArticleNeedUpdate: '',
+    arrHashTag: []
 })
 
 window['article'] = articleContainer

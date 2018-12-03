@@ -45,7 +45,7 @@ const WriteArticle = () => {
             width: '70%'
         }}>
             <Author idUser={idUser} avatarLink={avatarLink} totalFollow={10} name={name} totalArticle={articles.length} />
-            <h1>  <$Title ref={refTitle} >cascnaskjcnasncjkn</$Title></h1>
+            <h1>  <$Title ref={refTitle} /></h1>
             <$WriteContent ref={inputEl} />
 
         </div>

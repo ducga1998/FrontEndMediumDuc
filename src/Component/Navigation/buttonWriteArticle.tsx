@@ -13,24 +13,14 @@ export default function ButtonArticle({ history }: any) {
     // state support UIModal 
     const [open, setOpen] = React.useState(false)
     // state support hashTag
-    const [arrHashTag, setArrHashTag] = React.useState([]) as any
+    // const [arrHashTag, setArrHashTag] = React.useState([]) as any
     const [nameHashTag, setNameHashTag] = React.useState('')
 
     let id = uuid()
-    if (window.location.pathname.match('store')) {
-        id = window.location.pathname.replace(/[/]store[/]/, '')
-    }
-    console.log('id store ', id)
-
-    // const { idArticleNeedUpdate } = articleContainer.state
-    // if (idArticleNeedUpdate.length > 0) {
-    //     id = idArticleNeedUpdate
-    // }
     const [idArticle, setIdArticle] = React.useState(id)
-
-    // const { isUpdate } = articleContainer.state
     const handleAddHashTag = async () => {
-        if (arrHashTag.length > 6 || arrHashTag < 0) {
+        const { arrHashTag } = articleContainer.state
+        if (arrHashTag.length > 6 || nameHashTag.length < 0) {
             toast.error('Maximum 6 hash tag and Min > 0!!!!');
             return
         }
@@ -44,7 +34,7 @@ export default function ButtonArticle({ history }: any) {
         }
 
         arrHashTag.push(nameHashTag);
-        await setArrHashTag(arrHashTag)
+        await articleContainer.setState({ arrHashTag })
         await setNameHashTag('')
 
     }
@@ -54,7 +44,7 @@ export default function ButtonArticle({ history }: any) {
         return <Subscribe to={[articleContainer]}>
             {
                 (container: any) => {
-                    const { isPublicArticle, isUpdate, idArticleNeedUpdate } = container.state
+                    const { isPublicArticle, isUpdate, idArticleNeedUpdate, arrHashTag } = container.state
 
 
                     return isPublicArticle ?
@@ -75,7 +65,7 @@ export default function ButtonArticle({ history }: any) {
                                         <Button
                                             onClick={() => {
                                                 const arrHasBeenDelete = arrHashTag.filter(itemHashTag => itemHashTag !== item)
-                                                setArrHashTag(arrHasBeenDelete)
+                                                articleContainer.setState({ arrHashTag: arrHasBeenDelete })
                                             }}><Glyphicon glyph="remove" />
                                         </Button>
                                     </ListGroupItem>
@@ -97,13 +87,21 @@ export default function ButtonArticle({ history }: any) {
                                 // if (newArticle) {
                                 // console.log
                                 // const { idArticle } = newArticle.data.addArticle
-                                await container.updateAricle(arrHashTag, idArticle)
+                                if (window.location.pathname.match('store')) {
+                                    const id = window.location.pathname.replace(/[/]store[/]/, '')
+                                    await container.updateAricle(id)
+
+                                }
+                                else {
+                                    await container.updateAricle(idArticle)
+                                }
+
                                 toast.success('Update aricle success !!!! ')
                                 await setOpen(false)
                             }
                             } >Update Article</UIButton> : <UIButton onChange={async () => {
 
-                                const newArticle = await container.addArticle(arrHashTag, idArticle)
+                                const newArticle = await container.addArticle(idArticle)
 
                                 if (newArticle) {
                                     toast.success('Public article success !!!!')
