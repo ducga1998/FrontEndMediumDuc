@@ -3,6 +3,7 @@ import { MenuItem, Nav, Navbar, NavDropdown, NavItem, Row } from 'react-bootstra
 import { Link } from 'react-router-dom';
 import { Subscribe } from 'unstated-x';
 import userContainer from '../../Container/userContainer';
+// import BrowserHistory from 'react-router/lib/BrowserHistory'
 import ButtonArticle from './buttonWriteArticle';
 class Navication extends React.Component<any, any>{
 
@@ -12,6 +13,11 @@ class Navication extends React.Component<any, any>{
         }}>
             <Navbar.Header>
                 <Navbar.Brand >
+
+                    {/* <button onClick={BrowserHistory.goBack}>Go Back</button> */}
+                </Navbar.Brand>
+                <Navbar.Brand >
+
                     <Link to="/home" style={{
                         padding: '0 0px 0px 100px'
                     }} href="#brand"><svg className="svgIcon-use" width="45" height="45"><path d="M5 40V5h35v35H5zm8.56-12.627c0 .555-.027.687-.318 1.03l-2.457 2.985v.396h6.974v-.396l-2.456-2.985c-.291-.343-.344-.502-.344-1.03V18.42l6.127 13.364h.714l5.256-13.364v10.644c0 .29 0 .342-.185.528l-1.848 1.796v.396h9.19v-.396l-1.822-1.796c-.184-.186-.21-.238-.21-.528V15.937c0-.291.026-.344.21-.528l1.823-1.797v-.396h-6.471l-4.622 11.542-5.203-11.542h-6.79v.396l2.14 2.64c.239.292.291.37.291.768v10.353z"></path></svg></Link>
@@ -55,7 +61,7 @@ class Navication extends React.Component<any, any>{
 
                 </Nav>
             </Navbar.Collapse>
-        </Navbar> </Row>
+        </Navbar> </Row >
 
 
     }

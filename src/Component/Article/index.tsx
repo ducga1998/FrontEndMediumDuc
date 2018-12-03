@@ -34,9 +34,9 @@ export default function Article({ idArticle, avatar, titleArticle, content, tota
         </$Avatar>
         <$DetailArticle>
             <h2><Link to={linkSwitchArticle}>{renderHTML(filterStringHTML(titleArticle, true))}</Link></h2>
-            <small>Create at : {time}</small> <br />
+            <small><b>Create at :</b> {time}</small> <br />
             <b >Content : </b>{renderHTML(filterStringHTML(content))}<Link to={linkSwitchArticle}> Read more ...</Link>
-            <p>Write by : <b><Link to={`/user/${idUser}`}>{name === '' ? 'NO NAME' : name}</Link></b></p>
+            <p><b>Write by :</b> <b><Link to={`/user/${idUser}`}>{name === '' ? 'NO NAME' : name}</Link></b></p>
             <ButtonToolbar>
                 <ButtonGroup>
                     {hashTag.map((item: any, key: number) => {

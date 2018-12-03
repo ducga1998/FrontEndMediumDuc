@@ -38,7 +38,6 @@ const WriteArticle = ({ match }) => {
         // console.log('dataArticle', dataArticle)
         if (dataArticle) {
             const { data: { getArticleById } } = dataArticle
-
             console.log('getArticleById', getArticleById)
             const { titleArticle, contentArticle, hashTag } = getArticleById
             articleContainer.setState({ titleArticle, contentArticle, arrHashTag: hashTag })
