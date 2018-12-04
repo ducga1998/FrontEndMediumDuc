@@ -1,40 +1,16 @@
 
 import { Container } from 'unstated-x';
-import { unBookMark, getAllArticleHashBeenBookMark, bookMark, isBookMarkToClient } from '../API/bookmarkAPI';
+import { unBookMark, bookMark, isBookMarkToClient } from '../API/bookmarkAPI';
 import userContainer from './userContainer';
 export interface IBookMark {
-
+    allArticleHasBeenBookMark: any[]
 
 }
 class AllBookMarkContainer extends Container<any>{
     constructor(data) {
         super(data)
     }
-    get idUser() {
-        console.log(' userContainer.state.dataUser', userContainer.state.dataUser)
-        const { dataUser } = userContainer.state
-        if (dataUser) {
-            return dataUser.idUser
-        }
-
-    }
     // function only run when we into article  has been bookmark   : )) yeahhhh 
-    async getAllArticeBookMark() {
-        const { dataUser } = userContainer.state
-        if (dataUser && dataUser.idUser) {
-            const { idUser } = dataUser
-
-        }
-
-    }
-    async bookMarkToClient({ idArticle, idUseOwnArticler }) {
-        const { idUser } = userContainer.state.dataUser
-        const { allArticleHasBeenBookMark } = this.state
-        const {bookMarkContainer} = allArticleHasBeenBookMark.find(item => item.idArticle == idArticle)
-        bookMarkContainer.setState({ isBookMark: true })
-        // const flag = await isBookMarkToClient({ idUser, idArticle })
-        bookMark({ idUserBookMark: idUser, idArticle, idUser: idUseOwnArticler })
-    }
     async isBookMark({ idArticle }) {
         const { idUser } = userContainer.state.dataUser
         const flag = await isBookMarkToClient({ idUser, idArticle }) as boolean
@@ -45,8 +21,7 @@ class AllBookMarkContainer extends Container<any>{
         }
         const { allArticleHasBeenBookMark } = this.state
         allArticleHasBeenBookMark.push(input)
-        this.setState(allArticleHasBeenBookMark)
-        console.log('flag', flag)
+        this.setState({ allArticleHasBeenBookMark })
         return flag
 
     }
@@ -58,11 +33,21 @@ class AllBookMarkContainer extends Container<any>{
         }
         return null
     }
+    findContainerAndSetState(idArticle, flag) {
+
+        const { allArticleHasBeenBookMark } = this.state
+        const { bookMarkContainer } = allArticleHasBeenBookMark.find(item => item.idArticle == idArticle)
+        bookMarkContainer.setState({ isBookMark: flag })
+    }
+    async bookMarkToClient({ idArticle, idUseOwnArticler }) {
+        const { idUser } = userContainer.state.dataUser
+        this.findContainerAndSetState(idArticle, true)
+        // const flag = await isBookMarkToClient({ idUser, idArticle })
+        bookMark({ idUserBookMark: idUser, idArticle, idUser: idUseOwnArticler })
+    }
     async unBookMarkToClient({ idUseOwnArticler, idArticle }) {
         const { idUser } = userContainer.state.dataUser
-        const { allArticleHasBeenBookMark } = this.state
-        const {bookMarkContainer} = allArticleHasBeenBookMark.find(item => item.idArticle == idArticle)
-        bookMarkContainer.setState({ isBookMark: false })
+        this.findContainerAndSetState(idArticle, false)
         unBookMark({ idUserBookMark: idUser, idArticle, idUser: idUseOwnArticler })
     }
 
@@ -74,7 +59,6 @@ class BookMarkContainer extends Container<any>{
 
 const allBookMarkContainer = new AllBookMarkContainer({
     allArticleHasBeenBookMark: [],
-    bookMark: true
 })
 //debug
 window["bookmark"] = allBookMarkContainer
