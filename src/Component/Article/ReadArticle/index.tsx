@@ -1,3 +1,4 @@
+
 import * as React from 'react';
 import { Label } from 'react-bootstrap';
 import renderHTML from 'react-render-html';
@@ -11,6 +12,7 @@ import WriteComment from './writeComment';
 import commentContainer from '../../../Container/commentContainer';
 import { Prompt } from 'react-router'
 import { withRouter } from 'react-router'
+import UIReaction from '../../../UI/UIReaction';
 
 interface IReadArticleType {
     title: String,
@@ -28,9 +30,12 @@ class ReadArticle extends React.Component<any> {
     async componentDidMount() {
         const { match: { params: { id } }, router } = this.props
         commentContainer.getAllCommentByIdArticle(id)
+
         // before refactor articleContainer
-        const article = await getArticleById(id)
+        const article = await getArticleById(id) as any
         if (article) {
+            // const {user: { idUser, avatarLink, name, articles }} = article
+            // allBookMarkContainer.isBookMark({ idArticle: id })
 
             await this.setState({ article })
         }
@@ -38,12 +43,15 @@ class ReadArticle extends React.Component<any> {
 
 
     render() {
+        // console.log(allBookMarkContainer)
         const { article, allCommentInArticle }: any = this.state
 
         if (article) {
             console.log('update update', article, allCommentInArticle)
-            const { user: { idUser, avatarLink, name, articles, }, contentArticle, titleArticle, hashTag, createTime } = article
+            const { user: { idUser, avatarLink, name, articles }, idArticle, contentArticle, titleArticle, hashTag, createTime } = article
             return <$Align>
+                {/* UIReraction need idArticle and idUser own this article */}
+                <UIReaction idArticle={idArticle} idUseOwnArticler={idUser} />
                 <div style={{
                     width: '70%'
                 }}>

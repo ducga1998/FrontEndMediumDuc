@@ -75,7 +75,6 @@ const $Content = styled.div`
     }
     & {
         flex : 10;
-        margin-top : 20px;
         margin-left: 30px;
         margin-bottom : 10px;
         transition: 0.2s;
@@ -92,7 +91,7 @@ const $Comment = styled.div`
     }
     border-bottom: 1px solid #e8e6e6;
     display : flex;
-    margin : 30px 0px;
+    /* margin : 30px 0px 0px; */
     padding: 30px;
     &:hover {
         background: #f1f3f3;

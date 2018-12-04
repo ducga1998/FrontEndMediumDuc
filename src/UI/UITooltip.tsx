@@ -7,6 +7,7 @@ export default class UITooltip extends React.Component<any> {
         // console.log(e)
     }
     handleMouseOver = (e) => {
+        e.stopPropagation()
         // console.log(e.target)
         const dom = e.target
 
@@ -16,17 +17,19 @@ export default class UITooltip extends React.Component<any> {
             const domToolTip = this.refToolTip.current
             // console.log(domToolTip, text)
             domToolTip.innerHTML = text
-            const { top, left } = dom.getBoundingClientRect()
+            const { top, left, height, width } = dom.getBoundingClientRect()
             const view = dom.ownerDocument.defaultView
             const scrollTop = view.scrollY
             // console.log('cascnkj', width)
             domToolTip.style.display = "inline-block"
-            const { width } = domToolTip.getBoundingClientRect()
-            domToolTip.style.left = `${left - (width / 2)}px`;
-            domToolTip.style.top = `${top - 40 + scrollTop}px`
+            const widthToolTip = domToolTip.getBoundingClientRect().width
+            domToolTip.style.left = `${left + width / 2 - (widthToolTip / 2)}px`;
+            domToolTip.style.top = `${top - height + scrollTop}px`
         }
     }
     handleMouseLeave = (e) => {
+
+        e.stopPropagation()
         const domToolTip = this.refToolTip.current
         domToolTip.style.display = "none"
     }
