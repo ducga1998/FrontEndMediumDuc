@@ -19,6 +19,8 @@ import { logoutBackend } from './API/client'
 import { notificationFuncSocket } from "./socketClient/notificationSocket";
 import Stories from "./Component/Article/Stories";
 import StoreDetail from "./Component/Article/Stories/Store";
+import ArticleBookMark from "./Component/Article/BookMarkArticle";
+
 const About = () => <div>
     Web design by Nguyen Minh duc
     <h5>Facebook : <a href="https://www.facebook.com/duc.ceh.cnna">https://www.facebook.com/duc.ceh.cnna</a></h5>
@@ -63,6 +65,7 @@ const AppRouter = () => {
                     <Route path="/profile" component={isAuth(Profile)} />
                     <Route path="/writearticle" component={isAuth(WriteArticle)} />
                     <Route path="/chatRoom/:id" component={isAuth(DetailRoomChat)} />
+                    <Route path="/bookmarks" component={isAuth(ArticleBookMark)} />
                 </Layout>
             </Switch>
         </Router>

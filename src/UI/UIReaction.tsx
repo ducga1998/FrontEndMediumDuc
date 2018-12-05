@@ -102,6 +102,7 @@ const $Button = styled.div<any>`
     height: 50px;
     background-color: ${props => props.active ? "#252c32" : '#b1c3d3'};
     display: flex;
+    color :  ${props => props.active ? 'white' : 'black'};
     justify-content: center;
     align-items: center;
     transition : .3s;

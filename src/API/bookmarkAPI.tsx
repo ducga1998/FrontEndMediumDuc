@@ -2,7 +2,6 @@ import gql from "graphql-tag";
 import { client } from "./client";
 import { convertDataToGraphQL } from "../help/help";
 export function bookMark(bookMark: any) {
-    console.log('bookMark', bookMark)
     let input: any = bookMark;
     console.log(input)
     return new Promise(async resolve => {
@@ -13,20 +12,6 @@ export function bookMark(bookMark: any) {
                     idUser
                     idArticle
                     idUserBookMark
-                    userBookMark {
-                        name
-                        avatarLink
-                    }
-                    userOwnArticle {
-                        name
-                        avatarLink
-                    }
-                    articleBookMark{
-                        idArticle
-                        idUser
-                        hashTag
-                        category
-                    }
                 }
             }
           `,
@@ -34,8 +19,8 @@ export function bookMark(bookMark: any) {
                 input
             }
         })
-        if (API) resolve(convertDataToGraphQL(API))
-        resolve({})
+        resolve(convertDataToGraphQL(API))
+
     })
 }
 export function getAllArticleHashBeenBookMark(idUser) {
@@ -46,34 +31,32 @@ export function getAllArticleHashBeenBookMark(idUser) {
                         getAllArticleHasBeenBookMark(idUser :"${idUser}"){
                             idUser
                             idArticle
-                            idUserBookMark
-                            userBookMark{
-                                name
-                                avatarLink
-                            }
                             userOwnArticle {
                                 name
                                 avatarLink
+                                idUser
                             }
                             articleBookMark{
                                 idArticle
                                 idUser
                                 hashTag
                                 category
+                                contentArticle
+                                titleArticle
+                                createTime
                             }
                 }
             }
                     `
         })
-        if (API) resolve(convertDataToGraphQL(API))
-        resolve({})
+        resolve(convertDataToGraphQL(API))
+
     })
 }
 // get all article in database
 export function unBookMark(bookMark: any) {
-    console.log('bookMark', bookMark)
+
     let input: any = bookMark;
-    console.log(input)
     return new Promise(async resolve => {
         const API = await client.mutate({
             mutation: gql`
@@ -82,20 +65,6 @@ export function unBookMark(bookMark: any) {
                     idUser
                     idArticle
                     idUserBookMark
-                    userBookMark {
-                        name
-                                avatarLink
-                    }
-                    userOwnArticle {
-                        name
-                        avatarLink
-                    }
-                    articleBookMark{
-                        idArticle
-                        idUser
-                        hashTag
-                        category
-                    }
                 }
             }
           `,
@@ -103,8 +72,8 @@ export function unBookMark(bookMark: any) {
                 input
             }
         })
-        if (API) resolve(convertDataToGraphQL(API))
-        resolve({})
+        resolve(convertDataToGraphQL(API))
+
     })
 }
 export function isBookMarkToClient({ idUser, idArticle }) {
@@ -117,7 +86,7 @@ export function isBookMarkToClient({ idUser, idArticle }) {
                     }
                 `
         })
-        if (API) resolve(convertDataToGraphQL(API))
-        resolve({})
+        resolve(convertDataToGraphQL(API))
+
     })
 }
