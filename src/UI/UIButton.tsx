@@ -4,12 +4,13 @@ interface IUIButton {
     width?: string
     height?: string
     children?: any
-    onChange?: (e: any) => any
+    onChange?: (e: any) => any,
+    style?: any
 }
 export default function UIButton({
-    children, width, height, onChange
+    children, width, height, onChange, style
 }: IUIButton) {
-    return <$Primary onMouseDown={onChange} width={width} height={height}>{children}</$Primary>
+    return <$Primary style={style} onMouseDown={onChange} width={width} height={height}>{children}</$Primary>
 }
 const $Button = styled.a<{ width?: string, height?: string }>`
     width : ${props => props.width ? props.width : 'auto'};
@@ -19,17 +20,13 @@ const $Button = styled.a<{ width?: string, height?: string }>`
     text-align: center;
     text-transform: uppercase;
     vertical-align: middle;
-    cursor: pointer;
     background-image: none;
-
-    font-size: 1.4rem;
+    padding : 15px 20px;
     border-radius: 3px;
     border: 1px solid transparent;
     text-decoration: none;
     user-select: none;
     box-shadow: inset 0 0 0 2px;
-    font-weight: 600;
-    border-radius: 12px;
     font-weight: 700;
     white-space: nowrap;
     word-break: keep-all;
@@ -37,8 +34,6 @@ const $Button = styled.a<{ width?: string, height?: string }>`
     font-size: 14px;
     line-height: 1;
     position: relative;
-    text-align: center;
-    padding : 12px 16px;
     &:hover  {
         text-decoration: none;
         box-shadow: 0px 0px 12px 2px #96bee0e0;

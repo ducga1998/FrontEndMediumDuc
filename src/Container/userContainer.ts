@@ -1,5 +1,5 @@
 import { Container } from 'unstated-x';
-import { checkLoginUser } from '../API/client';
+import { checkLoginUser, updateInfomation } from '../API/client';
 // import {  } from 'react-router';
 class UserContainer extends Container<any>{
     async login({ username, password }) {
@@ -20,6 +20,13 @@ class UserContainer extends Container<any>{
             await this.setState({ login: false })
         }
         return null
+    }
+    async updateProfile(input) {
+        const { idUser } = this.state.dataUser
+        const data = { ...input, ...{ idUser } }
+        const newInfoUser = await updateInfomation(data)
+        console.log('newInfoUser', newInfoUser)
+        return newInfoUser
     }
 }
 const userContainer = new UserContainer({

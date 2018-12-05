@@ -18,6 +18,30 @@ export function logoutBackend() {
         resolve(data)
     })
 }
+export function updateInfomation(user: any) {
+    // const { idUser, login, password, decentraliz, avatarLink, name } = user
+    const input = user
+    return new Promise(async resolve => {
+        const API = client.mutate({
+            mutation: gql`
+              mutation UpdateInfomationUser($input: UserInput) {
+                updateInfomationUser(input: $input) {
+                    idUser
+                    login
+                    password
+                    decentraliz
+                    name
+                    avatarLink
+                }
+            }
+            `,
+            variables: {
+                input
+            }
+        })
+        resolve(convertDataToGraphQL(API))
+    })
+}
 export function addUser(user: any) {
     const { idUser, login, password, decentraliz, avatarLink, name } = user
     console.log('userrr', user)
@@ -57,6 +81,10 @@ export function getAllInformationUser(idUser: string) {
                     idUser
                     name
                     avatarLink
+                    biographical
+                    birthday
+                    location
+                    biographical
                     articles {
                         idArticle
                         hashTag
