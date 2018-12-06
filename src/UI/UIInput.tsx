@@ -8,7 +8,9 @@ interface IUIInput {
     style?: any,
     placeholder?: string,
     type?: 'uncontrol' | 'control',
-    refInput?: any
+    refInput?: any,
+    onKeyPress?: (e: any) => any
+
 }
 export default class UIInput extends React.Component<IUIInput> {
     inputRef: any = React.createRef()
@@ -16,7 +18,7 @@ export default class UIInput extends React.Component<IUIInput> {
 
     }
     render() {
-        const { value, onChange, style, placeholder, type, refInput } = this.props
+        const { value, onChange, style, placeholder, type, refInput, onKeyPress } = this.props
         if (type && type === 'uncontrol') {
             return <$Input
                 placeholder={placeholder || undefined}
@@ -25,6 +27,7 @@ export default class UIInput extends React.Component<IUIInput> {
             />
         }
         return <$Input
+            onKeyPress={onKeyPress}
             ref={refInput}
             placeholder={placeholder || undefined}
             style={style}

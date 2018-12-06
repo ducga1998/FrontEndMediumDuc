@@ -37,7 +37,7 @@ class ViewUserDetail extends React.Component<IViewUserDetail> {
                     if (!item || !dataUser) {
                         return <UILoading />
                     }
-                    const { articles, avatarLink, name, idUser } = dataUser as any;
+                    const { articles, avatarLink, name, idUser, location, biographical, birthday } = dataUser as any;
                     const { followContainer } = item
                     // console.log(followContainer)
                     return <Subscribe to={[followContainer]}>
@@ -51,8 +51,10 @@ class ViewUserDetail extends React.Component<IViewUserDetail> {
                                         <Left>
                                             <$Author>
                                                 <Img src={avatarLink ? avatarLink : srcImg} /> */}
-                                                 <h3>{name}</h3>
-                                                <h5> Article : {articles.length}</h5>
+                                                 <h3>Name : {name}</h3>
+                                                <h3> Location : {location} </h3>
+                                                <h3> Article : {articles.length}</h3>
+                                                <h3>Birthday : {birthday}</h3>
                                             </$Author>
                                             {/* <Author avatarLink={avatarLink} totalFollow={10} name={name} totalArticle={articles.length} /> */}
                                         </Left>
@@ -70,6 +72,9 @@ class ViewUserDetail extends React.Component<IViewUserDetail> {
                                                 })}
 
                                             </$ListAvatarUserFollow> : <p><b>No user Follow :((</b></p>}
+                                            <div>
+                                                Bio : <div ><h1>{biographical}</h1></div>
+                                            </div>
                                         </Right>
                                     </$Content >
                                     <hr />
@@ -98,38 +103,38 @@ class ViewUserDetail extends React.Component<IViewUserDetail> {
 }
 //"idArticle", "hashTag", "category", "comment", "totalClap", "notification", "contentArticle", "titleArticle", "imageArticle", "createTime", "__typename"
 const $ListAvatarUserFollow = styled.div`
-    margin : 10px;
+                            margin : 10px;
     & img {
-        width : 40px;
-        height : 40px;
-        margin-left : 3px;
-        border-radius:50%;
-    }
-
-`
+                            width : 40px;
+                        height : 40px;
+                        margin-left : 3px;
+                        border-radius:50%;
+                    }
+                
+                `
 const Img = styled.img`
-
-width : 200px;
-height : 200px;
-border-radius : 50%;
-`
+                
+                width : 200px;
+                height : 200px;
+                border-radius : 50%;
+                `
 const $Author = styled.div`
-            `
+                            `
 const $ArticleDetail = styled.div`
-            `
+                            `
 const $ViewArticle = styled.div`
-            border-top  :2px solid #9eaee8;
-            padding-top : 20px;
-            `
+                            border-top  :2px solid #9eaee8;
+                            padding-top : 20px;
+                            `
 const $Content = styled.div`
-             display : flex;
-             
-            `
+                             display : flex;
+                             
+                            `
 const Left = styled.div`
-            flex : 5
-            `
+                            flex : 5
+                            `
 const Right = styled.div`
-            flex : 6
-            `
+                            flex : 6
+                            `
 
 export default ViewUserDetail
