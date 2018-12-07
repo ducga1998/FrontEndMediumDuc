@@ -4,6 +4,7 @@ import * as React from 'react';
 import { Grid } from 'react-bootstrap';
 import Footer from './footer';
 import Navigation from './Navigation/index';
+import Pagination from './pagination'
 
 export default function Layout(props) {
     console.log('propspropsprops', props)

@@ -28,7 +28,7 @@ export default function UIModal({ trigger, children, title, width, height, close
             <$Content height={height} width={width}> {children}</$Content>
 
             <$Footer>
-                <UIButton width="100px" onChange={(e: any) => { e.stopPropagation(); closeMoDal() }}> Close </UIButton>
+                <UIButton width="100px" onMouseDown={(e: any) => { e.stopPropagation(); closeMoDal() }}> Close </UIButton>
             </$Footer>
         </$Modal>
     </$Background>

@@ -83,7 +83,7 @@ export default function ButtonArticle({ history }: any) {
                                     <Glyphicon glyph="plus" />
                                 </Button>
                             </FormGroup>
-                            {isUpdate ? <UIButton onChange={async () => {
+                            {isUpdate ? <UIButton onMouseDown={async () => {
                                 if (window.location.pathname.match('store')) {
                                     const id = window.location.pathname.replace(/[/]store[/]/, '')
                                     await container.updateAricle(id)
@@ -94,7 +94,7 @@ export default function ButtonArticle({ history }: any) {
                                 toast.success('Update aricle success !!!! ')
                                 await setOpen(false)
                             }
-                            } >Update Article</UIButton> : <UIButton onChange={async () => {
+                            } >Update Article</UIButton> : <UIButton onMouseDown={async () => {
 
                                 const newArticle = await container.addArticle(idArticle)
 

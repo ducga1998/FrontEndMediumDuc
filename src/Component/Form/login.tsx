@@ -25,7 +25,7 @@ export default function Login({ history }) {
             setValuePassword(value)
         }} />
         <Link to="/home" ref={refLink} />
-        <UIButton onChange={async () => {
+        <UIButton onMouseDown={async () => {
             const dataUser = await userContainer.login({ username: name, password })
             if (!dataUser) {
                 toast.error('Login false, please check user name and passwod')

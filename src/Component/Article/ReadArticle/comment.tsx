@@ -50,7 +50,8 @@ export default class ViewComment extends React.Component<IViewComment> {
                                             <$Img data-tooltip={name} src={avatarLink ? avatarLink : IMAGE_SOURCE_DEFAULT} />
                                             <$Content  >{renderHTML(item.content)}</$Content>
                                         </$Comment>
-                                    }) : <h2 style={{ textAlign: 'center', color: 'gray' }}> NO  Comment,  : ))) cmt vào cho vui đi thằng ngu</h2>}
+                                    }) : <h2 style={{ textAlign: 'center', color: 'gray' }}> NO  Comment,  : ))) cmt vào cho vui đi thằng ngu</h2>
+                                    }
                                 </div>
                             }
                         }

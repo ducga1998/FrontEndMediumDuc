@@ -80,7 +80,7 @@ export default class WriteComment extends React.Component<IWriteComment> {
         return <>< $Comment>
             <$Img src={avatarLink ? avatarLink : IMAGE_SOURCE_DEFAULT} /> <b>{name}</b>
             <$Content ref={this.refComment} />
-            <UIButton onChange={this.handleAddComment} >Comment</UIButton>
+            <UIButton onMouseDown={this.handleAddComment} >Comment</UIButton>
         </$Comment>
         </>
     }
@@ -88,7 +88,7 @@ export default class WriteComment extends React.Component<IWriteComment> {
 
 const $Content = styled.div`
     &:focus {
-    background-color: #f3f3f3;
+background-color: #f3f3f3;
     transition: 0.5s;
     outline: none;
     border-radius: 10px;

@@ -94,7 +94,7 @@ export default class RoomChat extends React.Component<IRoomChat> {
             </$ViewChat>
             <$WrapperInput >
                 <$InputChat onFocus={this.handleFocus} onChange={this.handleOnChange} onKeyPress={this.handleKeyUp} />
-                <UIButton onChange={this.handleOnClick}> Send  </UIButton>
+                <UIButton onMouseDown={this.handleOnClick}> Send  </UIButton>
             </$WrapperInput>
         </$WrapperChat>
     }

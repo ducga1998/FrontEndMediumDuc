@@ -23,8 +23,21 @@ export function updateArticleToClient(article: any) {
                 input
             }
         })
-        if (API) resolve(convertDataToGraphQL(API))
-        resolve({})
+        resolve(convertDataToGraphQL(API))
+
+    })
+}
+export function countArticle() {
+    return new Promise(async resolve => {
+        const API = await client.query({
+            query: gql`
+                    query {
+                        countArticle
+                    }
+                    `
+        })
+        resolve(convertDataToGraphQL(API))
+
     })
 }
 export function getArticleById(id) {
@@ -63,18 +76,17 @@ export function getArticleById(id) {
                     }
                     `
         })
-        if (API) resolve(convertDataToGraphQL(API))
-        resolve({})
+        resolve(convertDataToGraphQL(API))
+
     })
 }
 //get all article in database
-export function getAllArticle() {
+export function getAllArticle(first = 5, offset = 0) {
     return new Promise(async resolve => {
         const API = await client.query({
             query: gql`
                     query {
-                        getAllArticle(id  : ""){
-                            
+                        getAllArticle(first : ${first},offset: ${offset}){
                                 idArticle
                                 idUser
                                 hashTag
@@ -98,13 +110,12 @@ export function getAllArticle() {
                                     name
                                     avatarLink
                                 }
-                            
                         }
                     }
                     `
         })
-        if (API) resolve(convertDataToGraphQL(API))
-        resolve({})
+        resolve(convertDataToGraphQL(API))
+
 
     })
 

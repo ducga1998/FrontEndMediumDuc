@@ -47,7 +47,7 @@ class ViewUserDetail extends React.Component<IViewUserCurrent> {
                                 closeMoDal={() => this.setState({ open: false })}>
                                 <h1>Please paste link avatar need change</h1>
                                 <UIInput onChange={(value) => this.setState({ newAvatarLink: value })} />
-                                <UIButton onChange={() => { }}>Update Avatar</UIButton>
+                                <UIButton onMouseDown={() => { }}>Update Avatar</UIButton>
                             </UIModal>
                             {[{ name }, { birthday }, { location }, { biographical }].map((item, key) => {
                                 console.log(key)
@@ -56,7 +56,7 @@ class ViewUserDetail extends React.Component<IViewUserCurrent> {
                                 return <UIEditer info={info} key={key} content={value} />
                             })}
                             <h5> Article : {articles.length}</h5>
-                            <UIButton onChange={() => { this.setState({ isChangePass: true }) }}>Change password</UIButton>
+                            <UIButton onMouseDown={() => { this.setState({ isChangePass: true }) }}>Change password</UIButton>
                         </$Author>
                     </Left>
                     <Right>

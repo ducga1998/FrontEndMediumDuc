@@ -1,16 +1,14 @@
 import { Container } from 'unstated-x';
 import uuid from 'uuid';
-import { updateArticleToClient, getAllArticle } from '../API/articleAPI';
+import { updateArticleToClient, getAllArticle, countArticle } from '../API/articleAPI';
 import { addArticleToClient } from '../API/client';
 import userContainer from './userContainer';
 import omit from 'lodash/omit'
-interface dataArticle {
-    idUser: String
-    idArticle: String
-    hashTag: String
-    category: String
-    comment: String
-    totalClap: Number
+interface IAllArticleContainer {
+    registryArticle: any[],
+    first: number,
+    offset: number,
+    count: number
     // notification: String
 }
 
@@ -20,16 +18,15 @@ let createTime = new Date().toUTCString()
 // B2 : send request server
 const registry = new Map()
 
-class AllArticleContainer extends Container<any> {
+class AllArticleContainer extends Container<IAllArticleContainer> {
     constructor(state) {
         super(state)
-        state = {
-            registryArticle: []
-        }
-        this.fetchData()
+        const { offset, first } = this.state
+        this.fetchData(first, offset)
     }
-    async fetchData() {
-        const allArticle = await getAllArticle() as any
+    async fetchData(first, offset) {
+        const allArticle = await getAllArticle(first, offset) as any
+        const count = await countArticle() as number
         // console.log('dataFake', dataFake)
         if (allArticle) {
             console.log('allArticle', allArticle)
@@ -41,9 +38,8 @@ class AllArticleContainer extends Container<any> {
                     articleContainer,
                     idArticle
                 }
-            })
-
-            this.setState({ registryArticle: listContainer })
+            }) as any[]
+            await this.setState({ registryArticle: listContainer, count })
         }
     }
     // addArticle will structure  {
@@ -54,8 +50,13 @@ class AllArticleContainer extends Container<any> {
     }
 }
 export const allArticleContainer = new AllArticleContainer({
-    registryArticle: []
+    registryArticle: [],
+    first: 5,
+    offset: 0,
+    count: 0
+
 })
+window['allArtcile'] = allArticleContainer
 class Article extends Container<any> {
 
 }

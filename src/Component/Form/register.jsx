@@ -33,7 +33,7 @@ export default function Register() {
             setValueAvatarLink(value)
         }} />
 
-        <UIButton onChange={async () => {
+        <UIButton onMouseDown={async () => {
 
             const user = {
                 idUser: uuid(),

@@ -47,7 +47,7 @@ export default class ListRoom extends React.Component<IListRoom> {
         return <div>
             <h1>Create Room</h1>
             <UIInput onChange={this.handleOnChange} value={title} />
-            <UIButton onChange={this.handleOnClick}> Submit </UIButton>
+            <UIButton onMouseDown={this.handleOnClick}> Submit </UIButton>
             <$Wrapper>
 
                 <SubscribeOne to={roomContainer} bind={['rooms', 'roomsToIdUser']}>
