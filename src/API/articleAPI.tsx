@@ -27,6 +27,23 @@ export function updateArticleToClient(article: any) {
 
     })
 }
+export function getDataSearch() {
+    return new Promise(async resolve => {
+        const API = await client.query({
+            query: gql`
+                    query {
+                        getDataSearch(id: "ascsd"){
+                            idArticle
+                            titleArticle
+                        }
+                    }
+                    `
+        })
+        resolve(convertDataToGraphQL(API))
+
+    })
+}
+
 export function countArticle() {
     return new Promise(async resolve => {
         const API = await client.query({

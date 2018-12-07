@@ -20,6 +20,7 @@ import { notificationFuncSocket } from "./socketClient/notificationSocket";
 import Stories from "./Component/Article/Stories";
 import StoreDetail from "./Component/Article/Stories/Store";
 import ArticleBookMark from "./Component/Article/BookMarkArticle";
+import history from './history'
 
 const About = () => <div>
     Web design by Nguyen Minh duc
@@ -49,7 +50,7 @@ const AppRouter = () => {
             return user != null ? component : redirect('/login')
         }
 
-        return <Router >
+        return <Router history={history}>
             <Switch>
                 <Layout >
                     <Route path="/chat" component={isAuth(AllRoomChat)} />
@@ -87,7 +88,7 @@ const AppRouter = () => {
         }
     </SubscribeOne>
 }
-function redirect(location) {
+export function redirect(location) {
     return class RedirectRoute extends React.Component {
         constructor(props) {
             super(props)

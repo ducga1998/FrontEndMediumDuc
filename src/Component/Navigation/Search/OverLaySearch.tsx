@@ -4,10 +4,10 @@ import UIWidget from '../../../UI/UIWidget';
 import styled from 'styled-components';
 import { Input } from '../../../UI/styled/input';
 import { OverLay } from '../../../UI/styled/overlay';
+import SmartList from './smartList';
 export default class OverLaySearch extends React.Component {
     state = {
         value: '',
-        isFocus: false
     }
     handleOnChange = (e) => {
 

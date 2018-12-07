@@ -4,23 +4,49 @@ import OverLaySearch from './OverLaySearch';
 import { Input } from '../../../UI/styled/input';
 import styled from 'styled-components';
 import buttonX from './buttonX.svg'
+import { getDataSearch } from '../../../API/articleAPI';
+import SmartList from './smartList';
 export default class Search extends React.Component {
     state = {
         value: '',
-        isFocus: false
+        isFocus: false,
+        afterData: [],
+        smartList: []
     }
+    async componentWillMount() {
+        const afterData = await getDataSearch()
+        this.setState({ afterData })
+    }
+
     handleOnChange = (e) => {
+        const { afterData } = this.state
+        const { value } = e.target
+        const smartList = afterData.filter((item: any) => item.titleArticle.includes(value))
+        console.log('dataFilter', smartList)
+        this.setState({ smartList })
 
     }
     handleOnKeyDown = (e) => {
 
     }
+    close = () => {
+        this.setState({ isFocus: false })
+    }
+    open = () => {
+        this.setState({ isFocus: true })
+    }
     render() {
-        const { isFocus } = this.state
+        const { isFocus, smartList } = this.state
         return <Wrapper>
-            <UIInput style={{ background: '#e7f1fa' }} onFocus={() => this.setState({ isFocus: true })} onChange={() => { }} />
-            {isFocus ? <OverLaySearch><InputSeach onKeyDown={this.handleOnKeyDown} autoFocus={true} onChange={this.handleOnChange} />
-                <span onMouseDown={() => this.setState({ isFocus: false })} className="close">  <span dangerouslySetInnerHTML={{ __html: buttonX }} /></span></OverLaySearch> : null}
+            <UIInput style={{ background: '#e7f1fa' }} onFocus={this.open} onChange={() => { }} />
+            {isFocus ? <> <OverLaySearch >
+                <InputSeach onKeyDown={this.handleOnKeyDown} autoFocus={true} onChange={this.handleOnChange} />
+                <span onMouseDown={this.close} className="close">
+                    <span dangerouslySetInnerHTML={{ __html: buttonX }} />
+                </span>
+                <SmartList smartList={smartList} close={this.close} />
+            </OverLaySearch></> : null
+            }
         </Wrapper>
     }
 }

@@ -16,7 +16,7 @@ let createTime = new Date().toUTCString()
 //  when public article then will two action  
 // B1 : add article in registryArticle
 // B2 : send request server
-const registry = new Map()
+const cacheArticle = new Map()
 
 class AllArticleContainer extends Container<IAllArticleContainer> {
     constructor(state) {
@@ -25,6 +25,11 @@ class AllArticleContainer extends Container<IAllArticleContainer> {
         this.fetchData(first, offset)
     }
     async fetchData(first, offset) {
+        const dataCache = cacheArticle.get(offset)
+        if (dataCache) {
+            this.setState({ registryArticle: dataCache })
+            return
+        }
         const allArticle = await getAllArticle(first, offset) as any
         const count = await countArticle() as number
         // console.log('dataFake', dataFake)
@@ -39,6 +44,7 @@ class AllArticleContainer extends Container<IAllArticleContainer> {
                     idArticle
                 }
             }) as any[]
+            cacheArticle.set(offset, listContainer)
             await this.setState({ registryArticle: listContainer, count })
         }
     }
