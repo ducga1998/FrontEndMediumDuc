@@ -42,9 +42,10 @@ class Navication extends React.Component<any, any>{
                     <NavItem>
                         <Link to="/about"> About </Link>
                     </NavItem>
-                    <Search />
+
                 </Nav>
                 <Nav pullRight>
+                    <NavItem eventKey={1}><NavItem /><Search /></NavItem>
                     {window.location.pathname === '/home' ? <NavItem eventKey={1} href="#">
                         <Link to="/writearticle" > Write Article</Link>
                     </NavItem> : null}
@@ -55,14 +56,15 @@ class Navication extends React.Component<any, any>{
                             container => {
                                 const { login, dataUser } = container.state
                                 return !login ? <NavItem> <Link to="/login">Login</Link> </NavItem> : <NavDropdown eventKey={3} title="Setting" id="basic-nav-dropdown">
-                                    <MenuItem eventKey={3.1}><Link to="/profile" > Profile</Link></MenuItem>
-                                    <MenuItem eventKey={3.2}><Link to="/stories" >Stories</Link></MenuItem>
-                                    <MenuItem eventKey={3.2}><Link to="/bookmarks" >Bookmark</Link></MenuItem>
-                                    <MenuItem eventKey={3.2}><Link to="/writearticle" >Write Article</Link></MenuItem>
 
-                                    <MenuItem eventKey={3.3}></MenuItem>
+                                    <MenuItem eventKey={3.2}><Link to="/profile" > Profile</Link></MenuItem>
+                                    <MenuItem eventKey={3.3}><Link to="/stories" >Stories</Link></MenuItem>
+                                    <MenuItem eventKey={3.4}><Link to="/bookmarks" >Bookmark</Link></MenuItem>
+                                    <MenuItem eventKey={3.5}><Link to="/writearticle" >Write Article</Link></MenuItem>
+
+                                    <MenuItem eventKey={3.6}></MenuItem>
                                     <MenuItem divider />
-                                    <MenuItem eventKey={3.4}><Link to="/logout" >Logout</Link></MenuItem>
+                                    <MenuItem eventKey={3.7}><Link to="/logout" >Logout</Link></MenuItem>
                                 </NavDropdown>
                             }
                         }

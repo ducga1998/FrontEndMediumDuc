@@ -2,6 +2,7 @@ import * as React from 'react';
 import styled from 'styled-components';
 import UIButton from './UIButton';
 import UIWidget from './UIWidget';
+import { OverLay } from '../UI/styled/overlay';
 // const { useEffect, useState } = React
 interface IUIModal {
     trigger: any
@@ -34,6 +35,7 @@ export default function UIModal({ trigger, children, title, width, height, close
     </$Background>
     </UIWidget> </>
 }
+const $Background = styled(OverLay)``
 const $Header = styled.div`
     background-color: #57aff5;
     font-size: 25px;
@@ -56,27 +58,7 @@ const $Content = styled.div<{ height?: string, width?: string }>`
     width : ${props => props.width ? props.width : 'auto'};
     background-color: white;
 `
-const $Background = styled.div<{ open: Boolean }>`
-    top: 0px;
-    left: 0px;
-    z-index : 1;
-    // pointer-events: initial;
-	box-shadow: none;
-	overflow: visible !important;
-    position: absolute;
-    width : 100%;
-    height : 100%;
-    display  : ${(props: any) => {
-        const { open } = props;
-        if (open) {
-            return 'flex';
-        }
-        return 'none';
-    }};
-    align-items : center;
-    justify-content : center;
-    background: #0000005e;
-`
+
 const $Modal = styled.div<{ width?: string, height?: string }>`
 display : flex;
 flex-direction : column;
