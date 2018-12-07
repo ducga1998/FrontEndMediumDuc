@@ -5,6 +5,7 @@ import { Subscribe } from 'unstated-x';
 import userContainer from '../../Container/userContainer';
 // import BrowserHistory from 'react-router/lib/BrowserHistory'
 import ButtonArticle from './buttonWriteArticle';
+import Search from './Search/search';
 class Navication extends React.Component<any, any>{
 
     public render() {
@@ -41,6 +42,7 @@ class Navication extends React.Component<any, any>{
                     <NavItem>
                         <Link to="/about"> About </Link>
                     </NavItem>
+                    <Search />
                 </Nav>
                 <Nav pullRight>
                     {window.location.pathname === '/home' ? <NavItem eventKey={1} href="#">

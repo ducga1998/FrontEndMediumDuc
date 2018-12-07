@@ -1,6 +1,7 @@
 
 import * as React from 'react'
 import styled from 'styled-components';
+import { Input } from './styled/input'
 interface IUIInput {
     onChange: (e: any) => any,
     value?: string | number,
@@ -9,7 +10,8 @@ interface IUIInput {
     placeholder?: string,
     type?: 'uncontrol' | 'control',
     refInput?: any,
-    onKeyPress?: (e: any) => any
+    onKeyPress?: (e: any) => any,
+    onFocus?: (e: any) => any
 
 }
 export default class UIInput extends React.Component<IUIInput> {
@@ -18,7 +20,7 @@ export default class UIInput extends React.Component<IUIInput> {
 
     }
     render() {
-        const { value, onChange, style, placeholder, type, refInput, onKeyPress } = this.props
+        const { value, onChange, style, placeholder, type, refInput, onKeyPress, onFocus } = this.props
         if (type && type === 'uncontrol') {
             return <$Input
                 placeholder={placeholder || undefined}
@@ -32,33 +34,11 @@ export default class UIInput extends React.Component<IUIInput> {
             placeholder={placeholder || undefined}
             style={style}
             onChange={e => { onChange(e.target.value) }}
+            onFocus={onFocus}
             value={value}
         />
 
     }
 }
-const $Input = styled.input`
-    border: none;
-    padding: 10px;
-    width: 400px;
-    border-radius: 2px;
-    background-color: #d9edf4;
-    color: #3e4141;
-    font-size: 20px;
-    &:focus {
-
-    -webkit-transition: .3s;
-    transition: .3s;
-    outline: none;
-    
-    background-color: #97cddf;
-    color: #454948;
-   
-    font-size: 20px;
-  
-   
-   
-    transition: .3s;
-
-    }
+const $Input = styled(Input)`
 `
