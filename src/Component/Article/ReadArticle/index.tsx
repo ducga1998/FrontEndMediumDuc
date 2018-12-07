@@ -30,7 +30,7 @@ class ReadArticle extends React.Component<any> {
     async componentDidMount() {
         const { match: { params: { id } }, router } = this.props
         commentContainer.getAllCommentByIdArticle(id)
-
+        console.log('didmout article')
         // before refactor articleContainer
         const article = await getArticleById(id) as any
         if (article) {

@@ -15,7 +15,7 @@ export default class SmartList extends React.Component<any> {
         }
         return <ul>
             {smartList.map(item => <Li><A onClick={() => {
-                history.push(`/article/${item.idArticle}`)
+                location.href = `/article/${item.idArticle}`
                 this.props.close();
 
             }}>{item.titleArticle}</A></Li>)}
