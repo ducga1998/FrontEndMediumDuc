@@ -5,7 +5,7 @@ import styled from 'styled-components';
 import { Provider } from 'unstated-x';
 import AppRouter from './route';
 import UITooltip from './UI/UITooltip';
-// import { from 'react-toastify';
+import './app.css'
 
 class App extends React.Component {
   public render() {

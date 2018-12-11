@@ -9,8 +9,10 @@ import UIButton from '../../../UI/UIButton';
 import commentAllContainer from '../../../Container/commentContainer';
 import { notificationSocket } from '../../../socketClient/socket';
 import { Config } from '../../../help/config';
+import { input } from '../../../UI/styled/input';
+import { IMAGE_SOURCE_DEFAULT } from '../../../help/define';
 const config = Config('Comment something now  . . . . . . . ')
-export const IMAGE_SOURCE_DEFAULT = 'https://scontent.fhan5-2.fna.fbcdn.net/v/t1.0-9/30710734_1894791530812895_692578444441026560_n.jpg?_nc_cat=102&_nc_ht=scontent.fhan5-2.fna&oh=46b63236752f0608bb45efcd83a59d05&oe=5C75BB19'
+
 interface IWriteComment {
     idArticle: string,
     imgSrc?: any,
@@ -74,44 +76,21 @@ export default class WriteComment extends React.Component<IWriteComment> {
         this.refComment.current.innerHTML = '<p><br /></p>'
     }
     render() {
-        const { name, avatarLink } = userContainer.state
-        console.log('avatarLink', avatarLink)
+        const { avatarLink } = userContainer.state.dataUser
+
         // here view user write comment 
-        return <>< $Comment>
-            <$Img src={avatarLink ? avatarLink : IMAGE_SOURCE_DEFAULT} /> <b>{name}</b>
-            <$Content ref={this.refComment} />
-            <UIButton onMouseDown={this.handleAddComment} >Comment</UIButton>
-        </$Comment>
-        </>
+        return <FormComment onMouseDown={this.handleAddComment} refContent={this.refComment} avatarLink={avatarLink} />
     }
 }
 
-const $Content = styled.div`
-    &:focus {
-background-color: #f3f3f3;
-    transition: 0.5s;
-    outline: none;
-    border-radius: 10px;
-    color: black;
-    padding: 30px;
-    font-size: 20px;
-    }
-    & {
-        background-color : #ededed;
-        border-radius: 5px;
-        padding : 20px  10px;
-        margin-bottom : 10px;
-        transition: 0.5s;
-    }
-`
-const $Img = styled.img`
+export const FormComment = ({ onMouseDown, refContent, avatarLink }: any) => {
+    return <div>
+        <img className="smallAvatar" src={avatarLink ? avatarLink : IMAGE_SOURCE_DEFAULT} /> <b>{name}</b>
+        <$Content ref={refContent || undefined} />
+        <UIButton onMouseDown={onMouseDown} >Comment</UIButton>
+    </div>
+}
 
+const $Content = styled(input)`
 `
-const $Comment = styled.div`
-    img {
-        width : 50px;
-        height : 50px;
-        border-radius : 50%;
-    }
-   
-`
+

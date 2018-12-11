@@ -20,6 +20,7 @@ function renderButton() {
 
     }
     console.log('countButton', countButton, count % first)
+
     return Array(countButton).fill(1).map((item, key) => {
         return <SubscribeOne to={allArticleContainer} bind={['offset']} >
             {

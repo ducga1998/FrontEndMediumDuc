@@ -34,9 +34,9 @@ class ReadArticle extends React.Component<any> {
         // before refactor articleContainer
         const article = await getArticleById(id) as any
         if (article) {
+            console.log('cmaslnckasncjkasnkcjnas', article)
             // const {user: { idUser, avatarLink, name, articles }} = article
             // allBookMarkContainer.isBookMark({ idArticle: id })
-
             await this.setState({ article })
         }
     }

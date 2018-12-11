@@ -1,10 +1,14 @@
 import * as React from 'react';
 import renderHTML from 'react-render-html';
 import styled from 'styled-components';
-import { IMAGE_SOURCE_DEFAULT } from './writeComment';
+import { FormComment } from './writeComment';
 import { Subscribe } from 'unstated-x';
 import commentAllContainer from '../../../Container/commentContainer';
 import UILoading from '../../../UI/UILoading';
+import { Config } from '../../../help/config';
+import MediumEditer from 'medium-editor';
+import { IMAGE_SOURCE_DEFAULT } from '../../../help/define';
+import RelyComment from './relyComment'
 interface IViewComment {
     idArticle: string,
     comments: any[],
@@ -12,8 +16,10 @@ interface IViewComment {
 }
 export default class ViewComment extends React.Component<IViewComment> {
     state = {
-        comments: []
+        comments: [],
+        open: false
     }
+    refContent = React.createRef()
     async componentDidMount() {
         const { comments, idArticle } = this.props
         await this.setState({ comments })
@@ -28,41 +34,51 @@ export default class ViewComment extends React.Component<IViewComment> {
 
         return <Subscribe to={[commentAllContainer]}>
             {
-                container => {
+                () => {
                     const { idArticle } = this.props
-                    const data = container.state.registryComment.find(item => item.idArticle === idArticle)
-                    console.log('dacnkajsncjkanscnkjasnc', data)
+                    const data = commentAllContainer.state.registryComment.find(item => item.idArticle === idArticle)
                     if (!data) {
                         return <UILoading />
                     }
                     const { commentContainer } = data
                     return <Subscribe to={[commentContainer]}>
                         {
-                            commentContainer => {
+                            () => {
                                 const { allComments } = commentContainer.state
                                 return <div>
                                     {allComments.length > 0 ? allComments.map((item: any, key) => {
-                                        // console.log('cscas', item)
-                                        const { userComment: { avatarLink, name }, createdAt } = item
-
-                                        return <$Comment data-tooltip={`Created At : ${new Date(createdAt)}`} key={key} >
-
-                                            <$Img data-tooltip={name} src={avatarLink ? avatarLink : IMAGE_SOURCE_DEFAULT} />
-                                            <$Content  >{renderHTML(item.content)}</$Content>
-                                        </$Comment>
-                                    }) : <h2 style={{ textAlign: 'center', color: 'gray' }}> NO  Comment,  : ))) cmt vào cho vui đi thằng ngu</h2>
+                                        return <Comment dataUserComment={item} />
+                                    }) :
+                                        <h2 style={{ textAlign: 'center', color: 'gray' }}> NO  Comment,  : ))) cmt vào cho vui đi thằng ngu</h2>
                                     }
                                 </div>
                             }
                         }
                     </Subscribe>
-
-
                 }
             }
         </Subscribe>
 
     }
+}
+const Comment = ({ dataUserComment }) => {
+    const [open, setOpen] = React.useState(false)
+    const refContent = React.useRef(null)
+    React.useEffect(() => {
+        console.log('refContent', refContent)
+        if (refContent.current) {
+            const title = new MediumEditer(refContent.current, Config)
+
+        }
+    })
+    const { userComment: { avatarLink, name }, createdAt, content } = dataUserComment
+    // userData 
+    return <>
+        <$Comment onMouseDown={() => { setOpen(!open) }} data-tooltip={`Created At : ${new Date(createdAt)}`}>
+            <$Img data-tooltip={name} src={avatarLink ? avatarLink : IMAGE_SOURCE_DEFAULT} />
+            <$Content  >{renderHTML(content)}</$Content>
+        </$Comment>
+    </>
 }
 const $Content = styled.div`
     &:focus {

@@ -12,6 +12,7 @@ interface IUIInput {
     refInput?: any,
     onKeyPress?: (e: any) => any,
     onFocus?: (e: any) => any
+    autoFocus?: boolean
 
 }
 export default class UIInput extends React.Component<IUIInput> {
@@ -20,7 +21,7 @@ export default class UIInput extends React.Component<IUIInput> {
 
     }
     render() {
-        const { value, onChange, style, placeholder, type, refInput, onKeyPress, onFocus } = this.props
+        const { value, onChange, style, placeholder, type, refInput, onKeyPress, onFocus, autoFocus } = this.props
         if (type && type === 'uncontrol') {
             return <$Input
                 placeholder={placeholder || undefined}
@@ -29,6 +30,7 @@ export default class UIInput extends React.Component<IUIInput> {
             />
         }
         return <$Input
+            autoFocus={autoFocus || undefined}
             onKeyPress={onKeyPress}
             ref={refInput}
             placeholder={placeholder || undefined}

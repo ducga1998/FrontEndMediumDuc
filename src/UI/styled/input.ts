@@ -20,3 +20,21 @@ export const Input = styled.input`
 
 }
 `
+export const input = styled.div`
+    &:focus {
+    background-color: #f3f3f3;
+    transition: 0.5s;
+    outline: none;
+    border-radius: 10px;
+    color: black;
+    padding: 30px;
+    font-size: 20px;
+    }
+    & {
+        background-color : #ededed;
+        border-radius: 5px;
+        padding : 20px  10px;
+        margin-bottom : 10px;
+        transition: 0.5s;
+    }
+`

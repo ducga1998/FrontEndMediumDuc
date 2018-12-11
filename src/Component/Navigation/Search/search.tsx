@@ -21,6 +21,7 @@ export default class Search extends React.Component {
     handleOnChange = (e) => {
         const { afterData } = this.state
         const { value } = e.target
+        this.setState({ value })
         const smartList = afterData.filter((item: any) => item.titleArticle.includes(value))
         console.log('dataFilter', smartList)
         this.setState({ smartList })
@@ -36,11 +37,11 @@ export default class Search extends React.Component {
         this.setState({ isFocus: true })
     }
     render() {
-        const { isFocus, smartList } = this.state
+        const { isFocus, smartList, value } = this.state
         return <Wrapper>
-            <UIInput style={{ background: '#e7f1fa' }} onFocus={this.open} onChange={() => { }} />
+            <UIInput placeholder="Search Something ... " style={{ background: '#e7f1fa' }} value={value} onFocus={this.open} onChange={() => { }} />
             {isFocus ? <> <OverLaySearch >
-                <InputSeach onKeyDown={this.handleOnKeyDown} autoFocus={true} onChange={this.handleOnChange} />
+                <InputSeach value={value} onKeyDown={this.handleOnKeyDown} autoFocus={true} onChange={this.handleOnChange} />
                 <span onMouseDown={this.close} className="close">
                     <span dangerouslySetInnerHTML={{ __html: buttonX }} />
                 </span>

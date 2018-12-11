@@ -34,7 +34,7 @@ export default class ListArticle extends React.Component<any> {
                             return <Subscribe to={[articleContainer]}>
                                 {
                                     () => {
-                                        const { hashTag, contentArticle, titleArticle, createTime, idArticle, user, comment } = articleContainer.state
+                                        const { hashTag, contentArticle, titleArticle, createTime, idArticle, user, comment, bookmark } = articleContainer.state
                                         return <Article
                                             user={user}
                                             idArticle={idArticle}
@@ -42,7 +42,7 @@ export default class ListArticle extends React.Component<any> {
                                             hashTag={hashTag}
                                             time={createTime}
                                             content={contentArticle}
-                                            totalClap={8}
+                                            totalClap={bookmark.length}
                                             totalComment={comment.length}
                                             titleArticle={titleArticle}
                                             avatar={`https://picsum.photos/200/200/?a${item}`} />

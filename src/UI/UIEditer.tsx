@@ -41,7 +41,7 @@ export default function UIEditer({ info, content }: IUIEditer) {
     return <div><h3 onClick={(e: any) => { setOpen(!open); }} ><b>{info} : </b>{(value ? value : '')}
         <Glyphicon glyph="edit" /></h3>
         {open ? <$Flex>
-            <UIInput onKeyPress={handleOnPress} style={{ width: '100%' }} refInput={inputref} onChange={() => { }} placeholder={info} />
+            <UIInput autoFocus onKeyPress={handleOnPress} style={{ width: '100%' }} refInput={inputref} onChange={() => { }} placeholder={info} />
             <UIButton style={{ "margin-left": "20px" }} onMouseDown={handleOnClick}>Edit</UIButton>
         </$Flex> : null}
     </div>

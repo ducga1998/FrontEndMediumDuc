@@ -72,6 +72,9 @@ export function getArticleById(id) {
                                 idArticle
                                 content
                             }
+                            bookmark {
+                                idUserBookMark
+                            }
                             totalClap
                             notification
                             contentArticle
@@ -112,6 +115,9 @@ export function getAllArticle(first = 5, offset = 0) {
                                     idUser
                                     idArticle
                                     content
+                                }
+                                bookmark {
+                                    idUserBookMark
                                 }
                                 totalClap
                                 notification

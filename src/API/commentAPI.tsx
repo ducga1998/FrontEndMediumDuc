@@ -25,10 +25,7 @@ export function getAllCommentinArtcileCurrent(idUser: string) {
                     }
                     `
         })
-        if (API) {
-            resolve(convertDataToGraphQL(API))
-        }
-        resolve({})
+        resolve(convertDataToGraphQL(API))
 
     })
 }
