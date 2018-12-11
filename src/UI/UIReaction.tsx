@@ -25,7 +25,6 @@ export default function UIReaction({ idUseOwnArticler, idArticle }: IUIReaction)
         allBookMarkContainer.isBookMark({ idArticle })
 
         window.addEventListener('scroll', (a) => {
-            console.log('scroll top', window.scrollY)
             if (refReaction.current && window.scrollY < 40) {
                 refReaction.current.style.opacity = 0
             }

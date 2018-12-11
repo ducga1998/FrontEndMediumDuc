@@ -1,7 +1,7 @@
 import * as React from 'react';
 import renderHTML from 'react-render-html';
 import styled from 'styled-components';
-import { FormComment } from './writeComment';
+// import { FormComment } from './writeComment';
 import { Subscribe } from 'unstated-x';
 import commentAllContainer from '../../../Container/commentContainer';
 import UILoading from '../../../UI/UILoading';
@@ -11,25 +11,10 @@ import { IMAGE_SOURCE_DEFAULT } from '../../../help/define';
 import RelyComment from './relyComment'
 interface IViewComment {
     idArticle: string,
-    comments: any[],
 
 }
 export default class ViewComment extends React.Component<IViewComment> {
-    state = {
-        comments: [],
-        open: false
-    }
     refContent = React.createRef()
-    async componentDidMount() {
-        const { comments, idArticle } = this.props
-        await this.setState({ comments })
-    }
-    async componentDidUpdate(preProps, preState) {
-        if (preProps.comments !== this.props.comments) {
-            const { comments } = this.props
-            this.setState({ comments })
-        }
-    }
     render() {
 
         return <Subscribe to={[commentAllContainer]}>

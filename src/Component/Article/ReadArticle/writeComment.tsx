@@ -11,6 +11,7 @@ import { notificationSocket } from '../../../socketClient/socket';
 import { Config } from '../../../help/config';
 import { input } from '../../../UI/styled/input';
 import { IMAGE_SOURCE_DEFAULT } from '../../../help/define';
+import { FormComment } from './FormComment';
 const config = Config('Comment something now  . . . . . . . ')
 
 interface IWriteComment {
@@ -18,7 +19,6 @@ interface IWriteComment {
     imgSrc?: any,
     name: string,
     idUser: string,
-    onChange: (e: any) => any
     titleArticle?: string
 
 }
@@ -28,16 +28,12 @@ export default class WriteComment extends React.Component<IWriteComment> {
     }
     refComment: any = React.createRef()
     async componentDidMount() {
-        const { idArticle, idUser } = this.props
-
-        commentAllContainer.getAllCommentByIdArticle(idArticle)
-        // console.log('allComment', allComment)
-        notificationSocket.emit('join', idUser)
-        const title = new MediumEditer(this.refComment.current, config)
-        title.subscribe('editableInput', (event, editable) => {
-            const content = event.srcElement.innerHTML
-            this.setState({ content })
-        });
+        notificationSocket.emit('join', this.props.idUser)
+        // const title = new MediumEditer(this.refComment.current, config)
+        // title.subscribe('editableInput', (event, editable) => {
+        //     const content = event.srcElement.innerHTML
+        //     this.setState({ content })
+        // });
 
     }
     componentWillUnmount() {
@@ -45,7 +41,7 @@ export default class WriteComment extends React.Component<IWriteComment> {
             notificationSocket.emit('leave', this.props.idUser)
         }
     }
-
+    //when click
     handleAddComment = async () => {
         const { idArticle, titleArticle } = this.props
         const { content } = this.state
@@ -60,7 +56,6 @@ export default class WriteComment extends React.Component<IWriteComment> {
             idUser,
             idArticle,
         }
-        // this.props.idUser  != userContainer.state.dataUser.idUser
 
         const commentSocket = {
             titleArticle,
@@ -77,19 +72,11 @@ export default class WriteComment extends React.Component<IWriteComment> {
     }
     render() {
         const { avatarLink } = userContainer.state.dataUser
-
-        // here view user write comment 
-        return <FormComment onMouseDown={this.handleAddComment} refContent={this.refComment} avatarLink={avatarLink} />
+        return <FormComment onMouseDown={this.handleAddComment} getRef={ref => this.refComment = ref} avatarLink={avatarLink} />
     }
 }
 
-export const FormComment = ({ onMouseDown, refContent, avatarLink }: any) => {
-    return <div>
-        <img className="smallAvatar" src={avatarLink ? avatarLink : IMAGE_SOURCE_DEFAULT} /> <b>{name}</b>
-        <$Content ref={refContent || undefined} />
-        <UIButton onMouseDown={onMouseDown} >Comment</UIButton>
-    </div>
-}
+
 
 const $Content = styled(input)`
 `

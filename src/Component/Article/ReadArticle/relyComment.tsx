@@ -3,7 +3,7 @@ import { Config } from '../../../help/config'
 import { IMAGE_SOURCE_DEFAULT } from '../../../help/define'
 import { input } from '../../../UI/styled/input'
 import styled from 'styled-components'
-import { FormComment } from './writeComment'
+import { FormComment } from './FormComment'
 import renderHTML from 'react-render-html'
 import MediumEditer from 'medium-editor'
 const CommentRely = ({ dataUserComment }) => {

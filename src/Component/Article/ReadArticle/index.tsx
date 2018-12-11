@@ -22,77 +22,64 @@ interface IReadArticleType {
     router?: any,
     route?: any
 }
+export const ArticleContext = React.createContext(null)
 class ReadArticle extends React.Component<any> {
     state = {
         article: null,
-        allCommentInArticle: []
     }
     async componentDidMount() {
         const { match: { params: { id } }, router } = this.props
         commentContainer.getAllCommentByIdArticle(id)
-        console.log('didmout article')
-        // before refactor articleContainer
         const article = await getArticleById(id) as any
         if (article) {
-            console.log('cmaslnckasncjkasnkcjnas', article)
-            // const {user: { idUser, avatarLink, name, articles }} = article
-            // allBookMarkContainer.isBookMark({ idArticle: id })
             await this.setState({ article })
         }
     }
 
 
     render() {
-        // console.log(allBookMarkContainer)
-        const { article, allCommentInArticle }: any = this.state
+        const { article }: any = this.state
 
         if (article) {
-            console.log('update update', article, allCommentInArticle)
-            const { user: { idUser, avatarLink, name, articles }, idArticle, contentArticle, titleArticle, hashTag, createTime } = article
-            return <$Align>
-                {/* UIReraction need idArticle and idUser own this article */}
-                <UIReaction idArticle={idArticle} idUseOwnArticler={idUser} />
-                <div style={{
-                    width: '70%'
-                }}>
+            const { user: { idUser, avatarLink, name }, idArticle, contentArticle, titleArticle, hashTag, createTime } = article
+            return <ArticleContext.Provider value={article}>
+                <$Align>
+                    {/* UIReraction need idArticle and idUser own this article */}
+                    <UIReaction idArticle={idArticle} idUseOwnArticler={idUser} />
+                    <div style={{
+                        width: '70%'
+                    }}>
 
-                    <Author idUser={idUser} avatarLink={avatarLink} totalFollow={10} name={name} totalArticle={213} />
-                    <$HashTag>
-                        HashTag :  {hashTag.map((item, key) => {
-                            return <Label key={key} style={{ fontSize: '15px', margin: ' 0px' }}>{item}</Label>
-                        })}
-                    </$HashTag>
+                        <Author idUser={idUser} avatarLink={avatarLink} totalFollow={10} name={name} totalArticle={213} />
+                        <$HashTag>
+                            HashTag :  {hashTag.map((item, key) => {
+                                return <Label key={key} style={{ fontSize: '15px', margin: ' 0px' }}>{item}</Label>
+                            })}
+                        </$HashTag>
+                        <p>{createTime}</p>
+                        <$Title>
+                            <h1> {renderHTML(titleArticle)}</h1>
+                        </$Title>
+                        <$ContentArticle >
+                            {renderHTML(contentArticle)}
+                        </$ContentArticle>
+                        <$WriteComment>
+                            {/* component assign  add new Comment */}
+                            <WriteComment
+                                titleArticle={titleArticle}
+                                idUser={idUser}
+                                idArticle={idArticle}
+                                imgSrc={avatarLink} name={name} />
+                        </$WriteComment>
+                        <h2>All Comment Article</h2>
+                        <$ViewComment>
+                            <CommentArticle
+                                idArticle={idArticle} />
+                        </$ViewComment>
 
-
-                    <p>{createTime}</p>
-                    <$Title>
-                        <h1> {renderHTML(titleArticle)}</h1>
-                    </$Title>
-                    <$ContentArticle >
-                        {renderHTML(contentArticle)}
-                    </$ContentArticle>
-                    <$WriteComment>
-                        {/* component assign  add new Comment */}
-                        <WriteComment
-                            titleArticle={titleArticle}
-                            onChange={async (comment) => {
-                                allCommentInArticle.push(comment);
-                                await this.setState({ allCommentInArticle })
-                            }}
-                            idUser={idUser}
-                            idArticle={article.idArticle}
-                            imgSrc={avatarLink} name={name} />
-                    </$WriteComment>
-                    <h2>All Comment Article</h2>
-                    <$ViewComment>
-                        {/* view comment component */}
-                        <CommentArticle
-
-                            comments={allCommentInArticle} idArticle={article.idArticle} />
-                    </$ViewComment>
-
-                </div>
-            </$Align>
+                    </div>
+                </$Align>
+            </ArticleContext.Provider>
         }
         return <UILoading />
 
