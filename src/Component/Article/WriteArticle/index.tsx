@@ -7,7 +7,7 @@ import Author from '../../Author';
 import UIRichText from '../../../UI/UIRichText';
 
 
-const CallWhenWrite = debouce(async (value, content) => {
+export const callWhenWrite = debouce(async (value, content) => {
     if (content === '<p><br></p>') {
         await articleContainer.setState({ isPublicArticle: false })
     }
@@ -32,7 +32,7 @@ const WriteArticle = () => {
                 await articleContainer.setState({ isPublicArticle: true, titleArticle: value })
             }} /></h1>
             <UIRichText placeholder="'Write something you want ......." onChange={value => {
-                CallWhenWrite('contentArticle', value)
+                callWhenWrite('contentArticle', value)
             }} />
 
         </div>

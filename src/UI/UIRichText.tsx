@@ -4,22 +4,38 @@ import * as React from 'react';
 import styled from 'styled-components';
 import { Config } from '../help/config';
 interface IUIRichText {
-    placeholder: string, onChange: (e: any) => any, isTitle?: boolean
+    placeholder?: string,
+    onChange?: (e: any) => any,
+    isTitle?: boolean,
+    mode?: 'view' | 'edit'
+    children?: any,
+    content?: String
 }
-const UIRichText = ({ placeholder, onChange, isTitle }: IUIRichText) => {
+const UIRichText = ({ placeholder, onChange, isTitle, mode, children, content }: IUIRichText) => {
     const textPlaceholder = Config(placeholder);
 
-    const inputEl = React.useRef(null);
+    const richtextRef = React.useRef(null);
     React.useEffect(() => {
-        const text = new MediumEditer(inputEl.current, textPlaceholder)
-        text.subscribe('editableInput', async function (event, editable) {
-            //  this parameter is value rich text form  : ))). pefect 
-            onChange(event.srcElement.innerHTML)
-        })
+        // OMG, this here handle work richtext or not work richText, it help me reuse UIRichText
+        if ((!mode || mode && mode === 'edit') && richtextRef.current) {
+            console.log('??????? mode', mode)
+            const text = new MediumEditer(richtextRef.current, textPlaceholder)
+            console.log('text', text)
+            text.subscribe('editableInput', async function (event) {
+                //  this parameter is value rich text form  : ))). pefect 
+                if (onChange && event.srcElement) {
+                    await onChange(event.srcElement.innerHTML)
+                }
+            })
+            if (content) {
+                text.setContent(content, 0)
+            }
+
+        }
 
         return () => { console.log('cascasn') }
     })
-    return <$RichText isTitle={isTitle || undefined} ref={inputEl} />
+    return <$RichText isTitle={isTitle || undefined} ref={richtextRef} >{children}</$RichText>
 
 
 

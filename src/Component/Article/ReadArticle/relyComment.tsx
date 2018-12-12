@@ -3,7 +3,7 @@ import { Config } from '../../../help/config'
 import { IMAGE_SOURCE_DEFAULT } from '../../../help/define'
 import { input } from '../../../UI/styled/input'
 import styled from 'styled-components'
-import { FormComment } from './FormComment'
+import FormComment from './FormComment'
 import renderHTML from 'react-render-html'
 import MediumEditer from 'medium-editor'
 const CommentRely = ({ dataUserComment }) => {
@@ -20,7 +20,7 @@ const CommentRely = ({ dataUserComment }) => {
             <img className="smallAvatar" data-tooltip={name} src={avatarLink ? avatarLink : IMAGE_SOURCE_DEFAULT} />
             <$Content  >{renderHTML(content)}</$Content>
         </div>
-        {open ? <FormComment refContent={refContent} avatarLink={avatarLink} onMouseDown={() => { }} /> : null}
+        {open ? <FormComment onMouseDown={() => { }} /> : null}
     </>
 }
 const $Content = styled(input)`

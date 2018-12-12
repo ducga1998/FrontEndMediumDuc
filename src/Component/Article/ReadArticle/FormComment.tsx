@@ -8,28 +8,59 @@ import { Config } from '../../../help/config';
 import styled from 'styled-components';
 import { input } from '../../../UI/styled/input';
 import { ArticleContext } from 'src/Component/Article/ReadArticle';
-// this component view Form Comment
-export const FormComment = ({ onMouseDown, getRef, avatarLink }: any) => {
-    const refContent = React.useRef(null)
+import { toast } from 'react-toastify';
+import userContainer from '../../../Container/userContainer';
+import { notificationSocket } from '../../../socketClient/socket';
+import commentAllContainer from '../../../Container/commentContainer';
+import { renderElement } from '../../../Core/renderElement';
+const FormComment = ({ context }: any) => {
+    const refContent = React.useRef(null) as any
+    const [content, setContent] = React.useState('')
+    let { name, avatarLink } = userContainer.state.dataUser
+    const { titleArticle, idArticle, idUser } = context
     React.useEffect(() => {
-        getRef(refContent)
-        // if (refContent.current) {
-        //     const title = new MediumEditer(refContent.current, Config)
+        if (refContent.current) {
+            const title = new MediumEditer(refContent.current, Config)
 
-        // }
-    })
-    return <ArticleContext.Consumer>
-        {
-            articleData => {
-                console.log('articleData', articleData)
-                return <div>
-                    <img className="smallAvatar" src={avatarLink ? avatarLink : IMAGE_SOURCE_DEFAULT} /> <b>{name}</b>
-                    <$Content ref={refContent || undefined} />
-                    <UIButton onMouseDown={onMouseDown} >Comment</UIButton>
-                </div>
-            }
+            title.subscribe('editableInput', event => {
+                setContent(event.srcElement.innerHTML)
+            });
         }
-    </ArticleContext.Consumer>
+    })
+    const handleAddComment = async () => {
+
+        if (content === ' <p><br></p>' || content === '') {
+            toast.error('Comment not empty !!!. Please write something ')
+            return
+        }
+
+        const input = {
+            content,
+            idUser: userContainer.state.dataUser.idUser,
+            idArticle,
+        }
+
+        const commentSocket = {
+            titleArticle,
+            content,
+            name,
+            type: 'Comment',
+            avatarLink
+        }
+        // must take idUser comment =>  this.props.isUser
+        notificationSocket.emit('notificationMessage', idUser, commentSocket)
+        await commentAllContainer.addCommentInArticle(input) // function handle request to backend and add data to commentAllContainer
+        setContent('')
+        refContent.current.innerHTML = '<p><br /></p>'
+    }
+    return <div>
+        <img className="smallAvatar" src={avatarLink ? avatarLink : IMAGE_SOURCE_DEFAULT} /> <b>{name}</b>
+        <$Content ref={refContent} />
+        <UIButton onMouseDown={handleAddComment} >Comment</UIButton>
+    </div>
+
+
 }
 const $Content = styled(input)`
 `
+export default renderElement(FormComment)

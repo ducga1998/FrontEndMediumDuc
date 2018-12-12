@@ -9,6 +9,7 @@ import { Config } from '../../../help/config';
 import MediumEditer from 'medium-editor';
 import { IMAGE_SOURCE_DEFAULT } from '../../../help/define';
 import RelyComment from './relyComment'
+import FormComment from './FormComment';
 interface IViewComment {
     idArticle: string,
 
@@ -62,7 +63,10 @@ const Comment = ({ dataUserComment }) => {
         <$Comment onMouseDown={() => { setOpen(!open) }} data-tooltip={`Created At : ${new Date(createdAt)}`}>
             <$Img data-tooltip={name} src={avatarLink ? avatarLink : IMAGE_SOURCE_DEFAULT} />
             <$Content  >{renderHTML(content)}</$Content>
+
         </$Comment>
+
+        {open ? <FormComment /> : null}
     </>
 }
 const $Content = styled.div`
