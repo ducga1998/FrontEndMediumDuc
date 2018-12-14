@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import articleContainer from '../../../Container/articleContainer';
 import userContainer from '../../../Container/userContainer';
 import Author from '../../Author';
-import UIRichText from '../../../UI/UIRichText';
+import UIRichText from '../../../Components/UI/UIRichText';
 
 
 export const callWhenWrite = debouce(async (value, content) => {

@@ -3,8 +3,8 @@ import { Link } from "react-router-dom";
 import { toast } from 'react-toastify';
 import styled from 'styled-components';
 import userContainer from '../../Container/userContainer';
-import UIButton from '../../UI/UIButton';
-import UIField from '../../UI/UIField';
+import UIButton from '../../Components/UI/UIButton';
+import UIField from '../../Components/UI/UIField';
 
 const { useState, useEffect, useRef } = React
 function CheckUser(user, password) {

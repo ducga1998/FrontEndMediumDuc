@@ -1,18 +1,19 @@
 
-import UIButton from '../../../UI/UIButton';
+import UIButton from '../../../Components/UI/UIButton';
 
 import MediumEditer from 'medium-editor'
 import * as React from 'react'
 import { IMAGE_SOURCE_DEFAULT } from '../../../help/define';
 import { Config } from '../../../help/config';
 import styled from 'styled-components';
-import { input } from '../../../UI/styled/input';
+
 import { ArticleContext } from 'src/Views/Article/ReadArticle';
 import { toast } from 'react-toastify';
 import userContainer from '../../../Container/userContainer';
 import { notificationSocket } from '../../../socketClient/socket';
 import commentAllContainer from '../../../Container/commentContainer';
 import { renderElement } from '../../../Core/renderElement';
+import { input } from 'src/Components/styled/input';
 const FormComment = ({ context }: any) => {
     const refContent = React.useRef(null) as any
     const [content, setContent] = React.useState('')

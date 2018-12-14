@@ -7,7 +7,7 @@ import userContainer from '../../Container/userContainer';
 
 import { chatsockets, roomSockets } from '../../socketClient/socket';
 
-import UIButton from '../../UI/UIButton';
+import UIButton from '../../Components/UI/UIButton';
 
 import { getMessageByIdRoom } from '../../API/messageAPI';
 

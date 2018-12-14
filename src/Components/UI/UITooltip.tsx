@@ -1,6 +1,7 @@
 
 import * as React from 'react';
 import styled from 'styled-components';
+import { Tooltip } from '../styled/base';
 export default class UITooltip extends React.Component<any> {
     refToolTip: any = React.createRef()
     handleMouseDown = (e) => {
@@ -38,12 +39,14 @@ export default class UITooltip extends React.Component<any> {
             onMouseOverCapture={this.handleMouseOver}
             onMouseOutCapture={this.handleMouseLeave}
         >
+
             <$ToolTip ref={this.refToolTip} />
             {this.props.children}
         </div>
     }
 }
 const $ToolTip = styled.div`
+
 background-color: #1b1a1a;
     color: white;
     position: absolute;

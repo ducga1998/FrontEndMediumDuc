@@ -4,7 +4,7 @@ import styled from 'styled-components';
 // import { FormComment } from './writeComment';
 import { Subscribe } from 'unstated-x';
 import commentAllContainer from '../../../Container/commentContainer';
-import UILoading from '../../../UI/UILoading';
+import UILoading from '../../../Components/UI/UILoading';
 import { Config } from '../../../help/config';
 import MediumEditer from 'medium-editor';
 import { IMAGE_SOURCE_DEFAULT } from '../../../help/define';

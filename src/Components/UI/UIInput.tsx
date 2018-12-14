@@ -1,7 +1,9 @@
 
 import * as React from 'react'
 import styled from 'styled-components';
-import { Input } from './styled/input'
+import { Input } from '../styled/input';
+
+
 interface IUIInput {
     onChange: (e: any) => any,
     value?: string | number,
@@ -29,7 +31,7 @@ export default class UIInput extends React.Component<IUIInput> {
                 ref={this.inputRef}
             />
         }
-        return <$Input
+        return <Input
             autoFocus={autoFocus || undefined}
             onKeyPress={onKeyPress}
             ref={refInput}

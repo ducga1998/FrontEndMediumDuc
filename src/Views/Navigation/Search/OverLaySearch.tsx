@@ -1,10 +1,9 @@
 import * as React from 'react'
-import UIInput from '../../../UI/UIInput';
-import UIWidget from '../../../UI/UIWidget';
+import UIInput from '../../../Components/UI/UIInput';
+import UIWidget from '../../../Components/UI/UIWidget';
 import styled from 'styled-components';
-import { Input } from '../../../UI/styled/input';
-import { OverLay } from '../../../UI/styled/overlay';
 import SmartList from './smartList';
+import { OverLay } from 'src/Components/styled/overlay';
 export default class OverLaySearch extends React.Component {
     state = {
         value: '',

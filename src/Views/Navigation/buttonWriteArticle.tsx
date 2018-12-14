@@ -4,10 +4,11 @@ import { toast } from 'react-toastify';
 import styled from 'styled-components';
 import { Subscribe } from 'unstated-x';
 import ArticleContainer from '../../Container/articleContainer';
-import UIButton from '../../UI/UIButton';
-import UIModal from '../../UI/UIModal';
+
 import uuid from 'uuid';
 import articleContainer from '../../Container/articleContainer';
+import UIModal from '../../Components/UI/UIModal';
+import UIButton from '../../Components/UI/UIButton';
 export default function ButtonArticle({ history }: any) {
 
     // state support UIModal 

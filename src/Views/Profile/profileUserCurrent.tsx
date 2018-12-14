@@ -1,4 +1,4 @@
-import UIEditer from '../../UI/UIEditer';
+import UIEditer from '../../Components/UI/UIEditer';
 import * as React from 'react';
 import { Button, Glyphicon } from 'react-bootstrap';
 import { getAllInformationUser } from 'src/API/client';
@@ -6,11 +6,11 @@ import styled from 'styled-components';
 import { follow, getAllInfomationUserFollowYour, unFollow } from '../../API/followAPI';
 import userContainer from '../../Container/userContainer';
 import srcImg from '../../image/9284571_300x300.jpeg';
-import UILoading from '../../UI/UILoading';
+import UILoading from '../../Components/UI/UILoading';
 import Article from '../Article';
-import UIButton from '../../UI/UIButton';
-import UIModal from '../../UI/UIModal';
-import UIInput from '../../UI/UIInput';
+import UIButton from '../../Components/UI/UIButton';
+import UIModal from '../../Components/UI/UIModal';
+import UIInput from '../../Components/UI/UIInput';
 
 interface IViewUserCurrent {
     match: any

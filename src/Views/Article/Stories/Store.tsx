@@ -4,7 +4,7 @@ import articleContainer from '../../../Container/articleContainer';
 import userContainer from '../../../Container/userContainer';
 import Author from '../../Author';
 import { getArticleById } from '../../../API/articleAPI';
-import UIRichText from '../../../UI/UIRichText';
+import UIRichText from '../../../Components/UI/UIRichText';
 import { SubscribeOne } from 'unstated-x';
 import { callWhenWrite } from '../WriteArticle';
 const { useEffect } = React as any

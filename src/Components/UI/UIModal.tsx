@@ -1,8 +1,11 @@
 import * as React from 'react';
 import styled from 'styled-components';
-import UIButton from './UIButton';
+
+
+import theme from '../../theme';
 import UIWidget from './UIWidget';
-import { OverLay } from '../UI/styled/overlay';
+import UIButton from './UIButton';
+import { OverLay } from '../styled/overlay';
 // const { useEffect, useState } = React
 interface IUIModal {
     trigger: any
@@ -56,7 +59,7 @@ const $Content = styled.div<{ height?: string, width?: string }>`
     padding : 10px;
     height : ${props => props.height ? props.height : '500px'};
     width : ${props => props.width ? props.width : 'auto'};
-    background-color: white;
+    background-color: ${theme.bg.default};
 `
 
 const $Modal = styled.div<{ width?: string, height?: string }>`

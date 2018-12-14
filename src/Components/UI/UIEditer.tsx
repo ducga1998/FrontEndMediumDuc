@@ -1,11 +1,13 @@
 
 
 import *  as React from 'react'
-import userContainer from '../Container/userContainer';
+
 import { Glyphicon } from 'react-bootstrap';
-import UIInput from './UIInput';
-import UIButton from './UIButton';
+
 import styled from 'styled-components';
+import userContainer from '../../Container/userContainer';
+import UIButton from './UIButton';
+import UIInput from './UIInput';
 
 const { useState, useRef } = React
 interface IUIEditer {

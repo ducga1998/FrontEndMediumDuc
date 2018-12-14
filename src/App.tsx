@@ -5,7 +5,7 @@ import styled from 'styled-components';
 import { Provider } from 'unstated-x';
 import AppRouter from './route';
 import { ThemeProvider } from 'styled-components';
-import UITooltip from './UI/UITooltip';
+import UITooltip from './Components/UI/UITooltip';
 import './app.css'
 import { throwServerError } from 'apollo-link-http-common';
 import { theme } from './theme';

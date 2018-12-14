@@ -2,7 +2,7 @@
 import MediumEditer from 'medium-editor';
 import * as React from 'react';
 import styled from 'styled-components';
-import { Config } from '../help/config';
+import { Config } from '../../help/config';
 interface IUIRichText {
     placeholder?: string,
     onChange?: (e: any) => any,

@@ -1,11 +1,11 @@
 import * as React from 'react'
-import UIInput from '../../../UI/UIInput';
+import UIInput from '../../../Components/UI/UIInput';
 import OverLaySearch from './OverLaySearch';
-import { Input } from '../../../UI/styled/input';
 import styled from 'styled-components';
 import buttonX from './buttonX.svg'
 import { getDataSearch } from '../../../API/articleAPI';
 import SmartList from './smartList';
+import { Input } from '../../../Components/styled/base';
 export default class Search extends React.Component {
     state = {
         value: '',

@@ -1,12 +1,12 @@
 import * as React from 'react';
-// import { Aside, Header, Layout, Main, Nav, SubHeader } from '../UI/styled/layout'
+// import { Aside, Header, Layout, Main, Nav, SubHeader } from '../Components/UI/styled/layout'
 // import AppRouter from '../route'
 import { Button, ButtonGroup, ButtonToolbar } from 'react-bootstrap';
 import renderHTML from 'react-render-html';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import { filterStringHTML } from '../../help/help';
-import UILoading from '../../UI/UILoading';
+import UILoading from '../../Components/UI/UILoading';
 export interface IArticle {
     avatar: String;
     titleArticle: String;

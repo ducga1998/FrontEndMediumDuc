@@ -4,13 +4,13 @@ import { Label } from 'react-bootstrap';
 import renderHTML from 'react-render-html';
 import styled from 'styled-components';
 import { getArticleById } from '../../../API/articleAPI';
-import UILoading from '../../../UI/UILoading';
+import UILoading from '../../../Components/UI/UILoading';
 import Author from '../../Author';
 import CommentArticle from './comment';
 import WriteComment from './writeComment';
 import commentContainer from '../../../Container/commentContainer';
-import UIReaction from '../../../UI/UIReaction';
-import UIRichText from '../../../UI/UIRichText';
+import UIReaction from '../../../Components/UI/UIReaction';
+import UIRichText from '../../../Components/UI/UIRichText';
 
 interface IReadArticleType {
     match: any,

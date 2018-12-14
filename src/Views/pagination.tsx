@@ -1,8 +1,9 @@
 import * as React from 'react';
 import { allArticleContainer } from '../Container/articleContainer';
-import UIButton from '../UI/UIButton';
+
 import { SubscribeOne } from 'unstated-x';
 import styled from 'styled-components';
+import UIButton from '../Components/UI/UIButton';
 
 
 
@@ -28,7 +29,7 @@ function renderButton() {
 
                     const { offset } = allArticleContainer.state
                     console.log(offset, key)
-                    return <UIButton style={{ margin: '2px' }} active={key === offset} keyButton={key} onMouseDown={handleOnClick}>{key + 1}</UIButton>
+                    return <UIButton style={{ margin: '2px' }} active={key === offset} keyButton={key} onMouseDown={handleOnClick}>{key + 1}</ UIButton >
                 }
             }
         </SubscribeOne>

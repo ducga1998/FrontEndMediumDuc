@@ -6,8 +6,8 @@ import { follow, getAllInfomationUserFollowYour, unFollow } from '../../API/foll
 import userContainer from '../../Container/userContainer';
 
 import { roomSockets } from '../../socketClient/socket';
-import UIInput from '../../UI/UIInput';
-import UIButton from '../../UI/UIButton';
+import UIInput from '../../Components/UI/UIInput';
+import UIButton from '../../Components/UI/UIButton';
 import { Link } from 'react-router-dom';
 import { getAllRoomFromBackEnd } from '../../API/roomAPI';
 import roomContainer from '../../Container/roomContainer';

@@ -5,7 +5,7 @@ import styled from 'styled-components';
 import { follow, getAllInfomationUserFollowYour, unFollow } from '../../API/followAPI';
 import userContainer from '../../Container/userContainer';
 import srcImg from '../../image/9284571_300x300.jpeg';
-import UILoading from '../../UI/UILoading';
+import UILoading from '../../Components/UI/UILoading';
 import Article from '../Article';
 import followAllContainer from '../../Container/followContainer';
 import { Subscribe } from 'unstated-x';

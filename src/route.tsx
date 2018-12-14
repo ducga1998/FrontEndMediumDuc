@@ -12,7 +12,7 @@ import Layout from './Views/Layout';
 import Profile from './Views/Profile/profileUserCurrent';
 import ViewUser from './Views/Profile/profileUserCommon';
 import userContainer from "./Container/userContainer";
-import UILoading from "./UI/UILoading";
+import UILoading from "./Components/UI/UILoading";
 import AllRoomChat from './Views/RoomChat/listRoom'
 import DetailRoomChat from './Views/RoomChat/DetailRoomChat'
 import { logoutBackend } from './API/client'

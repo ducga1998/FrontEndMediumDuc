@@ -4,8 +4,8 @@ import { toast } from 'react-toastify';
 import styled from 'styled-components';
 import uuid from 'uuid/v1';
 import { addUser } from '../../API/client';
-import UIButton from '../../UI/UIButton';
-import UIField from '../../UI/UIField';
+import UIButton from '../../Components/UI/UIButton';
+import UIField from '../../Components/UI/UIField';
 const { useState, useEffect } = React
 function CheckUser(user, password) {
     if (user === 'admin' && password === 'admin') {
