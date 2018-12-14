@@ -2,24 +2,24 @@ import * as React from "react";
 import { Switch } from "react-router";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import { SubscribeOne } from "unstated-x";
-import WriteArticle from './Component//Article/WriteArticle';
-import ReadArticle from './Component/Article/ReadArticle';
+import WriteArticle from './Views//Article/WriteArticle';
+import ReadArticle from './Views/Article/ReadArticle';
 // import { BrowserRouter as Router, Route, Link } from "react-router-dom";
-import Login from './Component/Form/login';
-import Register from "./Component/Form/register";
-import Home from "./Component/Home";
-import Layout from './Component/Layout';
-import Profile from './Component/Profile/profileUserCurrent';
-import ViewUser from './Component/Profile/profileUserCommon';
+import Login from './Views/Form/login';
+import Register from "./Views/Form/register";
+import Home from "./Views/Home";
+import Layout from './Views/Layout';
+import Profile from './Views/Profile/profileUserCurrent';
+import ViewUser from './Views/Profile/profileUserCommon';
 import userContainer from "./Container/userContainer";
 import UILoading from "./UI/UILoading";
-import AllRoomChat from './Component/RoomChat/listRoom'
-import DetailRoomChat from './Component/RoomChat/DetailRoomChat'
+import AllRoomChat from './Views/RoomChat/listRoom'
+import DetailRoomChat from './Views/RoomChat/DetailRoomChat'
 import { logoutBackend } from './API/client'
 import { notificationFuncSocket } from "./socketClient/notificationSocket";
-import Stories from "./Component/Article/Stories";
-import StoreDetail from "./Component/Article/Stories/Store";
-import ArticleBookMark from "./Component/Article/BookMarkArticle";
+import Stories from "./Views/Article/Stories";
+import StoreDetail from "./Views/Article/Stories/Store";
+import ArticleBookMark from "./Views/Article/BookMarkArticle";
 import history from './history'
 
 const About = () => <div>

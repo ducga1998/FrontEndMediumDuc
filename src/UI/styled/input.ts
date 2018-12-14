@@ -11,8 +11,8 @@ export const Input = styled.input`
     &:focus {
     -webkit-transition: .3s;
     transition: .3s;
-    outline: none;
-
+    outline: none;  
+    
     background-color: #97cddf;
     color: #454948;
     font-size: 20px;

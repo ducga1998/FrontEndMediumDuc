@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { ArticleContext } from 'src/Component/Article/ReadArticle';
+import { ArticleContext } from 'src/Views/Article/ReadArticle';
 export const renderElement = (Comp) => {
     return class extends React.Component<any> {
         render() {

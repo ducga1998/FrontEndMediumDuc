@@ -1,3 +1,4 @@
+
 import { Container } from 'unstated-x';
 import { getAllCommentinArtcileCurrent, addComment } from '../API/commentAPI';
 import userContainer from './userContainer';
@@ -13,14 +14,16 @@ class CommentAllContainer extends Container<any>{
     constructor(state) {
         super(state)
     }
+    addRely(input, idrely) {
 
+    }
     async addCommentInArticle(input) {
         const { content, idArticle, idUser } = input
         // this is new comment data 
         //request to backend
         // B1 : 
         let newComment = await addComment(input) as any
-        // B2 : 
+        // B2 :  add to container on front end
         const { registryComment } = this.state
         const data = registryComment.find(comment => comment.idArticle === idArticle) // 
         const { commentContainer } = data // this is all Comment

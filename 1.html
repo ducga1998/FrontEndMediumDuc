@@ -7,46 +7,109 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
     <style>
-        .background {
-            background-color: black;
+        .layout {
             display: flex;
-            align-items: center;
-            justify-content: center;
-            height: 100%;
-            position: fixed;
+
+        }
+
+        .vertical {
+            flex-direction: row;
+        }
+
+        .horizontal {
+            flex-direction: column;
+        }
+
+        .flex-1 {
+            flex: 1
+        }
+
+        .flex-2 {
+            flex: 2
+        }
+
+        .flex-3 {
+            flex: 3
+        }
+
+        .flex-4 {
+            flex: 4
+        }
+
+        .flex-5 {
+            flex: 5
+        }
+
+        .flex-6 {
+            flex: 6
+        }
+
+        .flex-7 {
+            flex: 7
+        }
+
+        .flex-8 {
+            flex: 8
+        }
+
+        .flex-9 {
+            flex: 9
+        }
+
+        .flex-10 {
+            flex: 10
+        }
+
+        .flex-11 {
+            flex: 11
+        }
+
+        .flex-12 {
+            flex: 12
+        }
+
+        .center-X {
+            justify-content: center
+        }
+
+        .left-X {
+            justify-content: flex-start;
+        }
+
+        .right-X {
+            justify-content: flex-end;
+        }
+
+        .center-Y {
+            align-items: center
+        }
+
+        .left-Y {
+            align-items: flex-start;
+        }
+
+        .right-Y {
+            align-items: flex-end;
+        }
+
+        /* Iam use private style */
+        .box {
             width: 100%;
+            height: 700px;
+            background: blueviolet
         }
 
-        .image {
-            width: 100px;
-            height: 100px;
-            transform: rotate3d(360);
-            animation: yAxis 3s infinite cubic-bezier(0.3, 0.27, 0.07, 1.64);
-        }
-
-        @keyframes yAxis {
-            0% {
-                opacity: 0;
-                /* transform: rotate3d(0deg); */
-            }
-            /* 50% {
-                animation-timing-function: cubic-bezier(0.02, 0.01, 0.21, 1);
-                transform: translateY(-100px);
-            } */
-            50% {
-                opacity: 1;
-                transform: rotateZ(360deg);
-                transform: rotateX(360deg);
-                transform: rotateY(360deg);
-            }
+        .subbox {
+            width: 50px;
+            height: 50px;
+            background-color: aquamarine
         }
     </style>
 </head>
 
 <body>
-    <div class="background">
-        <div class="image"><img style="width : 100%" src="https://scontent.fhan2-1.fna.fbcdn.net/v/t1.0-9/30710734_1894791530812895_692578444441026560_n.jpg?_nc_cat=102&_nc_ht=scontent.fhan2-1.fna&oh=aabbc49a433d7c80c99c083dd054764b&oe=5C75BB19"
-            /></div>
+    <div class="layout left-X center-Y box">
+        <div class="subbox"></div>
     </div>
 </body>
 

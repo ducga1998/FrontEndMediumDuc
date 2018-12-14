@@ -4,21 +4,27 @@ import 'react-toastify/dist/ReactToastify.css';
 import styled from 'styled-components';
 import { Provider } from 'unstated-x';
 import AppRouter from './route';
+import { ThemeProvider } from 'styled-components';
 import UITooltip from './UI/UITooltip';
 import './app.css'
+import { throwServerError } from 'apollo-link-http-common';
+import { theme } from './theme';
 
 class App extends React.Component {
   public render() {
 
     return <>
-      <UITooltip>
-        <Provider>
-          <$BoxAlgin>
-            <AppRouter />
-          </$BoxAlgin>
-          <ToastContainer transition={Zoom} autoClose={4000} />
-        </Provider>
-      </UITooltip>
+      <ThemeProvider theme={theme}>
+        <UITooltip>
+
+          <Provider>
+            <$BoxAlgin>
+              <AppRouter />
+            </$BoxAlgin>
+            <ToastContainer transition={Zoom} autoClose={4000} />
+          </Provider>
+        </UITooltip>
+      </ThemeProvider>
     </>
   }
 }

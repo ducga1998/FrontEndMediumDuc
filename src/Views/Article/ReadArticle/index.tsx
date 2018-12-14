@@ -13,15 +13,12 @@ import UIReaction from '../../../UI/UIReaction';
 import UIRichText from '../../../UI/UIRichText';
 
 interface IReadArticleType {
-    title: String,
-    content: String,
-    totalClap: number,
     match: any,
     router?: any,
     route?: any
 }
 export const ArticleContext = React.createContext(null)
-class ReadArticle extends React.Component<any> {
+class ReadArticle extends React.Component<IReadArticleType> {
     state = {
         article: null,
     }
@@ -35,7 +32,6 @@ class ReadArticle extends React.Component<any> {
     }
     render() {
         const { article }: any = this.state
-
         if (article) {
             const { user: { idUser, avatarLink, name }, idArticle, contentArticle, titleArticle, hashTag, createTime } = article
             return <ArticleContext.Provider value={article}>
@@ -51,17 +47,15 @@ class ReadArticle extends React.Component<any> {
                                 return <Label key={key} style={{ fontSize: '15px', margin: ' 0px' }}>{item}</Label>
                             })}
                         </$HashTag>
-
+                        <p>{createTime}</p>
                         <UIRichText isTitle mode="view" >
                             <h1> {renderHTML(titleArticle)}</h1>
                         </UIRichText>
-
                         <UIRichText mode="view" >
                             {renderHTML(contentArticle)}
                         </UIRichText>
                         <WriteComment idUser={idUser} />
                         <h2>All Comment Article</h2>
-
                         <CommentArticle
                             idArticle={idArticle} />
                     </div>

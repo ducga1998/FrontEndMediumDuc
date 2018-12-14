@@ -1,6 +1,6 @@
 import * as React from 'react';
 // import styled from 'styled-components'
-// import Footer from './Component/footer'
+// import Footer from './Views/footer'
 import { Grid } from 'react-bootstrap';
 import Footer from './footer';
 import Navigation from './Navigation/index';

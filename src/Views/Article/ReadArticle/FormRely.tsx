@@ -7,7 +7,7 @@ import { IMAGE_SOURCE_DEFAULT } from '../../../help/define';
 import { Config } from '../../../help/config';
 import styled from 'styled-components';
 import { input } from '../../../UI/styled/input';
-import { ArticleContext } from 'src/Component/Article/ReadArticle';
+import { ArticleContext } from 'src/Views/Article/ReadArticle';
 import { toast } from 'react-toastify';
 import userContainer from '../../../Container/userContainer';
 import { notificationSocket } from '../../../socketClient/socket';

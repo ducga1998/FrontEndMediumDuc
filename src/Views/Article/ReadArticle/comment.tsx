@@ -8,7 +8,7 @@ import UILoading from '../../../UI/UILoading';
 import { Config } from '../../../help/config';
 import MediumEditer from 'medium-editor';
 import { IMAGE_SOURCE_DEFAULT } from '../../../help/define';
-import RelyComment from './relyComment'
+import RelyComment from './FormRely'
 import FormComment from './FormComment';
 interface IViewComment {
     idArticle: string,
