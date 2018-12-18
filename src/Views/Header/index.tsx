@@ -6,7 +6,7 @@ import userContainer from '../../Container/userContainer';
 // import BrowserHistory from 'react-router/lib/BrowserHistory'
 import ButtonArticle from './buttonWriteArticle';
 import Search from './Search/search';
-import Navbar from './navbar';
+import Navbar from './Navigation/navbar';
 import DropDown from '../../Components/UI/UIDropDown'
 class Navication extends React.Component<any, any>{
 
@@ -16,7 +16,7 @@ class Navication extends React.Component<any, any>{
 
 
             <Navbar />
-            <DropDown >caskjcnasncasc</DropDown>
+            {/* <DropDown >caskjcnasncasc</DropDown> */}
             <Nav pullRight>
                 <NavItem eventKey={1}><NavItem /><Search /></NavItem>
                 {window.location.pathname === '/home' ? <NavItem eventKey={1} href="#">

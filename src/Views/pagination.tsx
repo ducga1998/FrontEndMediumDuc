@@ -4,6 +4,7 @@ import { allArticleContainer } from '../Container/articleContainer';
 import { SubscribeOne } from 'unstated-x';
 import styled from 'styled-components';
 import UIButton from '../Components/UI/UIButton';
+import { Section } from '../Components/styled/nav';
 
 
 
@@ -22,7 +23,7 @@ function renderButton() {
     }
     console.log('countButton', countButton, count % first)
 
-    return Array(countButton).fill(1).map((item, key) => {
+    return <Section>{Array(countButton).fill(1).map((item, key) => {
         return <SubscribeOne to={allArticleContainer} bind={['offset']} >
             {
                 () => {
@@ -33,7 +34,8 @@ function renderButton() {
                 }
             }
         </SubscribeOne>
-    })
+    })}
+    </Section>
 
 }
 export default function Pagination(props) {

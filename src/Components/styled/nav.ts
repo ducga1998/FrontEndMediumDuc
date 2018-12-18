@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom';
 // @flow
 import styled, { css } from 'styled-components';
 import { FlexRow, hexa } from './base';
-
+ //  have
 
 export const Nav = styled(FlexRow)`
   width: 100%;
@@ -91,7 +91,7 @@ export const IconLink = styled(Link)`
           position: absolute;
           left: calc(100% - 12px);
           top: -2px;
-          font-size: 14px;
+          font-size: 20px;
           font-weight: 600;
           background: ${({ theme }) => theme.bg.default};
           color: ${({ theme }) =>

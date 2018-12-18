@@ -1,6 +1,6 @@
 import * as React from 'react';
 import styled from 'styled-components';
-import { StyledSolidButton } from '../styled/button';
+import { StyledOutlineButton } from '../styled/button';
 interface IUIButton {
     width?: string
     height?: string
@@ -13,7 +13,7 @@ interface IUIButton {
 export default function UIButton({
     children, width, height, onMouseDown, style, keyButton, active
 }: IUIButton) {
-    return <StyledSolidButton
+    return <StyledOutlineButton
 
         data-active={active || undefined}
         data-keyButton={keyButton}
@@ -21,5 +21,5 @@ export default function UIButton({
         onMouseDown={onMouseDown}
 
     >{children}
-    </StyledSolidButton>
+    </StyledOutlineButton>
 }

@@ -4,6 +4,7 @@
 import styled, { css } from 'styled-components';
 
 import { Shadow, Transition, hexa } from '../styled/base';
+import theme from '../../theme';
 
 const baseButton = css`
   display: flex;
@@ -36,6 +37,49 @@ const baseButton = css`
   div + span,
   span + span {
     margin: 0 8px;
+  }
+  @media (min-width: 768px) {
+    &[data-active~='true'] {
+      box-shadow: inset 0 ${true ? '-2px' : '-4px'} 0
+        ${theme.text.reverse};
+      color: ${theme.text.reverse};
+      transition: ${Transition.hover.on};
+    background : #4400cee3;
+      &:hover,
+      &:focus {
+        box-shadow: inset 0 ${true ? '-2px' : '-4px'} 0
+          ${theme.text.reverse};
+        transition: ${Transition.hover.on};
+      }
+    }
+
+    &:hover,
+    &:focus {
+      box-shadow: inset 0 ${true ? '-2px' : '-4px'} 0
+        ${({ theme }) =>
+        process.env.NODE_ENV === 'production'
+            ? theme.text.placeholder
+            : theme.warn.border};
+      color: ${theme.text.reverse};
+      transition: ${Transition.hover.on};
+    }
+  }
+
+  @media (max-width: 768px) {
+    color: ${props =>
+        process.env.NODE_ENV === 'production'
+            ? props.theme.text.placeholder
+            : props.theme.warn.border};
+    padding: 0;
+    grid-template-columns: 'auto';
+    grid-template-rows: 'auto auto';
+    grid-template-areas: 'icon' 'label';
+    align-content: center;
+
+    &[data-active~='true'] {
+      color: ${theme.text.reverse};
+      transition: ${Transition.hover.on};
+    }
   }
 `;
 

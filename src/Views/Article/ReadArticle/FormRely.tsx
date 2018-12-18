@@ -13,7 +13,7 @@ import userContainer from '../../../Container/userContainer';
 import { notificationSocket } from '../../../socketClient/socket';
 import commentAllContainer from '../../../Container/commentContainer';
 import { renderElement } from '../../../Core/renderElement';
-import { input } from 'src/Components/styled/input';
+import { Input } from '../../../Components/styled/base';
 const FormComment = ({ context }: any) => {
     const refContent = React.useRef(null) as any
     const [content, setContent] = React.useState('')
@@ -62,6 +62,6 @@ const FormComment = ({ context }: any) => {
 
 
 }
-const $Content = styled(input)`
+const $Content = styled(Input)`
 `
 export default renderElement(FormComment)

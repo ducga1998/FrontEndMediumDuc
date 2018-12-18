@@ -9,6 +9,7 @@ import styled from 'styled-components';
 import Card from '../styled/card';
 import { Shadow, FlexCol, hexa, Transition } from '../styled/base';
 import theme from '../../theme';
+import { AnyNaptrRecord } from 'dns';
 
 
 const StyledDropdown = styled(FlexCol)`
@@ -22,7 +23,7 @@ const StyledDropdown = styled(FlexCol)`
   color: ${theme.text.default};
   transition: ${Transition.dropdown.off};
 `;
-
+// card is notification 
 const StyledCard = styled(Card)`
   display: flex;
   flex-direction: column;
@@ -34,11 +35,21 @@ const StyledCard = styled(Card)`
   border-radius: 8px;
 `;
 
-const DropdownPure = (props) => (
-  <StyledDropdown className={'dropdown'} {...props}>
-    <StyledCard>{props.children}</StyledCard>
-  </StyledDropdown>
-);
+interface IUIDropDown {
+  trigger: any,
+  children: any
+}
+export default class UIDropDown extends React.Component<IUIDropDown> {
 
-export const Dropdown = compose()(DropdownPure);
-export default Dropdown;
+  render() {
+    const { trigger, children } = this.props
+    React.cloneElement(trigger, {
+      onMouseDown: () => {
+        console.log('test')
+      }
+    })
+    return <div>  <StyledDropdown>{children}</StyledDropdown></div>
+  }
+
+
+}

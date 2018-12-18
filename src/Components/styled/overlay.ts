@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const OverLay = styled.div<{ open: Boolean }>`
+export const OverLay = styled.div<{ open?: Boolean }>`
     top: 0px;
     left: 0px;
     z-index : 1;

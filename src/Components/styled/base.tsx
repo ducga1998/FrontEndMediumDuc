@@ -118,7 +118,7 @@ export const PrefixLabel = styled.label`
     margin-left: 2px;
   }
 `;
-
+// all input extends it
 export const Input = styled.input`
   flex: 1 0 auto;
   background: ${({ theme }) => theme.bg.default};
@@ -130,6 +130,7 @@ export const Input = styled.input`
   padding: 0.5rem 0.75rem;
   margin-top: 0.125rem;
   box-shadow: none;
+  
 
   ${props =>
     props.type === 'checkbox' &&
@@ -153,9 +154,10 @@ export const Input = styled.input`
 
   &:focus {
     border-color: ${({ theme }) => theme.brand.default};
+    outline : none;
   }
 `;
-
+// all textarea extends a here
 export const TextArea = styled.textarea`
   flex: 1 0 auto;
   width: 100%;
@@ -277,21 +279,21 @@ export const Span = styled.span`
   margin: 0;
   padding: 0;
 `;
-
+// hoizatal 
 export const FlexRow = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
   align-items: center;
 `;
-
+// vectical 
 export const FlexCol = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
   align-items: stretch;
 `;
-
+// use tooltip
 export const returnTooltip = props => {
   switch (props.tipLocation) {
     case 'top-left':

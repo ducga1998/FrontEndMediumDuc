@@ -38,5 +38,5 @@ export const StyledCard = styled(FlexCol) <any>`
   }
 `
 
-export const Card = compose()(CardPure);
-export default Card;
+
+export default StyledCard;

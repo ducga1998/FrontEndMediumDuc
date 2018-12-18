@@ -1,5 +1,7 @@
 import { FormGroup, ControlLabel, FormControl, HelpBlock } from "react-bootstrap";
 import * as React from "react";
+import UIInput from "./UIInput";
+import { Label, H2 } from "../styled/base";
 interface IUIField {
     titleField?: String;
     help?: Boolean;
@@ -26,25 +28,18 @@ export default class UIField extends React.Component<IUIField, any> {
         const { help, titleField, label, onChange, placeholder, value, type, minLength, maxLength } = this.props
         return (
             <form>
-                <FormGroup
-                    // controlId="formBasicText"
-                    validationState={this.getValidationState()}
-                >
-                    {label ? <ControlLabel>{label}</ControlLabel> : null}
-                    <h2>{titleField}</h2>
-                    <FormControl
-                        type={type ? `${type}` : 'text'}
-                        value={value}
-                        placeholder={`${placeholder}`}
-                        onChange={(e: any) => {
-                            onChange(e.target.value)
-                        }}
-                        minLength={minLength || undefined}
-                        maxLength={maxLength || undefined}
-                    />
-                    <FormControl.Feedback />
-                    {help ? <HelpBlock>Validation is based on string length.</HelpBlock> : null}
-                </FormGroup>
+
+                {label ? <Label>{label}</Label> : null}
+                <H2>{titleField}</H2>
+                <UIInput
+                    value={value}
+                    placeholder={`${placeholder}`}
+                    onChange={(e: any) => {
+                        onChange(e.target.value)
+                    }}
+                />
+                {help ? <Label>Validation is based on string length.</Label> : null}
+
             </form>
         );
     }

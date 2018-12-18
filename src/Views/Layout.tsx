@@ -2,19 +2,18 @@ import * as React from 'react';
 // import styled from 'styled-components'
 // import Footer from './Views/footer'';
 import Footer from './footer';
-import Navigation from './Navigation/index';
+import Navigation from './Header/Navigation/navbar';
 import Pagination from './pagination'
 import styled from 'styled-components';
 const HistoryContext = React.createContext(null)
 export default function Layout(props) {
-    console.log('propspropsprops', props)
-    return <HistoryContext.Provider value={props.history}>
+  return <HistoryContext.Provider value={props.history}>
     <Body>
-        <Navigation />
-        {props.children}
-        <Footer />
-        </Body>
-    </HistoryContext.Provider>
+      <Navigation />
+      {props.children}
+      <Footer />
+    </Body>
+  </HistoryContext.Provider>
 }
 const Body = styled.div`
   display: flex;

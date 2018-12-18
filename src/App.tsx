@@ -9,12 +9,13 @@ import UITooltip from './Components/UI/UITooltip';
 import './app.css'
 import { throwServerError } from 'apollo-link-http-common';
 import { theme } from './theme';
+import UIPopUp from './Components/UI/UIPopUp';
+import { UITheme } from './Components/UI/UITheme';
 
 class App extends React.Component {
   public render() {
 
-    return <>
-      <ThemeProvider theme={theme}>
+    return  <UITheme>
         <UITooltip>
 
           <Provider>
@@ -24,8 +25,8 @@ class App extends React.Component {
             <ToastContainer transition={Zoom} autoClose={4000} />
           </Provider>
         </UITooltip>
-      </ThemeProvider>
-    </>
+
+      </UITheme>
   }
 }
 const $BoxAlgin = styled.div`

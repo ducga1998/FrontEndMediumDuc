@@ -1,6 +1,8 @@
+import { Section } from './nav';
+
 import styled from "styled-components";
 
-export const layout = styled.div`
-    display : flex;
-   
+export const Field = styled(Section)`
+margin : 20px;
+
 `

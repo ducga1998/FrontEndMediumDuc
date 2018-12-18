@@ -1,7 +1,6 @@
 
 import * as React from 'react'
-import styled from 'styled-components';
-import { Input } from '../styled/input';
+import { Input } from '../styled/base';
 
 
 interface IUIInput {
@@ -10,7 +9,7 @@ interface IUIInput {
     size?: 'xs' | 'ls' | 'sm',
     style?: any,
     placeholder?: string,
-    type?: 'uncontrol' | 'control',
+    type?: string
     refInput?: any,
     onKeyPress?: (e: any) => any,
     onFocus?: (e: any) => any
@@ -24,25 +23,19 @@ export default class UIInput extends React.Component<IUIInput> {
     }
     render() {
         const { value, onChange, style, placeholder, type, refInput, onKeyPress, onFocus, autoFocus } = this.props
-        if (type && type === 'uncontrol') {
-            return <$Input
-                placeholder={placeholder || undefined}
-                style={style}
-                ref={this.inputRef}
-            />
-        }
         return <Input
+            type={type || undefined}
             autoFocus={autoFocus || undefined}
             onKeyPress={onKeyPress}
             ref={refInput}
             placeholder={placeholder || undefined}
             style={style}
-            onChange={e => { onChange(e.target.value) }}
+            onChange={e => {
+                onChange(e.target.value)
+            }}
             onFocus={onFocus}
             value={value}
         />
 
     }
 }
-const $Input = styled(Input)`
-`
