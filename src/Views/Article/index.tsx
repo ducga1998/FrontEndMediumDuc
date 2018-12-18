@@ -1,12 +1,17 @@
 import * as React from 'react';
 // import { Aside, Header, Layout, Main, Nav, SubHeader } from '../Components/UI/styled/layout'
 // import AppRouter from '../route'
-import { Button, ButtonGroup, ButtonToolbar } from 'react-bootstrap';
+// import { Button, ButtonGroup, ButtonToolbar } from 'react-bootstrap';
 import renderHTML from 'react-render-html';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import { filterStringHTML } from '../../help/help';
 import UILoading from '../../Components/UI/UILoading';
+import { H1, FlexCol, P  } from '../../Components/styled/base';
+import { StyledSolidButton } from '../../Components/styled/button';
+import { Section } from '../../Components/styled/nav';
+import { AvatarImage } from '../../Components/styled/avatar';
+
 export interface IArticle {
     avatar: String;
     titleArticle: String;
@@ -29,21 +34,19 @@ export default function Article({ idArticle, avatar, titleArticle, content, tota
     const { name, avatarLink, idUser } = user
     const linkSwitchArticle = typeArticle && typeArticle === 'store' ? `/store/${idArticle}` : `/article/${idArticle}`
     return <$Article>
-        <$Avatar>
-            <img src={`${avatarLink ? avatarLink : avatar}`} />
-        </$Avatar>
+        
+            <AvatarImage size ={100}  src={`${avatarLink ? avatarLink : avatar}`} />
+      
         <$DetailArticle>
-            <h2><Link to={linkSwitchArticle}>{renderHTML(filterStringHTML(titleArticle, true))}</Link></h2>
+            <H1><Link to={linkSwitchArticle}>{renderHTML(filterStringHTML(titleArticle, true))}</Link></H1>
             <small><b>Create at :</b> {time}</small> <br />
             <b >Content : </b>{renderHTML(filterStringHTML(content))}<Link to={linkSwitchArticle}> Read more ...</Link>
-            <p><b>Write by :</b> <b><Link to={`/user/${idUser}`}>{name === '' ? 'NO NAME' : name}</Link></b></p>
-            <ButtonToolbar>
-                <ButtonGroup>
-                    {hashTag.map((item: any, key: number) => {
-                        return <Button>{item}</Button>
+            <P><b>Write by :</b> <b><Link to={`/user/${idUser}`}>{name === '' ? 'NO NAME' : name}</Link></b></P>
+            
+                   <Section> {hashTag.map((item: any, key: number) => {
+                        return <StyledSolidButton>{item}</StyledSolidButton>
                     })}
-                </ButtonGroup>
-            </ButtonToolbar>
+                    </Section>
         </$DetailArticle>
         <$TotalClap><i className="fa fa-bookmark" /> {totalClap}</$TotalClap>
         <$TotalComment><i className="fa fa-comment" /> {totalComment}</$TotalComment>
@@ -58,7 +61,6 @@ const $TotalComment = styled.div`
     font-size : 20px;
 `
 const $Avatar = styled.div`
-    background-color : "red";
     img {
         width :100%;
         flex : 1;
@@ -71,14 +73,13 @@ const $DetailArticle = styled.div`
 const $Article = styled.div`
     position :relative;
     display : flex;
-    border-bottom: 1px solid #d9d5d5;
-    margin-bottom: 13px;
+    border-bottom: 1px solid ${props => props.theme.bg.hairline};
     transition : 0.3s;
     ${$Avatar} {
             flex : 1;
     }
     &:hover {
-        background-color: #f8f8f8;
-        transition : 0.3s;
+    background-color: ${props => props.theme.bg.default};
+    transition : 0.3s;
     }
 `

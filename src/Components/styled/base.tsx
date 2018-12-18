@@ -101,7 +101,7 @@ export const Label = styled.label`
   }
 
   a {
-    text-decoration: underline;
+    text-decoration: none;
   }
 `;
 

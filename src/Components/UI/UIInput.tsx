@@ -1,6 +1,7 @@
 
 import * as React from 'react'
 import { Input } from '../styled/base';
+import styled from 'styled-components';
 
 
 interface IUIInput {
@@ -23,7 +24,7 @@ export default class UIInput extends React.Component<IUIInput> {
     }
     render() {
         const { value, onChange, style, placeholder, type, refInput, onKeyPress, onFocus, autoFocus } = this.props
-        return <Input
+        return <$Input
             type={type || undefined}
             autoFocus={autoFocus || undefined}
             onKeyPress={onKeyPress}
@@ -39,3 +40,7 @@ export default class UIInput extends React.Component<IUIInput> {
 
     }
 }
+
+const $Input = styled(Input)`
+width : auto;
+`

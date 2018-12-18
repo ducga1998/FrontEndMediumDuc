@@ -2,7 +2,9 @@ import * as React from 'react';
 import { Link } from "react-router-dom";
 import { Subscribe } from 'unstated-x';
 import userContainer from '../../Container/userContainer';
-import './index.css';
+import { H2, FlexRow, FlexCol, P } from '../../Components/styled/base';
+import { AvatarImage } from '../../Components/styled/avatar';
+// import './index.css';
 interface IAuthor {
     name: string,
     totalFollow: number,
@@ -16,24 +18,27 @@ const Author = ({ name, totalFollow, totalArticle, avatarLink, idUser }: IAuthor
         {
             container => {
 
-                return <div className="meta-profile item">
-                    <div className="left floated ui bigger avatar image">
-                        <Link to="/profile" ><img className="lazy" src={src} /></Link>
-                    </div>
-                    <div className="right floated">
+                return <FlexCol>
+                    <FlexRow>
+                        <Link to="/profile" ><AvatarImage radius={15} src={src} /></Link>
+                            
+                  
                         <Link className="name" to={`/user/${idUser}`}>
-                            <h2 className="caption">
+                            <H2 className="caption">
                                 {name}
-                            </h2>
-                        </Link>        <div className="extra">
-                            <b>{totalArticle} </b>
-                            Article
+                            </H2>
+                        </Link>     
+                        </FlexRow>
+                        <FlexRow>
+                          <P> <b>{totalArticle} </b>
+                            Article</P> 
                          <br />
 
-                            <b> {totalFollow} Pepole Follow</b>
-                        </div>
-                    </div>
-                </div>
+                            <P><b> {totalFollow} Pepole Follow</b></P>
+                            </FlexRow>
+                            </FlexCol>
+                         
+        
             }
         }
     </Subscribe>

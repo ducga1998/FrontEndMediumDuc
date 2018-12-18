@@ -6,6 +6,7 @@ import theme from '../../theme';
 import UIWidget from './UIWidget';
 import UIButton from './UIButton';
 import { OverLay } from '../styled/overlay';
+import { H1 } from '../styled/base';
 // const { useEffect, useState } = React
 interface IUIModal {
     trigger: any
@@ -28,7 +29,7 @@ export default function UIModal({ trigger, children, title, width, height, close
         <$Modal onMouseDown={(e: any) => {
             e.stopPropagation();
         }} >
-            <$Header>{title ? title : 'Header Modal '}</$Header>
+            <$Header><H1>{title ? title : 'Header Modal '}</H1></$Header>
             <$Content height={height} width={width}> {children}</$Content>
 
             <$Footer>
@@ -39,9 +40,8 @@ export default function UIModal({ trigger, children, title, width, height, close
     </UIWidget> </>
 }
 const $Background = styled(OverLay)``
-const $Header = styled.div`
-    background-color: #57aff5;
-    font-size: 25px;
+const $Header = styled.header`
+    background-color: ${props => props.theme.space.default};
     padding: 10px;
     display: flex;
     align-items: center;
@@ -51,13 +51,13 @@ const $Header = styled.div`
 const $Footer = styled.div`
 display : flex;
 justify-content : flex-end;
-background-color : white;
+background-color : ${props => props.theme.bg.default};
 border-top: 1px solid black;
 padding: 10px;
 `
 const $Content = styled.div<{ height?: string, width?: string }>`
     padding : 10px;
-    height : ${props => props.height ? props.height : '500px'};
+    height : ${props => props.height ? props.height : 'auto'};
     width : ${props => props.width ? props.width : 'auto'};
     background-color: ${theme.bg.default};
 `
@@ -68,4 +68,8 @@ flex-direction : column;
 z-index : 10;
     width : ${(props: any) => props.width ? props.width : 'auto'};
     height: ${(props: any) => props.height ? props.height : 'auto'};
+    flex-direction: column;
+    border-radius: 5px;
+    box-shadow: 1px 2px 50px -12px;
+    overflow: hidden;
 `

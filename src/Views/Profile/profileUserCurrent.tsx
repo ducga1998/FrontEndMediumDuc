@@ -11,6 +11,7 @@ import Article from '../Article';
 import UIButton from '../../Components/UI/UIButton';
 import UIModal from '../../Components/UI/UIModal';
 import UIInput from '../../Components/UI/UIInput';
+import { H1 , H4 } from '../../Components/styled/base';
 
 interface IViewUserCurrent {
     match: any
@@ -45,7 +46,7 @@ class ViewUserDetail extends React.Component<IViewUserCurrent> {
                                 open={open}
                                 onClickOutSide={() => this.setState({ open: false })}
                                 closeMoDal={() => this.setState({ open: false })}>
-                                <h1>Please paste link avatar need change</h1>
+                                <H1>Please paste link avatar need change</H1>
                                 <UIInput onChange={(value) => this.setState({ newAvatarLink: value })} />
                                 <UIButton onMouseDown={() => { }}>Update Avatar</UIButton>
                             </UIModal>
@@ -55,7 +56,7 @@ class ViewUserDetail extends React.Component<IViewUserCurrent> {
                                 const value = item[info]
                                 return <UIEditer info={info} key={key} content={value} />
                             })}
-                            <h5> Article : {articles.length}</h5>
+                            <H4> Article : {articles.length}</H4>
                             <UIButton onMouseDown={() => { this.setState({ isChangePass: true }) }}>Change password</UIButton>
                         </$Author>
                     </Left>
