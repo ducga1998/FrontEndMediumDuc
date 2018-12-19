@@ -23,7 +23,6 @@ const baseButton = css`
   position: relative;
   text-align: center;
   padding: ${(props: any) => (props.icon ? '4px 8px 4px 4px' : '12px 16px')};
-
   &:hover {
     transition: ${Transition.hover.on};
     box-shadow: ${(props: any) =>

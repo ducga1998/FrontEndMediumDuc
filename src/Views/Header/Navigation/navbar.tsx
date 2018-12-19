@@ -13,6 +13,7 @@ import styled from 'styled-components';
 import UIPopUp from '../../../Components/UI/UIPopUp';
 import UIDropDown from '../../../Components/UI/UIDropDown';
 import { Shadow, hexa, FlexCol } from '../../../Components/styled/base';
+import theme from '../../../theme';
 class Navbar extends React.Component {
     render() {
         const location = window.location.href
@@ -40,13 +41,13 @@ class Navbar extends React.Component {
             <IconLink to="/about" data-active={location.includes('about')}>
                 <Label> About </Label>
             </IconLink>
-            {window.location.pathname === '/home' ?
-                    <IconLink to="/writearticle" > <Label>writearticle</Label></IconLink> : null}
-            <UIPopUp trigger ={<Button> Setting</Button>}>
+            <ButtonArticle />
+            <IconLink to="/writearticle" > <Label>Write Article</Label></IconLink> 
+            <UIPopUp trigger ={<Button data-active={true}> <Icon glyph="settings" />  Setting</Button>}>
             <div style={{ display: 'flex' }}>
           
                
-                <ButtonArticle />
+               
 
                 <Subscribe to={[userContainer]} >
                     {
@@ -58,7 +59,7 @@ class Navbar extends React.Component {
                                 <StyledCard><IconLink to="/stories">Stories</IconLink></StyledCard> 
                                 <StyledCard><IconLink to="/bookmarks">Bookmark</IconLink></StyledCard> 
                                 <StyledCard><IconLink to="/writearticle" >Write Article</IconLink></StyledCard> 
-                                <StyledCard><IconLink to="/logout" >Logout</IconLink></StyledCard> 
+                                <StyledCard style={{backgroundColor : theme.warn.default}}><IconLink  to="/logout" >Logout</IconLink></StyledCard> 
                             </>}
                            </Wrapper>
                         }
@@ -81,17 +82,28 @@ const StyledCard = styled(Card)`
   overflow: hidden;
   align-items: stretch;
   display: inline-block;
+  
   width  : 100%;
   border-radius: 8px;
   margin  : 0px;
   padding : 10px;
-&:hover {
-    background-color : ${props =>props.theme.bg.inactive};
-    transition : .2s;
+    a{
+       color : ${props =>props.theme.bg.reverse};
+   }
+    &:hover {
+    background-color : ${props =>props.theme.bg.reverse};
+  
+    a{
+        color : ${props =>props.theme.bg.default};
+        box-shadow : none;
+    }
 }
+    
 `;
 const Button = styled(IconLink.withComponent('a'))`
     cursor : pointer;
-    
+    background-color : ${props => props.theme.settings.default};
+    border-left : 5px solid ${props => props.theme.bg.default};
+
 `
 export default Navbar

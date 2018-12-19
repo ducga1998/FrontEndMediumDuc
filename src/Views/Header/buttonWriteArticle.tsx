@@ -1,14 +1,15 @@
 import * as React from 'react';
-import { Button, FormControl, FormGroup, Glyphicon, ListGroup, ListGroupItem, MenuItem } from 'react-bootstrap';
 import { toast } from 'react-toastify';
 import styled from 'styled-components';
 import { Subscribe } from 'unstated-x';
-import ArticleContainer from '../../Container/articleContainer';
 
 import uuid from 'uuid';
 import articleContainer from '../../Container/articleContainer';
 import UIModal from '../../Components/UI/UIModal';
 import UIButton from '../../Components/UI/UIButton';
+import { IconLink } from '../../Components/styled/nav';
+import UIInput from '../../Components/UI/UIInput';
+import { H2, FlexRow } from '../../Components/styled/base';
 export default function ButtonArticle({ history }: any) {
 
     // state support UIModal 
@@ -59,31 +60,35 @@ export default function ButtonArticle({ history }: any) {
                                 setOpen(false)
                             }}
                             title="Hash Tag" width="600px"
-                            trigger={<MenuItem>Public Article</MenuItem>}>
-                            {arrHashTag.length > 0 ? <Grid><ListGroup style={{ flex: '6' }}>
-                                {arrHashTag.map((item, key) => {
-                                    return <ListGroupItem key={key}>{item}
-                                        <Button
-                                            onClick={() => {
+                            trigger={<Button >Public Article</Button>}>
+                            {arrHashTag.length > 0 ?
+                                <div>{arrHashTag.map((item, key) => {
+                                    return <FlexRow><H2 style={{flex : 1}} >{item}</H2>
+                                        <UIButton icon="delete"
+                                        style={{padding : '0px'}}
+                                            onMouseDown={() => {
                                                 const arrHasBeenDelete = arrHashTag.filter(itemHashTag => itemHashTag !== item)
                                                 articleContainer.setState({ arrHashTag: arrHasBeenDelete })
-                                            }}><Glyphicon glyph="remove" />
-                                        </Button>
-                                    </ListGroupItem>
-                                })}
-                            </ListGroup>
-                            </Grid> : null}
-                            <FormGroup style={{ display: 'flex' }}>
-                                <FormControl
-                                    type="text"
+                                            }} />
+                                    </FlexRow>
+                                })}</div>
+                                : null}
+
+                            <FlexRow>
+                                <UIInput
                                     value={nameHashTag}
                                     placeholder="Enter text"
-                                    onChange={(e: any) => setNameHashTag(e.target.value)}
+                                    onChange={(value) => setNameHashTag(value)}
+                                    onKeyPress={(event) => {
+                                        if(event.charCode === 13){
+                                            handleAddHashTag()
+                                        }
+                                    }}
                                 />
-                                <Button onClick={handleAddHashTag}>
-                                    <Glyphicon glyph="plus" />
-                                </Button>
-                            </FormGroup>
+                                <UIButton style={{padding : '0px'}} icon="plus" onMouseDown={handleAddHashTag} />
+                            </FlexRow>
+
+
                             {isUpdate ? <UIButton onMouseDown={async () => {
                                 if (window.location.pathname.match('store')) {
                                     const id = window.location.pathname.replace(/[/]store[/]/, '')
@@ -121,4 +126,10 @@ export default function ButtonArticle({ history }: any) {
 
 const Grid = styled.div`
     display : 'flex';
+`
+const Button = styled(IconLink.withComponent('a'))`
+    cursor : pointer;
+    background-color : ${props => props.theme.special.default};
+    border-left : 5px solid ${props => props.theme.special.alt};
+
 `

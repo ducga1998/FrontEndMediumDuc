@@ -2,9 +2,6 @@
 
 
 import * as React from 'react';
-// $FlowFixMe
-import compose from 'recompose/compose';
-// $FlowFixMe
 import styled from 'styled-components';
 import { FlexCol } from './base';
 

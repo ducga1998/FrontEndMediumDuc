@@ -104,7 +104,6 @@ const Popup = styled(FlexCol)`
     background-color : ${theme.bg.default};
     position: absolute;
     z-index: 21323;
-    padding-top: 8px;
     color: ${theme.text.default};
-    /* transition: ${Transition.dropdown.off}; */
+    transition: ${Transition.dropdown.off};
 `;
