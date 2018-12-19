@@ -1,15 +1,13 @@
+// import { theme } from './../../theme/index';
 import { Link } from 'react-router-dom';
 // @flow
 import styled, { css } from 'styled-components';
-import { FlexRow, hexa } from './base';
+import { FlexRow, hexa, fontStack, Transition } from './base';
  //  have
 
 export const Nav = styled(FlexRow)`
   width: 100%;
-  background: ${({ theme }) =>
-        process.env.NODE_ENV === 'production'
-            ? theme.text.default
-            : theme.warn.alt};
+  background: ${({ theme }) =>theme.text.default };
   display: flex;
   align-items: stretch;
   color: ${({ theme }) => theme.text.reverse};
@@ -67,6 +65,7 @@ export const Logo = styled.img`
 `;
 
 export const IconLink = styled(Link)`
+  ${fontStack}
   display: flex;
   flex: auto;
   flex-direction: row;
@@ -78,9 +77,12 @@ export const IconLink = styled(Link)`
   opacity: 0.8;
   position: relative;
   width: 100%;
-
+  color : ${props => props.theme.text.reverse};
+  transition : ${Transition.hover.off};
   &:hover {
     opacity: 1;
+    box-shadow: inset 0 -4px 0 ${({ theme }) => theme.bg.default};
+    transition : ${Transition.hover.on};
   }
 
   ${/* handles unseen notification counts for both DMs and Notifications */ ''} ${(props: any) =>
@@ -94,18 +96,12 @@ export const IconLink = styled(Link)`
           font-size: 20px;
           font-weight: 600;
           background: ${({ theme }) => theme.bg.default};
-          color: ${({ theme }) =>
-                process.env.NODE_ENV === 'production'
-                    ? theme.text.default
-                    : theme.warn.alt};
+          color: ${({ theme }) =>theme.text.default}
+             
           border-radius: 8px;
           padding: 2px 4px;
-          border: 2px solid
-            ${({ theme }) =>
-                process.env.NODE_ENV === 'production'
-                    ? theme.text.default
-                    : theme.warn.alt};
-        }
+          border: 2px solid ${({ theme }) =>theme.text.default}
+               
       `} &[data-active~='true'] {
     box-shadow: inset 0 -4px 0 ${({ theme }) => theme.bg.default};
     opacity: 1;

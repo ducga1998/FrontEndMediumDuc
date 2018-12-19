@@ -9,6 +9,7 @@ import UILoading from '../../Components/UI/UILoading';
 import Article from '../Article';
 import followAllContainer from '../../Container/followContainer';
 import { Subscribe } from 'unstated-x';
+import { H3, H1 } from '../../Components/styled/base';
 interface IViewUserDetail {
     match: any
 }
@@ -50,11 +51,11 @@ class ViewUserDetail extends React.Component<IViewUserDetail> {
                                     <$Content >
                                         <Left>
                                             <$Author>
-                                                <Img src={avatarLink ? avatarLink : srcImg} /> */}
-                                                 <h3>Name : {name}</h3>
-                                                <h3> Location : {location} </h3>
-                                                <h3> Article : {articles.length}</h3>
-                                                <h3>Birthday : {birthday}</h3>
+                                                    <Img src={avatarLink ? avatarLink : srcImg} /> 
+                                                    <H3>Name : {name}</H3>
+                                                    <H3> Location : {location} </H3>
+                                                    <H3> Article : {articles.length}</H3>
+                                                    <H3>Birthday : {birthday}</H3>
                                             </$Author>
                                             {/* <Author avatarLink={avatarLink} totalFollow={10} name={name} totalArticle={articles.length} /> */}
                                         </Left>
@@ -73,16 +74,16 @@ class ViewUserDetail extends React.Component<IViewUserDetail> {
 
                                             </$ListAvatarUserFollow> : <p><b>No user Follow :((</b></p>}
                                             <div>
-                                                Bio : <div ><h1>{biographical}</h1></div>
+                                                Bio : <div ><H1>{biographical}</H1></div>
                                             </div>
                                         </Right>
                                     </$Content >
                                     <hr />
-                                    <h3> All Article <b style={
+                                    <H3> All Article <b style={
                                         {
                                             color: "#4797db"
                                         }
-                                    } >{name} </b> has write</h3>
+                                    } >{name} </b> has write</H3>
                                     <$ViewArticle>
                                         {articles && articles.length > 0 ? articles.map((item, key) => {
                                             const { hashTag, isUSer, contentArticle, titleArticle, createTime, idArticle } = item

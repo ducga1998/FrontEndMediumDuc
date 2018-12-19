@@ -13,7 +13,7 @@ interface IAuthor {
     idUser: string
 }
 const Author = ({ name, totalFollow, totalArticle, avatarLink, idUser }: IAuthor) => {
-    const src = avatarLink ? avatarLink : "http://graph.facebook.com/1898075403817841/picture"
+    const src = avatarLink ? avatarLink : "./default.jpg"
     return <Subscribe to={[userContainer]}>
         {
             container => {

@@ -42,11 +42,11 @@ export default function Login({ history }) {
         </div>
         <H1 className="center">Login</H1>
         <Field>
-            <H3>Login : </H3>
+            <H2>Login : </H2>
             <UIInput onChange={(value) => { setValueName(value) }} placeholder="Email ..." value={name} />
         </Field>
         <Field>
-            <H3>Password : </H3>
+            <H2>Password : </H2>
             <UIInput type="password" placeholder="Password .... " value={password} onChange={(value) => {
                 setValuePassword(value)
             }} /> 

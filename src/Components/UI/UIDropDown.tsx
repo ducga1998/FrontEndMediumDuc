@@ -1,22 +1,18 @@
-// @flow
 
 import * as  React from 'react';
-// $FlowFixMe
-import compose from 'recompose/compose';
-// $FlowFixMe
 import styled from 'styled-components';
-// import { } from '';
 import Card from '../styled/card';
 import { Shadow, FlexCol, hexa, Transition } from '../styled/base';
 import theme from '../../theme';
-import { AnyNaptrRecord } from 'dns';
 
 
 const StyledDropdown = styled(FlexCol)`
   background-color: transparent;
   position: absolute;
-  width: 400px;
-  top: 100%;
+  display : block;
+  width: auto;
+  top: 0px;
+  opacity : 0;
   right: 0px;
   z-index: 21323;
   padding-top: 8px;
@@ -40,16 +36,31 @@ interface IUIDropDown {
   children: any
 }
 export default class UIDropDown extends React.Component<IUIDropDown> {
-
+  refDropDown  : any  = React.createRef()
+  state  = {
+    open : false
+  }
+  handleViewDropDown= (event) => {
+    console.log('nguyen minh duc')
+      const domDropDown = this.refDropDown.current
+      this.setState({open : true})
+  }
   render() {
     const { trigger, children } = this.props
-    React.cloneElement(trigger, {
-      onMouseDown: () => {
-        console.log('test')
+    const Button =  React.cloneElement(trigger, {
+      onMouseDown: (event) => {
+        
+        console.log('nguyen minh duc')
+        this.handleViewDropDown(event)
       }
     })
-    return <div>  <StyledDropdown>{children}</StyledDropdown></div>
+  
+    return <><Wrapper> {Button}{this.state.open? <StyledDropdown >{children}</StyledDropdown> : null}</Wrapper></>
   }
 
 
 }
+const Wrapper = styled.div`
+position : relative;
+
+`

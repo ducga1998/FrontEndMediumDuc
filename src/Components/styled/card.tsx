@@ -22,10 +22,10 @@ export const StyledCard = styled(FlexCol) <any>`
   max-width: 100%;
   background-clip: padding-box;
   overflow: visible;
+  border-bottom : 2px solid ${props => props.theme.bg.hairline};
   flex: none;
   + div,
   + span {
-    margin-top: 16px;
 
     @media (max-width: 768px) {
       margin-top: 2px;
@@ -36,6 +36,9 @@ export const StyledCard = styled(FlexCol) <any>`
     border-radius: 0;
     box-shadow: none;
   }
+  &:focus {
+    background-color : ${props => props.theme.bg.hairline}
+  } 
 `
 
 
