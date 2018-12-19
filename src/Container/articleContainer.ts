@@ -62,7 +62,6 @@ export const allArticleContainer = new AllArticleContainer({
     count: 0
 
 })
-window['allArtcile'] = allArticleContainer
 class Article extends Container<any> {
 
 }

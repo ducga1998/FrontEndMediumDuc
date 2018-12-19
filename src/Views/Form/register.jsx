@@ -22,8 +22,8 @@ export default function Register() {
     const [isRegister, setRegister] = useState(false)
     return <$Form>
         <h2 className="center">Register</h2>
-        <UIField minLength={9} titleField="Email and Name" placeholder="Email ..." value={login} onChange={(value) => { setValueLogin(value) }} />
-        <UIField minLength={6} type="password" titleField="Password" placeholder="Password .... " value={password} onChange={(value) => {
+        <UIField  titleField="Email and Name" placeholder="Email ..." value={login} onChange={(value) => { setValueLogin(value) }} />
+        <UIField  type="password" titleField="Password" placeholder="Password .... " value={password} onChange={(value) => {
             setValuePassword(value)
         }} />
         <UIField minLength={6} type="text" titleField="Name Your... " placeholder="Name Your... " value={name} onChange={(value) => {

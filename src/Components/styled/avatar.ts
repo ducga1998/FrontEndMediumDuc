@@ -6,4 +6,5 @@ export const AvatarImage = styled.img<any>`
   height: ${props => (props.size ? `${props.size}px` : '30px')};
   border-radius: ${props =>
         props.radius ? `${props.radius}px` : `${props.size / 2}px`};
+        border : 6px solid ${props => props.theme.bg.reverse};
 `;

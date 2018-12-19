@@ -21,7 +21,13 @@ const Body = styled.div`
   width: 100vw;
   height: 100vh;
   overflow-y: scroll;
-  background: ${props => props.theme.bg.wash};
+  background: ${props => {
+    // background layout project 
+    if(location.pathname==='/login'){
+    return props.theme.bg.reverse
+  }
+  return props.theme.bg.wash
+  }};
 
   @media (max-width: 768px) {
     height: 100vh;

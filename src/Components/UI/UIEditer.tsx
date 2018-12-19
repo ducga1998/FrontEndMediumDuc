@@ -19,9 +19,6 @@ export default function UIEditer({ info, content }: IUIEditer) {
     const [open, setOpen] = useState(false)
     const [value, setValue] = useState(content)
     const inputref = useRef(null) as any
-    const handleMousuOut = () => {
-        console.log('out')
-    }
     React.useEffect(() => {
         // setValue(content)
         if (inputref.current) {
