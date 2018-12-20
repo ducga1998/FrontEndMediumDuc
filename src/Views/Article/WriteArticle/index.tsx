@@ -5,6 +5,8 @@ import articleContainer from '../../../Container/articleContainer';
 import userContainer from '../../../Container/userContainer';
 import Author from '../../Author';
 import UIRichText from '../../../Components/UI/UIRichText';
+import MediumDraft from './mediumDraft';
+import { fontStack } from '../../../Components/styled/base';
 
 
 export const callWhenWrite = debouce(async (value, content) => {
@@ -28,12 +30,7 @@ const WriteArticle = () => {
             width: '70%'
         }}>
             <Author idUser={idUser} avatarLink={avatarLink} totalFollow={10} name={name} totalArticle={articles.length} />
-            <h1>  <UIRichText isTitle placeholder="Title" onChange={async (value) => {
-                await articleContainer.setState({ isPublicArticle: true, titleArticle: value })
-            }} /></h1>
-            <UIRichText placeholder="'Write something you want ......." onChange={value => {
-                callWhenWrite('contentArticle', value)
-            }} />
+            <MediumDraft />
 
         </div>
     </$Align>
@@ -41,10 +38,12 @@ const WriteArticle = () => {
 }
 
 const $Align = styled.div`
+${fontStack}
         display : flex;
         width : 100%;
         margin-bottom : 10px;
         /* flex-direction : column; */
         justify-content : center;
+        font-size : 1.5em;
 `
 export default WriteArticle 

@@ -2,7 +2,7 @@ import { notificationSocket } from "./socket";
 import { toast } from "react-toastify";
 
 export function notificationFuncSocket(user : any)  {
-    if (user && user.idUser) {
+    if (user && user.idUser)    {
         notificationSocket.emit('join' , user.idUser)
         notificationSocket.on('notificationRun', (data) => {
             const { titleArticle, content, name, type, avatarLink } = data

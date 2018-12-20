@@ -1,0 +1,51 @@
+
+.md-RichEditor-editor {
+    
+    /*padding: 0 10px;*/
+    background: #fbffff;
+}
+.md-block-atomic-wrapper {
+    position: relative;
+    border: 1px solid #e8ebec;
+}
+.md-block-atomic-embed button {
+    background: #fff;
+    border: 1px solid #7d7d7d;
+}
+.md-block-atomic-wrapper hr {
+    border: none;
+    background: #5a5a5a;
+    min-height: 3px;
+    max-width: 50px;
+}
+.md-block-atomic-wrapper.md-block-atomic-wrapper-separator {
+    border-color: transparent;
+}
+.md-RichEditor-editor .md-RichEditor-blockquote {
+    font-family: 'Hoefler Text', 'Georgia', serif;
+}
+.md-RichEditor-editor .public-DraftStyleDefault-pre {
+    font-family: 'Inconsolata', 'Menlo', 'Consolas', monospace;
+}
+.github-fork-ribbon:before {
+    background-color: #090;
+}
+.editor-action {
+    bottom: 5px;
+    top: auto;
+}
+.menu {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    padding: 10px 20px;
+    background: #eee;
+    z-index: 100;
+    color: #555;
+    
+    font-size: 1.2em;
+}
+.md-editor-toolbar-edit-link a {
+    color: #fff;
+}

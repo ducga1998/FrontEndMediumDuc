@@ -26,6 +26,9 @@ const Body = styled.div`
     if(location.pathname==='/login'){
     return props.theme.bg.reverse
   }
+  if(location.pathname ==='/writearticle'){
+    return 'white'
+  }
   return props.theme.bg.wash
   }};
 

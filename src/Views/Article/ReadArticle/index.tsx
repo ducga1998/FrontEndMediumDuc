@@ -11,6 +11,9 @@ import WriteComment from './writeComment';
 import commentContainer from '../../../Container/commentContainer';
 import UIReaction from '../../../Components/UI/UIReaction';
 import UIRichText from '../../../Components/UI/UIRichText';
+import { StyledSolidButton } from '../../../Components/styled/button';
+import { FlexRow, FlexCol, H2 } from '../../../Components/styled/base';
+import { Section } from '../../../Components/styled/nav';
 
 interface IReadArticleType {
     match: any,
@@ -42,12 +45,12 @@ class ReadArticle extends React.Component<IReadArticleType> {
                         width: '70%'
                     }}>
                         <Author idUser={idUser} avatarLink={avatarLink} totalFollow={10} name={name} totalArticle={213} />
-                        <$HashTag>
-                            HashTag :  {hashTag.map((item, key) => {
-                                return <Label key={key} style={{ fontSize: '15px', margin: ' 0px' }}>{item}</Label>
+                        <Section    >
+                        <H2> HashTag : </H2> {hashTag.map((item, key) => {
+                                return <StyledSolidButton key={key} style={{ fontSize: '15px', margin: '0px 2px' }}>{item}</StyledSolidButton>
                             })}
-                        </$HashTag>
-                        <p>{createTime}</p>
+                        </Section>
+                        <H2>{createTime}</H2>
                         <UIRichText isTitle mode="view" >
                             <h1> {renderHTML(titleArticle)}</h1>
                         </UIRichText>
