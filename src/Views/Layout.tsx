@@ -20,7 +20,7 @@ const Body = styled.div`
   flex-direction: column;
   width: 100vw;
   height: 100vh;
-  overflow-y: scroll;
+
   background: ${props => {
     // background layout project 
     if(location.pathname==='/login'){

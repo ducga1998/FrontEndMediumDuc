@@ -22,23 +22,29 @@ const WriteArticle = () => {
     React.useEffect(() => {
         // beause when user write new Article then  we reset all setting in new article, avoid case to store
         articleContainer.setState({ arrHashTag: [] })
-
+        console.log('test  ' , )
+        console.log(   () => {
+            console.log()
+        })
         return () => { console.log('cascasn') }
+
     })
     return <$Align>
-        <div style={{
-            width: '70%'
-        }}>
+        <Wrapper  >
             <Author idUser={idUser} avatarLink={avatarLink} totalFollow={10} name={name} totalArticle={articles.length} />
-            <MediumDraft />
+            <MediumDraft onChange = {  (value :string) => { callWhenWrite( 'contentArticle' ,  value  ); console.log('sacas' ,value)}}   initArticle = "OK" />
 
-        </div>
+        </Wrapper>
     </$Align>
 
 }
-
+const Wrapper = styled.div`
+    width : 70%;
+    position : relative;
+`
+ // scalable very good 
 const $Align = styled.div`
-${fontStack}
+    ${fontStack}  
         display : flex;
         width : 100%;
         margin-bottom : 10px;

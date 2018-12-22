@@ -29,7 +29,248 @@ import {
   entityToHTML,
   styleToHTML
 }  from 'medium-draft/lib/exporter';
+import mediumDraftImporter from 'medium-draft/lib/importer';
 import './draft.css'
+import OverLay from '../../../workspace/overlay';
+import styled from 'styled-components';
+interface IMediumDraft {
+  onChange : (e : any) => any,
+  initArticle  : string
+}
+export default class MediumDraft extends React.Component<IMediumDraft> {
+  state = {
+    editorState: createEditorState(),
+    editorEnabled: true,
+    placeholder: 'Write here...',
+    imgSrc  : ''
+  };
+  _editor : any = React.createRef()
+  wrapperEditer : any = React.createRef()
+  onChange = (editorState, callback?:any  ) => {
+    // console.log('content', editorState)
+  const domEditer =   document.querySelectorAll('[data-contents="true"]')[0]
+  console.log(domEditer.innerHTML)
+    const currentContent = this.state.editorState.getCurrentContent();
+    const eHTML = this.exporter(currentContent);
+     this.props.onChange(domEditer.innerHTML)
+    // console.log('html',eHTML)
+    if (this.state.editorEnabled) {
+      this.setState({ editorState }, () => {
+        if (callback) {
+          callback();
+        }
+      });
+    }
+  };
+  sideButtons = [{
+    title: 'Image',
+    component: ImageSideButton,
+  }, {
+    title: 'Embed',
+    component: EmbedSideButton,
+  }, {
+    title: 'Separator',
+    component: SeparatorSideButton,
+  }];
+  exporter = setRenderOptions({
+    styleToHTML,
+    blockToHTML: newBlockToHTML,
+    entityToHTML: newEntityToHTML,
+  });
+  getEditorState = () => this.state.editorState;
+  componentDidMount() {
+  console.log(this._editor.current)
+  const dom = (this._editor.current)
+  
+    const html = '<p>OK data ok roi </p>'
+    // const editorState = createEditorState(convertToRaw(mediumDraftImporter(html)));
+    this.setState({
+      placeholder: 'Write something for you  .....',
+
+    });
+    // setTimeout(this.fetchData, 1000);
+    // this.refs.editor.focus();
+  }
+  rendererFn = (setEditorState, getEditorState) =>  {
+    const atomicRenderers = {
+      embed: AtomicEmbedComponent,
+      separator: AtomicSeparatorComponent,
+    };
+    const rFnOld = rendererFn(setEditorState, getEditorState);
+    const rFnNew = (contentBlock) => {
+      const type = contentBlock.getType();
+      switch(type) {
+        case Block.ATOMIC:
+          return {
+            component: AtomicBlock,
+            editable: false,
+            props: {
+              components: atomicRenderers,
+            },
+          };
+        default: return rFnOld(contentBlock);
+      }
+    };
+    return rFnNew;
+  }
+  keyBinding = (e) =>  {
+    if (hasCommandModifier(e)) {
+      if (e.which === 83) {  /* Key S */
+        return 'editor-save';
+      }
+      // else if (e.which === 74 /* Key J */) {
+      //  return 'do-nothing';
+      //}
+    }
+    if (e.altKey === true) {
+      if (e.shiftKey === true) {
+        switch (e.which) {
+          /* Alt + Shift + L */
+          case 76: return 'load-saved-data';
+          /* Key E */
+          // case 69: return 'toggle-edit-mode';
+        }
+      }
+      
+      if (e.which === 72 /* Key H */) {
+        return 'toggleinline:HIGHLIGHT';
+      }
+    }
+    return keyBindingFn(e);
+  }
+  handleKeyCommand = (command) =>  {
+    console.log('test commad key' , command)
+    if (command === 'editor-save') {
+      window.localStorage['editor'] = JSON.stringify(convertToRaw(this.state.editorState.getCurrentContent()));
+      // window.ga('send', 'event', 'draftjs', command);
+      return true;
+    } else if (command === 'load-saved-data') {
+      this.loadSavedData();
+      return true;
+    } else if (command === 'toggle-edit-mode') {
+      this.toggleEdit();
+    }
+    return false;
+  }
+  
+  logData(e) {
+    const es = convertToRaw(this.state.editorState.getCurrentContent());
+    console.log(es);
+    console.log(this.state.editorState.getSelection().toJS());
+    // window.ga('send', 'event', 'draftjs', 'log-data');
+  }
+  renderHTML = (e) =>  {
+    const currentContent = this.state.editorState.getCurrentContent();
+    const eHTML = this.exporter(currentContent);
+    var newWin : any = window.open(
+      `${window.location.pathname}rendered.html`,
+      'windowName',`height=${window.screen.height},width=${window.screen.width}`)
+      console.log('html ',eHTML)
+  }
+
+  
+  loadSavedData= () =>  {
+    const data = window.localStorage.getItem('editor');
+    if (data === null) {
+      return;
+    }
+    try {
+      const blockData = JSON.parse(data);
+      console.log(blockData);
+      this.onChange( EditorState.push(this.state.editorState, convertFromRaw(blockData)), this._editor.focus);
+    } catch(e) {
+      console.log(e);
+    }
+    // window.ga('send', 'event', 'draftjs', 'load-data', 'localstorage');
+  }
+  toggleEdit = () => {
+    this.setState({
+      editorEnabled: !this.state.editorEnabled
+    }, () => {
+      // window.ga('send', 'event', 'draftjs', 'toggle-edit', this.state.editorEnabled + '');
+    });
+  }
+  handleDroppedFiles = (selection, files) =>  {
+    // window.ga('send', 'event', 'draftjs', 'filesdropped', files.length + ' files');
+    const file = files[0];
+    if (file.type.indexOf('image/') === 0) {
+      // eslint-disable-next-line no-undef
+      const src = URL.createObjectURL(file);
+      this.onChange(addNewBlockAt(
+        this.state.editorState,
+        selection.getAnchorKey(),
+        Block.IMAGE, {
+          src,
+        }
+      ));
+      return HANDLED;
+    }
+    return NOT_HANDLED
+  }
+  handleReturn = (e) =>  {
+    // const currentBlock = getCurrentBlock(this.state.editorState);
+    // var text = currentBlock.getText();
+    return NOT_HANDLED;
+  }
+  handleMouseDown = (event) => {
+    // event.stopPropagation()
+    console.log(event.target)
+    if(event.target.tagName ==='IMG') {
+      const {width , height , top , left}  = event.target.getBoundingClientRect()
+        const Y = (window.innerWidth  * 3/10 ) / 2
+
+    
+      const view = event.target.ownerDocument.defaultView
+      const scrollTop = view.scrollY
+      const imgSrc = event.target.getAttribute('src')
+      this.setState({imgSrc})
+      console.log('scroll X  , ' , scrollTop)
+      this.refOverLay.style.width  = width + 'px'
+      this.refOverLay.style.height  = height + 'px'
+      this.refOverLay.style.top  = (top + scrollTop - 48) + 'px'
+
+      this.refOverLay.style.left  = (left - Y) + 'px'
+      
+      // console.log('nguyen inh duc' , scrt)
+    }
+  }
+
+  refOverLay : any = React.createRef()
+  render() {
+    const { editorState, editorEnabled } = this.state;
+    return (
+      <EditerWrapper ref={this.wrapperEditer}  onMouseDownCapture = {this.handleMouseDown}>
+        {/* <div className="editor-action">
+          <button onClick={this.logData}>Log State</button>
+          <button onClick={this.renderHTML}>Render HTML</button>
+          <button onClick={this.toggleEdit}>Toggle Edit</button>
+        </div> */}
+      
+      <OverLay  imgSrc={this.state.imgSrc} getRef ={ ( ref) => { this.refOverLay = ref }}  /> 
+     
+        <Editor
+          ref={(e) => {this._editor = e;}}
+          editorState={editorState}
+          onChange={this.onChange}
+          editorEnabled={editorEnabled}
+          handleDroppedFiles={this.handleDroppedFiles}
+          handleKeyCommand={this.handleKeyCommand}
+          placeholder={this.state.placeholder}
+          keyBindingFn={this.keyBinding}
+          beforeInput={handleBeforeInput}
+          handleReturn={this.handleReturn}
+          // sideButtons={this.sideButtons}
+          rendererFn={this.rendererFn}
+        >
+        
+          </Editor>
+      </EditerWrapper>
+    );
+  }
+};
+const EditerWrapper = styled.div`
+    /* position : relative; */
+`
 const newBlockToHTML = (block) => {
   const blockType = block.type;
   if (block.type === Block.ATOMIC) {
@@ -237,208 +478,4 @@ const AtomicBlock = (props) => {
     );
   }
   return <p>Block of type <b>{type}</b> is not supported.</p>;
-};
-export default class MediumDraft extends React.Component {
-  state = {
-    editorState: createEditorState(),
-    editorEnabled: true,
-    placeholder: 'Write here...',
-  };
-  _editor : any = React.createRef()
-  onChange = (editorState, callback?:any  ) => {
-    if (this.state.editorEnabled) {
-      this.setState({ editorState }, () => {
-        if (callback) {
-          callback();
-        }
-      });
-    }
-  };
-  sideButtons = [{
-    title: 'Image',
-    component: ImageSideButton,
-  }, {
-    title: 'Embed',
-    component: EmbedSideButton,
-  }, {
-    title: 'Separator',
-    component: SeparatorSideButton,
-  }];
-  exporter = setRenderOptions({
-    styleToHTML,
-    blockToHTML: newBlockToHTML,
-    entityToHTML: newEntityToHTML,
-  });
-  getEditorState = () => this.state.editorState;
-  componentDidMount() {
-    this.setState({
-      placeholder: 'Loading...',
-    });
-    // setTimeout(this.fetchData, 1000);
-    // this.refs.editor.focus();
-  }
-  rendererFn = (setEditorState, getEditorState) =>  {
-    const atomicRenderers = {
-      embed: AtomicEmbedComponent,
-      separator: AtomicSeparatorComponent,
-    };
-    const rFnOld = rendererFn(setEditorState, getEditorState);
-    const rFnNew = (contentBlock) => {
-      const type = contentBlock.getType();
-      switch(type) {
-        case Block.ATOMIC:
-          return {
-            component: AtomicBlock,
-            editable: false,
-            props: {
-              components: atomicRenderers,
-            },
-          };
-        default: return rFnOld(contentBlock);
-      }
-    };
-    return rFnNew;
-  }
-  keyBinding = (e) =>  {
-    if (hasCommandModifier(e)) {
-      if (e.which === 83) {  /* Key S */
-        return 'editor-save';
-      }
-      // else if (e.which === 74 /* Key J */) {
-      //  return 'do-nothing';
-      //}
-    }
-    if (e.altKey === true) {
-      if (e.shiftKey === true) {
-        switch (e.which) {
-          /* Alt + Shift + L */
-          case 76: return 'load-saved-data';
-          /* Key E */
-          // case 69: return 'toggle-edit-mode';
-        }
-      }
-      if (e.which === 72 /* Key H */) {
-        return 'toggleinline:HIGHLIGHT';
-      }
-    }
-    return keyBindingFn(e);
-  }
-  handleKeyCommand = (command) =>  {
-    if (command === 'editor-save') {
-      window.localStorage['editor'] = JSON.stringify(convertToRaw(this.state.editorState.getCurrentContent()));
-      // window.ga('send', 'event', 'draftjs', command);
-      return true;
-    } else if (command === 'load-saved-data') {
-      this.loadSavedData();
-      return true;
-    } else if (command === 'toggle-edit-mode') {
-      this.toggleEdit();
-    }
-    return false;
-  }
-  // fetchData = () => {
-  //   window.ga('send', 'event', 'draftjs', 'load-data', 'ajax');
-  //   const req = new XMLHttpRequest();
-  //   req.open('GET', 'data.json', true);
-  //   req.onreadystatechange = () => {
-  //     if (req.readyState === 4) {
-  //       const data = JSON.parse(req.responseText);
-  //       this.setState({
-  //         editorState: createEditorState(data),
-  //         placeholder: 'Write here...'
-  //       }, () => {
-  //         this._editor.focus();
-  //       });
-  //       window.ga('send', 'event', 'draftjs', 'data-success');
-  //     }
-  //   };
-  //   req.send();
-  // }
-  logData(e) {
-    const es = convertToRaw(this.state.editorState.getCurrentContent());
-    console.log(es);
-    console.log(this.state.editorState.getSelection().toJS());
-    // window.ga('send', 'event', 'draftjs', 'log-data');
-  }
-  renderHTML = (e) =>  {
-    const currentContent = this.state.editorState.getCurrentContent();
-    const eHTML = this.exporter(currentContent);
-    var newWin : any = window.open(
-      `${window.location.pathname}rendered.html`,
-      'windowName',`height=${window.screen.height},width=${window.screen.width}`)
-    newWin.onload = () => {
-      newWin.postMessage(eHTML, window.location.origin);
-      // window.ga('send', 'event', 'draftjs', 'render-window-loaded');
-    };
-    // window.ga('send', 'event', 'draftjs', 'render-window-opened');
-  }
-  loadSavedData= () =>  {
-    const data = window.localStorage.getItem('editor');
-    if (data === null) {
-      return;
-    }
-    try {
-      const blockData = JSON.parse(data);
-      console.log(blockData);
-      this.onChange( EditorState.push(this.state.editorState, convertFromRaw(blockData)), this._editor.focus);
-    } catch(e) {
-      console.log(e);
-    }
-    // window.ga('send', 'event', 'draftjs', 'load-data', 'localstorage');
-  }
-  toggleEdit = () => {
-    this.setState({
-      editorEnabled: !this.state.editorEnabled
-    }, () => {
-      // window.ga('send', 'event', 'draftjs', 'toggle-edit', this.state.editorEnabled + '');
-    });
-  }
-  handleDroppedFiles = (selection, files) =>  {
-    // window.ga('send', 'event', 'draftjs', 'filesdropped', files.length + ' files');
-    const file = files[0];
-    if (file.type.indexOf('image/') === 0) {
-      // eslint-disable-next-line no-undef
-      const src = URL.createObjectURL(file);
-      this.onChange(addNewBlockAt(
-        this.state.editorState,
-        selection.getAnchorKey(),
-        Block.IMAGE, {
-          src,
-        }
-      ));
-      return HANDLED;
-    }
-    return NOT_HANDLED
-  }
-  handleReturn = (e) =>  {
-    // const currentBlock = getCurrentBlock(this.state.editorState);
-    // var text = currentBlock.getText();
-    return NOT_HANDLED;
-  }
-  render() {
-    const { editorState, editorEnabled } = this.state;
-    return (
-      <div>
-        <div className="editor-action">
-          <button onClick={this.logData}>Log State</button>
-          <button onClick={this.renderHTML}>Render HTML</button>
-          <button onClick={this.toggleEdit}>Toggle Edit</button>
-        </div>
-        <Editor
-          ref={(e) => {this._editor = e;}}
-          editorState={editorState}
-          onChange={this.onChange}
-          editorEnabled={editorEnabled}
-          handleDroppedFiles={this.handleDroppedFiles}
-          handleKeyCommand={this.handleKeyCommand}
-          placeholder={this.state.placeholder}
-          keyBindingFn={this.keyBinding}
-          beforeInput={handleBeforeInput}
-          handleReturn={this.handleReturn}
-          sideButtons={this.sideButtons}
-          rendererFn={this.rendererFn}
-        />
-      </div>
-    );
-  }
 };

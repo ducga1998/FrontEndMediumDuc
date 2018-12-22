@@ -4,6 +4,9 @@
     /*padding: 0 10px;*/
     background: #fbffff;
 }
+.md-RichEditor-editor a {
+    color : #bc6d10
+}
 .md-block-atomic-wrapper {
     position: relative;
     border: 1px solid #e8ebec;
