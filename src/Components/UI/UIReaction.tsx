@@ -12,28 +12,8 @@ interface IUIReaction {
 const { useEffect } = React as any
 export default function UIReaction({ idUseOwnArticler, idArticle }: IUIReaction) {
     const refReaction = React.useRef(null) as any
-
-    // check xem trong mang bookmark co chu
-    // lan dau khi vao => load to backend
-    // tao mot container bookmark save lai su kien do 
-    // {idArticle , bookMarkContainer }
-    // lan sau if user vao lai dung bai viet do thi for tu mang save ay ra 
-    // neu co thi view theo data
     useEffect(() => {
         allBookMarkContainer.isBookMark({ idArticle })
-        // window.addEventListener('scroll', (a) => {
-        
-        //     if (refReaction.current && window.scrollY < 40) {
-        //         refReaction.current.style.opacity = 0
-        //     }
-        //     else if (refReaction.current) {
-        //         refReaction.current.style.opacity = 0.7
-        //     }
-        // })
-        // return () => {
-        //     window.removeEventListener('scroll', () => {
-        //     })
-        // }
     })
     return <><UIWidget>
         <Subscribe to={[allBookMarkContainer]}>

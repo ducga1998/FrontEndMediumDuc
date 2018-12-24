@@ -1,5 +1,6 @@
 import * as React from 'react'
 import styled from 'styled-components';
+import UIWidget from '../Components/UI/UIWidget';
 // import { Input } from '../Components/styled/base';
 
 export default function OverLay({getRef , imgSrc}  ) {
@@ -60,7 +61,7 @@ export default function OverLay({getRef , imgSrc}  ) {
       
         
     }
- return <Wrapper onMouseDown = {e => e.stopPropagation()} ref={(ref) => {getRef(ref)}}>
+ return <UIWidget><Wrapper onMouseDown = {e => e.stopPropagation()} ref={(ref) => {getRef(ref)}}>
             <Full>
                 <Input>
                     {['Left', 'Center', 'Full', 'Right'].map(item => {
@@ -69,7 +70,7 @@ export default function OverLay({getRef , imgSrc}  ) {
                 </Input>
             </Full>
             
- </Wrapper>
+ </Wrapper></UIWidget>
     
 }
 const Wrapper  =  styled.div`

@@ -12,7 +12,7 @@ import commentContainer from '../../../Container/commentContainer';
 import UIReaction from '../../../Components/UI/UIReaction';
 import UIRichText from '../../../Components/UI/UIRichText';
 import { StyledSolidButton } from '../../../Components/styled/button';
-import { FlexRow, FlexCol, H2 } from '../../../Components/styled/base';
+import { FlexRow, FlexCol, H2, fontStack, H4 } from '../../../Components/styled/base';
 import { Section } from '../../../Components/styled/nav';
 
 interface IReadArticleType {
@@ -42,23 +42,26 @@ class ReadArticle extends React.Component<IReadArticleType> {
                     {/* UIReraction need idArticle and idUser own this article */}
                     <UIReaction idArticle={idArticle} idUseOwnArticler={idUser} />
                     <div style={{
-                        width: '70%'
+                        width: '70%',
+                      
                     }}>
                         <Author idUser={idUser} avatarLink={avatarLink} totalFollow={10} name={name} totalArticle={213} />
                         <Section    >
-                        <H2> HashTag : </H2> {hashTag.map((item, key) => {
+                            <H2> HashTag : </H2> {hashTag.map((item, key) => {
                                 return <StyledSolidButton key={key} style={{ fontSize: '15px', margin: '0px 2px' }}>{item}</StyledSolidButton>
                             })}
                         </Section>
                         <H2>{createTime}</H2>
-                        <UIRichText isTitle mode="view" >
-                            <h1> {renderHTML(titleArticle)}</h1>
-                        </UIRichText>
-                        <UIRichText mode="view" >
-                            {renderHTML(contentArticle)}
-                        </UIRichText>
+                        <H4 style={{
+                              fontSize : '1.5em'
+                        }}>   {renderHTML(titleArticle)}
+
+                        {renderHTML(contentArticle)}
+
+                        </H4>
+
                         <WriteComment idUser={idUser} />
-                        <h2>All Comment Article</h2>
+                        <H2>All Comment Article</H2>
                         <CommentArticle
                             idArticle={idArticle} />
                     </div>
@@ -78,6 +81,7 @@ const $HashTag = styled.div`
     }
 `
 const $Align = styled.div`
+    ${fontStack}
         display : flex;
         width : 100%;
         margin-bottom : 10px;

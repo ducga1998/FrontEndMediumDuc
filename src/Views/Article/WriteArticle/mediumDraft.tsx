@@ -227,24 +227,20 @@ export default class MediumDraft extends React.Component<IMediumDraft> {
   handleMouseDown = (event) => {
     // event.stopPropagation()
     console.log(event.target)
-    // if(event.target.tagName ==='IMG') {
-    //   const {width , height , top , left}  = event.target.getBoundingClientRect()
-    //   const Y = (window.innerWidth  * 3/10 ) / 2
+    if(event.target.tagName ==='IMG') {
+      const {width , height , top , left}  = event.target.getBoundingClientRect()
+      const view = event.target.ownerDocument.defaultView
+      const scrollTop = view.scrollY
+      const imgSrc = event.target.getAttribute('src')
+      this.setState({imgSrc})
+      this.refOverLay.style.width  = width + 'px'
+      this.refOverLay.style.height  = height + 'px'
+      this.refOverLay.style.top  = (top + scrollTop) + 'px'
 
-    
-    //   const view = event.target.ownerDocument.defaultView
-    //   const scrollTop = view.scrollY
-    //   const imgSrc = event.target.getAttribute('src')
-    //   this.setState({imgSrc})
-    //   console.log('scroll X  , ' , scrollTop)
-    //   this.refOverLay.style.width  = width + 'px'
-    //   this.refOverLay.style.height  = height + 'px'
-    //   this.refOverLay.style.top  = (top + scrollTop - 48) + 'px'
-
-    //   this.refOverLay.style.left  = (left - Y) + 'px'
+      this.refOverLay.style.left  = (left ) + 'px'
       
-    //   // console.log('nguyen inh duc' , scrt)
-    // }
+      // console.log('nguyen inh duc' , scrt)
+    }
   }
    blockRendererFn = function(contentBlock) {
     const type = contentBlock.getType()
@@ -264,7 +260,7 @@ export default class MediumDraft extends React.Component<IMediumDraft> {
           <button onClick={this.toggleEdit}>Toggle Edit</button>
         </div> */}
       
-      {/* <OverLay  imgSrc={this.state.imgSrc} getRef ={ ( ref) => { this.refOverLay = ref }}  />  */}
+      <OverLay  imgSrc={this.state.imgSrc} getRef ={ ( ref) => { this.refOverLay = ref }}  /> 
      
         <Editor
           ref={(e) => {this._editor = e;}}
@@ -281,8 +277,7 @@ export default class MediumDraft extends React.Component<IMediumDraft> {
           rendererFn={this.rendererFn}
           blockRendererFn={this.blockRendererFn}
           customStyleMap={styleMap}
-          orderedSet={OrderedSet}
-          
+          orderedSet={OrderedSet}  
         >
         
           </Editor>

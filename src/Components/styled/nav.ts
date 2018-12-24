@@ -1,5 +1,5 @@
 // import { theme } from './../../theme/index';
-import { Link } from 'react-router-dom';
+import Link from '../Link';
 // @flow
 import styled, { css } from 'styled-components';
 import { FlexRow, hexa, fontStack, Transition } from './base';

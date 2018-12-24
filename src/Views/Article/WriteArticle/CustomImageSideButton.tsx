@@ -12,10 +12,7 @@ export default class CustomImageSideButton  extends ImageSideButton {
       // This is a post request to server endpoint with image as `image`
       const formData = new FormData();
       formData.append('image', file);
-     
-    //   this.props.setEditorState(addNewBlock(this.props.getEditorState(), Block.IMAGE, {
-    //     src:    `http://localhost:4000/img/${file.name}`,
-    //   }));
+  
       fetch('/img', {
         method: 'POST',
         body: formData,
