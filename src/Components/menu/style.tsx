@@ -12,7 +12,7 @@ export const Wrapper = styled.div`
         css`
       > button {
         color: ${theme.text.reverse};
-        transition: ${Transition.hover.off};
+        /* transition: ${Transition.hover.off}; */
 
         &:hover {
           color: ${theme.text.reverse};

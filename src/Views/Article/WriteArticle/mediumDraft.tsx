@@ -40,7 +40,7 @@ import styled from 'styled-components';
 interface IMediumDraft {
   onChangeTitle  : (e : any) => any,
   onChangeContent : (e : string) =>any,
-  initArticle  : string
+  initArticle ? : any
 }
 const styleMap = {
   'STRIKETHROUGH': {
@@ -56,15 +56,18 @@ export default class MediumDraft extends React.Component<IMediumDraft> {
   };
   _editor : any = React.createRef()
   wrapperEditer : any = React.createRef()
-  onChange = (editorState, callback?:any  ) => {
+  onChange = async (editorState, callback?:any  ) => {
     // console.log(convertToRaw)
     // console.log(editorState)
   //   // console.log('content', editorState)
   // const domEditer =   document.querySelectorAll('[data-contents="true"]')[0]
   // console.log(domEditer.innerHTML)
     const currentContent = this.state.editorState.getCurrentContent();
+  // console.log('currentContent',currentContent)
+  const title = currentContent.getFirstBlock().text
     const eHTML = this.exporter(currentContent);
-     this.props.onChangeTitle(eHTML)
+     await this.props.onChangeTitle(title)
+    await  this.props.onChangeContent(eHTML)
     // console.log('html',eHTML)
     if (this.state.editorEnabled) {
       this.setState({ editorState }, () => {
@@ -91,14 +94,13 @@ export default class MediumDraft extends React.Component<IMediumDraft> {
   });
   getEditorState = () => this.state.editorState;
   componentDidMount() {
-  console.log(this._editor.current)
-  const dom = (this._editor.current)
-  
-    const html = '<p>OK data ok roi </p>'
-    // const editorState = createEditorState(convertToRaw(mediumDraftImporter(html)));
+    if(this.props.initArticle){
+      const editorState = createEditorState(convertToRaw(mediumDraftImporter(this.props.initArticle)));
+      this.setState({editorState})
+    }
+   
     this.setState({
       placeholder: 'Write something for you  .....',
-
     });
     // setTimeout(this.fetchData, 1000);
     // this.refs.editor.focus();

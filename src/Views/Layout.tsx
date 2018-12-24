@@ -19,14 +19,15 @@ const Body = styled.div`
   display: flex;
   flex-direction: column;
   width: 100%;
-  height: 100%;
+  height: 100vh;
+  
 
   background: ${props => {
     // background layout project 
     if(location.pathname==='/login'){
     return props.theme.bg.reverse
   }
-  return 'white';
+  return 'white'
 }};
 
   @media (max-width: 768px) {

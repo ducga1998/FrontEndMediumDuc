@@ -12,10 +12,10 @@ import {mscConfirm} from 'medium-style-confirm'
 export const updateDataArticle = debouce(async (value, content) => {
     console.log('type', value, 'value', content)
     await articleContainer.setState({ isPublicArticle: true, [value]: content })
-}, 3000)
+}, 1000)
 export const updateContent = debouce(async (content ) => {
     await articleContainer.setState({ isPublicArticle: true, 'contentArticle': content })
-} , 4000)
+} , 2000)
 const WriteArticle = () => {
     const { avatarLink, name, articles, idUser } = userContainer.state.dataUser
     React.useEffect(() => {

@@ -8,7 +8,6 @@ interface IUILoading {
     link?: string
 }
 export default class UILoading extends React.Component<IUILoading> {
-
     render() {
         return <UIWidget>
             <$Background>

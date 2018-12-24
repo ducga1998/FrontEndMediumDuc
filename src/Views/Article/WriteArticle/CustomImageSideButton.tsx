@@ -2,10 +2,6 @@ import { Block, ImageSideButton, addNewBlock } from 'medium-draft';
 import * as React from 'react'
 export default class CustomImageSideButton  extends ImageSideButton {
     props: any;
-  /*
-  We will only check for first file and also whether
-  it is an image or not.
-  */
   onChange(e) {
     const file = e.target.files[0];
     if (file.type.indexOf('image/') === 0) {

@@ -78,7 +78,7 @@ export const IconLink = styled(Link)`
   position: relative;
   width: 100%;
   color : ${props => props.theme.text.reverse};
-  transition : ${Transition.hover.off};
+  /* transition : ${Transition.hover.off}; */
   &:hover {
     opacity: 1;
     box-shadow: inset 0 -4px 0 ${({ theme }) => theme.bg.default};

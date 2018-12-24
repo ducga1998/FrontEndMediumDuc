@@ -6,14 +6,13 @@ import * as React from 'react'
 import { IMAGE_SOURCE_DEFAULT } from '../../../help/define';
 import { Config } from '../../../help/config';
 import styled from 'styled-components';
-
-import { ArticleContext } from 'src/Views/Article/ReadArticle';
 import { toast } from 'react-toastify';
 import userContainer from '../../../Container/userContainer';
 import { notificationSocket } from '../../../socketClient/socket';
 import commentAllContainer from '../../../Container/commentContainer';
 import { renderElement } from '../../../Core/renderElement';
 import { Input } from '../../../Components/styled/base';
+import { AvatarImage } from '../../../Components/styled/avatar';
 const FormComment = ({ context }: any) => {
     const refContent = React.useRef(null) as any
     const [content, setContent] = React.useState('')
@@ -56,7 +55,7 @@ const FormComment = ({ context }: any) => {
         refContent.current.innerHTML = '<p><br /></p>'
     }
     return <div>
-        <img className="smallAvatar" src={avatarLink ? avatarLink : IMAGE_SOURCE_DEFAULT} /> <b>{name}</b>
+        <AvatarImage className="smallAvatar" src={avatarLink ? avatarLink : IMAGE_SOURCE_DEFAULT} /> <b>{name}</b>
         <$Content ref={refContent} />
         <UIButton onMouseDown={handleAddComment} >Comment</UIButton>
     </div>

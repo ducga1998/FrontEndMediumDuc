@@ -7,4 +7,10 @@ export const AvatarImage = styled.img<any>`
   border-radius: ${props =>
         props.radius ? `${props.radius}px` : `${props.size / 2}px`};
         border : 6px solid ${props => props.theme.bg.reverse};
+        &:hover {
+          border : 6px solid ${props => props.theme.brand.default};
+        }
+        transition : .2s;
+        
 `;
+

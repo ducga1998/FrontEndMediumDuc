@@ -10,12 +10,14 @@ import MediumEditer from 'medium-editor';
 import { IMAGE_SOURCE_DEFAULT } from '../../../help/define';
 import RelyComment from './FormRely'
 import FormComment from './FormComment';
+import { AvatarImage } from '../../../Components/styled/avatar';
+import { H2 } from '../../../Components/styled/base';
 interface IViewComment {
     idArticle: string,
 
 }
 export default class ViewComment extends React.Component<IViewComment> {
-    refContent = React.createRef()
+
     render() {
 
         return <Subscribe to={[commentAllContainer]}>
@@ -35,7 +37,7 @@ export default class ViewComment extends React.Component<IViewComment> {
                                     {allComments.length > 0 ? allComments.map((item: any, key) => {
                                         return <Comment dataUserComment={item} />
                                     }) :
-                                        <h2 style={{ textAlign: 'center', color: 'gray' }}> NO  Comment,  : ))) cmt vào cho vui đi thằng ngu</h2>
+                                        <H2 style={{ textAlign: 'center', color: 'gray' }}> NO  Comment,  : ))) cmt vào cho vui đi thằng ngu</H2>
                                     }
                                 </div>
                             }
@@ -49,34 +51,18 @@ export default class ViewComment extends React.Component<IViewComment> {
 }
 const Comment = ({ dataUserComment }) => {
     const [open, setOpen] = React.useState(false)
-    const refContent = React.useRef(null)
-    React.useEffect(() => {
-        console.log('refContent', refContent)
-        if (refContent.current) {
-            const title = new MediumEditer(refContent.current, Config)
-
-        }
-    })
-    // phan biet giua form comment va render comment
     function renderComment(comment) {
-        if (comment.idRely) {
+        const { userComment: { avatarLink, name }, createdAt, content } = comment
             return <>
                 <$Comment onMouseDown={() => { setOpen(!open) }} data-tooltip={`Created At : ${new Date(createdAt)}`}>
-                    <$Img data-tooltip={name} src={avatarLink ? avatarLink : IMAGE_SOURCE_DEFAULT} />
+                    <AvatarImage data-tooltip={name} src={avatarLink ? avatarLink : IMAGE_SOURCE_DEFAULT} />
                     <$Content  >{renderHTML(content)}</$Content>
                 </$Comment>
 
                 {open ? <FormComment /> : null}
             </>
-        }
-        // id comment , idRely , content 
-
     }
-    const { userComment: { avatarLink, name }, createdAt, content } = dataUserComment
-    // userData 
-    return <>
-
-    </>
+    return renderComment(dataUserComment)
 }
 const $Content = styled.div`
     &:focus {
@@ -95,9 +81,6 @@ const $Content = styled.div`
         margin-bottom : 10px;
         transition: 0.2s;
     }
-`
-const $Img = styled.img`
-
 `
 const $Comment = styled.div`
     img {

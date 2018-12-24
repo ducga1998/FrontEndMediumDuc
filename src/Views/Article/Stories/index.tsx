@@ -7,6 +7,7 @@ import userContainer from '../../../Container/userContainer';
 import srcImg from '../../image/9284571_300x300.jpeg';
 import UILoading from '../../../Components/UI/UILoading';
 import Article from '../../Article';
+import { H2 } from '../../../Components/styled/base';
 interface IStories {
     match: any
 }
@@ -23,7 +24,6 @@ class Stories extends React.Component<IStories> {
 
         await this.setState({ dataUser })
     }
-
     render() {
         const { ownProfileId, dataUser } = this.state as any
         console.log('state', this.state)
@@ -39,7 +39,7 @@ class Stories extends React.Component<IStories> {
                     const { hashTag, isUSer, contentArticle, titleArticle, createTime, idArticle } = item
                     return <Article typeArticle='store' user={dataUser} idArticle={idArticle} key={key} hashTag={hashTag} time={createTime} content={contentArticle} totalClap={8} totalComment={9} titleArticle={titleArticle} avatar={`https://picsum.photos/200/200/?a${item}`} />
 
-                }) : <h2>NO Article  :), fuck own account stupid </h2>}
+                }) : <H2>NO Article  :), fuck own account stupid </H2>}
             </$ViewArticle>
         </$ArticleDetail>
 
