@@ -18,19 +18,16 @@ export default function Layout(props) {
 const Body = styled.div`
   display: flex;
   flex-direction: column;
-  width: 100vw;
-  height: 100vh;
+  width: 100%;
+  height: 100%;
 
   background: ${props => {
     // background layout project 
     if(location.pathname==='/login'){
     return props.theme.bg.reverse
   }
-  if(location.pathname ==='/writearticle'){
-    return 'white'
-  }
-  return props.theme.bg.wash
-  }};
+  return 'white';
+}};
 
   @media (max-width: 768px) {
     height: 100vh;

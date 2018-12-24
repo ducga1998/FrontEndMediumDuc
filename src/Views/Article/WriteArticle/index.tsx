@@ -7,33 +7,31 @@ import Author from '../../Author';
 import UIRichText from '../../../Components/UI/UIRichText';
 import MediumDraft from './mediumDraft';
 import { fontStack } from '../../../Components/styled/base';
+import {mscConfirm} from 'medium-style-confirm'
 
-
-export const callWhenWrite = debouce(async (value, content) => {
-    if (content === '<p><br></p>') {
-        await articleContainer.setState({ isPublicArticle: false })
-    }
-    else {
-        await articleContainer.setState({ isPublicArticle: true, [value]: content })
-    }
+export const updateDataArticle = debouce(async (value, content) => {
+    console.log('type', value, 'value', content)
+    await articleContainer.setState({ isPublicArticle: true, [value]: content })
 }, 3000)
+export const updateContent = debouce(async (content ) => {
+    await articleContainer.setState({ isPublicArticle: true, 'contentArticle': content })
+} , 4000)
 const WriteArticle = () => {
     const { avatarLink, name, articles, idUser } = userContainer.state.dataUser
     React.useEffect(() => {
         // beause when user write new Article then  we reset all setting in new article, avoid case to store
         articleContainer.setState({ arrHashTag: [] })
-        console.log('test  ' , )
-        console.log(   () => {
-            console.log()
-        })
-        return () => { console.log('cascasn') }
-
     })
     return <$Align>
         <Wrapper  >
+            <button onClick={() => {mscConfirm("Delete?",function(){
+  alert("Post deleted");
+});}} >mscConfirm</button>
             <Author idUser={idUser} avatarLink={avatarLink} totalFollow={10} name={name} totalArticle={articles.length} />
-            <MediumDraft onChange = {  (value :string) => { callWhenWrite( 'contentArticle' ,  value  ); console.log('sacas' ,value)}}   initArticle = "OK" />
-
+            <MediumDraft
+                onChangeTitle={value => updateDataArticle('titleArticle', value)}
+                onChangeContent={value => updateContent(value)}
+                initArticle="OK" />
         </Wrapper>
     </$Align>
 
@@ -42,7 +40,7 @@ const Wrapper = styled.div`
     width : 70%;
     position : relative;
 `
- // scalable very good 
+// scalable very good 
 const $Align = styled.div`
     ${fontStack}  
         display : flex;

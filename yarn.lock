@@ -5054,6 +5054,10 @@ medium-editor@^5.23.3:
   version "5.23.3"
   resolved "https://registry.yarnpkg.com/medium-editor/-/medium-editor-5.23.3.tgz#6fb638759ae2fc76c423feb056f346d9c518d3b7"
 
+medium-style-confirm@^0.4.6:
+  version "0.4.6"
+  resolved "https://registry.yarnpkg.com/medium-style-confirm/-/medium-style-confirm-0.4.6.tgz#aa96dacc733ef710f46477a3a30c6ad024ce4466"
+
 mem@^1.1.0:
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/mem/-/mem-1.1.0.tgz#5edd52b485ca1d900fe64895505399a0dfa45f76"

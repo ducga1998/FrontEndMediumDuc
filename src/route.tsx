@@ -21,7 +21,6 @@ import Stories from "./Views/Article/Stories";
 import StoreDetail from "./Views/Article/Stories/Store";
 import ArticleBookMark from "./Views/Article/BookMarkArticle";
 import history from './history'
-
 const About = () => <div>
     Web design by Nguyen Minh duc
     <h5>Facebook : <a href="https://www.facebook.com/duc.ceh.cnna">https://www.facebook.com/duc.ceh.cnna</a></h5>
@@ -35,7 +34,7 @@ const AppRouter = () => {
         if (localStorage.getItem('duc-app-medium-login')) {
 
             const dataCache = localStorage.getItem('duc-app-medium-login')
-            console.log(dataCache)
+            // console.log(dataCache)
             if (dataCache) {
                 const dataUser = JSON.parse(dataCache)
                 await userContainer.setState({ dataUser, login: true })
@@ -50,7 +49,7 @@ const AppRouter = () => {
             return user != null ? component : redirect('/login')
         }
 
-        return <Router history={history}>
+        return <Router history={history} >
             <Switch>
                 <Layout >
                     <Route path="/chat" component={isAuth(AllRoomChat)} />

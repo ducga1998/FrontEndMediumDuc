@@ -5,4 +5,8 @@ module.exports = function (app) {
 		'target': 'http://localhost:4000/graphql',
 		'secure': false
 	}))
+	app.use(proxy(['/img'], {
+		'target': 'http://localhost:4000',
+		'secure': false
+	}))
 }

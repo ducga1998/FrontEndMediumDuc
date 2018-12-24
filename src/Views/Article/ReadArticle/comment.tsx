@@ -57,20 +57,30 @@ const Comment = ({ dataUserComment }) => {
 
         }
     })
+    // phan biet giua form comment va render comment
+    function renderComment(comment) {
+        if (comment.idRely) {
+            return <>
+                <$Comment onMouseDown={() => { setOpen(!open) }} data-tooltip={`Created At : ${new Date(createdAt)}`}>
+                    <$Img data-tooltip={name} src={avatarLink ? avatarLink : IMAGE_SOURCE_DEFAULT} />
+                    <$Content  >{renderHTML(content)}</$Content>
+                </$Comment>
+
+                {open ? <FormComment /> : null}
+            </>
+        }
+        // id comment , idRely , content 
+
+    }
     const { userComment: { avatarLink, name }, createdAt, content } = dataUserComment
     // userData 
     return <>
-        <$Comment onMouseDown={() => { setOpen(!open) }} data-tooltip={`Created At : ${new Date(createdAt)}`}>
-            <$Img data-tooltip={name} src={avatarLink ? avatarLink : IMAGE_SOURCE_DEFAULT} />
-            <$Content  >{renderHTML(content)}</$Content>
 
-        </$Comment>
-
-        {open ? <FormComment /> : null}
     </>
 }
 const $Content = styled.div`
     &:focus {
+    flex : 1;
     background-color: #f3f3f3;
     transition: 0.2s;
     outline: none;

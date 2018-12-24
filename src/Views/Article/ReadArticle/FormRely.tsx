@@ -34,6 +34,7 @@ const FormComment = ({ context }: any) => {
             toast.error('Comment not empty !!!. Please write something ')
             return
         }
+        
 
         const input = {
             content,

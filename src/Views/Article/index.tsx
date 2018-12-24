@@ -27,7 +27,6 @@ export interface IArticle {
 
 // => view list Article  =>  you check file listArticle is view props data and function call api to backend
 export default function Article({ idArticle, avatar, titleArticle, content, totalClap, time, hashTag, totalComment, user, typeArticle }: IArticle) {
-    console.log('user', user)
     if (!user) {
         return null
     }

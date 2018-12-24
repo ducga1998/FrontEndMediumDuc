@@ -6,7 +6,7 @@ import Author from '../../Author';
 import { getArticleById } from '../../../API/articleAPI';
 import UIRichText from '../../../Components/UI/UIRichText';
 import { SubscribeOne } from 'unstated-x';
-import { callWhenWrite } from '../WriteArticle';
+import { updateDataArticle } from '../WriteArticle';
 const { useEffect } = React as any
 const WriteArticle = ({ match }) => {
 
@@ -48,7 +48,7 @@ const WriteArticle = ({ match }) => {
                             />
                         </h1>
                         <UIRichText placeholder="Write something you want ......." content={contentArticle}
-                            onChange={async (value) => { await callWhenWrite('contentArticle', value) }}
+                            onChange={async (value) => { await updateDataArticle('contentArticle', value) }}
                         />
 
 

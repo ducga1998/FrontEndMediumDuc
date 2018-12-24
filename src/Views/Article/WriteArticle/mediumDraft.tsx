@@ -8,6 +8,8 @@ import {
   Modifier,
   AtomicBlockUtils,
   Entity,
+  EditorBlock,
+  OrderedSet
 }  from 'draft-js';
 import {
   Editor,
@@ -29,14 +31,22 @@ import {
   entityToHTML,
   styleToHTML
 }  from 'medium-draft/lib/exporter';
+import 'isomorphic-fetch';
 import mediumDraftImporter from 'medium-draft/lib/importer';
 import './draft.css'
 import OverLay from '../../../workspace/overlay';
+import CustomImageSideButton from './CustomImageSideButton'
 import styled from 'styled-components';
 interface IMediumDraft {
-  onChange : (e : any) => any,
+  onChangeTitle  : (e : any) => any,
+  onChangeContent : (e : string) =>any,
   initArticle  : string
 }
+const styleMap = {
+  'STRIKETHROUGH': {
+    textDecoration: 'line-through',
+  },
+};
 export default class MediumDraft extends React.Component<IMediumDraft> {
   state = {
     editorState: createEditorState(),
@@ -47,12 +57,14 @@ export default class MediumDraft extends React.Component<IMediumDraft> {
   _editor : any = React.createRef()
   wrapperEditer : any = React.createRef()
   onChange = (editorState, callback?:any  ) => {
-    // console.log('content', editorState)
-  const domEditer =   document.querySelectorAll('[data-contents="true"]')[0]
-  console.log(domEditer.innerHTML)
+    // console.log(convertToRaw)
+    // console.log(editorState)
+  //   // console.log('content', editorState)
+  // const domEditer =   document.querySelectorAll('[data-contents="true"]')[0]
+  // console.log(domEditer.innerHTML)
     const currentContent = this.state.editorState.getCurrentContent();
     const eHTML = this.exporter(currentContent);
-     this.props.onChange(domEditer.innerHTML)
+     this.props.onChangeTitle(eHTML)
     // console.log('html',eHTML)
     if (this.state.editorEnabled) {
       this.setState({ editorState }, () => {
@@ -64,7 +76,7 @@ export default class MediumDraft extends React.Component<IMediumDraft> {
   };
   sideButtons = [{
     title: 'Image',
-    component: ImageSideButton,
+    component: CustomImageSideButton,
   }, {
     title: 'Embed',
     component: EmbedSideButton,
@@ -215,26 +227,32 @@ export default class MediumDraft extends React.Component<IMediumDraft> {
   handleMouseDown = (event) => {
     // event.stopPropagation()
     console.log(event.target)
-    if(event.target.tagName ==='IMG') {
-      const {width , height , top , left}  = event.target.getBoundingClientRect()
-        const Y = (window.innerWidth  * 3/10 ) / 2
+    // if(event.target.tagName ==='IMG') {
+    //   const {width , height , top , left}  = event.target.getBoundingClientRect()
+    //   const Y = (window.innerWidth  * 3/10 ) / 2
 
     
-      const view = event.target.ownerDocument.defaultView
-      const scrollTop = view.scrollY
-      const imgSrc = event.target.getAttribute('src')
-      this.setState({imgSrc})
-      console.log('scroll X  , ' , scrollTop)
-      this.refOverLay.style.width  = width + 'px'
-      this.refOverLay.style.height  = height + 'px'
-      this.refOverLay.style.top  = (top + scrollTop - 48) + 'px'
+    //   const view = event.target.ownerDocument.defaultView
+    //   const scrollTop = view.scrollY
+    //   const imgSrc = event.target.getAttribute('src')
+    //   this.setState({imgSrc})
+    //   console.log('scroll X  , ' , scrollTop)
+    //   this.refOverLay.style.width  = width + 'px'
+    //   this.refOverLay.style.height  = height + 'px'
+    //   this.refOverLay.style.top  = (top + scrollTop - 48) + 'px'
 
-      this.refOverLay.style.left  = (left - Y) + 'px'
+    //   this.refOverLay.style.left  = (left - Y) + 'px'
       
-      // console.log('nguyen inh duc' , scrt)
+    //   // console.log('nguyen inh duc' , scrt)
+    // }
+  }
+   blockRendererFn = function(contentBlock) {
+    const type = contentBlock.getType()
+    switch (type) {
+      default:
+        return {component: <Line />, editable: true}
     }
   }
-
   refOverLay : any = React.createRef()
   render() {
     const { editorState, editorEnabled } = this.state;
@@ -246,7 +264,7 @@ export default class MediumDraft extends React.Component<IMediumDraft> {
           <button onClick={this.toggleEdit}>Toggle Edit</button>
         </div> */}
       
-      <OverLay  imgSrc={this.state.imgSrc} getRef ={ ( ref) => { this.refOverLay = ref }}  /> 
+      {/* <OverLay  imgSrc={this.state.imgSrc} getRef ={ ( ref) => { this.refOverLay = ref }}  />  */}
      
         <Editor
           ref={(e) => {this._editor = e;}}
@@ -259,8 +277,12 @@ export default class MediumDraft extends React.Component<IMediumDraft> {
           keyBindingFn={this.keyBinding}
           beforeInput={handleBeforeInput}
           handleReturn={this.handleReturn}
-          // sideButtons={this.sideButtons}
+          sideButtons={this.sideButtons}
           rendererFn={this.rendererFn}
+          blockRendererFn={this.blockRendererFn}
+          customStyleMap={styleMap}
+          orderedSet={OrderedSet}
+          
         >
         
           </Editor>
@@ -268,6 +290,17 @@ export default class MediumDraft extends React.Component<IMediumDraft> {
     );
   }
 };
+class Line extends React.Component<any> {
+  render () {
+    const blockMap = this.props.contentState.getBlockMap().toArray()
+    const blockKey = this.props.block.key
+    const lineNumber = blockMap.findIndex(block => blockKey === block.key) + 1
+    return <div style={{display: 'flex'}}>
+      <span style={{marginRight: '5px'}}>{lineNumber}</span>
+      <div style={{flex: '1'}}><EditorBlock {...this.props} /></div>
+    </div>
+  }
+}
 const EditerWrapper = styled.div`
     /* position : relative; */
 `

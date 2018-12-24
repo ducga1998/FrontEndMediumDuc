@@ -3,7 +3,7 @@ import * as React from 'react';
 import { Button, Glyphicon } from 'react-bootstrap';
 import { getAllInformationUser } from 'src/API/client';
 import styled from 'styled-components';
-import { follow, getAllInfomationUserFollowYour, unFollow } from '../../API/followAPI';
+// import { follow, getAllInfomationUserFollowYour, unFollow } from '../../API/followAPI';
 import userContainer from '../../Container/userContainer';
 import srcImg from '../../image/9284571_300x300.jpeg';
 import UILoading from '../../Components/UI/UILoading';
@@ -30,12 +30,10 @@ class ViewUserDetail extends React.Component<IViewUserCurrent> {
         const dataUser = await getAllInformationUser(idUser)
         await this.setState({ dataUser })
     }
-
     render() {
         const { dataUser, open } = this.state
         if (dataUser) {
             const { articles, avatarLink, name, location, biographical, birthday } = dataUser as any;
-            console.log('articles', articles)
             return <$ArticleDetail>
                 <$Content>
                     <Left>

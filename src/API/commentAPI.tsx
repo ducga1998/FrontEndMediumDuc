@@ -62,4 +62,35 @@ export function addComment(input: { idUser: string, idArticle: string, content: 
 
 
     })
-}
+} 
+export function addRelyComment(input: { idUser: string, idArticle: string, content: string , idRely :string }) {
+    return new Promise(async resolve => {
+        const API = await client.mutate({
+            mutation: gql`
+              mutation AddCommentIntoArticle($input: CommentInput) {
+                addCommentIntoArticle(input: $input) {
+                    idUser
+                    idArticle
+                    content
+                    userComment {
+                        name
+                        avatarLink
+                    }
+                    articleComment {
+                        idUser
+                        createTime
+                    }
+                }
+            }
+            `,
+            variables: {
+                input
+            }
+        })
+
+        // const { data: { addCommentIntoArticle } } = API
+        resolve(convertDataToGraphQL(API));
+
+
+    })
+} 
