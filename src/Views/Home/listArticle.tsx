@@ -34,7 +34,8 @@ export default class ListArticle extends React.Component<any> {
                             return <Subscribe to={[articleContainer]}>
                                 {
                                     () => {
-                                        const { hashTag, contentArticle, titleArticle, createTime, idArticle, user, comment, bookmark } = articleContainer.state
+                                        const { hashTag, contentArticle, titleArticle, createTime, idArticle, user, comment, bookmark , imageArticle } = articleContainer.state
+                                        const backgroundArticle = `http://localhost:4000/img/${imageArticle}`
                                         return <Article
                                             user={user}
                                             idArticle={idArticle}
@@ -45,6 +46,7 @@ export default class ListArticle extends React.Component<any> {
                                             totalClap={bookmark.length}
                                             totalComment={comment.length}
                                             titleArticle={titleArticle}
+                                            imageArticle={backgroundArticle}
                                             avatar={`https://picsum.photos/200/200/?a${item}`} />
                                     }
                                 }

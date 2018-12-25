@@ -31,7 +31,7 @@ const WriteArticle = () => {
             <MediumDraft
                 onChangeTitle={value => updateDataArticle('titleArticle', value)}
                 onChangeContent={value => updateContent(value)}
-                initArticle="OK" />
+             />
         </Wrapper>
     </$Align>
 

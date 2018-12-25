@@ -12,6 +12,7 @@ export function updateArticleToClient(article: any) {
                 updateArticle(input : $input) {
                     idUser
                     hashTag
+                    imageArticle
                     category
                     totalClap
                     notification

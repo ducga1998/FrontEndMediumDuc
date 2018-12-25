@@ -55,6 +55,7 @@ class Navbar extends React.Component {
                             const { login, dataUser } = container.state
                             return <Wrapper>{!login ? <IconLink to="/login">Login</IconLink> :
                              <>  
+                             <StyledCard><Search /></StyledCard>
                                 <StyledCard><IconLink to="/profile"> Profile</IconLink></StyledCard>
                                 <StyledCard><IconLink to="/stories">Stories</IconLink></StyledCard> 
                                 <StyledCard><IconLink to="/bookmarks">Bookmark</IconLink></StyledCard> 

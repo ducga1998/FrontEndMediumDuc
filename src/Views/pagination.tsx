@@ -18,7 +18,7 @@ function renderButton() {
         // offset   * (5 - 1) + 2 
         //  (offset - 1) * first
         await allArticleContainer.setState({ offset })
-        allArticleContainer.fetchData(5, offset * 5)
+        allArticleContainer.fetchData(first, offset * first)
 
     }
     console.log('countButton', countButton, count % first)

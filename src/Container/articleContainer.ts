@@ -8,7 +8,8 @@ interface IAllArticleContainer {
     registryArticle: any[],
     first: number,
     offset: number,
-    count: number
+    count: number,
+   
     // notification: String
 }
 
@@ -74,29 +75,28 @@ export interface IArticleContainer {
     isUpdate: Boolean,
     newArticle: any,
     idArticleNeedUpdate: String,
-    arrHashTag: any
+    arrHashTag: any,
+    imageArticle : string
 }
 class ArticleContainer extends Container<IArticleContainer>{
     //   =>   request to back end 
     //  => front end alway have stories
     async addArticle(idArticle) {
-        const { contentArticle, titleArticle, arrHashTag } = this.state
+        const { contentArticle, titleArticle, arrHashTag  , imageArticle} = this.state
         const { dataUser } = userContainer.state as any
 
         if (dataUser) {
             const { idUser } = dataUser
-            console.log('run func addArticle')
-            return await addArticleToClient({ contentArticle, titleArticle, idUser, idArticle, hashTag: arrHashTag, createTime })
+            return await addArticleToClient({imageArticle ,  contentArticle, titleArticle, idUser, idArticle, hashTag: arrHashTag, createTime })
         }
     }
     async updateAricle(idArticle) {
-        const { contentArticle, titleArticle, arrHashTag } = this.state
+        const { contentArticle, titleArticle, arrHashTag , imageArticle } = this.state
         const { dataUser } = userContainer.state as any
         // const idArticle = uuid()
         if (dataUser) {
             const { idUser } = dataUser
-            console.log('input final', { contentArticle, titleArticle, idUser, idArticle, hashTag: arrHashTag, createTime })
-            return await updateArticleToClient({ contentArticle, titleArticle, idUser, idArticle, hashTag: arrHashTag, createTime })
+            return await updateArticleToClient({ contentArticle, titleArticle, idUser, idArticle, hashTag: arrHashTag, createTime , imageArticle })
         }
     }
 }
@@ -104,6 +104,7 @@ class ArticleContainer extends Container<IArticleContainer>{
 const articleContainer = new ArticleContainer({
     contentArticle: '',
     titleArticle: '',
+    imageArticle : '',
     isPublicArticle: false,
     isUpdate: false,
     idArticleNeedUpdate: '',

@@ -41,7 +41,6 @@ export default class UIDropDown extends React.Component<IUIDropDown> {
     open : false
   }
   handleViewDropDown= (event) => {
-    console.log('nguyen minh duc')
       const domDropDown = this.refDropDown.current
       this.setState({open : true})
   }
@@ -49,8 +48,6 @@ export default class UIDropDown extends React.Component<IUIDropDown> {
     const { trigger, children } = this.props
     const Button =  React.cloneElement(trigger, {
       onMouseDown: (event) => {
-        
-        console.log('nguyen minh duc')
         this.handleViewDropDown(event)
       }
     })

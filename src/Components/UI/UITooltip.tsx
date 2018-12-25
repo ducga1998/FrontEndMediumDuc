@@ -45,6 +45,7 @@ export default class UITooltip extends React.Component<any> {
         </div>
     }
 }
+
 const $ToolTip = styled.div`
 
 background-color: #1b1a1a;

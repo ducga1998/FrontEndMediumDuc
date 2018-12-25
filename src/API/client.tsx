@@ -161,6 +161,7 @@ export function addArticleToClient(article: any) {
                     idUser
                     hashTag
                     category
+                    imageArticle
                     comment {
                             idUser
                             idArticle

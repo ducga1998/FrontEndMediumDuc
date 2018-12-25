@@ -65,7 +65,7 @@ const WrapperComment = styled.div`
 `
 const Comment = ({ dataUserComment  , relyComment } : {dataUserComment : any ,relyComment?: any }) => {
     const [open, setOpen] = React.useState(false)
-    const [dataRely  , setDataRely] = React.useState(relyComment)
+    const [dataRely  , setDataRely] = React.useState(relyComment?relyComment : [])
 //    console.log('dataRelydataRely',dataRely)
     function renderCommentRely(commentRely: any){
         console.log('commentRely',commentRely)
@@ -94,12 +94,9 @@ const Comment = ({ dataUserComment  , relyComment } : {dataUserComment : any ,re
                 <$Comment data-id={idComment} onMouseDown={(event) => {  setOpen(!open) }} data-tooltip={`Created At : ${new Date(createdAt)}`}>
                     <AvatarImage data-tooltip={name} src={avatarLink ? avatarLink : IMAGE_SOURCE_DEFAULT} />
                     <$Content  >{renderHTML(content)}</$Content>
-                  {dataRely?  <CountRely><H2>{dataRely.length} Rely comment</H2></CountRely>:null}
+                  {dataRely && dataRely.length > 0?  <CountRely><H2>{dataRely.length } Rely comment</H2></CountRely>:null}
                 </$Comment>
 
-            
-                
-             
                 {open ?    <WrapperRely>    {dataRely && dataRely.length > 0 ? renderCommentRely(dataRely): null} <FormComment onChange={addCommentRely}  idRely={idComment} />  </WrapperRely> : null}
                     
                

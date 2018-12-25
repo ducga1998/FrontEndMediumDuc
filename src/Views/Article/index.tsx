@@ -22,11 +22,12 @@ export interface IArticle {
     totalComment: number
     idArticle: string
     user: any,
-    typeArticle?: 'store' | 'view'
+    typeArticle?: 'store' | 'view',
+    imageArticle ?: string
 }
 
 // => view list Article  =>  you check file listArticle is view props data and function call api to backend
-export default function Article({ idArticle, avatar, titleArticle, content, totalClap, time, hashTag, totalComment, user, typeArticle }: IArticle) {
+export default function Article({imageArticle ,  idArticle, avatar, titleArticle, content, totalClap, time, hashTag, totalComment, user, typeArticle }: IArticle) {
     if (!user) {
         return null
     }
@@ -34,7 +35,7 @@ export default function Article({ idArticle, avatar, titleArticle, content, tota
     const linkSwitchArticle = typeArticle && typeArticle === 'store' ? `/store/${idArticle}` : `/article/${idArticle}`
     return <$Article>
         
-            <AvatarImage size ={100}  src={`${avatarLink ? avatarLink : avatar}`} />
+            <AvatarImage size ={100}  src={`${imageArticle ? imageArticle : avatar}`} />
       
         <$DetailArticle>
             <H1><Link to={linkSwitchArticle}>{renderHTML(filterStringHTML(titleArticle, true))}</Link></H1>

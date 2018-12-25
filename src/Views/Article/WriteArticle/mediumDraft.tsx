@@ -58,7 +58,7 @@ export default class MediumDraft extends React.Component<IMediumDraft> {
   wrapperEditer : any = React.createRef()
   onChange = async (editorState, callback?:any  ) => {
     // console.log(convertToRaw)
-    // console.log(editorState)
+    console.log(editorState)
   //   // console.log('content', editorState)
   // const domEditer =   document.querySelectorAll('[data-contents="true"]')[0]
   // console.log(domEditer.innerHTML)

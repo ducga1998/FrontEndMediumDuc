@@ -3,6 +3,7 @@ import { Container } from 'unstated-x';
 import { getAllCommentinArtcileCurrent, addComment } from '../API/commentAPI';
 import userContainer from './userContainer';
 import { AnyNaptrRecord } from 'dns';
+import uuid from 'uuid'
 export interface IArticleContainer {
     isPublicArticle: Boolean
     contentArticle: String
@@ -19,11 +20,12 @@ class CommentAllContainer extends Container<any>{
 
     }
     async addCommentInArticle(input : any) {
+        const idComment = uuid()
         const { content, idArticle, idUser ,idRely} = input
         // this is new comment data 
         //request to backend
         // B1 : 
-        let newComment = await addComment(input) as any
+        let newComment = await addComment({...input , ...{idComment}}) as any
         if(idRely){
             return
         }
@@ -33,13 +35,14 @@ class CommentAllContainer extends Container<any>{
         const { commentContainer } = data // this is all Comment
         const { allComments } = commentContainer.state
         let { name, avatarLink } = userContainer.state.dataUser as any
+        // CODE HERE MUST BIG REFACTOR 
         newComment.userComment = {
             avatarLink,
             name,
-            idUser
+            idUser,
+            idComment
         }
         allComments.push(newComment)
-        console.log(allComments)
         await commentContainer.setState({ allComments })
     }
     // each user 
