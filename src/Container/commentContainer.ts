@@ -2,6 +2,7 @@
 import { Container } from 'unstated-x';
 import { getAllCommentinArtcileCurrent, addComment } from '../API/commentAPI';
 import userContainer from './userContainer';
+import { AnyNaptrRecord } from 'dns';
 export interface IArticleContainer {
     isPublicArticle: Boolean
     contentArticle: String
@@ -17,12 +18,15 @@ class CommentAllContainer extends Container<any>{
     addRely(input, idrely) {
 
     }
-    async addCommentInArticle(input) {
-        const { content, idArticle, idUser } = input
+    async addCommentInArticle(input : any) {
+        const { content, idArticle, idUser ,idRely} = input
         // this is new comment data 
         //request to backend
         // B1 : 
         let newComment = await addComment(input) as any
+        if(idRely){
+            return
+        }
         // B2 :  add to container on front end
         const { registryComment } = this.state
         const data = registryComment.find(comment => comment.idArticle === idArticle) // 

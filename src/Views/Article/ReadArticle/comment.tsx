@@ -8,10 +8,10 @@ import UILoading from '../../../Components/UI/UILoading';
 import { Config } from '../../../help/config';
 import MediumEditer from 'medium-editor';
 import { IMAGE_SOURCE_DEFAULT } from '../../../help/define';
-import RelyComment from './FormRely'
 import FormComment from './FormComment';
 import { AvatarImage } from '../../../Components/styled/avatar';
 import { H2 } from '../../../Components/styled/base';
+import userContainer from '../../../Container/userContainer';
 interface IViewComment {
     idArticle: string,
 
@@ -33,13 +33,23 @@ export default class ViewComment extends React.Component<IViewComment> {
                         {
                             () => {
                                 const { allComments } = commentContainer.state
-                                return <div>
+                                return <WrapperComment>
                                     {allComments.length > 0 ? allComments.map((item: any, key) => {
-                                        return <Comment dataUserComment={item} />
+                                        const {idRely} = item
+                                        let dataRely
+                                        if(!idRely){
+                                            // loop all comment, find idComment  === idRely 
+                                             dataRely = allComments.filter(comment => {
+                                                 if(comment.idRely){
+                                                    return comment.idRely === item.idComment
+                                                 }
+                                             })
+                                        }
+                                        return <Comment dataUserComment={item} relyComment={dataRely && dataRely.length > 0 ? dataRely : undefined} />
                                     }) :
                                         <H2 style={{ textAlign: 'center', color: 'gray' }}> NO  Comment,  : ))) cmt vào cho vui đi thằng ngu</H2>
                                     }
-                                </div>
+                                </WrapperComment>
                             }
                         }
                     </Subscribe>
@@ -49,21 +59,60 @@ export default class ViewComment extends React.Component<IViewComment> {
 
     }
 }
-const Comment = ({ dataUserComment }) => {
+// comment only comment => we handle data coment a here
+const WrapperComment = styled.div`
+
+`
+const Comment = ({ dataUserComment  , relyComment } : {dataUserComment : any ,relyComment?: any }) => {
     const [open, setOpen] = React.useState(false)
+    const [dataRely  , setDataRely] = React.useState(relyComment)
+//    console.log('dataRelydataRely',dataRely)
+    function renderCommentRely(commentRely: any){
+        console.log('commentRely',commentRely)
+       return   commentRely.map(comment => {
+        const { userComment: { avatarLink, name }, createdAt, content , idComment  } = comment
+           return <$Comment data-id={idComment}  data-tooltip={`Created At : ${new Date(createdAt)}`}>
+         <b>  ---- </b>
+           <AvatarImage data-tooltip={name} src={avatarLink ? avatarLink : IMAGE_SOURCE_DEFAULT} />
+           <$Content  >{renderHTML(content)}</$Content>
+           </$Comment>
+       })
+    }
+    function addCommentRely(rely){
+        const {avatarLink , name} =  userContainer.state.dataUser
+        rely = {... rely  , ...{userComment : {avatarLink , name}}}; 
+       
+        dataRely.push(rely); setDataRely(dataRely)
+     }
+    
     function renderComment(comment) {
-        const { userComment: { avatarLink, name }, createdAt, content } = comment
+        const { userComment: { avatarLink, name }, createdAt, content , idComment , idRely } = comment
+        if(idRely ){
+            return null
+        }
             return <>
-                <$Comment onMouseDown={() => { setOpen(!open) }} data-tooltip={`Created At : ${new Date(createdAt)}`}>
+                <$Comment data-id={idComment} onMouseDown={(event) => {  setOpen(!open) }} data-tooltip={`Created At : ${new Date(createdAt)}`}>
                     <AvatarImage data-tooltip={name} src={avatarLink ? avatarLink : IMAGE_SOURCE_DEFAULT} />
                     <$Content  >{renderHTML(content)}</$Content>
+                  {dataRely?  <CountRely><H2>{dataRely.length} Rely comment</H2></CountRely>:null}
                 </$Comment>
 
-                {open ? <FormComment /> : null}
+            
+                
+             
+                {open ?    <WrapperRely>    {dataRely && dataRely.length > 0 ? renderCommentRely(dataRely): null} <FormComment onChange={addCommentRely}  idRely={idComment} />  </WrapperRely> : null}
+                    
+               
             </>
     }
     return renderComment(dataUserComment)
 }
+const CountRely = styled.div`
+
+`
+const WrapperRely  = styled.div`
+padding  : 10px 0px 0px 40px;
+`
 const $Content = styled.div`
     &:focus {
     flex : 1;
@@ -83,17 +132,18 @@ const $Content = styled.div`
     }
 `
 const $Comment = styled.div`
+    align-items: center;
     img {
         width : 50px;
         height : 50px;
         border-radius : 50%;
     }
-    border-bottom: 1px solid #e8e6e6;
+    border-bottom: 1px solid  ${props => props.theme.bg.border};
     display : flex;
     /* margin : 30px 0px 0px; */
     padding: 30px;
     &:hover {
-        background: #f1f3f3;
+    background: ${props => props.theme.bg.wash};
     transition: 0.3s;
     border-radius: 10px;
     }

@@ -8,14 +8,18 @@ export function getAllCommentinArtcileCurrent(idUser: string) {
         const API = await client.query({
             query: gql`
                     query {
+                        # add mechasim have idComment
                         getAllCommentInTheArticle(id:"${idUser}"){
                             idUser
+                            idComment
                             idArticle
                             content
                             createdAt
+                            idRely
                             userComment {
                                 name
                                 avatarLink
+
                             }
                             articleComment {
                                 idUser
@@ -32,7 +36,7 @@ export function getAllCommentinArtcileCurrent(idUser: string) {
 //MUATION 
 // this is function felp we add comment into a article , 
 // input : idArticle and  content comment ?  . Iam not sure  :v 
-export function addComment(input: { idUser: string, idArticle: string, content: string }) {
+export function addComment(input: { idUser: string, idArticle: string, content: string , idRely?: string }) {
     return new Promise(async resolve => {
         const API = await client.mutate({
             mutation: gql`

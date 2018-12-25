@@ -13,7 +13,7 @@ export const Nav = styled(FlexRow)`
   color: ${({ theme }) => theme.text.reverse};
   justify-content: space-between;
   flex: 0 0 48px;
-  padding: 0 16px;
+
   line-height: 1;
   box-shadow: 0 4px 8px ${({ theme }) => hexa(theme.bg.reverse, 0.15)};
   z-index: 1000;
