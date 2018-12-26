@@ -7,6 +7,7 @@ import userContainer from '../../../Container/userContainer';
 import srcImg from '../../image/9284571_300x300.jpeg';
 import UILoading from '../../../Components/UI/UILoading';
 import Article from '../../Article';
+import { FlexRow } from '../../../Components/styled/base';
 interface IStories {
     match: any
 }
@@ -46,39 +47,14 @@ class ArticleBookMark extends React.Component<IStories> {
     }
 }
 //"idArticle", "hashTag", "category", "comment", "totalClap", "notification", "contentArticle", "titleArticle", "imageArticle", "createTime", "__typename"
-const $ListAvatarUserFollow = styled.div`
-    margin : 10px;
-    & img {
-        width : 40px;
-        height : 40px;
-        margin-left : 3px;
-        border-radius:50%;
-    }
 
-`
-const Img = styled.img`
 
-width : 200px;
-height : 200px;
-border-radius : 50%;
-`
-const $Author = styled.div`
-            `
 const $ArticleDetail = styled.div`
             `
-const $ViewArticle = styled.div`
-            border-top  :2px solid #9eaee8;
-            padding-top : 20px;
-            `
-const $Content = styled.div`
-             display : flex;
-             
-            `
-const Left = styled.div`
-            flex : 5
-            `
-const Right = styled.div`
-            flex : 6
+const $ViewArticle = styled(FlexRow)`
+          padding-top : 20px;
+            flex-wrap : wrap;
+            align-items: initial;
             `
 
 export default ArticleBookMark

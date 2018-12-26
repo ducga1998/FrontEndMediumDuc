@@ -95,7 +95,5 @@ export function addRelyComment(input: { idUser: string, idArticle: string, conte
 
         // const { data: { addCommentIntoArticle } } = API
         resolve(convertDataToGraphQL(API));
-
-
     })
 } 

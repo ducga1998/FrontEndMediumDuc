@@ -18,7 +18,6 @@ export function getAllInfomationUserFollowYour(idUser) {
                     }
                     `
         })
-
         resolve(convertDataToGraphQL(API));
 
     })
@@ -30,18 +29,18 @@ export function follow(input: any) {
     return new Promise(async resolve => {
         const API = await client.mutate({
             mutation: gql`
-              mutation Follow($input: FollowInput) {
-                follow(input: $input) {
-                    idUser
-                    idUserFollow
-                    userFollow {
-                                name
-                                avatarLink
-                                articles {
-                                    idArticle
-                                }
+                mutation Follow($input: FollowInput) {
+                    follow(input: $input) {
+                        idUser
+                        idUserFollow
+                        userFollow {
+                            name
+                            avatarLink
+                            articles {
+                                idArticle
                             }
-                }
+                        }
+                    }
             }
             `,
             variables: {
@@ -60,18 +59,18 @@ export function unFollow(input: any) {
     return new Promise(async resolve => {
         const API = await client.mutate({
             mutation: gql`
-              mutation UnFollow($input: FollowInput) {
-                unFollow(input: $input) {
-                    idUser
-                    idUserFollow
-                    userFollow {
-                                name
-                                avatarLink
-                                articles {
-                                    idArticle
-                                }
+                mutation UnFollow($input: FollowInput) {
+                    unFollow(input: $input) {
+                        idUser
+                        idUserFollow
+                        userFollow {
+                            name
+                            avatarLink
+                            articles {
+                                idArticle
                             }
-                }
+                        }
+                    }
             }
             `,
             variables: {

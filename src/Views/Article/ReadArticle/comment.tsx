@@ -72,7 +72,7 @@ const Comment = ({ dataUserComment  , relyComment } : {dataUserComment : any ,re
        return   commentRely.map(comment => {
         const { userComment: { avatarLink, name }, createdAt, content , idComment  } = comment
            return <$Comment data-id={idComment}  data-tooltip={`Created At : ${new Date(createdAt)}`}>
-         <b>  ---- </b>
+            <b>  ---- </b>
            <AvatarImage data-tooltip={name} src={avatarLink ? avatarLink : IMAGE_SOURCE_DEFAULT} />
            <$Content  >{renderHTML(content)}</$Content>
            </$Comment>

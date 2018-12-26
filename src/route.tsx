@@ -88,7 +88,7 @@ const AppRouter = () => {
     </SubscribeOne>
 }
 export function redirect(location) {
-    return class RedirectRoute extends React.Component {
+    return class     extends React.Component {
         constructor(props) {
             super(props)
             props.history.push(location);

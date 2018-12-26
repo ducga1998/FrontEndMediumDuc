@@ -3,12 +3,14 @@ import styled from 'styled-components';
 import ListArticle from './listArticle';
 import ListAuthor from './listAuthor';
 import Pagination from '../pagination';
+import { H2 } from '../../Components/styled/base';
 // import Footer from './footer'
 
 export default function Home({ children, history, match }) {
     return <$Content>
         <$ListArticle >
             <Pagination />
+           
             <ListArticle />
         </$ListArticle>
         <$ListAuthor>
@@ -27,3 +29,4 @@ const $Content = styled.div`
 display : flex;
 width : 100%;
 `
+

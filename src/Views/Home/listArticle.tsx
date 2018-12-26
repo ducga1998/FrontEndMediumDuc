@@ -4,6 +4,7 @@ import { getAllArticle } from '../../API/articleAPI';
 import Article from '../Article';
 import { Subscribe } from 'unstated-x';
 import { allArticleContainer } from '../../Container/articleContainer';
+import { FlexCol, FlexRow, H2 } from '../../Components/styled/base';
 // import Footer from './footer'
 const { useEffect, useState } = React as any
 export default class ListArticle extends React.Component<any> {
@@ -28,14 +29,16 @@ export default class ListArticle extends React.Component<any> {
                 container => {
                     const { registryArticle } = container.state
 
-                    return <$ListArticle>{
+                    return <$ListArticle>
+                
+                    {
                         registryArticle.length > 0 ? registryArticle.map((item: any, key) => {
                             const { articleContainer } = item
                             return <Subscribe to={[articleContainer]}>
                                 {
                                     () => {
                                         const { hashTag, contentArticle, titleArticle, createTime, idArticle, user, comment, bookmark , imageArticle } = articleContainer.state
-                                        const backgroundArticle = `http://localhost:4000/img/${imageArticle}`
+                                       
                                         return <Article
                                             user={user}
                                             idArticle={idArticle}
@@ -46,7 +49,7 @@ export default class ListArticle extends React.Component<any> {
                                             totalClap={bookmark.length}
                                             totalComment={comment.length}
                                             titleArticle={titleArticle}
-                                            imageArticle={backgroundArticle}
+                                            imageArticle={imageArticle}
                                             avatar={`https://picsum.photos/200/200/?a${item}`} />
                                     }
                                 }
@@ -58,6 +61,8 @@ export default class ListArticle extends React.Component<any> {
         </Subscribe>
     }
 }
-const $ListArticle = styled.div`
-    overflow : scroll;
+
+const $ListArticle = styled(FlexRow)`
+    flex-wrap : wrap;
+    align-items: initial;
 `

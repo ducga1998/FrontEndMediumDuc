@@ -10,8 +10,8 @@ export default class CustomImageSideButton extends ImageSideButton <any , {image
       // This is a post request to server endpoint with image as `image`
       const formData = new FormData();
       formData.append('image', file);
-
-      fetch('/img', {
+    
+      fetch('/img', { // => localhost:3000/img  =>localhost:4000/img < == backend 
         method: 'POST',
         body: formData,
       }).then((response) => {

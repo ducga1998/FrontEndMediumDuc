@@ -4,20 +4,14 @@ import 'react-toastify/dist/ReactToastify.css';
 import styled from 'styled-components';
 import { Provider } from 'unstated-x';
 import AppRouter from './route';
-import { ThemeProvider } from 'styled-components';
 import UITooltip from './Components/UI/UITooltip';
-import './app.css'
-import { throwServerError } from 'apollo-link-http-common';
-import { theme } from './theme';
-import UIPopUp from './Components/UI/UIPopUp';
 import { UITheme } from './Components/UI/UITheme';
-
+import './app.css'
 class App extends React.Component {
   public render() {
 
     return  <UITheme>
         <UITooltip>
-
           <Provider>
             <$BoxAlgin>
               <AppRouter />

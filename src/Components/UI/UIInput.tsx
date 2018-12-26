@@ -37,7 +37,6 @@ export default class UIInput extends React.Component<IUIInput> {
             onFocus={onFocus}
             value={value}
         />
-
     }
 }
 

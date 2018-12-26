@@ -39,6 +39,7 @@ export const Section = styled(FlexRow) <any>`
 `;
 
 export const LogoLink = styled(Link)`
+  color : ${props => props.theme.text.reverse};
   margin-right: 32px;
   display: flex;
   flex-direction: column;
@@ -48,7 +49,6 @@ export const LogoLink = styled(Link)`
         process.env.NODE_ENV !== 'production' &&
         css`
       &:after {
-        content: 'Dev';
         margin-top: 4px;
         font-size: 0.75em;
       }

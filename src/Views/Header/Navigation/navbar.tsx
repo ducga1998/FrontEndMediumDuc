@@ -19,8 +19,10 @@ class Navbar extends React.Component {
         const location = window.location.href
         return <Nav>
             <LogoLink to="/home">
-                <Logo src={IMAGE_SOURCE_DEFAULT} role="presentation" />
-                {/* <span dangerouslySetInnerHTML={{ __html: medium }} /> */}
+            
+            <Icon glyph="explore" />
+                {/* <Logo src={IMAGE_SOURCE_DEFAULT} role="presentation" />
+                <span dangerouslySetInnerHTML={{ __html: medium }} /> */}
             </LogoLink>
 
             <IconLink to="/home" data-active={location.includes('home')}>
@@ -45,10 +47,6 @@ class Navbar extends React.Component {
             <IconLink to="/writearticle" > <Label>Write Article</Label></IconLink> 
             <UIPopUp trigger ={<Button data-active={true}> <Icon glyph="settings" />  Setting</Button>}>
             <div style={{ display: 'flex' }}>
-          
-               
-               
-
                 <Subscribe to={[userContainer]} >
                     {
                         container => {
