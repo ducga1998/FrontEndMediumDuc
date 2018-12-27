@@ -5,15 +5,22 @@ import { rankData } from '../../API/fetchAPI';
 import { render } from 'react-dom';
 // import { isNull } from 'util';
 const { useEffect } = React as any
-
+const cachRank  = new Map()
 class ListAuthor extends React.Component {
     // const [rankState, setRankState] =  React.useState(null)
     state = {
         rankState: null
     }
     async componentDidMount() {
+        if(cachRank.get('cache')){
+            this.setState({ rankState: cachRank.get('cache') })
+            return
+        }
         const fetchDataRank = await rankData()
-        this.setState({ rankState: fetchDataRank })
+       
+        cachRank.set('cache' , fetchDataRank)
+        this.setState({rankState :fetchDataRank })
+       
     }
     //name, totalFollow, totalArticle, avatarLink, idUser
 

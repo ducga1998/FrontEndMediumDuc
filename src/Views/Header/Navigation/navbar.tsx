@@ -14,16 +14,16 @@ import UIPopUp from '../../../Components/UI/UIPopUp';
 import UIDropDown from '../../../Components/UI/UIDropDown';
 import { Shadow, hexa, FlexCol } from '../../../Components/styled/base';
 import theme from '../../../theme';
-class Navbar extends React.Component {
+class Navbar extends React.Component<any> {
     render() {
         const location = window.location.href
         return <Nav>
-            <LogoLink to="/home">
+            <NavButton onClick={() => {this.props.openNavBar()}}>
             
-            <Icon glyph="explore" />
+            <Icon glyph="explore"   />
                 {/* <Logo src={IMAGE_SOURCE_DEFAULT} role="presentation" />
                 <span dangerouslySetInnerHTML={{ __html: medium }} /> */}
-            </LogoLink>
+            </NavButton>
 
             <IconLink to="/home" data-active={location.includes('home')}>
                 <Icon glyph="home" />
@@ -69,6 +69,7 @@ class Navbar extends React.Component {
         </Nav>
     }
 }
+const NavButton = styled(LogoLink.withComponent('button'))``
 const Wrapper  = styled(FlexCol)`
 
     width  :100%;

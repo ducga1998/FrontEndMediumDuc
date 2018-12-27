@@ -103,6 +103,8 @@ const $Article = styled(FlexCol)`
     width : 400px; 
     border-radius : 5px;
     transition : .3s;
+    cursor : pointer;
+    padding : 10px;
     &:hover {
         ${SrcImage}{
             transform : scale(1.2) ;
@@ -113,6 +115,8 @@ const $Article = styled(FlexCol)`
             color : ${props => props.theme.brand.alt};
         }
     }
-    cursor : pointer;
-    padding : 10px;
+    &:active {
+        background-color : ${props => props.theme.space.default};
+    }
+   
 `

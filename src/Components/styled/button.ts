@@ -168,7 +168,6 @@ export const StyledOutlineButton = styled(StyledTextButton)`
     transition: ${Transition.hover.on};
   }
 `;
-
 export const StyledIconButton = styled.button`
   ${baseButton}
   padding: 0;

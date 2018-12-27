@@ -44,6 +44,7 @@ export default class UIDropDown extends React.Component<IUIDropDown> {
       const domDropDown = this.refDropDown.current
       this.setState({open : true})
   }
+  
   render() {
     const { trigger, children } = this.props
     const Button =  React.cloneElement(trigger, {

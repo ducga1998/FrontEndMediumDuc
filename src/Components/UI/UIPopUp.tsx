@@ -72,20 +72,22 @@ export default function UIPopUp({children , trigger }) {
     onMouseDown :  updatePosition ,           
     })
     return <> {Button}  
-    {  <UIWidget>
-        <Wrapper open={open} data-off="true" onMouseDown={(event) => {  event.stopPropagation() ; console.log(event.target); 
-            console.log(!!event.target.getAttribute('open'))
+            {<UIWidget>
+                <Wrapper open={open} data-off="true" onMouseDown={(event) => {  event.stopPropagation() ; console.log(event.target); 
+                    console.log(!!event.target.getAttribute('open'))
+                    
+                    if(event.target && event.target.getAttribute('data-off')){
+                            setOpen(false)
+                        }
+                }} > 
+                    <Popup ref={refPopUp}>
+                        {children}
+                    </Popup>
+                </Wrapper>
             
-    if(event.target && event.target.getAttribute('data-off')){
-            setOpen(false)
+        </UIWidget> 
         }
-           }} > 
-            <Popup ref={refPopUp}>
-                {children}
-            </Popup>
-        </Wrapper>
-       
-   </UIWidget> }</>
+    </>
 }
 const Wrapper  = styled.div<any>`
  

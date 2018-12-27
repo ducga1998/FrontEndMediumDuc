@@ -30,24 +30,13 @@ export default class ListArticle extends React.Component<any> {
                     const { registryArticle } = container.state
 
                     return <$ListArticle>
-                
                     {
                         registryArticle.length > 0 ? registryArticle.map((item: any, key) => {
                             const { articleContainer } = item
-                            return <Subscribe to={[articleContainer]}>
+                            return <Subscribe   key={key} to={[articleContainer]}>
                                 {
-                                    () => {
-                                      
-                                       
-                                        return <Article article ={articleContainer.state}
-                                          
-                                            key={key}
-                                          
-                                      
-                                          
-                                        
-                                            
-                                            />
+                                    () => { 
+                                        return <Article article ={articleContainer.state}/>
                                     }
                                 }
                             </Subscribe>

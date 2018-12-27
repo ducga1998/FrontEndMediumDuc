@@ -12,6 +12,7 @@ import UIButton from '../../Components/UI/UIButton';
 import UIModal from '../../Components/UI/UIModal';
 import UIInput from '../../Components/UI/UIInput';
 import { H1 , H4 } from '../../Components/styled/base';
+import Link from '../../Components/Link';
 
 interface IViewUserCurrent {
     match: any
@@ -57,6 +58,7 @@ class ViewUserDetail extends React.Component<IViewUserCurrent> {
                             <H4> Article : {articles.length}</H4>
                             <UIButton onMouseDown={() => { this.setState({ isChangePass: true }) }}>Change password</UIButton>
                         </$Author>
+                       
                     </Left>
                     <Right>
                         <UIEditer info={'biographical'} content={biographical ? biographical : ''} />

@@ -11,6 +11,7 @@ import followAllContainer from '../../Container/followContainer';
 import { Subscribe } from 'unstated-x';
 import { H3, H1, FlexRow } from '../../Components/styled/base';
 import { StyledSolidButton } from '../../Components/styled/button';
+import Link from '../../Components/Link';
 interface IViewUserDetail {
     match: any
 }
@@ -91,6 +92,7 @@ class ViewUserDetail extends React.Component<IViewUserDetail> {
 
                                         }) : <h2>NO Article  :), fuck own account stupid </h2>}
                                     </$ListArticle>
+                                    <Link to={`/user/d52f4330-0367-11e9-8f6e-c510ab8f59c5`}>OK dde</Link>
                                 </$ArticleDetail>
                             }
                         }

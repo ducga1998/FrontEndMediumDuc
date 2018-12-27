@@ -21,12 +21,12 @@ const ArticleRank = ({ article , type}: IArticle) => {
         const {user: { avatarLink, idUser, name },idArticle ,  titleArticle, imageArticle, count } = item 
         // const {count , idUser , name , avatarLink ,biographical } = item
         return <FlexCol>
-        <FlexRow>
+        <FlexRow data-tooltip={filterStringHTML(titleArticle, true , 100)} >
             <Link to={`/article/${idArticle}`} ><AvatarImage  plan sizeBorder="2px" radius={0} size={40} src={imageArticle} /></Link>
                 
       
             <Link className="name" to={`/article/${idArticle}`}>
-                <H2 className="caption" data-tooltip={filterStringHTML(titleArticle, true)}>
+                <H2 className="caption" >
                 {filterStringHTML(titleArticle , false , 20)}... 
                 </H2>
             </Link>     

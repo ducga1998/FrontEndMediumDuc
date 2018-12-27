@@ -124,9 +124,6 @@ export default function ButtonArticle({ history }: any) {
 
 }
 
-const Grid = styled.div`
-    display : 'flex';
-`
 const Button = styled(IconLink.withComponent('a'))`
     cursor : pointer;
     background-color : ${props => props.theme.special.default};

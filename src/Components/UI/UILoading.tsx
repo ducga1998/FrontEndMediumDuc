@@ -16,7 +16,6 @@ export default class UILoading extends React.Component<IUILoading> {
                 </$ImageLoading>
             </$Background>
         </UIWidget>
-
     }
 }
 const $Background = styled.div`

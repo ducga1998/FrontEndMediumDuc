@@ -5,11 +5,17 @@ import Footer from './footer';
 import Navigation from './Header/Navigation/navbar';
 import styled from 'styled-components';
 import { H1 , H2 } from '../Components/styled/base';
+import NavBar from '../workspace/navbar';
 export default function Layout(props) {
+  const [openNavBar , setOpenNavBar ] = React.useState(false)
+  function toggleNavBar() {
+    setOpenNavBar(!openNavBar)
+  }
   console.log('propspropspropsprops',props)
   return <Body>
-      <Navigation />
-      <Slogan >
+      <Navigation openNavBar={toggleNavBar} />
+       <NavBar open={openNavBar} setOpen = {toggleNavBar} /> 
+      <Slogan>
         <H1>Talk is cheap, show me the code</H1>
         <H2>Linus Torvalds</H2>
       </Slogan>

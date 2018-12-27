@@ -58,7 +58,7 @@ class AllArticleContainer extends Container<IAllArticleContainer> {
 }
 export const allArticleContainer = new AllArticleContainer({
     registryArticle: [],
-    first: 10,
+    first: 8,
     offset: 0,
     count: 0
 
@@ -99,7 +99,9 @@ class ArticleContainer extends Container<IArticleContainer>{
             return await updateArticleToClient({ contentArticle, titleArticle, idUser, idArticle, hashTag: arrHashTag, createTime , imageArticle })
         }
     }
+    
 }
+
 
 const articleContainer = new ArticleContainer({
     contentArticle: '',

@@ -52,7 +52,7 @@ const AppRouter = () => {
         }
 
         return <Router history={history} >
-            <Switch>
+            {/* <Switch> */}
                 <Layout >
                     <Route path="/chat" component={isAuth(AllRoomChat)} />
                     <Route path="/about/" component={About} />
@@ -69,7 +69,7 @@ const AppRouter = () => {
                     <Route path="/chatRoom/:id" component={isAuth(DetailRoomChat)} />
                     <Route path="/bookmarks" component={isAuth(ArticleBookMark)} />
                 </Layout>
-            </Switch>
+            {/* </Switch> */}
         </Router>
     }
     return <SubscribeOne to={userContainer} bind={['dataUser', 'login']} >
