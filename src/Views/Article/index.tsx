@@ -12,57 +12,57 @@ import { StyledSolidButton } from '../../Components/styled/button';
 import { Section } from '../../Components/styled/nav';
 import { AvatarImage } from '../../Components/styled/avatar';
 import { Wrapper } from '../../Components/menu/style';
-import history from '../../history';
+import { HistoryContext } from '../../Core/renderElement';
+
+// import { HistoryContext } from '../Layout';
 
 const defaultImg = `http://www.rangerwoodperiyar.com/images/joomlart/demo/default.jpg`
 export interface IArticle {
-    avatar: String;
-    titleArticle: String;
-    content: String;
-    totalClap: number;
-    time: String;
-    hashTag: any[],
-    totalComment: number
-    idArticle: string
-    user: any,
+ 
+  
     typeArticle?: 'store' | 'view',
-    imageArticle?: string
+    article : any
 }
 // => view list Article  =>  you check file listArticle is view props data and function call api to backend
-export default function Article({ imageArticle, idArticle, avatar, titleArticle, content, totalClap, time, hashTag, totalComment, user, typeArticle }: IArticle) {
+export default function Article({ article ,  typeArticle }: IArticle) {
+    const { hashTag, contentArticle, titleArticle, createTime, idArticle, user, comment, bookmark , imageArticle } = article
     if (!user) {
         return null
     }
+     
     const { name, avatarLink, idUser } = user
     const backgroundArticle = `http://localhost:4000/img/${imageArticle}`
     const linkSwitchArticle = typeArticle && typeArticle === 'store' ? `/store/${idArticle}` : `/article/${idArticle}`
-    return <$Article onMouseDown={() => { history.push(linkSwitchArticle) }}>
-        <WrapperImg>
-            <SrcImage src={`${imageArticle !== defaultImg ? backgroundArticle : './backgroundDefault.jpg'}`} />
-        </WrapperImg>
-        <$DetailArticle>
-            <FlexRow>
-                <$H1 style={{ flex: 6 }}>
-                    <Link to={linkSwitchArticle}>{renderHTML(filterStringHTML(titleArticle, true))}</Link>
-                </$H1>
-                <$TotalClap><i className="fa fa-bookmark" /> {totalClap}</$TotalClap>
-                <$TotalComment><i className="fa fa-comment" /> {totalComment}</$TotalComment>
-            </FlexRow>
-            <H4><b>Create at :</b> {time}</H4> <br />
-            <H4><b >Content : </b>{renderHTML(filterStringHTML(content))}<Link to={linkSwitchArticle}> Read more ...</Link></H4>
-           <FlexRow>
-               <AvatarImage size={30} src={avatar}/>
-               <H3><b><Link to={`/user/${idUser}`}>{name === '' ? 'NO NAME' : name}</Link></b></H3>
-               </FlexRow> 
-
-            <WrapperHashTag>
-                {hashTag.map((item: any, key: number) => {
-                    return <StyledSolidButton>{item}</StyledSolidButton>
-                })}
-            </WrapperHashTag>
-        </$DetailArticle>
-
-    </$Article>
+    
+            return <$Article onMouseDown={() => {  }}>
+            <Link to={linkSwitchArticle}>
+            <WrapperImg>
+                <SrcImage src={`${imageArticle !== defaultImg ? backgroundArticle : './backgroundDefault.jpg'}`} />
+            </WrapperImg>
+            </Link>
+            <$DetailArticle>
+                <FlexRow>
+                    <$H1 style={{ flex: 6 }}>
+                        <Link to={linkSwitchArticle}>{renderHTML(filterStringHTML(titleArticle, true))}</Link>
+                    </$H1>
+                    <$TotalClap><i className="fa fa-bookmark" /> {bookmark?bookmark.length:0}</$TotalClap>
+                    <$TotalComment><i className="fa fa-comment" /> {comment?comment.length:0}</$TotalComment>
+                </FlexRow>
+                <H4><b>Create at :</b> {createTime}</H4> <br />
+                <H4><b >Content : </b>{renderHTML(filterStringHTML(contentArticle))}<Link to={linkSwitchArticle}> Read more ...</Link></H4>
+               <FlexRow>
+                   <AvatarImage plan sizeBorder="2px" src={avatarLink}/>
+                   <H3><b><Link to={`/user/${idUser}`}>{name === '' ? 'NO NAME' : name}</Link></b></H3>
+                   </FlexRow> 
+    
+                <WrapperHashTag>
+                    {hashTag.map((item: any, key: number) => {
+                        return <StyledSolidButton>{item}</StyledSolidButton>
+                    })}
+                </WrapperHashTag>
+            </$DetailArticle>
+            
+        </$Article>
 }
 
 const $H1 = styled(H1)`

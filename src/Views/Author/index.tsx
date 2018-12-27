@@ -16,8 +16,7 @@ const Author = ({ name, totalFollow, totalArticle, avatarLink, idUser }: IAuthor
     const src = avatarLink ? avatarLink : "./default.jpg"
     return <Subscribe to={[userContainer]}>
         {
-            container => {
-
+            () => {
                 return <FlexCol>
                     <FlexRow>
                         <Link to="/profile" ><AvatarImage radius={15} src={src} /></Link>

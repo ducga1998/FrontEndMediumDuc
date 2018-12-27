@@ -37,20 +37,17 @@ export default class ListArticle extends React.Component<any> {
                             return <Subscribe to={[articleContainer]}>
                                 {
                                     () => {
-                                        const { hashTag, contentArticle, titleArticle, createTime, idArticle, user, comment, bookmark , imageArticle } = articleContainer.state
+                                      
                                        
-                                        return <Article
-                                            user={user}
-                                            idArticle={idArticle}
+                                        return <Article article ={articleContainer.state}
+                                          
                                             key={key}
-                                            hashTag={hashTag}
-                                            time={createTime}
-                                            content={contentArticle}
-                                            totalClap={bookmark.length}
-                                            totalComment={comment.length}
-                                            titleArticle={titleArticle}
-                                            imageArticle={imageArticle}
-                                            avatar={`https://picsum.photos/200/200/?a${item}`} />
+                                          
+                                      
+                                          
+                                        
+                                            
+                                            />
                                     }
                                 }
                             </Subscribe>
@@ -61,7 +58,9 @@ export default class ListArticle extends React.Component<any> {
         </Subscribe>
     }
 }
+const ListArticleComponent = function({articles}){
 
+}
 const $ListArticle = styled(FlexRow)`
     flex-wrap : wrap;
     align-items: initial;

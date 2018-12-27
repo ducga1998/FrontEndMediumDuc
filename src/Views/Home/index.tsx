@@ -6,7 +6,7 @@ import Pagination from '../pagination';
 import { H2 } from '../../Components/styled/base';
 // import Footer from './footer'
 
-export default function Home({ children, history, match }) {
+export default function Home() {
     return <$Content>
         <$ListArticle >
             <Pagination />
@@ -14,7 +14,7 @@ export default function Home({ children, history, match }) {
             <ListArticle />
         </$ListArticle>
         <$ListAuthor>
-            <ListAuthor />
+            <ListAuthor  />
         </$ListAuthor>
     </$Content>
 }
@@ -22,7 +22,7 @@ const $ListArticle = styled.div`
 flex : 9;
 `
 const $ListAuthor = styled.div`
-flex : 2
+flex : 2;
 `
 
 const $Content = styled.div`

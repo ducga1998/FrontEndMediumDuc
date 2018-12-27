@@ -92,7 +92,7 @@ export const Label = styled.span`
   margin: auto;
 `;
 
-export const StyledSolidButton = styled.button`
+export const StyledSolidButton = styled('button')<any>`
   ${baseButton}
   background-color: ${(props: any) =>
         props.disabled
@@ -132,7 +132,7 @@ export const StyledTextButton = styled(StyledSolidButton)`
     box-shadow: none;
     color: ${(props: any) =>
         props.disabled
-            ? props.theme.inactive
+          ? props.theme.inactive
             : eval(
                 `props.theme.${props.hoverColor ? props.hoverColor : 'brand.alt'}`
             )};

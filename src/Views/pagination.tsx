@@ -42,7 +42,8 @@ export default function Pagination(props) {
     </Flex>
 }
 const Flex = styled.div`
-    text-align : center;
+   display : flex;
+   justify-content : center;
     margin-bottom : 20px;
     /* a {
         padding : 5px;

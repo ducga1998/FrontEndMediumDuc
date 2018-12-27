@@ -1,9 +1,9 @@
 // import  from 'socket.io-client'
-export function filterStringHTML(str: any, flag: boolean = false): string {
+export function filterStringHTML(str: any, flag: boolean = false , lengthString = 10): string {
     if (flag) {
         return str.replace(/<\/?[^>]+(>|$)/g, "")
     }
-    return str.replace(/<\/?[^>]+(>|$)/g, "").substring(0, 10);
+    return str.replace(/<\/?[^>]+(>|$)/g, "").substring(0, lengthString);
 }
 export function getVariableNam(variable) {
     Object.keys({ variable })[0]

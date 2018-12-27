@@ -8,6 +8,8 @@ import srcImg from '../../image/9284571_300x300.jpeg';
 import UILoading from '../../../Components/UI/UILoading';
 import Article from '../../Article';
 import { H2, FlexRow, H1 } from '../../../Components/styled/base';
+import omit from 'lodash/omit'
+import { splitBsPropsAndOmit } from 'react-bootstrap/lib/utils/bootstrapUtils';
 interface IStories {
     match: any
 }
@@ -18,14 +20,14 @@ class Stories extends React.Component<IStories> {
         ownProfileId: ''
     }
     async componentDidMount() {
-        const { idUser } = userContainer.state.dataUser
+        const { idUser ,   } = userContainer.state.dataUser
 
         const dataUser = await getAllInformationUser(idUser)
 
         await this.setState({ dataUser })
     }
     render() {
-        const { ownProfileId, dataUser } = this.state as any
+        const {  dataUser } = this.state as any
         console.log('state', this.state)
         if (!dataUser) {
             return <UILoading />
@@ -36,14 +38,12 @@ class Stories extends React.Component<IStories> {
             <H1> All Article {name}</H1>
             <$ViewArticle>
                 {articles && articles.length > 0 ? articles.map((item, key) => {
-                    const { hashTag, isUSer, contentArticle, titleArticle, createTime, idArticle , imageArticle } = item
-                    return <Article typeArticle='store' user={dataUser} idArticle={idArticle} key={key} imageArticle={imageArticle} hashTag={hashTag} time={createTime} content={contentArticle} totalClap={8} totalComment={9} titleArticle={titleArticle} avatar={`https://picsum.photos/200/200/?a${item}`} />
+                    const article = {...item , ...{user : { idUser ,  avatarLink , name }}}
+                    return <Article key={key} typeArticle='store' article={article}  />
 
                 }) : <H2>NO Article  :), fuck own account stupid </H2>}
             </$ViewArticle>
         </$ArticleDetail>
-
-        // console.log(followContainer)
     }
 }
 //"idArticle", "hashTag", "category", "comment", "totalClap", "notification", "contentArticle", "titleArticle", "imageArticle", "createTime", "__typename"

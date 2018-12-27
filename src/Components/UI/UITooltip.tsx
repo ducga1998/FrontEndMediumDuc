@@ -1,18 +1,24 @@
 
 import * as React from 'react';
 import styled from 'styled-components';
-import { Tooltip } from '../styled/base';
+function findDomToolTip(count , dom){
+    if(count  > 5 || !dom){
+        return  null
+    }
+    if(dom && dom.getAttribute('data-tooltip')){
+        return dom
+    }
+    return findDomToolTip(count , dom.parentElement)
+}
 export default class UITooltip extends React.Component<any> {
     refToolTip: any = React.createRef()
     handleMouseDown = (e) => {
-        // console.log(e)
     }
     handleMouseOver = (e) => {
-        e.stopPropagation()
-        // console.log(e.target)
-        const dom = e.target
-
-        if (dom.getAttribute('data-tooltip')) {
+       e.preventDefault()
+        let count = 0
+        let dom = findDomToolTip(count , e.target) as HTMLElement ||null
+        if (dom && dom.getAttribute('data-tooltip')) {
             const text = dom.getAttribute('data-tooltip')
             dom.scroll
             const domToolTip = this.refToolTip.current
@@ -25,7 +31,7 @@ export default class UITooltip extends React.Component<any> {
             domToolTip.style.display = "inline-block"
             const widthToolTip = domToolTip.getBoundingClientRect().width
             domToolTip.style.left = `${left + width / 2 - (widthToolTip / 2)}px`;
-            domToolTip.style.top = `${top - height + scrollTop}px`
+            domToolTip.style.top = `${top - 30 + scrollTop}px`
         }
     }
     handleMouseLeave = (e) => {
@@ -47,11 +53,10 @@ export default class UITooltip extends React.Component<any> {
 }
 
 const $ToolTip = styled.div`
-
-background-color: #1b1a1a;
+    z-index : 999999999999999;
+    background-color: #1b1a1a;
     color: white;
     position: absolute;
-    display: inline-block;
     padding: 10px;
     border-radius: 10px;
     display : none;

@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Button } from 'react-bootstrap';
+
 import { getAllInformationUser } from 'src/API/client';
 import styled from 'styled-components';
 import { follow, getAllInfomationUserFollowYour, unFollow } from '../../API/followAPI';
@@ -9,7 +9,8 @@ import UILoading from '../../Components/UI/UILoading';
 import Article from '../Article';
 import followAllContainer from '../../Container/followContainer';
 import { Subscribe } from 'unstated-x';
-import { H3, H1 } from '../../Components/styled/base';
+import { H3, H1, FlexRow } from '../../Components/styled/base';
+import { StyledSolidButton } from '../../Components/styled/button';
 interface IViewUserDetail {
     match: any
 }
@@ -61,8 +62,8 @@ class ViewUserDetail extends React.Component<IViewUserDetail> {
                                         </Left>
 
                                         <Right>
-                                            {isFollow ? <Button bsStyle="danger" onClick={async () => { await followAllContainer.unfollow(idUser) }}>Unfollow</Button> :
-                                                <Button bsStyle="info" onClick={async () => { await followAllContainer.follow(idUser) }}> Follow </Button>
+                                            {isFollow ? <StyledSolidButton hoverColor="text.placeholder"  color="text.alt" onClick={async () => { await followAllContainer.unfollow(idUser) }}>Unfollow</StyledSolidButton> :
+                                                <StyledSolidButton  hoverColor="space.default" color="space.alt" onClick={async () => { await followAllContainer.follow(idUser) }}> Follow </StyledSolidButton>
                                             }
 
 
@@ -84,13 +85,12 @@ class ViewUserDetail extends React.Component<IViewUserDetail> {
                                             color: "#4797db"
                                         }
                                     } >{name} </b> has write</H3>
-                                    <$ViewArticle>
+                                    <$ListArticle>
                                         {articles && articles.length > 0 ? articles.map((item, key) => {
-                                            const { hashTag, isUSer, contentArticle, titleArticle, createTime, idArticle } = item
-                                            return <Article user={dataUser} idArticle={idArticle} key={key} hashTag={hashTag} time={createTime} content={contentArticle} totalClap={8} totalComment={9} titleArticle={titleArticle} avatar={`https://picsum.photos/200/200/?a${item}`} />
+                                            return <Article article={item}   />
 
                                         }) : <h2>NO Article  :), fuck own account stupid </h2>}
-                                    </$ViewArticle>
+                                    </$ListArticle>
                                 </$ArticleDetail>
                             }
                         }
@@ -123,10 +123,10 @@ const $Author = styled.div`
                             `
 const $ArticleDetail = styled.div`
                             `
-const $ViewArticle = styled.div`
-                            border-top  :2px solid #9eaee8;
-                            padding-top : 20px;
-                            `
+const $ListArticle = styled(FlexRow)`
+flex-wrap : wrap;
+align-items: initial;
+`
 const $Content = styled.div`
                              display : flex;
                              

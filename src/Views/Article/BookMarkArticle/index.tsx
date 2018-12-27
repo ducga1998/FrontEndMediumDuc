@@ -37,7 +37,9 @@ class ArticleBookMark extends React.Component<IStories> {
                     const { articleBookMark, userOwnArticle } = item
                     const { hashTag, contentArticle, titleArticle, createTime, idArticle
                     } = articleBookMark
-                    return <Article user={userOwnArticle} idArticle={idArticle} key={key} hashTag={hashTag} time={createTime} content={contentArticle} totalClap={8} totalComment={9} titleArticle={titleArticle} avatar={`https://picsum.photos/200/200/?a${item}`} />
+                    const article = {...articleBookMark , ...{user : userOwnArticle} }
+                    console.log('articlearticle',article)
+                    return <Article article={article} />
 
                 }) : <h2>NO Article  :), fuck own account stupid </h2>}
             </$ViewArticle>

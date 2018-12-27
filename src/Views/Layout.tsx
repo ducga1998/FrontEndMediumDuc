@@ -3,13 +3,11 @@ import * as React from 'react';
 // import Footer from './Views/footer'';
 import Footer from './footer';
 import Navigation from './Header/Navigation/navbar';
-import Pagination from './pagination'
 import styled from 'styled-components';
 import { H1 , H2 } from '../Components/styled/base';
-const HistoryContext = React.createContext(null)
 export default function Layout(props) {
-  return <HistoryContext.Provider value={props.history}>
-    <Body>
+  console.log('propspropspropsprops',props)
+  return <Body>
       <Navigation />
       <Slogan >
         <H1>Talk is cheap, show me the code</H1>
@@ -18,7 +16,6 @@ export default function Layout(props) {
       {props.children}
       <Footer />
     </Body>
-  </HistoryContext.Provider>
 }
 const Body = styled.div`
   display: flex;

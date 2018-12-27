@@ -1,17 +1,32 @@
 import * as React from 'react';
 import userContainer from '../../Container/userContainer';
-import Author from '../Author';
-const ListAuthor = ({ }) => {
-    React.useEffect(() => {
-        return () => { console.log('cascasn') }
-    })
-    const [value, setValue] = React.useState(0);
-    const { avatarLink, name, articles, idUser } = userContainer.state.dataUser
-    // const link = avatarLink ? avatarLink : "http://graph.facebook.com/1898075403817841/picture"
-    return <>{
-        [1, 2, 24, 5].map((item, key) => {
-            return <Author idUser={idUser} key={key} avatarLink={avatarLink} totalFollow={10} name={name} totalArticle={articles.length} />
-        })
-    }</>
+import RankAll from './Rank/index'
+import { rankData } from '../../API/fetchAPI';
+import { render } from 'react-dom';
+// import { isNull } from 'util';
+const { useEffect } = React as any
+
+class ListAuthor extends React.Component {
+    // const [rankState, setRankState] =  React.useState(null)
+    state = {
+        rankState: null
+    }
+    async componentDidMount() {
+        const fetchDataRank = await rankData()
+        this.setState({ rankState: fetchDataRank })
+    }
+    //name, totalFollow, totalArticle, avatarLink, idUser
+
+
+    render() {
+        const { rankState } = this.state
+        if (!rankState) {
+            return null
+
+           
+        }
+        return <RankAll rankState={rankState} />
+
+    }
 }
 export default ListAuthor

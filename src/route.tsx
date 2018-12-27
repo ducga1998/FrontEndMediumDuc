@@ -21,6 +21,8 @@ import Stories from "./Views/Article/Stories";
 import StoreDetail from "./Views/Article/Stories/Store";
 import ArticleBookMark from "./Views/Article/BookMarkArticle";
 import history from './history'
+import { HistoryContext } from "./Core/renderElement";
+import { rankData } from "./API/fetchAPI";
 const About = () => <div>
     Web design by Nguyen Minh duc
     <h5>Facebook : <a href="https://www.facebook.com/duc.ceh.cnna">https://www.facebook.com/duc.ceh.cnna</a></h5>
@@ -46,7 +48,7 @@ const AppRouter = () => {
         notificationFuncSocket(user)
 
         function isAuth(component) {
-            return user != null ? component : redirect('/login')
+            return user != null ? component: redirect('/login')
         }
 
         return <Router history={history} >
@@ -73,6 +75,7 @@ const AppRouter = () => {
     return <SubscribeOne to={userContainer} bind={['dataUser', 'login']} >
         {
             container => {
+                rankData()
                 const { dataUser } = container.state
                 const dataCache = localStorage.getItem('duc-app-medium-login')
                 if (dataCache && !dataUser) {
@@ -87,6 +90,24 @@ const AppRouter = () => {
         }
     </SubscribeOne>
 }
+
+export function historyAdv (Comp) {
+  
+        return class extends React.Component<any> {
+            render(){
+                console.log('props.history',this.props.history)
+                return <HistoryContext.Provider value={this.props.history}>
+                    {
+                        value => {
+                            return <Comp {...this.props} />
+                        }
+                    }
+                 </HistoryContext.Provider>
+            }
+        }
+    
+}
+
 export function redirect(location) {
     return class     extends React.Component {
         constructor(props) {

@@ -105,5 +105,5 @@ const Popup = styled(FlexCol)`
     position: absolute;
     z-index: 21323;
     color: ${theme.text.default};
-    transition: ${Transition.dropdown.off};
+    /* transition: ${Transition.dropdown.off}; */
 `;
