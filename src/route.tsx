@@ -51,7 +51,7 @@ const AppRouter = () => {
         function isAuth(component) {
             return user != null ? component: redirect('/login')
         }
-        const {decentraliz} = user
+        // const {decentraliz} = user
         
         // check isAdmin ???  => {}   
         //admin thi hon so voi user thuong nhung cai gi ?
