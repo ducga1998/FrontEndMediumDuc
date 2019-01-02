@@ -22,11 +22,12 @@ import StoreDetail from "./Views/Article/Stories/Store";
 import ArticleBookMark from "./Views/Article/BookMarkArticle";
 import history from './history'
 import { HistoryContext } from "./Core/renderElement";
-import { rankData } from "./API/fetchAPI";
+import { H1 } from "./Components/styled/base";
+import ManagerAccount from './Views/User/Admin/ManagerAccout'
 const About = () => <div>
     Web design by Nguyen Minh duc
-    <h5>Facebook : <a href="https://www.facebook.com/duc.ceh.cnna">https://www.facebook.com/duc.ceh.cnna</a></h5>
-    <h5>GitHub : <a href="https://github.com/ducga1998">https://github.com/ducga1998</a></h5>
+    <H1>Facebook : <a href="https://www.facebook.com/duc.ceh.cnna">https://www.facebook.com/duc.ceh.cnna</a></H1>
+    <H1>GitHub : <a href="https://github.com/ducga1998">https://github.com/ducga1998</a></H1>
 </div>
 
 
@@ -46,13 +47,20 @@ const AppRouter = () => {
     const renderRoutes = (user: any) => {
         // this is function help me catch event socket to backend 
         notificationFuncSocket(user)
-
+        
         function isAuth(component) {
             return user != null ? component: redirect('/login')
         }
+        const {decentraliz} = user
+        
+        // check isAdmin ???  => {}   
+        //admin thi hon so voi user thuong nhung cai gi ?
+        // check on front end , these have admin => render  and check in request 
+        // in request have info user => if it 's admin => allow 
+        
 
         return <Router history={history} >
-            {/* <Switch> */}
+            <Switch>
                 <Layout >
                     <Route path="/chat" component={isAuth(AllRoomChat)} />
                     <Route path="/about/" component={About} />
@@ -68,14 +76,15 @@ const AppRouter = () => {
                     <Route path="/writearticle" component={isAuth(WriteArticle)} />
                     <Route path="/chatRoom/:id" component={isAuth(DetailRoomChat)} />
                     <Route path="/bookmarks" component={isAuth(ArticleBookMark)} />
+                    <Route path ="/managerAccount" component={isAuth(ManagerAccount)} />
                 </Layout>
-            {/* </Switch> */}
+            </Switch>
         </Router>
     }
     return <SubscribeOne to={userContainer} bind={['dataUser', 'login']} >
         {
             container => {
-                rankData()
+
                 const { dataUser } = container.state
                 const dataCache = localStorage.getItem('duc-app-medium-login')
                 if (dataCache && !dataUser) {
@@ -83,30 +92,11 @@ const AppRouter = () => {
                 }
 
                 return renderRoutes(dataUser)
-
-
-
             }
         }
     </SubscribeOne>
 }
 
-export function historyAdv (Comp) {
-  
-        return class extends React.Component<any> {
-            render(){
-                console.log('props.history',this.props.history)
-                return <HistoryContext.Provider value={this.props.history}>
-                    {
-                        value => {
-                            return <Comp {...this.props} />
-                        }
-                    }
-                 </HistoryContext.Provider>
-            }
-        }
-    
-}
 
 export function redirect(location) {
     return class     extends React.Component {

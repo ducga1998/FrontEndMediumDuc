@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { FlexRow, FlexCol, H2 } from '../../../Components/styled/base';
+import { FlexRow, FlexCol, H1 } from '../../../Components/styled/base';
 import RankAuthor from './AuthorRank';
 import RankArticle from './ArticleRank'
 import styled from 'styled-components';
@@ -14,21 +14,15 @@ export default function Rank({rankState}) {
             <br />
             <RankBookMarkArticle rankBookMark={rankCountBookMarkArticle} />
         </FlexCol>
-            
-       
-    
 }
 function RankFollow({rankFollow}){
-    return <> <H2>The Best Author have follow</H2><RankAuthor type="follow" author={rankFollow}   /></>
+    return <> <H1>The Best Author have follow</H1><RankAuthor type="follow" author={rankFollow}   /></>
 }
 function RankWriteArticle({rankWriteArticle}) {
-    return <><H2>The Best Author have follow</H2><RankAuthor type="article" author={rankWriteArticle} /></>
+    return <><H1>The Best Author have count write article</H1><RankAuthor type="article" author={rankWriteArticle} /></>
 }
 function RankBookMarkArticle({rankBookMark}){
-    return <><H2>The best Article have bookmark</H2>
+    return <><H1>The best Article have bookmark</H1>
     <RankArticle article={rankBookMark}></RankArticle>
     </>
 }
-const WrapperRank = styled(FlexCol)`
-
-`

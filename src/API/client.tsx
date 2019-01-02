@@ -122,10 +122,10 @@ export function checkLoginUser(user: any) {
                 query {
                 checklogin( username :"${username}" , password :"${password}" ){
                     idUser
-                    password
                     login
                     name
                     avatarLink
+                    decentraliz
                     articles {
                         idArticle
                         hashTag
@@ -147,6 +147,32 @@ export function checkLoginUser(user: any) {
         })
         resolve(convertDataToGraphQL(API))
 
+    })
+}
+export function getAllUser() {
+
+    return new Promise(async resolve => {
+        const API = await client.query({
+            query: gql`
+                query {
+                    getAllUser{
+                    idUser
+                    name
+                    avatarLink
+                    biographical
+                    birthday
+                    location
+                    biographical
+                    decentraliz
+                    articles {
+                        idArticle                      
+                    }
+                }
+            }
+            `
+        })
+        if (API) resolve(convertDataToGraphQL(API))
+        resolve({})
     })
 }
 

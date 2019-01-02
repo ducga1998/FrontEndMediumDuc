@@ -9,7 +9,7 @@ import { OverLay } from '../styled/overlay';
 import { H1 } from '../styled/base';
 // const { useEffect, useState } = React
 interface IUIModal {
-    trigger: any
+    trigger?: any
     title?: string
     children?: any
     width?: string
@@ -19,13 +19,16 @@ interface IUIModal {
     open: boolean,
     onClickOutSide: () => any
 }
-export default function UIModal({ trigger, children, title, width, height, closeMoDal, openModal, open, onClickOutSide }: IUIModal) {
-    const button = React.cloneElement(trigger, {
-        onClick: () => {
-            openModal()
-        },
-    })
-    return <>{button} <UIWidget> <$Background onMouseDown={onClickOutSide} open={open}>
+export default function     UIModal({ trigger, children, title, width, height, closeMoDal, openModal, open, onClickOutSide }: IUIModal) {
+    let button 
+    if(trigger){
+         button = React.cloneElement(trigger, {
+            onClick: () => {
+                openModal()
+            },
+        })
+    }
+    return <>{button?button : null} <UIWidget> <$Background onMouseDown={onClickOutSide} open={open}>
         <$Modal onMouseDown={(e: any) => {
             e.stopPropagation();
         }} >

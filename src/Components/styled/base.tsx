@@ -199,8 +199,9 @@ export const UnderlineInput = styled.input`
   }
 `;
 
-export const H1 = styled.h1`
+export const H1 = styled.h1<any>`
   ${fontStack};
+  flex : ${(props : any) => props.flex ?props.flex : 'none' };
   color: ${({ theme }) => theme.text.default};
   font-weight: 900;
   font-size: 1.5rem;
@@ -209,7 +210,8 @@ export const H1 = styled.h1`
   padding: 0;
 `;
 
-export const H2 = styled.h2`
+export const H2 = styled.h2<any>`
+  flex : ${(props : any) => props.flex ?props.flex : 'none' };
   color: ${({ theme }) => theme.text.default};
   ${fontStack};
   font-weight: 700;
@@ -219,7 +221,8 @@ export const H2 = styled.h2`
   padding: 0;
 `;
 
-export const H3 = styled.h3`
+export const H3 = styled.h3<any>`
+ flex : ${(props : any) => props.flex ?props.flex : 'none' };
   color: ${({ theme }) => theme.text.default};
   ${fontStack};
   font-weight: 500;
@@ -229,7 +232,8 @@ export const H3 = styled.h3`
   padding: 0;
 `;
 
-export const H4 = styled.h4`
+export const H4 = styled.h4<any>`
+ flex : ${(props : any) => props.flex ?props.flex : 'none' };
   color: ${({ theme }) => theme.text.default};
   ${fontStack};
   font-weight: 500;
@@ -239,7 +243,8 @@ export const H4 = styled.h4`
   padding: 0;
 `;
 
-export const H5 = styled.h5`
+export const H5 = styled.h5<any>`
+ flex : ${(props : any) => props.flex ?props.flex : 'none' };
   color: ${({ theme }) => theme.text.default};
   ${fontStack};
   font-weight: 500;
@@ -249,7 +254,8 @@ export const H5 = styled.h5`
   padding: 0;
 `;
 
-export const H6 = styled.h6`
+export const H6 = styled.h6<any>`
+ flex : ${(props : any) => props.flex ?props.flex : 'none' };
   color: ${({ theme }) => theme.text.default};
   ${fontStack};
   font-weight: 600;

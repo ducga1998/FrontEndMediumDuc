@@ -162,3 +162,28 @@ export const truncate = (str, length) => {
     const subString = str.substr(0, length);
     return subString.substr(0, subString.lastIndexOf(' ')) + '…';
 };
+
+function quick_Sort(origArray) {
+    // console.log('origArray',origArray)
+    // return 'ok'
+    if (origArray.length <= 1) {
+        return origArray
+    } else {
+
+        var left = [];
+        var right = [];
+        var newArray = [];
+        var pivot = origArray.pop();
+        var length = origArray.length;
+
+        for (var i = 0; i < length; i++) {
+            if (origArray[i].count <= pivot.count) {
+                // left.push(origArray[i]);
+            } else {
+                // right.push(origArray[i]);
+            }
+        }
+
+        return newArray.concat(quick_Sort(left), pivot, quick_Sort(right));
+    }
+}

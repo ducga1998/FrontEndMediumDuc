@@ -45,7 +45,6 @@ export default class UITooltip extends React.Component<any> {
             onMouseOverCapture={this.handleMouseOver}
             onMouseOutCapture={this.handleMouseLeave}
         >
-
             <$ToolTip ref={this.refToolTip} />
             {this.props.children}
         </div>
