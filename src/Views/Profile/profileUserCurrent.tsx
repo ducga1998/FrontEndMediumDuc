@@ -53,7 +53,7 @@ class ViewUserDetail extends React.Component<IViewUserCurrent> {
                                 console.log(key)
                                 const info = Object.keys(item)[0]
                                 const value = item[info]
-                                return <UIEditer info={info} key={key} content={value} />
+                                return <UIEditer onUpdateProfile={(value) => { userContainer.updateProfile({ [info]: value })}} info={info} key={key} content={value} />
                             })}
                             <H4> Article : {articles.length}</H4>
                             <UIButton onMouseDown={() => { this.setState({ isChangePass: true }) }}>Change password</UIButton>
@@ -61,7 +61,7 @@ class ViewUserDetail extends React.Component<IViewUserCurrent> {
                        
                     </Left>
                     <Right>
-                        <UIEditer info={'biographical'} content={biographical ? biographical : ''} />
+                        {/* <UIEditer info={'biographical'} content={biographical ? biographical : ''} /> */}
                     </Right>
                 </$Content >
                 <hr />

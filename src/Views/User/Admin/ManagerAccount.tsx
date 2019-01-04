@@ -1,13 +1,14 @@
 import * as React from 'react';
 import styled from 'styled-components';
 import { FlexCol, FlexRow, H2, P, H3 } from '../../../Components/styled/base';
-import { getAllUser } from '../../../API/client';
+import { getAllUser, updateInfomation, deleteUserById } from '../../../API/client';
 import { AvatarImage } from '../../../Components/styled/avatar';
 import UIButton from '../../../Components/UI/UIButton';
 import UIModal from '../../../Components/UI/UIModal';
 import { Section } from '../../../Components/styled/nav';
 import UIFieldAlgin from '../../../Components/UI/UIFieldAlgin';
-
+import UIEditer from '../../../Components/UI/UIEditer';
+import omit from 'lodash/omit'
 // import Footer from './footer'
 interface IManagerAccount {
     listUser: any,
@@ -25,32 +26,36 @@ export default class ManagerAccount extends React.Component<any> {
         console.log('allUserData', listUser)
         this.setState({ listUser })
     }
-    deleteUser() {
-
+    async deleteUser(idUser) {
+       const listUser =  this.state.listUser.filter((user :any)=> user.idUser !== idUser)
+       this.setState({listUser})
+       await deleteUserById(idUser)
     }
     updateUser() {
 
     }
-    detailInfoUser(user){
-        this.setState({ open: true, userSelect: user }) 
+    detailInfoUser(user) {
+        this.setState({ open: true, userSelect: user })
     }
     //idUser", "name", "avatarLink", "biographical", "birthday", "location", "decentraliz", "articles", "__typename"
     render() {
         const { listUser, open, userSelect } = this.state
+      
         return <><FlexCol>
+                <Header  />
             {listUser.length > 0 && listUser.map((user: any, key) => {
                 const { idUser, name, avatarLink, biographical, birthday, location, decentraliz, articles } = user
                 const role = decentraliz === 1 ? 'User Normal' : 'Admin'
                 return <Wrapper onDoubleClick={() => this.detailInfoUser(user)}><UIFieldAlgin key={key} style={{ justifyContent: 'center', margin: '10px' }} vectical>
                     <UIFieldAlgin flex={3}>
-                        <AvatarImage src={avatarLink} size={80} />
+                        <AvatarImage radius="24px" src={avatarLink} size={80} />
                     </UIFieldAlgin>
                     <UIFieldAlgin flex={3} >    <H2 > {name}</H2> </UIFieldAlgin >
                     <UIFieldAlgin flex={3} >    <H3> Role : </H3><HightLigth>{role}</HightLigth> </UIFieldAlgin >
                     <UIFieldAlgin flex={3} >
-                        <UIButton style={{}} onMouseDown={() => { }}>Update</UIButton>
-                        <UIButton style={{}} onMouseDown={() => { }}>Delete</UIButton>
-                        <UIButton style={{}} onMouseDown={() => this.detailInfoUser(user)}>Detail</UIButton>
+                        <UIButton icon="edit" category="space" style={{}} onMouseDown={() => { }}>Update</UIButton>
+                        <UIButton icon="close" category="danger"style={{}} onMouseDown={() => {this.deleteUser(idUser)}}>Delete</UIButton>
+                        <UIButton icon="profile"category="space" style={{}} onMouseDown={() => this.detailInfoUser(user)}>Detail</UIButton>
                     </UIFieldAlgin >
                 </UIFieldAlgin></Wrapper>
             })}
@@ -62,29 +67,60 @@ export default class ManagerAccount extends React.Component<any> {
                 openModal={() => { }}
                 closeMoDal={() => { this.setState({ open: false }) }}
                 open={open}
+                title="Update Infomation Detail User : )))"
             >
-                {
-                    renderUser(userSelect)
-                }
+                <RenderUser user={userSelect} />
 
             </UIModal>
         </>
     }
 }
-function renderUser(user) {
-    if (!user) {
-        return 'Loading ...'
-    }
-    const { idUser, name, avatarLink, biographical, birthday, location, decentraliz, articles } = user
-    return <> <AvatarImage src={avatarLink} />
-        <H2>{name}</H2>
-        {/* <H2>Decentraliz {role}</H2> */}
-        Biographical : {biographical}
-        birthday : {birthday}
-        location : {location}
-        Count Article : {articles.length} </>
+async function updateProfile(input) {
+    const { idUser } = input
+    const data = { ...input, ...{ idUser } }
+    const newInfoUser = await updateInfomation(data)
+    console.log('newInfoUser', newInfoUser)
+    return newInfoUser
 }
-const Wrapper = styled.div`
+async function handleUpdateInfo(value ,info , user){
+    const input = omit({...user , ...{[info] : value}} , ['articles','__typename'])
+    console.log('output data' , input )
+    await updateProfile(input)
+}
+function RenderUser({user} :any) {
+    React.useEffect(() => {
+
+    },[user])
+    if (!user) {
+        return <>'Loading ...'</>
+    }
+    
+    const { idUser, name, avatarLink, biographical, birthday, location, decentraliz, articles } = user
+    return <>
+        <AvatarImage src={avatarLink} size={80} />
+        {[{ name }, { birthday }, { location }, { biographical } ,{avatarLink}].map((item, key) => {
+            console.log('name',name)
+            const info = Object.keys(item)[0]
+            const value = item[info]
+            return <UIEditer onUpdateProfile={async (value : string) => await handleUpdateInfo(value , info ,user)} info={info} key={key} content={value} />
+        })}
+    </>
+}
+function Header(){
+   return  <Wrapper header><UIFieldAlgin style={{ justifyContent: 'center', margin: '10px' }} vectical>
+    <UIFieldAlgin flex={3}>
+       <H2>Avatar User</H2> 
+    </UIFieldAlgin>
+    <UIFieldAlgin flex={3} >    <H2 >Name </H2> </UIFieldAlgin >
+    <UIFieldAlgin flex={3} >    <H2> Role  </H2></UIFieldAlgin >
+    <UIFieldAlgin flex={3} >
+        <H2>Settings</H2> 
+    </UIFieldAlgin >
+</UIFieldAlgin></Wrapper>
+}
+const Wrapper = styled.div<any>`
+background-color: ${(props : any)  => props.header? props.theme.bg.inactive : 'none'};
+    cursor : pointer;
     &:hover {
         background-color : ${props => props.theme.bg.wash};
         transition : .2s;

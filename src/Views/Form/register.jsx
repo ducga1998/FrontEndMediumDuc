@@ -7,13 +7,6 @@ import { addUser } from '../../API/client';
 import UIButton from '../../Components/UI/UIButton';
 import UIField from '../../Components/UI/UIField';
 const { useState, useEffect } = React
-function CheckUser(user, password) {
-    if (user === 'admin' && password === 'admin') {
-        console.log('ok')
-        return true
-    }
-    return false
-}
 export default function Register() {
     const [login, setValueLogin] = useState('')
     const [password, setValuePassword] = useState('')

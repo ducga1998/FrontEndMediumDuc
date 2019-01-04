@@ -42,6 +42,31 @@ export function updateInfomation(user: any) {
         resolve(convertDataToGraphQL(API))
     })
 }
+export function deleteUserById(id){
+    
+   
+    return new Promise(async resolve => {
+        const API = client.mutate({
+            mutation: gql`
+              mutation DeleteUserById($id: String) {
+                deleteUserById(id: $id) {
+                    idUser
+                    login
+                    password
+                    decentraliz
+                    name
+                    avatarLink
+                }
+            }
+            `,
+            variables: {
+                id
+            }
+        })
+        if (API) resolve(convertDataToGraphQL(API))
+        resolve({})
+    })
+}
 export function addUser(user: any) {
     const { idUser, login, password, decentraliz, avatarLink, name } = user
     console.log('userrr', user)

@@ -8,14 +8,15 @@ import styled from 'styled-components';
 import userContainer from '../../Container/userContainer';
 import UIButton from './UIButton';
 import UIInput from './UIInput';
-import { H3 } from '../styled/base';
+import { H3, baseHover } from '../styled/base';
 
 const { useState, useRef } = React
 interface IUIEditer {
     info: string,
     content: string
+    onUpdateProfile : (value : string)=> void
 }
-export default function UIEditer({ info, content }: IUIEditer) {
+export default function UIEditer({ info, content , onUpdateProfile }: IUIEditer) {
     const [open, setOpen] = useState(false)
     const [value, setValue] = useState(content)
     const inputref = useRef(null) as any
@@ -24,12 +25,17 @@ export default function UIEditer({ info, content }: IUIEditer) {
         if (inputref.current) {
             inputref.current.value = (value ? value : '')
         }
-    })
+    } ) 
+    React.useEffect(() => {
+        setValue(content)
+    },[  content])
     async function handleOnClick() {
         if (inputref.current) {
             setValue(inputref.current.value)
             setOpen(false)
-            userContainer.updateProfile({ [info]: inputref.current.value })
+            // onUpdateProfile()
+            onUpdateProfile(inputref.current.value)
+           
         }
     }
     function handleOnPress(event) {
@@ -38,10 +44,10 @@ export default function UIEditer({ info, content }: IUIEditer) {
             handleOnClick()
         }
     }
-    return <div><H3 onClick={(e: any) => { setOpen(!open); }} ><b>{info} : </b>{(value ? value : '')}
-        <Glyphicon glyph="edit" /></H3>
+    return <div><Propety onClick={(e: any) => { setOpen(!open); }} ><b>{info} : </b>{(value ? value : '')}
+        <Glyphicon glyph="edit" /></Propety>
         {open ? <$Flex>
-            <UIInput autoFocus onKeyPress={handleOnPress} style={{ width: '100%' }} refInput={inputref} onChange={() => { }} placeholder={info} />
+            <UIInput autoFocus onKeyPress={handleOnPress}  refInput={inputref} onChange={() => { }} placeholder={info} />
             <UIButton style={{ "margin-left": "20px" }} onMouseDown={handleOnClick}>Edit</UIButton>
         </$Flex> : null}
     </div>
@@ -49,4 +55,16 @@ export default function UIEditer({ info, content }: IUIEditer) {
 }
 const $Flex = styled.div`
     display : flex;
+`
+const Propety = styled(H3)`
+    cursor : pointer;
+    padding : 10px;
+    &:first-letter{
+        /* font-size  :30px; */
+        font-display : uppcase;
+        text-transform: uppercase;
+    }
+    &:hover {
+        ${baseHover}
+    }
 `

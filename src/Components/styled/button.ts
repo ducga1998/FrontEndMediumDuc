@@ -99,7 +99,6 @@ export const StyledSolidButton = styled('button')<any>`
             ? props.theme.inactive
             : eval(`props.theme.${props.color ? props.color : `brand.alt`}`)};
   color: ${(props: any) => props.theme.text.reverse};
-
   &:hover {
     background-color: ${(props: any) =>
         props.disabled
@@ -150,7 +149,7 @@ export const StyledOutlineButton = styled(StyledTextButton)`
             ? props.theme.inactive
             : eval(`props.theme.${props.color ? props.color : 'brand.default'}`)};
   transition: ${Transition.hover.on};
-
+  
   &:hover {
     background-color: ${({ theme }) => theme.bg.default};
     color: ${(props: any) =>

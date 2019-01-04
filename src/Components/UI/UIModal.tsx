@@ -51,6 +51,7 @@ const $Header = styled.header`
     height: 100px;
 
 `
+
 const $Footer = styled.div`
 display : flex;
 justify-content : flex-end;
@@ -58,13 +59,13 @@ background-color : ${props => props.theme.bg.default};
 border-top: 1px solid black;
 padding: 10px;
 `
+
 const $Content = styled.div<{ height?: string, width?: string }>`
     padding : 10px;
     height : ${props => props.height ? props.height : 'auto'};
     width : ${props => props.width ? props.width : 'auto'};
     background-color: ${theme.bg.default};
 `
-
 const $Modal = styled.div<{ width?: string, height?: string }>`
 display : flex;
 flex-direction : column;

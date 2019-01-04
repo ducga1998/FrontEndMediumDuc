@@ -6,7 +6,7 @@ export const OverLay = styled.div<{ open?: Boolean }>`
     z-index : 999999;
 	box-shadow: none;
 	overflow: visible !important;
-    position: absolute;
+    position: fixed;
     width : 100%;
     height : 100%;
     display  : ${(props: any) => {

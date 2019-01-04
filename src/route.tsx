@@ -23,7 +23,7 @@ import ArticleBookMark from "./Views/Article/BookMarkArticle";
 import history from './history'
 import { HistoryContext } from "./Core/renderElement";
 import { H1 } from "./Components/styled/base";
-import ManagerAccount from './Views/User/Admin/ManagerAccout'
+import ManagerAccount from './Views/User/Admin/ManagerAccount'
 const About = () => <div>
     Web design by Nguyen Minh duc
     <H1>Facebook : <a href="https://www.facebook.com/duc.ceh.cnna">https://www.facebook.com/duc.ceh.cnna</a></H1>
@@ -61,7 +61,7 @@ const AppRouter = () => {
 
         return <Router history={history} >
             <Switch>
-                <Layout >
+                <Layout>
                     <Route path="/chat" component={isAuth(AllRoomChat)} />
                     <Route path="/about/" component={About} />
                     <Route path="/user/:id" component={isAuth(ViewUser)} />

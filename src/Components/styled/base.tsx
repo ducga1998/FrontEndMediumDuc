@@ -13,7 +13,11 @@ export const Gradient = (g1, g2) => css`radial-gradient(ellipse farthest-corner 
 //   mid: '0 4px 12px rgba(23,26,33, 0.2)',
 //   high: '0 8px 16px rgba(23,26,33, 0.25)',
 // };
+export const baseHover = css`
+background-color : ${props => props.theme.bg.border};
+transition : .2s;
 
+`
 export const hexa = (hex, alpha) => {
   var r = parseInt(hex.slice(1, 3), 16),
     g = parseInt(hex.slice(3, 5), 16),

@@ -19,7 +19,7 @@ const Author = ({ name, totalFollow, totalArticle, avatarLink, idUser }: IAuthor
             () => {
                 return <FlexCol>
                     <FlexRow>
-                        <Link to="/profile" ><AvatarImage radius={15} src={src} /></Link>
+                        <Link to="/profile" ><AvatarImage  src={src} /></Link>
                             
                   
                         <Link className="name" to={`/user/${idUser}`}>
