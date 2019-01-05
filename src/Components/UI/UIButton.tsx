@@ -1,7 +1,8 @@
 import * as React from 'react';
 import styled from 'styled-components';
-import { StyledOutlineButton } from '../styled/button';
+import { StyledOutlineButton, StyledSolidButton, StyledTextButton } from '../styled/button';
 import Icon from '../Icon';
+import { Spinner } from '../styled/base';
 interface IUIButton {
     width?: string
     height?: string
@@ -11,11 +12,12 @@ interface IUIButton {
     keyButton?: number,
     active?: boolean,
     icon ? :string
-    category ?:'danger'| 'space' |'success',
-    // isLoading : boolean,
+    category ?:'danger'| 'space' |'success'|'sidebar',
+    isLoading ?: boolean,
+    type ?: 'outline'| 'soild' |'text'
 }
-export default function UIButton({
-    children, width, height, onMouseDown, style, keyButton, active, icon ,category
+export default function UIButton({ type , 
+    children, width, height, onMouseDown, style, keyButton, active, icon ,category, isLoading
 }: IUIButton) {
     let categoryButton
     switch (category) {
@@ -27,12 +29,29 @@ export default function UIButton({
             break;
             case 'success':
             categoryButton ="success.default"
+            case 'sidebar' : 
+            categoryButton ="brand.default"
             break;
     
         default:
             break;
     }
-    return <StyledOutlineButton
+    let Button 
+    switch(type ){
+        case 'soild' :
+        Button = StyledSolidButton
+        break;
+        case 'text' :
+        Button = StyledTextButton
+        break;
+        default :
+        Button = StyledOutlineButton
+
+
+    }
+    
+
+    return <Button
         data-active={active || undefined}
         data-keyButton={keyButton}
         style={style}
@@ -40,8 +59,8 @@ export default function UIButton({
         color={categoryButton||undefined}
         hoverColor={categoryButton||undefined}
     >   
-    
+    {isLoading ?<Spinner /> : null}
     {icon?  <Icon glyph={icon} /> :  null}
     {children}
-    </StyledOutlineButton>
+    </Button>
 }

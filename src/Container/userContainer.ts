@@ -1,7 +1,11 @@
 import { Container } from 'unstated-x';
 import { checkLoginUser, updateInfomation } from '../API/client';
 // import {  } from 'react-router';
-class UserContainer extends Container<any>{
+interface IUserContainer {
+    dataUser : any ,
+    login : boolean
+}
+class UserContainer extends Container<IUserContainer>{
     async login({ username, password }) {
         let dataUser = await checkLoginUser({ username, password }) as any
         if (localStorage.getItem('duc-app-medium-login')) {

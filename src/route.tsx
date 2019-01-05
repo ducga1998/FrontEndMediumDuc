@@ -21,9 +21,9 @@ import Stories from "./Views/Article/Stories";
 import StoreDetail from "./Views/Article/Stories/Store";
 import ArticleBookMark from "./Views/Article/BookMarkArticle";
 import history from './history'
-import { HistoryContext } from "./Core/renderElement";
 import { H1 } from "./Components/styled/base";
 import ManagerAccount from './Views/User/Admin/ManagerAccount'
+import ManagerArticles from './Views/User/Admin/MangerArticle'
 const About = () => <div>
     Web design by Nguyen Minh duc
     <H1>Facebook : <a href="https://www.facebook.com/duc.ceh.cnna">https://www.facebook.com/duc.ceh.cnna</a></H1>
@@ -45,13 +45,14 @@ const AppRouter = () => {
         }
     })
     const renderRoutes = (user: any) => {
+    
         // this is function help me catch event socket to backend 
         notificationFuncSocket(user)
         
         function isAuth(component) {
             return user != null ? component: redirect('/login')
         }
-        // const {decentraliz} = user
+        
         
         // check isAdmin ???  => {}   
         //admin thi hon so voi user thuong nhung cai gi ?
@@ -76,7 +77,11 @@ const AppRouter = () => {
                     <Route path="/writearticle" component={isAuth(WriteArticle)} />
                     <Route path="/chatRoom/:id" component={isAuth(DetailRoomChat)} />
                     <Route path="/bookmarks" component={isAuth(ArticleBookMark)} />
-                    <Route path ="/managerAccount" component={isAuth(ManagerAccount)} />
+                    {user && user.decentraliz === 3? <>  
+                     <Route path ="/managerAccount" component={isAuth(ManagerAccount)} />
+                    <Route path ="/managerArticles" component={isAuth(ManagerArticles)} />
+                    </>:null}
+                 
                 </Layout>
             </Switch>
         </Router>

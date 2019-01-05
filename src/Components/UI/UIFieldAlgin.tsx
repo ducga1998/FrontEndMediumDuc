@@ -8,13 +8,14 @@ interface IUIFieldAlgin {
     flex ?:number ,
     children : any
     style  ?: any
+    shadow ?: string
 }
 export default class UIFieldAlgin extends React.Component<IUIFieldAlgin> {
     // default render UIField  is vectical
     render() {
-        const { horizontal , flex, children , style} = this.props
+        const { horizontal , flex, children , style , shadow} = this.props
         
-      const styleUIField = {...{flex : flex?`${flex}`:'none' } , ...style}
+      const styleUIField = {...{flex : flex?`${flex}`:'none' , boxShadow : shadow } , ...style}
         console.log('styleUIField',styleUIField)
        if(horizontal){  
            return <FlexCol style ={styleUIField}>{children}</FlexCol>

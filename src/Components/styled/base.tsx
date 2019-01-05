@@ -7,12 +7,12 @@ export const Truncate = width => css`
   white-space: nowrap;
   min-width: 0;
 `;
-export const Gradient = (g1, g2) => css`radial-gradient(ellipse farthest-corner at top left, ${g1} 0%, ${g2} 100%)`;
-// export const Shadow = {
-//   low: '0 2px 8px rgba(23,26,33, 0.15)',
-//   mid: '0 4px 12px rgba(23,26,33, 0.2)',
-//   high: '0 8px 16px rgba(23,26,33, 0.25)',
-// };
+export const Gradient = (g1, g2 , g3= '0%') => css`radial-gradient(ellipse farthest-corner at top left, ${g1} ${g3}, ${g2} 100%)`;
+export const Shadow = {
+  low: '0 2px 8px rgba(23,26,33, 0.15)',
+  mid: '0 4px 12px rgba(23,26,33, 0.2)',
+  high: '0 8px 16px rgba(23,26,33, 0.25)',
+};
 export const baseHover = css`
 background-color : ${props => props.theme.bg.border};
 transition : .2s;
@@ -28,12 +28,6 @@ export const hexa = (hex, alpha) => {
   } else {
     return `rgb(${r}, ${g}, ${b})`;
   }
-};
-
-export const Shadow = {
-  low: '0 2px 8px',
-  mid: '0 4px 12px',
-  high: '0 6px 16px',
 };
 
 export const Transition = {
@@ -295,6 +289,7 @@ export const FlexRow = styled.div`
   flex-direction: row;
   justify-content: flex-start;
   align-items: center;
+ 
 `;
 // vectical 
 export const FlexCol = styled.div`
@@ -302,6 +297,7 @@ export const FlexCol = styled.div`
   flex-direction: column;
   justify-content: flex-start;
   align-items: stretch;
+ 
 `;
 // use tooltip
 export const returnTooltip = props => {
@@ -505,7 +501,7 @@ export const Onboarding = props => css`
 
   &:before {
     content: '';
-    z-index: 1000;
+    z-index: 3;
     border: 5px solid transparent;
   }
 

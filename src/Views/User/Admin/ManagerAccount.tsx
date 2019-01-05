@@ -1,6 +1,6 @@
 import * as React from 'react';
 import styled from 'styled-components';
-import { FlexCol, FlexRow, H2, P, H3 } from '../../../Components/styled/base';
+import { FlexCol, FlexRow, H2, P, H3, Gradient } from '../../../Components/styled/base';
 import { getAllUser, updateInfomation, deleteUserById } from '../../../API/client';
 import { AvatarImage } from '../../../Components/styled/avatar';
 import UIButton from '../../../Components/UI/UIButton';
@@ -53,8 +53,8 @@ export default class ManagerAccount extends React.Component<any> {
                     <UIFieldAlgin flex={3} >    <H2 > {name}</H2> </UIFieldAlgin >
                     <UIFieldAlgin flex={3} >    <H3> Role : </H3><HightLigth>{role}</HightLigth> </UIFieldAlgin >
                     <UIFieldAlgin flex={3} >
-                        <UIButton icon="edit" category="space" style={{}} onMouseDown={() => { }}>Update</UIButton>
-                        <UIButton icon="close" category="danger"style={{}} onMouseDown={() => {this.deleteUser(idUser)}}>Delete</UIButton>
+                     
+                        <UIButton icon="delete" category="danger"style={{}} onMouseDown={() => {this.deleteUser(idUser)}}>Delete</UIButton>
                         <UIButton icon="profile"category="space" style={{}} onMouseDown={() => this.detailInfoUser(user)}>Detail</UIButton>
                     </UIFieldAlgin >
                 </UIFieldAlgin></Wrapper>
@@ -119,7 +119,7 @@ function Header(){
 </UIFieldAlgin></Wrapper>
 }
 const Wrapper = styled.div<any>`
-background-color: ${(props : any)  => props.header? props.theme.bg.inactive : 'none'};
+background-image: ${(props : any)  => props.header? Gradient('#7b16ff85','#34aadc') : 'none'};
     cursor : pointer;
     &:hover {
         background-color : ${props => props.theme.bg.wash};

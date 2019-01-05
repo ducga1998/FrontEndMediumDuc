@@ -18,8 +18,6 @@ export default withRouter(
     <Link
       {...rest}
       onClick={evt => {
-          console.log('history' , history)
-       console.log(   window.location)
         if (rest.onClick) rest.onClick(evt);
         if (evt.metaKey || evt.ctrlKey) return;
         if (window.appUpdateAvailable === true) {

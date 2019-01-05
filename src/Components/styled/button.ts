@@ -9,7 +9,6 @@ import theme from '../../theme';
 const baseButton = css`
   display: flex;
   flex: none;
-  align-self: center;
   align-items: center;
   justify-content: center;
   border-radius: 12px;

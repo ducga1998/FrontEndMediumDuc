@@ -16,7 +16,7 @@ export const Nav = styled(FlexRow)`
 
   line-height: 1;
   box-shadow: 0 4px 8px ${({ theme }) => hexa(theme.bg.reverse, 0.15)};
-  z-index: 1000;
+  z-index: 3;
 
   @media (max-width: 768px) {
     padding: 0;

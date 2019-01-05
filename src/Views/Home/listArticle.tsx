@@ -36,7 +36,7 @@ export default class ListArticle extends React.Component<any> {
                             return <Subscribe   key={key} to={[articleContainer]}>
                                 {
                                     () => { 
-                                        return <Article article ={articleContainer.state}/>
+                                        return <Article  article ={articleContainer.state}/>
                                     }
                                 }
                             </Subscribe>

@@ -1,3 +1,4 @@
+
 import styled from 'styled-components';
 
 export const AvatarImage = styled.img<{ plan ?: boolean , radius ?: any ,sizeBorder ?: string , size ?: number}>`
