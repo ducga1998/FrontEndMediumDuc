@@ -27,12 +27,12 @@ class ReadArticle extends React.Component<IReadArticleType> {
         article: null,
     }
     async componentDidMount() {
-        const { match: { params: { id } }, router } = this.props
+        const { match: { params: { id } } } = this.props
         commentContainer.getAllCommentByIdArticle(id)
         const article = await getArticleById(id) as any
         if (article) {
-            const {user :  {idUser}}  = article
-            notificationSocket.emit('join', idUser)
+          
+            notificationSocket.emit('join', userContainer.state.dataUser.idUser)
             await this.setState({ article })
         }
         

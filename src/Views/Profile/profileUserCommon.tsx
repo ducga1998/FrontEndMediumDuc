@@ -66,7 +66,7 @@ class ViewUserDetail extends React.Component<IViewUserDetail> {
 
                                         <Right>
                                             {isFollow ? <StyledSolidButton hoverColor="text.placeholder"  color="text.alt" onClick={async () => { await followAllContainer.unfollow(idUser) }}>Unfollow</StyledSolidButton> :
-                                                <StyledSolidButton  hoverColor="space.default" color="space.alt" onClick={() => {this.follow(idUser) }}> Follow </StyledSolidButton>
+                                                <StyledSolidButton  hoverColor="space.default" color="space.alt" onClick={() => {this.follow(ownProfileId) }}> Follow </StyledSolidButton>
                                             }
                                             {allUserFollow && allUserFollow.length > 0 ? <$ListAvatarUserFollow>
                                                 {allUserFollow.map((item: any, key) => {

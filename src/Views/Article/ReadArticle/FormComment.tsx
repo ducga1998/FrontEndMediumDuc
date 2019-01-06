@@ -39,8 +39,8 @@ const FormComment = ({ context , idRely , onChange }: IFormRely ) => {
             input = {...input , ...{idRely}}
             onChange(input)
         }
-    
-        socketNotication({...context , ...{content} },idRely?'RelyComment':'Comment')
+        const {user :  {idUser}}  = context
+        socketNotication({...context , ...{content,idUser} },idRely?'RelyComment':'Comment')
       
         await commentAllContainer.addCommentInArticle(input) // function handle request to backend and add data to commentAllContainer
         setContent('')

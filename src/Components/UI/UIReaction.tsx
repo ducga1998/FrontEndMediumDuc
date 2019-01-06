@@ -34,7 +34,7 @@ export default function UIReaction({ idUseOwnArticler, idArticle ,titleArticle}:
                                         allBookMarkContainer.unBookMarkToClient({ idUseOwnArticler, idArticle })
                                     }
                                     else {
-                                        socketNotication({titleArticle} , 'Bookmark')
+                                        socketNotication({titleArticle , idUser : idUseOwnArticler} , 'Bookmark')
                                         allBookMarkContainer.bookMarkToClient({ idUseOwnArticler, idArticle })
                                     }
                                 }

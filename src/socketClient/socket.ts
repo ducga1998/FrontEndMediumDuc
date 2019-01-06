@@ -18,6 +18,6 @@ export const notificationSocket = (function () {
 // socket.join(idUserNeedJoin) => each user want chat in room have idRoom then must use socket.join(idUserNeedRoom)
 
 export function socketNotication(data ,  type){
-    const {name , avatarLink,idUser,decentraliz}=userContainer.state.dataUser
-    notificationSocket.emit('newNotification',{...data ,...{name , avatarLink,idUser,decentraliz,type} })
+    const {name , avatarLink,decentraliz}=userContainer.state.dataUser
+    notificationSocket.emit('newNotification',{...data ,...{name , avatarLink,decentraliz,type} })
 }
