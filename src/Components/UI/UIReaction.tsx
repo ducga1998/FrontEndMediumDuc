@@ -4,13 +4,15 @@ import { Subscribe } from 'unstated-x';
 import allBookMarkContainer from '../../Container/bookMarkContainer';
 import UIWidget from './UIWidget';
 import Icon, { Glyph } from '../Icon';
+import { socketNotication } from '../../socketClient/socket';
 // const { useEffect, useState } = React
 interface IUIReaction {
     idUseOwnArticler?: string
     idArticle: string
-}
+    titleArticle : string
+}   
 const { useEffect } = React as any
-export default function UIReaction({ idUseOwnArticler, idArticle }: IUIReaction) {
+export default function UIReaction({ idUseOwnArticler, idArticle ,titleArticle}: IUIReaction) {
     const refReaction = React.useRef(null) as any
     useEffect(() => {
         allBookMarkContainer.isBookMark({ idArticle })
@@ -32,6 +34,7 @@ export default function UIReaction({ idUseOwnArticler, idArticle }: IUIReaction)
                                         allBookMarkContainer.unBookMarkToClient({ idUseOwnArticler, idArticle })
                                     }
                                     else {
+                                        socketNotication({titleArticle} , 'Bookmark')
                                         allBookMarkContainer.bookMarkToClient({ idUseOwnArticler, idArticle })
                                     }
                                 }

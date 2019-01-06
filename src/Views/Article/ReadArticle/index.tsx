@@ -13,6 +13,8 @@ import { StyledSolidButton } from '../../../Components/styled/button';
 import { FlexRow, FlexCol, H2, fontStack, H4 } from '../../../Components/styled/base';
 import { Section } from '../../../Components/styled/nav';
 import ViewComment from './comment';
+import { notificationSocket } from 'src/socketClient/socket';
+import userContainer from '../../../Container/userContainer';
 
 interface IReadArticleType {
     match: any,
@@ -29,7 +31,16 @@ class ReadArticle extends React.Component<IReadArticleType> {
         commentContainer.getAllCommentByIdArticle(id)
         const article = await getArticleById(id) as any
         if (article) {
+            const {user :  {idUser}}  = article
+            notificationSocket.emit('join', idUser)
             await this.setState({ article })
+        }
+        
+    }
+    componentWillUnmount() {
+        const {user :  {idUser}}  = this.state.article as any
+        if (idUser !== userContainer.state.dataUser.idUser) {
+            notificationSocket.emit('leave', idUser)
         }
     }
     render() {
@@ -39,7 +50,7 @@ class ReadArticle extends React.Component<IReadArticleType> {
             return <ArticleContext.Provider value={article}>
                 <$Align>
                     {/* UIReraction need idArticle and idUser own this article */}
-                    <UIReaction idArticle={idArticle} idUseOwnArticler={idUser} />
+                    <UIReaction idArticle={idArticle} idUseOwnArticler={idUser} titleArticle={titleArticle}  />
                     <div style={{
                         width: '70%',
 

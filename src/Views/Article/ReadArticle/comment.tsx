@@ -68,7 +68,6 @@ const Comment = ({ dataUserComment  , relyComment } : {dataUserComment : any ,re
     const [dataRely  , setDataRely] = React.useState(relyComment?relyComment : [])
 //    console.log('dataRelydataRely',dataRely)
     function renderCommentRely(commentRely: any){
-        console.log('commentRely',commentRely)
        return   commentRely.map(comment => {
         const { userComment: { avatarLink, name }, createdAt, content , idComment  } = comment
            return <$Comment data-id={idComment}  data-tooltip={`Created At : ${new Date(createdAt)}`}>
@@ -98,8 +97,6 @@ const Comment = ({ dataUserComment  , relyComment } : {dataUserComment : any ,re
                 </$Comment>
 
                 {open ?    <WrapperRely>    {dataRely && dataRely.length > 0 ? renderCommentRely(dataRely): null} <FormComment onChange={addCommentRely}  idRely={idComment} />  </WrapperRely> : null}
-                    
-               
             </>
     }
     return renderComment(dataUserComment)

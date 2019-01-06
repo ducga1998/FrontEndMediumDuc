@@ -27,7 +27,7 @@ export default class SideBar extends React.Component<{ open: boolean, setOpen: a
         if(!this.props.user){
             return null
         }
-        const { user: { name, avatarLink ,decentraliz } } = this.props
+        const { user: { name, avatarLink ,decentraliz , biographical } } = this.props
         console.log('opennnn ok ', this.props.open)
         return <> <UIWidget>
             {this.props.open ? <OverLayNavBar open onMouseDown={this.handleMouseDown} >
@@ -52,7 +52,7 @@ export default class SideBar extends React.Component<{ open: boolean, setOpen: a
                         <AvatarImage src={avatarLink} size={80} radius="24px" />
                         <UIFieldAlgin horizontal style={{ paddingLeft: '10px' }}>
                             <H3>{name}</H3>
-                            <P>cácnaksjcna</P>
+                            <P>{biographical}</P>
                         </UIFieldAlgin>
                     </UIFieldAlgin>
                     </UIFieldAlgin>

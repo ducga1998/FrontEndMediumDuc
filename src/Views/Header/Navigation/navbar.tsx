@@ -1,8 +1,7 @@
 import * as React from 'react';
 
-import { Section, Nav, LogoLink, Logo, IconLink, Label } from '../../../Components/styled/nav';
+import { Nav, LogoLink, Logo, IconLink, Label } from '../../../Components/styled/nav';
 import Card from '../../../Components/styled/card';
-import medium from './medium.svg'
 import Icon from '../../../Components/Icon';
 import { IMAGE_SOURCE_DEFAULT } from '../../../help/define';
 import Search from '../Search/search';
@@ -11,24 +10,25 @@ import { Subscribe } from 'unstated-x';
 import userContainer from '../../../Container/userContainer';
 import styled from 'styled-components';
 import UIPopUp from '../../../Components/UI/UIPopUp';
-import UIDropDown from '../../../Components/UI/UIDropDown';
 import { Shadow, hexa, FlexCol } from '../../../Components/styled/base';
 import theme from '../../../theme';
 import SideBar from './SideBar';
+import Notification from './notification'
 class Navbar extends React.Component<any> {
-    state  ={
-        open : false
+    state = {
+        sideBarOpen: false,
+        notificationOpen: false
     }
     render() {
-        const {dataUser} = userContainer.state
-        const {open} = this.state
+        const { dataUser } = userContainer.state
+        const { sideBarOpen, notificationOpen } = this.state
         const location = window.location.href
         return <Nav>
-            <NavButton to="/" onClick={async (e : Event) =>{e.preventDefault() ; await this.setState({open :true })}}>
-                <Icon onClick={( )=> {this.setState({open :true })}} glyph="menu" />
-                <SideBar user={dataUser} open={this.state.open} setOpen={() => {this.setState({open : false})}} />
+            <NavButton to="/" onClick={async (e: Event) => { e.preventDefault(); await this.setState({ sideBarOpen: true }) }}>
+                <Icon onClick={() => { this.setState({ sideBarOpen: true }) }} glyph="menu" />
+                <SideBar user={dataUser} open={sideBarOpen} setOpen={() => { this.setState({ sideBarOpen: false }) }} />
             </NavButton>
-           
+
             <IconLink to="/home" data-active={location.includes('home')}>
                 <Icon glyph="home" />
                 <Label> Home </Label>
@@ -42,6 +42,7 @@ class Navbar extends React.Component<any> {
             </IconLink>
             <ButtonArticle />
             <IconLink to="/writearticle" > <Label>Write Article</Label></IconLink>
+            <Notification open={notificationOpen} setOpen={() => this.setState({ notificationOpen: !notificationOpen })} />
             <UIPopUp trigger={<Button data-active={true}> <Icon glyph="settings" />  Setting</Button>}>
                 <div style={{ display: 'flex' }}>
                     <Subscribe to={[userContainer]} >
@@ -66,7 +67,10 @@ class Navbar extends React.Component<any> {
         </Nav>
     }
 }
-const NavButton = styled(LogoLink)``
+
+const NavButton = styled(LogoLink)`
+position : relative;
+`
 const Wrapper = styled(FlexCol)`
 
     width  :100%;
@@ -75,7 +79,6 @@ const StyledCard = styled(Card)`
   display: flex;
   flex-direction: column;
   box-shadow: ${Shadow.high} ${({ theme }) => hexa(theme.bg.reverse, 0.15)};
-  max-height: 640px;
   overflow: hidden;
   align-items: stretch;
   display: inline-block;
@@ -85,15 +88,11 @@ const StyledCard = styled(Card)`
   margin  : 0px;
   padding : 10px;
     a{
-       color : ${props => props.theme.bg.reverse};
+       color : ${props => props.theme.text.reverse};
    }
     &:hover {
     background-color : ${props => props.theme.bg.reverse};
   
-    a{
-        color : ${props => props.theme.bg.default};
-        box-shadow : none;
-    }
 }
     
 `;

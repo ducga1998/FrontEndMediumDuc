@@ -1,18 +1,12 @@
 import * as React from 'react';
-// import { Aside, Header, Layout, Main, Nav, SubHeader } from '../Components/UI/styled/layout'
-// import AppRouter from '../route'
-// import { Button, ButtonGroup, ButtonToolbar } from 'react-bootstrap';
 import renderHTML from 'react-render-html';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import { filterStringHTML } from '../../help/help';
-import UILoading from '../../Components/UI/UILoading';
-import { H1, FlexCol, P, FlexRow, H4, H3 } from '../../Components/styled/base';
+import { H1, FlexCol, P, H4, H3 } from '../../Components/styled/base';
 import { StyledSolidButton } from '../../Components/styled/button';
 import { Section } from '../../Components/styled/nav';
 import { AvatarImage } from '../../Components/styled/avatar';
-import { Wrapper } from '../../Components/menu/style';
-import { HistoryContext } from '../../Core/renderElement';
 import UIFieldAlgin from '../../Components/UI/UIFieldAlgin';
 
 // import { HistoryContext } from '../Layout';
@@ -46,7 +40,7 @@ export default function Article({ article ,  typeArticle ,vectical ,horizontal ,
             :  <WrapperImg>
                 <SrcImage src={`${imageArticle !== defaultImg ? backgroundArticle : './backgroundDefault.jpg'}`} />
             </WrapperImg>}
-           
+        
             </Link>
             <$DetailArticle>
                <UIFieldAlgin>

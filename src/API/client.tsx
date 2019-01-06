@@ -151,6 +151,7 @@ export function checkLoginUser(user: any) {
                     name
                     avatarLink
                     decentraliz
+                    biographical
                     articles {
                         idArticle
                         hashTag

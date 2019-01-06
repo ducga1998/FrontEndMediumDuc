@@ -46,11 +46,7 @@ export default function UIButton({ type ,
         break;
         default :
         Button = StyledOutlineButton
-
-
     }
-    
-
     return <Button
         data-active={active || undefined}
         data-keyButton={keyButton}
@@ -60,7 +56,7 @@ export default function UIButton({ type ,
         hoverColor={categoryButton||undefined}
     >   
     {isLoading ?<Spinner /> : null}
-    {icon?  <Icon glyph={icon} /> :  null}
+    {icon?  <Icon tipText="KOKOKKO" glyph={icon} /> :  null}
     {children}
     </Button>
 }

@@ -17,9 +17,9 @@ class ArticleBookMark extends React.Component<IStories> {
         dataBookMark: []
     }
     async componentDidMount() {
-        const { idUser } = userContainer.state.dataUser
-        const dataBookMark = await getAllArticleHashBeenBookMark(idUser)
-        console.log('dataBookMark', dataBookMark)
+        const { idUser , avatarLink , name } = userContainer.state.dataUser
+        const dataBookMark = await getAllArticleHashBeenBookMark(idUser) as any
+       
         this.setState({ dataBookMark })
     }
 

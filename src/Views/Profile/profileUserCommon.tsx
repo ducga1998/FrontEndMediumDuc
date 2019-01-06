@@ -12,10 +12,10 @@ import { Subscribe } from 'unstated-x';
 import { H3, H1, FlexRow } from '../../Components/styled/base';
 import { StyledSolidButton } from '../../Components/styled/button';
 import Link from '../../Components/Link';
+import { notificationSocket, socketNotication } from '../../socketClient/socket';
 interface IViewUserDetail {
     match: any
 }
-const { useEffect } = React
 class ViewUserDetail extends React.Component<IViewUserDetail> {
     state = {
         dataUser: null,
@@ -27,10 +27,12 @@ class ViewUserDetail extends React.Component<IViewUserDetail> {
         const dataUser = await getAllInformationUser(id)
         await this.setState({ dataUser, ownProfileId: id })
     }
-
+    async follow(idUser){
+        socketNotication({},'Follow')
+        await followAllContainer.follow(idUser)
+    }
     render() {
         const { ownProfileId, dataUser } = this.state as any
-        console.log('state', this.state)
         return <Subscribe to={[followAllContainer]}>
             {
                 followAll => {
@@ -64,10 +66,8 @@ class ViewUserDetail extends React.Component<IViewUserDetail> {
 
                                         <Right>
                                             {isFollow ? <StyledSolidButton hoverColor="text.placeholder"  color="text.alt" onClick={async () => { await followAllContainer.unfollow(idUser) }}>Unfollow</StyledSolidButton> :
-                                                <StyledSolidButton  hoverColor="space.default" color="space.alt" onClick={async () => { await followAllContainer.follow(idUser) }}> Follow </StyledSolidButton>
+                                                <StyledSolidButton  hoverColor="space.default" color="space.alt" onClick={() => {this.follow(idUser) }}> Follow </StyledSolidButton>
                                             }
-
-
                                             {allUserFollow && allUserFollow.length > 0 ? <$ListAvatarUserFollow>
                                                 {allUserFollow.map((item: any, key) => {
                                                     const { avatarLink, name } = item.userFollow
@@ -92,7 +92,6 @@ class ViewUserDetail extends React.Component<IViewUserDetail> {
 
                                         }) : <h2>NO Article  :), fuck own account stupid </h2>}
                                     </$ListArticle>
-                                    <Link to={`/user/d52f4330-0367-11e9-8f6e-c510ab8f59c5`}>OK dde</Link>
                                 </$ArticleDetail>
                             }
                         }

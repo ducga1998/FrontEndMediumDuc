@@ -9,7 +9,7 @@ import styled from 'styled-components';
 
 import { toast } from 'react-toastify';
 import userContainer from '../../../Container/userContainer';
-import { notificationSocket } from '../../../socketClient/socket';
+import { socketNotication } from '../../../socketClient/socket';
 import commentAllContainer from '../../../Container/commentContainer';
 import { renderElement } from '../../../Core/renderElement';
 import { Input, FlexCol, FlexRow } from '../../../Components/styled/base';
@@ -19,11 +19,10 @@ interface IFormRely {
     idRely ?:string,
     onChange ?: (event : any) => any
 }
-const FormRely = ({ context , idRely , onChange }: IFormRely ) => {
-    const refContent = React.useRef(null) as any
+const FormComment = ({ context , idRely , onChange }: IFormRely ) => {
     const [content, setContent] = React.useState('')
-    let { name, avatarLink } = userContainer.state.dataUser
-    const { titleArticle, idArticle, idUser } = context
+    const { idArticle } = context
+    const { avatarLink}  = userContainer.state.dataUser
     const handleAddComment = async () => {
         if ( content === '') {
             toast.error('Comment not empty !!!. Please write something ')
@@ -40,12 +39,14 @@ const FormRely = ({ context , idRely , onChange }: IFormRely ) => {
             input = {...input , ...{idRely}}
             onChange(input)
         }
-        console.log('input when have rely' )
+    
+        socketNotication({...context , ...{content} },idRely?'RelyComment':'Comment')
+      
         await commentAllContainer.addCommentInArticle(input) // function handle request to backend and add data to commentAllContainer
         setContent('')
     }
     function handleKeyPress (event) {
-        if(event.charCode===13){
+        if(event.charCode === 13){
             handleAddComment()
         }
         
@@ -55,7 +56,7 @@ const FormRely = ({ context , idRely , onChange }: IFormRely ) => {
             <Avatar className="smallAvatar" src={avatarLink ? avatarLink : IMAGE_SOURCE_DEFAULT} /> <b>{name}</b>
         </FlexRow>
         <WrapperFromComment>
-            <FormComment placeholder="Comment something ....." value={content} onKeyPress={handleKeyPress} onChange={  e => setContent(e.target.value)}  />
+            <$FormComment placeholder="Comment something ....." value={content} onKeyPress={handleKeyPress} onChange={  e => setContent(e.target.value)}  />
             <UIButton style={{flex : 2}} onMouseDown={handleAddComment} >Comment</UIButton>
         </WrapperFromComment>
     </$Aglin>
@@ -69,7 +70,7 @@ const Avatar = styled(AvatarImage)`
     margin-right : 20px;
     margin-bottom : 20px;
 `
-const FormComment = styled(Input)`
+const $FormComment = styled(Input)`
     flex : 10;
 `
 const $Aglin = styled(FlexCol)`
@@ -77,4 +78,4 @@ const $Aglin = styled(FlexCol)`
     padding : 10px;
     border-radius : 20px;
 `
-export default renderElement(FormRely)
+export default renderElement(FormComment)
