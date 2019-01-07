@@ -16,7 +16,6 @@ export default class UIFieldAlgin extends React.Component<IUIFieldAlgin> {
         const { horizontal , flex, children , style , shadow} = this.props
         
       const styleUIField = {...{flex : flex?`${flex}`:'none' , boxShadow : shadow } , ...style}
-        console.log('styleUIField',styleUIField)
        if(horizontal){  
            return <FlexCol style ={styleUIField}>{children}</FlexCol>
        }

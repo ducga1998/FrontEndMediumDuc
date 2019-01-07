@@ -25,10 +25,11 @@ export const ArticleContext = React.createContext(null)
 class ReadArticle extends React.Component<IReadArticleType> {
     state = {
         article: null,
+        
     }
     async componentDidMount() {
         const { match: { params: { id } } } = this.props
-        commentContainer.getAllCommentByIdArticle(id)
+        commentContainer.getAllCommentByIdArticle(id ,  0 , 5)
         const article = await getArticleById(id) as any
         if (article) {
           

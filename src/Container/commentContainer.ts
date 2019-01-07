@@ -34,6 +34,7 @@ class CommentAllContainer extends Container<any>{
         const data = registryComment.find(comment => comment.idArticle === idArticle) // 
         const { commentContainer } = data // this is all Comment
         const { allComments } = commentContainer.state
+    
         let { name, avatarLink } = userContainer.state.dataUser as any
         // CODE HERE MUST BIG REFACTOR 
         newComment.userComment = {
@@ -42,16 +43,19 @@ class CommentAllContainer extends Container<any>{
             idUser,
             idComment
         }
-        allComments.push(newComment)
+        allComments.unshift(newComment)
         await commentContainer.setState({ allComments })
     }
+    loadmore() {
+
+    }
     // each user 
-    async getAllCommentByIdArticle(idArticle) {
+    async getAllCommentByIdArticle(idArticle , first ,offset) {
         const commentInArticleContainer = new CommentInArticleContainer({
             allComments: [],
             idArticle
         })
-        await commentInArticleContainer.getAllCommentByIdArticle(idArticle)
+        await commentInArticleContainer.getAllCommentByIdArticle(idArticle,first ,offset )
         const input = {
             idArticle,
             commentContainer: commentInArticleContainer
@@ -67,8 +71,8 @@ class CommentInArticleContainer extends Container<any>{
     constructor(data) {
         super(data)
     }
-    async getAllCommentByIdArticle(idArticle) {
-        const allComments = await getAllCommentinArtcileCurrent(idArticle)
+    async getAllCommentByIdArticle(idArticle , first ,offset ) {
+        const allComments = await getAllCommentinArtcileCurrent(idArticle,first,offset)
         if (allComments) {
 
             await this.setState({ allComments })

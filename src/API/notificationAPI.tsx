@@ -3,13 +3,13 @@ import gql from "graphql-tag";
 import { convertDataToGraphQL } from "../help/help";
 import userContainer from "../Container/userContainer";
 
-export function getAllNotificationByIdUser() {
+export function getAllNotificationByIdUser(first , offset) {
     const {idUser} = userContainer.state.dataUser
     return new Promise(async resolve => {
         const API = await client.query({
             query: gql`
                 query {
-                    getAllNotifiOfUser( id : "${idUser}" ){
+                    getAllNotifiOfUser( id : "${idUser}" , first :${first} , offset : ${offset} ){
                         idNotification
                         idUser
                         type

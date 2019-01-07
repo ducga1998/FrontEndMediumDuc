@@ -2,7 +2,7 @@
 import styled from 'styled-components';
 
 export const AvatarImage = styled.img<{ plan ?: boolean , radius ?: any ,sizeBorder ?: string , size ?: number}>`
-cursor : pointer;
+  cursor : pointer;
   background-color: transparent;
   width: ${props => (props.size ? `${props.size}px` : '30px')};
   height: ${props => (props.size ? `${props.size}px` : '30px')};

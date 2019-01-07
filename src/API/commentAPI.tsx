@@ -2,14 +2,14 @@ import gql from "graphql-tag";
 import { client } from "./client";
 import { convertDataToGraphQL } from "../help/help";
 //QUERIES 
-export function getAllCommentinArtcileCurrent(idUser: string) {
+export function getAllCommentinArtcileCurrent(idUser: string , first :number , offset : number ) {
     console.log('999', idUser)
     return new Promise(async resolve => {
         const API = await client.query({
             query: gql`
                     query {
                         # add mechasim have idComment
-                        getAllCommentInTheArticle(id:"${idUser}"){
+                        getAllCommentInTheArticle(id:"${idUser}", first: ${first} ,offset:${offset} ){
                             idUser
                             idComment
                             idArticle

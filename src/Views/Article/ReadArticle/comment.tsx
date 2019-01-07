@@ -35,15 +35,15 @@ export default class ViewComment extends React.Component<IViewComment> {
                                 const { allComments } = commentContainer.state
                                 return <WrapperComment>
                                     {allComments.length > 0 ? allComments.map((item: any, key) => {
-                                        const {idRely} = item
+                                        const { idRely } = item
                                         let dataRely
-                                        if(!idRely){
+                                        if (!idRely) {
                                             // loop all comment, find idComment  === idRely 
-                                             dataRely = allComments.filter(comment => {
-                                                 if(comment.idRely){
+                                            dataRely = allComments.filter(comment => {
+                                                if (comment.idRely) {
                                                     return comment.idRely === item.idComment
-                                                 }
-                                             })
+                                                }
+                                            })
                                         }
                                         return <Comment dataUserComment={item} relyComment={dataRely && dataRely.length > 0 ? dataRely : undefined} />
                                     }) :
@@ -63,48 +63,48 @@ export default class ViewComment extends React.Component<IViewComment> {
 const WrapperComment = styled.div`
 
 `
-const Comment = ({ dataUserComment  , relyComment } : {dataUserComment : any ,relyComment?: any }) => {
+const Comment = ({ dataUserComment, relyComment }: { dataUserComment: any, relyComment?: any }) => {
     const [open, setOpen] = React.useState(false)
-    const [dataRely  , setDataRely] = React.useState(relyComment?relyComment : [])
-//    console.log('dataRelydataRely',dataRely)
-    function renderCommentRely(commentRely: any){
-       return   commentRely.map(comment => {
-        const { userComment: { avatarLink, name }, createdAt, content , idComment  } = comment
-           return <$Comment data-id={idComment}  data-tooltip={`Created At : ${new Date(createdAt)}`}>
-            <b>  ---- </b>
-           <AvatarImage data-tooltip={name} src={avatarLink ? avatarLink : IMAGE_SOURCE_DEFAULT} />
-           <$Content  >{renderHTML(content)}</$Content>
-           </$Comment>
-       })
+    const [dataRely, setDataRely] = React.useState(relyComment ? relyComment : [])
+    //    console.log('dataRelydataRely',dataRely)
+    function renderCommentRely(commentRely: any) {
+        return commentRely.map(comment => {
+            const { userComment: { avatarLink, name }, createdAt, content, idComment } = comment
+            return <$Comment data-id={idComment} data-tooltip={`Created At : ${new Date(createdAt)}`}>
+                <b>  ---- </b>
+                <AvatarImage data-tooltip={name} src={avatarLink ? avatarLink : IMAGE_SOURCE_DEFAULT} />
+                <$Content  >{renderHTML(content)}</$Content>
+            </$Comment>
+        })
     }
-    function addCommentRely(rely){
-        const {avatarLink , name} =  userContainer.state.dataUser
-        rely = {... rely  , ...{userComment : {avatarLink , name}}}; 
-       
+    function addCommentRely(rely) {
+        const { avatarLink, name } = userContainer.state.dataUser
+        rely = { ...rely, ...{ userComment: { avatarLink, name } } };
+
         dataRely.push(rely); setDataRely(dataRely)
-     }
-    
+    }
+
     function renderComment(comment) {
-        const { userComment: { avatarLink, name }, createdAt, content , idComment , idRely } = comment
-        if(idRely ){
+        const { userComment: { avatarLink, name }, createdAt, content, idComment, idRely } = comment
+        if (idRely) {
             return null
         }
-            return <>
-                <$Comment data-id={idComment} onMouseDown={(event) => {  setOpen(!open) }} data-tooltip={`Created At : ${new Date(createdAt)}`}>
-                    <AvatarImage data-tooltip={name} src={avatarLink ? avatarLink : IMAGE_SOURCE_DEFAULT} />
-                    <$Content  >{renderHTML(content)}</$Content>
-                  {dataRely && dataRely.length > 0?  <CountRely><H2>{dataRely.length } Rely comment</H2></CountRely>:null}
-                </$Comment>
+        return <>
+            <$Comment data-id={idComment} onMouseDown={(event) => { setOpen(!open) }} data-tooltip={`Created At : ${new Date(createdAt)}`}>
+                <AvatarImage data-tooltip={name} src={avatarLink ? avatarLink : IMAGE_SOURCE_DEFAULT} />
+                <$Content  >{renderHTML(content)}</$Content>
+                {dataRely && dataRely.length > 0 ? <CountRely><H2>{dataRely.length} Rely comment</H2></CountRely> : null}
+            </$Comment>
 
-                {open ?    <WrapperRely>    {dataRely && dataRely.length > 0 ? renderCommentRely(dataRely): null} <FormComment onChange={addCommentRely}  idRely={idComment} />  </WrapperRely> : null}
-            </>
+            {open ? <WrapperRely>    {dataRely && dataRely.length > 0 ? renderCommentRely(dataRely) : null} <FormComment onChange={addCommentRely} idRely={idComment} />  </WrapperRely> : null}
+        </>
     }
     return renderComment(dataUserComment)
 }
 const CountRely = styled.div`
 
 `
-const WrapperRely  = styled.div`
+const WrapperRely = styled.div`
 padding  : 10px 0px 0px 40px;
 `
 const $Content = styled.div`
