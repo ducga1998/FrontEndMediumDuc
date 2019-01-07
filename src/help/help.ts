@@ -3,6 +3,7 @@ export function filterStringHTML(str: any, flag: boolean = false , lengthString 
     if (flag) {
         return str.replace(/<\/?[^>]+(>|$)/g, "")
     }
+    if(!str) return ''
     const dot = lengthString > str.length ? '': '...'
     return str.replace(/<\/?[^>]+(>|$)/g, "").substring(0, lengthString) + dot;
 }

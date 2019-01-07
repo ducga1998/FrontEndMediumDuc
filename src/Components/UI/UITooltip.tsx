@@ -1,6 +1,7 @@
 
 import * as React from 'react';
 import styled from 'styled-components';
+import { H3 } from '../styled/base';
 function findDomToolTip(count , dom){
     if(count  > 5 || !dom){
         return  null
@@ -45,7 +46,7 @@ export default class UITooltip extends React.Component<any> {
             onMouseOverCapture={this.handleMouseOver}
             onMouseOutCapture={this.handleMouseLeave}
         >
-            <$ToolTip ref={this.refToolTip} />
+        <H3> <$ToolTip ref={this.refToolTip} /></H3> 
             {this.props.children}
         </div>
     }

@@ -35,7 +35,7 @@ const Body = styled.div`
 
   background: ${props => {
     // background layout project 
-    if (location.pathname === '/login') {
+    if (location.pathname === '/login'  ||location.pathname ==='/register') {
       return props.theme.bg.reverse
     }
     return 'white'

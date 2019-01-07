@@ -20,7 +20,7 @@ function CheckUser(user, password) {
     }
     return false
 }
-
+const MESSAGETOOLTIP = "nhìn tao thì quay ngược màn hình lại thử xem =))))"
 export default function Login({ history }) {
     const [name, setValueName] = useState('')
     const [password, setValuePassword] = useState('')
@@ -38,7 +38,7 @@ export default function Login({ history }) {
     return <$Form>
         
         <div className="center">
-        <AvatarImage  size ={300} src="./default.jpg" />
+        <AvatarImage style={  { transform: 'rotate(180deg)'}} size ={300} src="./default.jpg" data-tooltip={MESSAGETOOLTIP}/>
         </div>
         <H1 className="center">Login</H1>
         <Field>
@@ -53,11 +53,12 @@ export default function Login({ history }) {
             </Field>
         <Section>
             <UIButton onMouseDown={handleLogin}>Login</UIButton>
-            <UIButton  ><Link to='/register'>Register</Link></UIButton>
+            <UIButton to='/register' >Register</UIButton>
         </Section>
     </$Form>
 }
 const $Form = styled.div`
+/* transform:  */
     width : 500px;
     margin : auto;
     .center {

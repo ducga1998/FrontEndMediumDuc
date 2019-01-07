@@ -5,7 +5,6 @@ import allBookMarkContainer from '../../Container/bookMarkContainer';
 import UIWidget from './UIWidget';
 import Icon, { Glyph } from '../Icon';
 import { socketNotication } from '../../socketClient/socket';
-// const { useEffect, useState } = React
 interface IUIReaction {
     idUseOwnArticler?: string
     idArticle: string

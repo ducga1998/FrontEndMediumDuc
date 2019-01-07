@@ -4,13 +4,57 @@ import { StyledCard } from "../../../Components/styled/card";
 import * as React from 'react'
 import Icon from "../../../Components/Icon";
 import { H3 } from "../../../Components/styled/base";
+import { getAllNotificationByIdUser } from "../../../API/notificationAPI";
+import { AvatarImage } from "../../../Components/styled/avatar";
+const {useEffect, useState} = React as any
+function handleTypeNotification(type , data){
+    const { name,titleArticle} = data
+    let notification = ''
+    switch(type){
+        case 'Bookmark' :
+        notification = `${name} đã bookmark bài ${titleArticle} của bạn`
+        break;
+        case 'Follow':
+        notification = `${name} đã follow bạn`
+        break;
+        case 'Comment': 
+        notification = `${name} đã comment trong bài viết ${titleArticle} của bạn`
+        break;
+        case 'RelyComment': 
+        notification = `${name} đã rely comment trong bài viết ${titleArticle} của bạn`
+         break
+         default : 
+         notification = ''
+    }
+    console.log('notification',notification)
+    return notification
+
+}
 export default function Notification({open , setOpen}) {
-    
-    return <NavButton to="/" onHo={async (e: Event) => { e.preventDefault(); }}>
+    const [data,  setData] = useState([])
+    useEffect(async () => {
+        const allNotification = await getAllNotificationByIdUser()
+        console.log('allNotification',allNotification)
+        setData(allNotification)
+        return () => { console.log('un mount')}
+    },[])
+//     avatarLink: "https://www.tutorialspoint.com/socket.io/images/logo.png"
+// decentraliz: 1
+// idUser: "065727f0-f082-11e8-8f63-5bcf15cefb2c"
+// name: "ngyen minh duc"
+// titleArticle: "This yesterday review of GemPages proves 2 things:"
+// type: "Bookmark"
+    //"idNotification", "idUser", "type", "notificationData", "time"
+    return <NavButton to="/" onClick={async (e: Event) => { e.preventDefault(); }}>
         <Icon onClick={() => {setOpen(!open) }} glyph="notification" />
         <DropDown open={open} >
-            <StyledCard><H3>dcdscnsdj</H3></StyledCard>
-            <StyledCard><H3>dcdscnsdj</H3></StyledCard>
+        {data && data.length > 0? data.map(notifi => {
+            const {type , notificationData : {avatarLink} , time}  = notifi
+        const view =  handleTypeNotification(type , notifi.notificationData)
+             return  <StyledCard ><AvatarImage size={30} src={avatarLink} /><H3>{view}</H3></StyledCard>
+        }) : null }
+            
+         
             <StyledCard><H3>dcdscnsdj</H3></StyledCard>
         </DropDown>
     </NavButton>

@@ -2,8 +2,6 @@ import * as React from 'react';
 
 import { getAllInformationUser } from 'src/API/client';
 import styled from 'styled-components';
-import { follow, getAllInfomationUserFollowYour, unFollow } from '../../API/followAPI';
-import userContainer from '../../Container/userContainer';
 import srcImg from '../../image/9284571_300x300.jpeg';
 import UILoading from '../../Components/UI/UILoading';
 import Article from '../Article';
@@ -11,8 +9,7 @@ import followAllContainer from '../../Container/followContainer';
 import { Subscribe } from 'unstated-x';
 import { H3, H1, FlexRow } from '../../Components/styled/base';
 import { StyledSolidButton } from '../../Components/styled/button';
-import Link from '../../Components/Link';
-import { notificationSocket, socketNotication } from '../../socketClient/socket';
+import { socketNotication } from '../../socketClient/socket';
 interface IViewUserDetail {
     match: any
 }
@@ -28,7 +25,7 @@ class ViewUserDetail extends React.Component<IViewUserDetail> {
         await this.setState({ dataUser, ownProfileId: id })
     }
     async follow(idUser){
-        socketNotication({},'Follow')
+        socketNotication({idUser},'Follow')
         await followAllContainer.follow(idUser)
     }
     render() {
