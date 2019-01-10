@@ -58,7 +58,7 @@ const baseButton = css`
         process.env.NODE_ENV === 'production'
             ? theme.text.placeholder
             : theme.warn.border};
-      color: ${theme.text.reverse};
+      /* color: ${theme.text.reverse}; */
       transition: ${Transition.hover.on};
     }
   }

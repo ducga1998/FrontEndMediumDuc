@@ -60,7 +60,9 @@ export function addComment(input: { idComment : string ,  idUser: string, idArti
             variables: {
                 input
             }
-        })
+        },
+        
+    )
 
         // const { data: { addCommentIntoArticle } } = API
         resolve(convertDataToGraphQL(API));

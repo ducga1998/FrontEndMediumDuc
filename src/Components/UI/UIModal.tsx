@@ -35,9 +35,7 @@ export default function     UIModal({ trigger, children, title, width, height, c
             <$Header><H1>{title ? title : 'Header Modal '}</H1></$Header>
             <$Content height={height} width={width}> {children}</$Content>
 
-            <$Footer>
-                <UIButton width="100px" onMouseDown={(e: any) => { e.stopPropagation(); closeMoDal() }}> Close </UIButton>
-            </$Footer>
+           
         </$Modal>
     </$Background>
     </UIWidget> </>

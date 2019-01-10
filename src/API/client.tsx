@@ -1,8 +1,22 @@
 import ApolloClient from "apollo-boost";
 import gql from "graphql-tag";
 import { convertDataToGraphQL } from "../help/help";
+import {InMemoryCache} from 'apollo-cache-inmemory'
+const defaultOptions = {
+    watchQuery: {
+      fetchPolicy: 'network-only',
+      errorPolicy: 'ignore',
+    },
+    query: {
+      fetchPolicy: 'network-only',
+      errorPolicy: 'all',
+    },
+  }
+  const cache = new InMemoryCache();
 export const client = new ApolloClient({
-    uri: "http://localhost:3000/graphql"
+    uri: "http://localhost:3000/graphql",
+    
+    // defaultOptions : defaultOptions
 })
 export function logoutBackend() {
     return new Promise(resolve => {

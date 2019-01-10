@@ -60,7 +60,7 @@ export default class SideBar extends React.Component<{ open: boolean, setOpen: a
                        <TextCard to="/profile"> <Icon glyph="home" /> Profile</TextCard>
                        <TextCard to="/stories">Stories</TextCard>
                         <TextCard to="/bookmarks">Bookmark</TextCard>
-                        {decentraliz ===3?<>
+                        {decentraliz === 3?<>
                         <TextCard to="/managerAccount">Manager All Account</TextCard>
                         <TextCard to="/managerArticles">Manager Articles</TextCard>
                         </>:null}

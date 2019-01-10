@@ -1,67 +1,86 @@
 import * as React from 'react';
 import renderHTML from 'react-render-html';
 import styled from 'styled-components';
-// import { FormComment } from './writeComment';
 import { Subscribe } from 'unstated-x';
 import commentAllContainer from '../../../Container/commentContainer';
 import UILoading from '../../../Components/UI/UILoading';
-import { Config } from '../../../help/config';
-import MediumEditer from 'medium-editor';
 import { IMAGE_SOURCE_DEFAULT } from '../../../help/define';
 import FormComment from './FormComment';
 import { AvatarImage } from '../../../Components/styled/avatar';
 import { H2 } from '../../../Components/styled/base';
 import userContainer from '../../../Container/userContainer';
+import { getAllCommentinArtcileCurrent } from '../../../API/commentAPI';
+import UIButton from '../../../Components/UI/UIButton';
+import { StyledTextButton } from '../../../Components/styled/button';
 interface IViewComment {
     idArticle: string,
 
 }
 export default class ViewComment extends React.Component<IViewComment> {
-
+    state = {
+        allComments: [],
+        offset: 0,
+        isFetch: true
+    }
+    async componentDidMount() {
+        const first = 5
+        const { idArticle } = this.props
+        const allComments = await getAllCommentinArtcileCurrent(idArticle, first, this.state.offset)
+        this.setState({ allComments })
+    }
+    handleComment = (comment) => {
+        this.setState({
+            allComments: [
+                comment,
+                ...this.state.allComments,
+            ]
+        })
+    }
+    handleLoadMore = async () => {
+        const { idArticle } = this.props
+        const first = 5
+        const offset = this.state.offset + first
+        const newArrComment = await getAllCommentinArtcileCurrent(idArticle, first, offset) as any[]
+        if (newArrComment.length === 0) {
+            this.setState({ isFetch: false })
+        }
+        this.setState({ allComments: [...this.state.allComments, ...newArrComment], offset })
+    }
     render() {
-
-        return <Subscribe to={[commentAllContainer]}>
-            {
-                () => {
-                    const { idArticle } = this.props
-                    const data = commentAllContainer.state.registryComment.find(item => item.idArticle === idArticle)
-                    if (!data) {
-                        return <UILoading />
-                    }
-                    const { commentContainer } = data
-                    return <Subscribe to={[commentContainer]}>
-                        {
-                            () => {
-                                const { allComments } = commentContainer.state
-                                return <WrapperComment>
-                                    {allComments.length > 0 ? allComments.map((item: any, key) => {
-                                        const { idRely } = item
-                                        let dataRely
-                                        if (!idRely) {
-                                            // loop all comment, find idComment  === idRely 
-                                            dataRely = allComments.filter(comment => {
-                                                if (comment.idRely) {
-                                                    return comment.idRely === item.idComment
-                                                }
-                                            })
-                                        }
-                                        return <Comment dataUserComment={item} relyComment={dataRely && dataRely.length > 0 ? dataRely : undefined} />
-                                    }) :
-                                        <H2 style={{ textAlign: 'center', color: 'gray' }}> NO  Comment,  : ))) cmt vào cho vui đi thằng ngu</H2>
-                                    }
-                                </WrapperComment>
+        const { allComments, isFetch } = this.state
+        if (allComments.length < 0) {
+            return <UIButton isLoading />
+        }
+        return <>
+            <FormComment onChange={(comment) => { this.handleComment(comment) }} />
+            <WrapperComment>
+                <> {allComments.length > 0 ? allComments.map((item: any, key) => {
+                    const { idRely } = item
+                    let dataRely
+                    if (!idRely) {
+                        // loop all comment, find idComment  === idRely 
+                        dataRely = allComments.filter((comment: any) => {
+                            if (comment.idRely) {
+                                return comment.idRely === item.idComment
                             }
-                        }
-                    </Subscribe>
+                        })
+                    }
+                    return <Comment dataUserComment={item} relyComment={dataRely && dataRely.length > 0 ? dataRely : undefined} />
+                }) :
+                    <H2 style={{ textAlign: 'center', color: 'gray' }}> NO  Comment,  : ))) cmt vào cho vui đi thằng ngu</H2>
                 }
-            }
-        </Subscribe>
-
+                    {isFetch ? <LoadMoreButton onMouseDown={this.handleLoadMore}>Load More </LoadMoreButton> : null}
+                </>
+            </WrapperComment>
+        </>
+    
     }
 }
 // comment only comment => we handle data coment a here
-const WrapperComment = styled.div`
-
+const WrapperComment = styled.div``
+const LoadMoreButton = styled(StyledTextButton)`
+    display : block;
+    margin : auto;
 `
 const Comment = ({ dataUserComment, relyComment }: { dataUserComment: any, relyComment?: any }) => {
     const [open, setOpen] = React.useState(false)
@@ -71,7 +90,6 @@ const Comment = ({ dataUserComment, relyComment }: { dataUserComment: any, relyC
         return commentRely.map(comment => {
             const { userComment: { avatarLink, name }, createdAt, content, idComment } = comment
             return <$Comment data-id={idComment} data-tooltip={`Created At : ${new Date(createdAt)}`}>
-                <b>  ---- </b>
                 <AvatarImage data-tooltip={name} src={avatarLink ? avatarLink : IMAGE_SOURCE_DEFAULT} />
                 <$Content  >{renderHTML(content)}</$Content>
             </$Comment>
@@ -80,7 +98,6 @@ const Comment = ({ dataUserComment, relyComment }: { dataUserComment: any, relyC
     function addCommentRely(rely) {
         const { avatarLink, name } = userContainer.state.dataUser
         rely = { ...rely, ...{ userComment: { avatarLink, name } } };
-
         dataRely.push(rely); setDataRely(dataRely)
     }
 
@@ -135,10 +152,10 @@ const $Comment = styled.div`
     border-bottom: 1px solid  ${props => props.theme.bg.border};
     display : flex;
     /* margin : 30px 0px 0px; */
-    padding: 30px;
+    padding: 30px 0px 30px 60px;
     &:hover {
     background: ${props => props.theme.bg.wash};
     transition: 0.3s;
     border-radius: 10px;
     }
-`
+` 

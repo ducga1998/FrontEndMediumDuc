@@ -24,8 +24,8 @@ class ViewUserDetail extends React.Component<IViewUserDetail> {
         const dataUser = await getAllInformationUser(id)
         await this.setState({ dataUser, ownProfileId: id })
     }
-    async follow(idUser){
-        socketNotication({idUser},'Follow')
+    async follow(idUser) {
+        socketNotication({ idUser }, 'Follow')
         await followAllContainer.follow(idUser)
     }
     render() {
@@ -52,18 +52,18 @@ class ViewUserDetail extends React.Component<IViewUserDetail> {
                                     <$Content >
                                         <Left>
                                             <$Author>
-                                                    <Img src={avatarLink ? avatarLink : srcImg} /> 
-                                                    <H3>Name : {name}</H3>
-                                                    <H3> Location : {location} </H3>
-                                                    <H3> Article : {articles.length}</H3>
-                                                    <H3>Birthday : {birthday}</H3>
+                                                <Img src={avatarLink ? avatarLink : srcImg} />
+                                                <H3>Name : {name}</H3>
+                                                <H3> Location : {location} </H3>
+                                                <H3> Article : {articles.length}</H3>
+                                                <H3>Birthday : {birthday}</H3>
                                             </$Author>
                                             {/* <Author avatarLink={avatarLink} totalFollow={10} name={name} totalArticle={articles.length} /> */}
                                         </Left>
 
                                         <Right>
-                                            {isFollow ? <StyledSolidButton hoverColor="text.placeholder"  color="text.alt" onClick={async () => { await followAllContainer.unfollow(idUser) }}>Unfollow</StyledSolidButton> :
-                                                <StyledSolidButton  hoverColor="space.default" color="space.alt" onClick={() => {this.follow(ownProfileId) }}> Follow </StyledSolidButton>
+                                            {isFollow ? <StyledSolidButton hoverColor="text.placeholder" color="text.alt" onClick={async () => { await followAllContainer.unfollow(idUser) }}>Unfollow</StyledSolidButton> :
+                                                <StyledSolidButton hoverColor="space.default" color="space.alt" onClick={() => { this.follow(ownProfileId) }}> Follow </StyledSolidButton>
                                             }
                                             {allUserFollow && allUserFollow.length > 0 ? <$ListAvatarUserFollow>
                                                 {allUserFollow.map((item: any, key) => {
@@ -85,7 +85,7 @@ class ViewUserDetail extends React.Component<IViewUserDetail> {
                                     } >{name} </b> has write</H3>
                                     <$ListArticle>
                                         {articles && articles.length > 0 ? articles.map((item, key) => {
-                                            return <Article article={item}   />
+                                            return <Article article={item} />
 
                                         }) : <h2>NO Article  :), fuck own account stupid </h2>}
                                     </$ListArticle>

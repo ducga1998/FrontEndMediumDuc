@@ -57,6 +57,9 @@ export default function UIButton({ type , to,
         >{children} 
          </ButtonLink>
     }
+    if(isLoading) {
+        return <Spinner />
+    }
     return <Button
         data-active={active || undefined}
         data-keyButton={keyButton}
