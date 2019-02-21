@@ -17,7 +17,6 @@ export default class ListArticle extends React.Component<any> {
         const allArticleData = await getAllArticle()
 
         if (allArticleData) {
-
             this.setState({ allArticleData })
         }
     }

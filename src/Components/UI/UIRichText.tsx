@@ -14,7 +14,6 @@ interface IUIRichText {
 }
 const UIRichText = ({ placeholder, onChange, isTitle, mode, children, content }: IUIRichText) => {
     const textPlaceholder = Config(placeholder);
-
     const richtextRef = React.useRef(null);
     React.useEffect(() => {
         // OMG, this here handle work richtext or not work richText, it help me reuse UIRichText
@@ -35,9 +34,6 @@ const UIRichText = ({ placeholder, onChange, isTitle, mode, children, content }:
         return () => { console.log('cascasn') }
     })
     return <$RichText isTitle={isTitle || undefined} ref={richtextRef} >{children}</$RichText>
-
-
-
 }
 const $RichText = styled.div<any>`
     ${fontStack}

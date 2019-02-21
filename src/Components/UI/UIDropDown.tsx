@@ -52,7 +52,6 @@ export default class UIDropDown extends React.Component<IUIDropDown> {
         this.handleViewDropDown(event)
       }
     })
-  
     return <><Wrapper> {Button}{this.state.open? <StyledDropdown >{children}</StyledDropdown> : null}</Wrapper></>
   }
 

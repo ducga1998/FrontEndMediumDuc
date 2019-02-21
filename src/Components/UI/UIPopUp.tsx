@@ -1,20 +1,15 @@
 
 import * as React from 'react'
-import { FlexCol, Transition , FlexRow } from '../styled/base';
+import { FlexCol, Transition  } from '../styled/base';
 import styled from 'styled-components';
 import theme from '../../theme';
 import UIWidget from './UIWidget';
-import { OverLay } from '../styled/overlay';
 const {useEffect , useState  ,useRef} = React
 export default function UIPopUp({children , trigger }) {
     const [open , setOpen ] = useState(false)
     const refPopUp = useRef(null)
     function updatePosition(event){
-        // event.preventDefault()
-       
         const domButton = event.target
-          
-       
         const domPopUp  = refPopUp.current as any
         console.log('domPopUp',domPopUp)
         if(domButton && domPopUp) {
@@ -22,21 +17,12 @@ export default function UIPopUp({children , trigger }) {
             top  = top + height
             const rectPopup = domPopUp.getBoundingClientRect()
             setOpen(!open)
-            
-         
             const  {innerHeight , innerWidth} = window
             domPopUp.style.width = (width - 10) + 'px'
-            //nomarl 
-
-            // domPopUp.style.top = top + 'px'
-            // domPopUp.style.left = left + 'px'
-
-            // bottom  +  left
             if(top  +rectPopup.height > innerHeight  && left + width > innerWidth ){
                 console.log('TH1')
                 domPopUp.style.top = (top  - rectPopup.height -10) + 'px'
                 domPopUp.style.left = (left - rectPopup.width - 10) + 'px'
-                
             }
             //  top - right
             else if (left + rectPopup.width  > innerWidth){

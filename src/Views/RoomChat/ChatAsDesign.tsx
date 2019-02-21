@@ -2,16 +2,12 @@ import * as React from 'react';
 import { Button } from 'react-bootstrap';
 
 import styled from 'styled-components';
-import userContainer from '../../Container/userContainer';
 
-import { roomSockets } from '../../socketClient/socket';
+import { messageChatSocket } from '../../socketClient/socket';
 import UIInput from '../../Components/UI/UIInput';
-import UIButton from '../../Components/UI/UIButton';
-import { Link } from 'react-router-dom';
-import { getAllRoomFromBackEnd } from '../../API/roomAPI';
-import roomContainer from '../../Container/roomContainer';
-import { SubscribeOne } from 'unstated-x';
+import UIButton from '../../Components/UI/UIButton';;
 import { fontStack } from '../../Components/styled/base';
+import { toast } from 'react-toastify';
 
 interface IListRoom {
     match?: any
@@ -66,36 +62,33 @@ export default class ChatMessage extends React.Component<IListRoom> {
         messages: dataMessage,
         valueChat: ''
     }
-    // handleOnChange = (title: string) => {
-    //     this.setState({ title })
-    // }
-    // handleOnClick = (e: any) => {
-    //     const { title } = this.state
-    //     const { idUser } = userContainer.state.dataUser
-    //     // this event emmiter add room to backend
-    //     roomSockets.emit('addRoom', { title, idUser })
-    // }
+    socket
+    refViewChat : any  = React.createRef()
     componentDidUpdate() {
 
     }
-    // async componentDidMount() {
-    //     // console.log(roomContainer.state)
-    //     roomSockets.on('updateListRooms', data => {
-    //         const { arr } = this.state
-    //         arr.push(data)
-    //         this.setState({ arr })
-    //     })
-    //     const data = await roomContainer.getRoomByIdUser()
-    //     const allRoom = await getAllRoomFromBackEnd()
-
-    // }
+     componentDidMount() {
+            this.socket =  new SocketMessageChat() 
+            this.socket.send('ok' ,'duc')
+        
+    }
     handleClickMessage = (active) => {
         this.setState({ active })
     }
-    sendMessage = (value) => {
+     sendMessage =  (value) => {
+         if(value === ''){
+            toast.error("Please, not empty, fill out input : )")
+            return
+        }
         const { messages } = this.state
-
-        this.setState({ messages: [...messages, ...[{ value, role: 1 },]] , valueChat : '' })
+        const {scrollHeight} = this.refViewChat 
+         this.setState({ messages: [...messages, ...[{ value, role: 1 }]] , valueChat : '' } , () => {
+            this.refViewChat.scrollTo({
+                top : scrollHeight,behavior: 'smooth'
+              }); 
+        })
+           
+             
     }
     render() {
         const { active, messages, valueChat } = this.state
@@ -120,7 +113,7 @@ export default class ChatMessage extends React.Component<IListRoom> {
                 <div className="title_chatZone">
                     <h1>Davil Nguyen</h1>
                 </div>
-                <div className="view_chat" >
+                <div className="view_chat" ref={(e) => this.refViewChat = e} >
                     {messages.map(message => {
                         const { name, role, value } = message
                         return <div className={`item_chat ${role === 0 ? "friend" : "me"} `}>
@@ -141,10 +134,11 @@ export default class ChatMessage extends React.Component<IListRoom> {
                         }
                         value={valueChat} />
                     <UIButton
+                
                         onMouseDown={() => { this.sendMessage(valueChat) }}
                     >
                         Send
-                    </UIButton>
+                    </UIButton >
                 </div>
             </ChatZone>
         </$Wrapper>
@@ -158,13 +152,15 @@ const ChatZone = styled.div`
     height : 100%;
     overflow : scroll;
     padding : 10px;
-  
+    display : flex;
+    flex-direction : column;
     .title_chatZone {
         border-bottom :1px solid gray;
     }
     .view_chat {
         display : flex;
         overflow : scroll;
+        height : 100%;
         flex-direction : column;
         .item_chat {
             margin : 10px;
@@ -180,7 +176,6 @@ const ChatZone = styled.div`
         .friend {
             text-align : left;
             margin-left : 100px;
-           
         }
         .me {
             text-align : right;
@@ -191,11 +186,17 @@ const ChatZone = styled.div`
         }
     }
     .input_chat{
-        position : fixed;
+        display : flex;
+        padding : 10px;
         bottom: 0px;
-        width :80%;
+        border-top: 5px solid #dbdbdb;
+        background: #dbdbdb;
+        border-radius: 17px;
         input {
          width : 80%;
+        }
+        button {
+           
         }
     }
 `
@@ -244,3 +245,20 @@ const $Wrapper = styled.div`
     height : 100%;
     ${fontStack}
 `
+class SocketMessageChat {
+socket = messageChatSocket
+    constructor(){
+        // this.socket = messageChatSocket as any
+        this.socket.on('connection', () => {
+            console.log('connection socket')
+        })
+    }
+    send(...args){
+        this.socket.emit(...args)
+    }
+    on(){
+        
+    }
+
+    
+}

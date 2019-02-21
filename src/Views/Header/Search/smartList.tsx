@@ -1,9 +1,5 @@
 import * as React from 'react'
-import { getDataSearch } from '../../../API/articleAPI';
-import { Link } from 'react-router-dom';
 import styled from 'styled-components';
-import { redirect } from '../../../route';
-import history from '../../../history';
 
 
 export default class SmartList extends React.Component<any> {

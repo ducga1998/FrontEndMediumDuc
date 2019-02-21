@@ -1,18 +1,14 @@
 import UIEditer from '../../Components/UI/UIEditer';
 import * as React from 'react';
-import { Button, Glyphicon } from 'react-bootstrap';
 import { getAllInformationUser } from 'src/API/client';
 import styled from 'styled-components';
-// import { follow, getAllInfomationUserFollowYour, unFollow } from '../../API/followAPI';
 import userContainer from '../../Container/userContainer';
 import srcImg from '../../image/9284571_300x300.jpeg';
 import UILoading from '../../Components/UI/UILoading';
-import Article from '../Article';
 import UIButton from '../../Components/UI/UIButton';
 import UIModal from '../../Components/UI/UIModal';
 import UIInput from '../../Components/UI/UIInput';
 import { H1, H4, FlexRow, FlexCol, H2 } from '../../Components/styled/base';
-import Link from '../../Components/Link';
 import UIFieldAlgin from '../../Components/UI/UIFieldAlgin';
 import { AvatarImage } from '../../Components/styled/avatar';
 import Tabs from 'src/workspace/tabs';
