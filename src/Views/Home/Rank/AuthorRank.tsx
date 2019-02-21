@@ -12,6 +12,7 @@ interface IAuthor {
     type: string
 }
 const AuthorRank = ({ author, type }: IAuthor) => {
+    
     //"count", "idUser", "name", "avatarLink", "biographical"]
     console.log('ahutorgvjksnd', author)
 

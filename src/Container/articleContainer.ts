@@ -9,7 +9,6 @@ interface IAllArticleContainer {
     first: number,
     offset: number,
     count: number,
-   
     // notification: String
 }
 
@@ -61,7 +60,6 @@ export const allArticleContainer = new AllArticleContainer({
     first: 8,
     offset: 0,
     count: 0
-
 })
 class Article extends Container<any> {
 

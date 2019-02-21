@@ -42,12 +42,16 @@ export default class ListRoom extends React.Component<IListRoom> {
         console.log(allRoom.data)
         // this.setState()
     }
+    handleOn = () => {
+        
+    }
     render() {
         const { title, arr } = this.state
         return <div>
             <h1>Create Room</h1>
             <UIInput onChange={this.handleOnChange} value={title} />
             <UIButton onMouseDown={this.handleOnClick}> Submit </UIButton>
+            
             <$Wrapper>
 
                 <SubscribeOne to={roomContainer} bind={['rooms', 'roomsToIdUser']}>
@@ -57,7 +61,6 @@ export default class ListRoom extends React.Component<IListRoom> {
                             return <> <TheWord>
                                 <h1>The Word chanel</h1>
                                 {rooms.reverse().map((item, key) => <div key={key}>
-
                                     <Link to={`/chatRoom/${item.idRoom}`}><h3><b>Room {key} : </b> {item.title}</h3></Link>
                                 </div>)}
                             </TheWord>

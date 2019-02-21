@@ -14,6 +14,7 @@ import ViewUser from './Views/Profile/profileUserCommon';
 import userContainer from "./Container/userContainer";
 import UILoading from "./Components/UI/UILoading";
 import AllRoomChat from './Views/RoomChat/listRoom'
+import ChatMessage from './Views/RoomChat/ChatAsDesign'
 import DetailRoomChat from './Views/RoomChat/DetailRoomChat'
 import { logoutBackend } from './API/client'
 import { notificationFuncSocket } from "./socketClient/notificationSocket";
@@ -76,6 +77,7 @@ const AppRouter = () => {
                     <Route path="/profile" component={isAuth(Profile)} />
                     <Route path="/writearticle" component={isAuth(WriteArticle)} />
                     <Route path="/chatRoom/:id" component={isAuth(DetailRoomChat)} />
+                    <Route path="/chatMessage" component= {isAuth(ChatMessage)} />
                     <Route path="/bookmarks" component={isAuth(ArticleBookMark)} />
                     {user && user.decentraliz === 3? <>  
                      <Route path ="/managerAccount" component={isAuth(ManagerAccount)} />

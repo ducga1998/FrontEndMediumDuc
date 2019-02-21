@@ -5,7 +5,7 @@ import styled, { css } from 'styled-components';
 
 import { Shadow, Transition, hexa } from '../styled/base';
 import theme from '../../theme';
-
+// css Base for all button 
 const baseButton = css`
   display: flex;
   flex: none;

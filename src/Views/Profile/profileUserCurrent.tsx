@@ -38,7 +38,7 @@ class ViewUserDetail extends React.Component<IViewUserCurrent> {
         const { dataUser, open } = this.state
         if (dataUser) {
             const { articles, avatarLink, name, location, biographical, birthday } = dataUser as any;
-            return <$ArticleDetail >
+            return <$ArticleDetail>
                 <Backgroud src="https://i.ytimg.com/vi/X42N5384rLk/maxresdefault.jpg" >
                     <UIModal title="Form Change AvatarLink" trigger={<WrapperAvatar><AvatarImage  size={200}
                             src={avatarLink ? avatarLink : srcImg} />  <H2 style={{textAlign: 'center'}}>{name}</H2></WrapperAvatar>

@@ -23,13 +23,15 @@ export default class UITooltip extends React.Component<any> {
             const text = dom.getAttribute('data-tooltip')
             dom.scroll
             const domToolTip = this.refToolTip.current
-            // console.log(domToolTip, text)
+           const win =  dom.ownerDocument.defaultView
+            
             domToolTip.innerHTML = text
             const { top, left, height, width } = dom.getBoundingClientRect()
             const view = dom.ownerDocument.defaultView
             const scrollTop = view.scrollY
             // console.log('cascnkj', width)
             domToolTip.style.display = "inline-block"
+            
             const widthToolTip = domToolTip.getBoundingClientRect().width
             domToolTip.style.left = `${left + width / 2 - (widthToolTip / 2)}px`;
             domToolTip.style.top = `${top - 30 + scrollTop}px`

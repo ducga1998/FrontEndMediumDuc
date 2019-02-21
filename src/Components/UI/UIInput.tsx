@@ -22,6 +22,7 @@ export default class UIInput extends React.Component<IUIInput> {
     componentDidUpdate() {
 
     }
+    
     render() {
         const { value, onChange, style, placeholder, type, refInput, onKeyPress, onFocus, autoFocus } = this.props
         return <$Input

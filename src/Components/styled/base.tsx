@@ -1,12 +1,13 @@
 /* eslint no-eval: 0 */
 import styled, { css, keyframes } from 'styled-components';
-
+// => focus , hover , active ,responsize, on full IDE , 
 export const Truncate = width => css`
   text-overflow: ellipsis;
   overflow: hidden;
   white-space: nowrap;
   min-width: 0;
 `;
+//  medthod : gradient , shawdow
 export const Gradient = (g1, g2 , g3= '0%') => css`radial-gradient(ellipse farthest-corner at top left, ${g1} ${g3}, ${g2} 100%)`;
 export const Shadow = {
   low: '0 2px 8px rgba(23,26,33, 0.15)',
@@ -169,15 +170,6 @@ export const TextArea = styled.textarea`
   box-shadow: none;
 
   &::placeholder {
-    color: ${({ theme }) => theme.text.placeholder};
-  }
-  &::-webkit-input-placeholder {
-    color: ${({ theme }) => theme.text.placeholder};
-  }
-  &:-moz-placeholder {
-    color: ${({ theme }) => theme.text.placeholder};
-  }
-  &:-ms-input-placeholder {
     color: ${({ theme }) => theme.text.placeholder};
   }
 
