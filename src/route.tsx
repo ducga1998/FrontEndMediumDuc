@@ -9,8 +9,8 @@ import Login from './Views/Form/login';
 import Register from "./Views/Form/register";
 import Home from "./Views/Home";
 import Layout from './Views/Layout';
-import Profile from './Views/Profile/profileUserCurrent';
-import ViewUser from './Views/Profile/profileUserCommon';
+import Profile from './Views/Profile/HomeProfile';
+import ViewUser from './Views/Profile/OtherProfile';
 import userContainer from "./Container/userContainer";
 import UILoading from "./Components/UI/UILoading";
 import AllRoomChat from './Views/RoomChat/listRoom'
@@ -36,7 +36,6 @@ const { useEffect } = React as any
 const AppRouter = () => {
     useEffect(async () => {
         if (localStorage.getItem('duc-app-medium-login')) {
-
             const dataCache = localStorage.getItem('duc-app-medium-login')
             // console.log(dataCache)
             if (dataCache) {
@@ -79,7 +78,7 @@ const AppRouter = () => {
                     <Route path="/chatRoom/:id" component={isAuth(DetailRoomChat)} />
                     <Route path="/chatMessage" component= {isAuth(ChatMessage)} />
                     <Route path="/bookmarks" component={isAuth(ArticleBookMark)} />
-                    {user && user.decentraliz === 3? <>  
+                        {user && user.decentraliz === 3? <>  
                      <Route path ="/managerAccount" component={isAuth(ManagerAccount)} />
                     <Route path ="/managerArticles" component={isAuth(ManagerArticles)} />
                     </>:null}
@@ -106,7 +105,7 @@ const AppRouter = () => {
 
 
 export function redirect(location) {
-    return class     extends React.Component {
+    return class   extends React.Component {
         constructor(props) {
             super(props)
             props.history.push(location);

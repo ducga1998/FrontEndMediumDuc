@@ -6,9 +6,7 @@ import styled from 'styled-components';
 import userContainer from '../../Container/userContainer';
 
 import { chatsockets, roomSockets } from '../../socketClient/socket';
-
 import UIButton from '../../Components/UI/UIButton';
-
 import { getMessageByIdRoom } from '../../API/messageAPI';
 
 interface IRoomChat {
@@ -52,7 +50,6 @@ export default class RoomChat extends React.Component<IRoomChat> {
         this.refUserCurrent.current.appendChild(dom)
         messageDom.className = "messageOtherUser"
         // messageDom.className = ""
-
         messageDom.innerHTML = content
 
         this.refOtherUser.current.appendChild(messageDom)
@@ -79,7 +76,6 @@ export default class RoomChat extends React.Component<IRoomChat> {
             content: value,
             idUser: userContainer.state.dataUser.idUser,
         }
-
         chatsockets.emit('newMessage', id, input)
         this.addMessageThisUser(input)
     }
@@ -100,9 +96,9 @@ export default class RoomChat extends React.Component<IRoomChat> {
     }
 }
 const $ViewChatUserCurrent = styled.div`
- div {
-    margin-top : 10px;
-}
+    div {
+        margin-top : 10px;
+    }
     .messageToMe {
         background-color: #c0d7dd;
     }
@@ -135,7 +131,7 @@ const $ViewChat = styled.div`
     width: 100%;
     height: 100%;
     overflow : scroll;
-       div {
+    div {
         padding: 30px;
         font-size: 22px;
         height : 40px;

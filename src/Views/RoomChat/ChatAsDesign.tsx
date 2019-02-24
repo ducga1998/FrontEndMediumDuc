@@ -1,3 +1,4 @@
+
 import * as React from 'react';
 import { Button } from 'react-bootstrap';
 
@@ -14,31 +15,37 @@ interface IListRoom {
 }
 const listInfoUser = [
     {
+        idUser: "A",
         name: "duc",
         time: "now",
         newMessage: "ok roi nha"
     },
     {
+        idUser: "B",
         name: "duc",
         time: "now",
         newMessage: "ok roi nha"
     },
     {
+        idUser: "C",
         name: "duc",
         time: "now",
         newMessage: "ok roi nha"
     },
     {
+        idUser: "D",
         name: "duc",
         time: "now",
         newMessage: "ok roi nha"
     },
     {
+        idUser: "E",
         name: "duc",
         time: "now",
         newMessage: "ok roi nha"
     },
     {
+        idUser: "F",
         name: "duc",
         time: "now",
         newMessage: "ok roi nha"
@@ -60,43 +67,64 @@ export default class ChatMessage extends React.Component<IListRoom> {
         title: '',
         active: 0,
         messages: dataMessage,
-        valueChat: ''
+        valueChat: '',
+        OldIdUser: ""
     }
     socket
-    refViewChat : any  = React.createRef()
-    componentDidUpdate() {
-
+    refViewChat: any = React.createRef()
+    componentDidMount() {
+        this.socket = new SocketMessageChat()
+        this.socket.on('receviceMessage', data => {
+            console.log('I am recevice Message success', data)
+            const {value, idUser}   = data
+            this.sendMessage({role : 0 , name : 'Davil Nguyen' ,value , idUser }, true)
+        })
     }
-     componentDidMount() {
-            this.socket =  new SocketMessageChat() 
-            this.socket.send('ok' ,'duc')
-        
-    }
-    handleClickMessage = (active) => {
+    handleSelecteUserChat = ({ active, idUser }) => {
+        const { OldIdUser } = this.state
         this.setState({ active })
+        // disconnect user old, if not select user else not leave
+        if (OldIdUser !== '') {
+            this.socket.leave(OldIdUser)
+        }
+        this.setState({ OldIdUser: idUser }, () => {
+            this.socket.join(idUser)
+        })
     }
-     sendMessage =  (value) => {
-         if(value === ''){
+    // need fefactor code below function 
+    sendMessage = (objMessage , stateSend = false) => {
+        const { value, name } = objMessage
+        if (value === '') {
             toast.error("Please, not empty, fill out input : )")
             return
         }
+
         const { messages } = this.state
-        const {scrollHeight} = this.refViewChat 
-         this.setState({ messages: [...messages, ...[{ value, role: 1 }]] , valueChat : '' } , () => {
+        const { scrollHeight } = this.refViewChat
+        this.setState({ messages: [...messages, ...[objMessage]], valueChat: '' }, () => {
             this.refViewChat.scrollTo({
-                top : scrollHeight,behavior: 'smooth'
-              }); 
+                top: scrollHeight, behavior: 'smooth'
+            });
+
         })
-           
-             
+        if(stateSend ) return
+        console.log('objMessage',objMessage)
+        // handle socket send message 
+        this.socket.send('sendMessage',objMessage )
+
     }
     render() {
-        const { active, messages, valueChat } = this.state
+        const { active, messages, valueChat , OldIdUser} = this.state
+    
         return <$Wrapper>
             <PeasonList>
-                {listInfoUser.map((user, key) => <div className={`item_Message ${key === active ? "active" : ''}`}
+                {listInfoUser.map((user, key) => <div key={key} className={`item_Message ${key === active ? "active" : ''}`}
                     onClick={
-                        () => this.handleClickMessage(key)
+                        () => {
+
+                            const { idUser } = user
+                            this.handleSelecteUserChat({ active: key, idUser })
+                        }
                     }>
                     <h2 className="name_people">
                         {user.name}
@@ -109,14 +137,14 @@ export default class ChatMessage extends React.Component<IListRoom> {
                     </div>
                 </div>)}
             </PeasonList>
-            <ChatZone>
+           { OldIdUser !== '' && <ChatZone>
                 <div className="title_chatZone">
                     <h1>Davil Nguyen</h1>
                 </div>
                 <div className="view_chat" ref={(e) => this.refViewChat = e} >
-                    {messages.map(message => {
+                    {messages.map((message, key) => {
                         const { name, role, value } = message
-                        return <div className={`item_chat ${role === 0 ? "friend" : "me"} `}>
+                        return <div className={`item_chat ${role === 0 ? "friend" : "me"} `} key={key}>
                             <div className="item_chat_value">{value}</div>
                         </div>
 
@@ -126,21 +154,21 @@ export default class ChatMessage extends React.Component<IListRoom> {
                     <UIInput
                         onChange={(valueChat) => { this.setState({ valueChat }) }}
                         onKeyPress={
-                          (event) =>   {
-                            if (event.charCode === 13) {
-                                this.sendMessage(event.target.value)
+                            (event) => {
+                                if (event.charCode === 13) {
+                                    const { value } = event.target
+                                    this.sendMessage({ value, role: 1 , idUser : OldIdUser})
+                                }
                             }
-                          }
                         }
                         value={valueChat} />
                     <UIButton
-                
-                        onMouseDown={() => { this.sendMessage(valueChat) }}
+                        onMouseDown={() => { this.sendMessage({ value: valueChat, role: 1 , idUser : OldIdUser }) }}
                     >
                         Send
                     </UIButton >
                 </div>
-            </ChatZone>
+            </ChatZone>}
         </$Wrapper>
     }
 }
@@ -246,19 +274,28 @@ const $Wrapper = styled.div`
     ${fontStack}
 `
 class SocketMessageChat {
-socket = messageChatSocket
-    constructor(){
+    socket = messageChatSocket
+    constructor() {
         // this.socket = messageChatSocket as any
         this.socket.on('connection', () => {
             console.log('connection socket')
         })
     }
-    send(...args){
-        this.socket.emit(...args)
+    send(nameEvent = "sendMessage", data) {
+
+        this.socket.emit(nameEvent, data)
     }
-    on(){
-        
+    on(eventName, callback) {
+        this.socket.on(eventName, callback)
+    }
+    join(idUser) {
+        console.log('okk', idUser)
+        this.socket.emit('join', idUser)
     }
 
-    
+    leave(idUser) {
+        this.socket.emit('leave', idUser)
+    }
+
+
 }

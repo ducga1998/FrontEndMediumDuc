@@ -81,8 +81,6 @@ const DropDown = styled.div<any>`
     background-color: #f2f2f2;
     box-shadow: 2px 1px 20px 0px white;
     visibility :${(props: any) => props.open ? 'visible' : 'hidden'}
-    
-    
 `
 const Card = styled(StyledCard)`
     padding : 20px;

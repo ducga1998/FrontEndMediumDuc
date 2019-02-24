@@ -20,7 +20,7 @@ export default class Tabs extends React.Component<ITabs>{
         if (items.length <= 0) {
             return <UIButton isLoading />
         }
-        return <div>
+        return <div className="tabs-element">
             <$Nav>{items.map((itemNav, key) => <NavButton borderColor="" onMouseDown={() => this.handleMouseDown(key)}>{itemNav.name}</NavButton>)}</$Nav>
             <FlexRow>{items.map((tab, key) => <Tab open={active === key} >{tab.component}</Tab>)}</FlexRow>
         </div>

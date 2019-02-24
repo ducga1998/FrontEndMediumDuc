@@ -1,11 +1,10 @@
 import * as React from 'react';
 import styled from 'styled-components';
-import { FlexCol, FlexRow, H2, P, H3, Gradient } from '../../../Components/styled/base';
+import { FlexCol, H2,  H3, Gradient } from '../../../Components/styled/base';
 import { getAllUser, updateInfomation, deleteUserById } from '../../../API/client';
 import { AvatarImage } from '../../../Components/styled/avatar';
 import UIButton from '../../../Components/UI/UIButton';
 import UIModal from '../../../Components/UI/UIModal';
-import { Section } from '../../../Components/styled/nav';
 import UIFieldAlgin from '../../../Components/UI/UIFieldAlgin';
 import UIEditer from '../../../Components/UI/UIEditer';
 import omit from 'lodash/omit'
@@ -95,7 +94,7 @@ function RenderUser({user} :any) {
         return <>'Loading ...'</>
     }
     
-    const { idUser, name, avatarLink, biographical, birthday, location, decentraliz, articles } = user
+    const {  name, avatarLink, biographical, birthday, location} = user
     return <>
         <AvatarImage src={avatarLink} size={80} />
         {[{ name }, { birthday }, { location }, { biographical } ,{avatarLink}].map((item, key) => {

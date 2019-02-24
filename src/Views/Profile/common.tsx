@@ -1,17 +1,5 @@
 import * as React from 'react';
 import styled from 'styled-components';
-/* 
-        idUser: String
-        login: String
-        password: String
-        decentraliz: Int 
-        name: String
-        avatarLink: String
-        articles: [String]
-        bookMark: [String]
-        totalFollow: [String]
-        followOtherPeople: [String]
-*/
 interface IProfile {
     avatarLink: string,
     name: string,

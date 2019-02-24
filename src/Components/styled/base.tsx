@@ -15,8 +15,8 @@ export const Shadow = {
   high: '0 8px 16px rgba(23,26,33, 0.25)',
 };
 export const baseHover = css`
-background-color : ${props => props.theme.bg.border};
-transition : .2s;
+  background-color : ${props => props.theme.bg.border};
+  transition : .2s;
 
 `
 export const hexa = (hex, alpha) => {
