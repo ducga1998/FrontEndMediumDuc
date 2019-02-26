@@ -79,6 +79,7 @@ export default class ChatMessage extends React.Component<IListRoom> {
             const {value, idUser}   = data
             this.sendMessage({role : 0 , name : 'Davil Nguyen' ,value , idUser }, true)
         })
+        3
     }
     handleSelecteUserChat = ({ active, idUser }) => {
         const { OldIdUser } = this.state
@@ -113,12 +114,16 @@ export default class ChatMessage extends React.Component<IListRoom> {
         this.socket.send('sendMessage',objMessage )
 
     }
+    handleFocus =() => {
+        this.socket.send('loading' )
+    }
     render() {
         const { active, messages, valueChat , OldIdUser} = this.state
     
         return <$Wrapper>
             <PeasonList>
-                {listInfoUser.map((user, key) => <div key={key} className={`item_Message ${key === active ? "active" : ''}`}
+                {
+                    listInfoUser.map((user, key) => <div key={key} className={`item_Message ${key === active ? "active" : ''}`}
                     onClick={
                         () => {
 
@@ -161,6 +166,7 @@ export default class ChatMessage extends React.Component<IListRoom> {
                                 }
                             }
                         }
+                        onFocus={this.handleFocus}
                         value={valueChat} />
                     <UIButton
                         onMouseDown={() => { this.sendMessage({ value: valueChat, role: 1 , idUser : OldIdUser }) }}

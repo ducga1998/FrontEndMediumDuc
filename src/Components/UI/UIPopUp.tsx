@@ -4,11 +4,18 @@ import { FlexCol, Transition  } from '../styled/base';
 import styled from 'styled-components';
 import theme from '../../theme';
 import UIWidget from './UIWidget';
-const {useEffect , useState  ,useRef} = React
-export default function UIPopUp({children , trigger }) {
+const {  useState  ,useRef} = React
+interface IPopUp {
+    children ?: any 
+    trigger?:any
+    width  ?:string
+    height?:string
+}
+export default function UIPopup({children , trigger ,  width  , height }:IPopUp) {
     const [open , setOpen ] = useState(false)
     const refPopUp = useRef(null)
     function updatePosition(event){
+        event.stopPropagation()
         const domButton = event.target
         const domPopUp  = refPopUp.current as any
         console.log('domPopUp',domPopUp)
@@ -18,7 +25,7 @@ export default function UIPopUp({children , trigger }) {
             const rectPopup = domPopUp.getBoundingClientRect()
             setOpen(!open)
             const  {innerHeight , innerWidth} = window
-            domPopUp.style.width = (width - 10) + 'px'
+            // domPopUp.style.width = (width - 10) + 'px'
             if(top  +rectPopup.height > innerHeight  && left + width > innerWidth ){
                 console.log('TH1')
                 domPopUp.style.top = (top  - rectPopup.height -10) + 'px'
@@ -49,24 +56,22 @@ export default function UIPopUp({children , trigger }) {
                 domPopUp.style.top = top  + 'px'
                 domPopUp.style.left = left + 'px'
             }
-
-            
         }
     
     }
    const Button  =  React.cloneElement(trigger , {
-    onMouseDown :  updatePosition ,           
+        onMouseDown :  updatePosition ,   
+        style : { zIndex : 9090 }        
     })
     return <> {Button}  
             {<UIWidget>
                 <Wrapper open={open} data-off="true" onMouseDown={(event) => {  event.stopPropagation() ; console.log(event.target); 
-                    console.log(!!event.target.getAttribute('open'))
                     
                     if(event.target && event.target.getAttribute('data-off')){
                             setOpen(false)
                         }
                 }} > 
-                    <Popup ref={refPopUp}>
+                    <Popup  ref={refPopUp} width={width} height={height}>
                         {children}
                     </Popup>
                 </Wrapper>
@@ -85,9 +90,10 @@ const Wrapper  = styled.div<any>`
  background-color : transparent;
  top : 0px;
  left : 0px;
-
 `
-const Popup = styled(FlexCol)`
+const Popup = styled(FlexCol)<any>`
+    width: ${props => props.width};
+    height :${props => props.height};
     display : block;
     background-color : ${theme.bg.default};
     position: absolute;

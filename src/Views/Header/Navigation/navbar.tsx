@@ -1,9 +1,7 @@
 import * as React from 'react';
-
-import { Nav, LogoLink, Logo, IconLink, Label } from '../../../Components/styled/nav';
+import { Nav, LogoLink, IconLink, Label } from '../../../Components/styled/nav';
 import Card from '../../../Components/styled/card';
 import Icon from '../../../Components/Icon';
-import { IMAGE_SOURCE_DEFAULT } from '../../../help/define';
 import Search from '../Search/search';
 import ButtonArticle from '../buttonWriteArticle';
 import { Subscribe } from 'unstated-x';
@@ -19,9 +17,11 @@ class Navbar extends React.Component<any> {
         sideBarOpen: false,
         notificationOpen: false
     }
+
+    
     render() {
         const { dataUser } = userContainer.state
-        const { sideBarOpen, notificationOpen } = this.state
+        const { sideBarOpen } = this.state
         const location = window.location.href
         return <Nav>
             <NavButton to="/" onClick={async (e: Event) => { e.preventDefault(); await this.setState({ sideBarOpen: true }) }}>
@@ -33,7 +33,7 @@ class Navbar extends React.Component<any> {
                 <Icon glyph="home" />
                 <Label> Home </Label>
             </IconLink>
-            <IconLink to="/chat" data-active={location.includes('chat')}>
+            <IconLink to="/chatMessage" data-active={location.includes('chat')}>
                 <Icon glyph="message" />
                 <Label> Chat</Label>
             </IconLink>
@@ -42,8 +42,8 @@ class Navbar extends React.Component<any> {
             </IconLink>
             <ButtonArticle />
             <IconLink to="/writearticle" > <Label>Write Article</Label></IconLink>
-            <Notification open={notificationOpen} setOpen={() => this.setState({ notificationOpen: !notificationOpen })} />
-            <UIPopUp trigger={<Button data-active={true}> <Icon glyph="settings" />  Setting</Button>}>
+            <Notification  />
+            <UIPopUp trigger={<Button data-active={true}>   Setting</Button>}>
                 <div style={{ display: 'flex' }}>
                     <Subscribe to={[userContainer]} >
                         {
@@ -98,8 +98,8 @@ const StyledCard = styled(Card)`
 `;
 const Button = styled(IconLink.withComponent('a'))`
     cursor : pointer;
-    background-color : ${props => props.theme.settings.default};
-    border-left : 5px solid ${props => props.theme.bg.default};
+    // background-color : ${props => props.theme.settings.default};
+    // border-left : 5px solid ${props => props.theme.bg.default};
 
 `
 export default Navbar

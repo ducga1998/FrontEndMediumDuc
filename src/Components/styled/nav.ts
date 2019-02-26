@@ -30,7 +30,6 @@ export const Nav = styled(FlexRow)`
 export const Section = styled(FlexRow) <any>`
   align-items: stretch;
   display: ${props => (props.hideOnDesktop ? 'none' : 'flex')};
-
   @media (max-width: 768px) {
     flex: auto;
     justify-content: space-around;
@@ -44,15 +43,10 @@ export const LogoLink = styled(Link)`
   display: flex;
   flex-direction: column;
   justify-content: center;
-
-  ${() =>
-        process.env.NODE_ENV !== 'production' &&
-        css`
-      &:after {
+  &:after {
         margin-top: 4px;
         font-size: 0.75em;
       }
-    `};
 `;
 
 export const Logo = styled.img`

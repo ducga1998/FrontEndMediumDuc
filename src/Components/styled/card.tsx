@@ -19,7 +19,7 @@ export const StyledCard = styled(FlexCol) <any>`
   max-width: 100%;
   background-clip: padding-box;
   overflow: visible;
-  border-bottom : 2px solid ${props => props.theme.bg.hairline};
+  border-bottom : 1px solid ${props => props.theme.bg.hairline};
   flex: none;
   + div,
   + span {

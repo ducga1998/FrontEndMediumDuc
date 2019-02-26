@@ -18,3 +18,7 @@ export function convertDataToGraphQL(API: any) {
     }
     return {}
 }
+export function dieEvent(event){
+    event.preventDefault()
+    event.stopPropagation()
+}
