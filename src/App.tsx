@@ -9,7 +9,6 @@ import { UITheme } from './Components/UI/UITheme';
 import './app.css'
 class App extends React.Component {
   public render() {
-
     return  <UITheme>
         <UITooltip>
           <Provider>

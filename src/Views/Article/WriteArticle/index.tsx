@@ -4,7 +4,6 @@ import styled from 'styled-components';
 import articleContainer from '../../../Container/articleContainer';
 import userContainer from '../../../Container/userContainer';
 import Author from '../../Author';
-import UIRichText from '../../../Components/UI/UIRichText';
 import MediumDraft from './mediumDraft';
 import { fontStack } from '../../../Components/styled/base';
 import {mscConfirm} from 'medium-style-confirm'
