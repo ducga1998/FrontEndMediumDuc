@@ -1,13 +1,8 @@
 import * as React from 'react';
 import { Link } from "react-router-dom";
-import { Subscribe } from 'unstated-x';
 import { FlexRow, FlexCol, H2, P } from '../../../Components/styled/base';
 import { AvatarImage } from '../../../Components/styled/avatar';
 import { filterStringHTML } from '../../../help/help';
-// import userContainer from '../../Container/userContainer';
-// import { H2, FlexRow, FlexCol, P } from './Components/styled/base';
-// import { AvatarImage } from '../../Components/styled/avatar';
-// import './index.css';
 interface IArticle{
     article : any,
     type ?: string
@@ -37,10 +32,5 @@ const ArticleRank = ({ article , type}: IArticle) => {
                 </FlexRow>
                 </FlexCol>
     })
-    // const src = avatarLink ? avatarLink : "./default.jpg"
-                
-                         
-        
-
 }
 export default ArticleRank

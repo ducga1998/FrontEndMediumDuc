@@ -1,15 +1,13 @@
 import * as React from 'react';
 import { Nav, LogoLink, IconLink, Label } from '../../../Components/styled/nav';
-import Card from '../../../Components/styled/card';
 import Icon from '../../../Components/Icon';
 import Search from '../Search/search';
 import ButtonArticle from '../buttonWriteArticle';
-import { Subscribe } from 'unstated-x';
+
 import userContainer from '../../../Container/userContainer';
 import styled from 'styled-components';
 import UIPopUp from '../../../Components/UI/UIPopUp';
-import { Shadow, hexa, FlexCol } from '../../../Components/styled/base';
-import theme from '../../../theme';
+import { Shadow,  FlexCol } from '../../../Components/styled/base';
 import SideBar from './SideBar';
 import Notification from './notification'
 class Navbar extends React.Component<any> {
@@ -17,8 +15,6 @@ class Navbar extends React.Component<any> {
         sideBarOpen: false,
         notificationOpen: false
     }
-
-    
     render() {
         const { dataUser } = userContainer.state
         const { sideBarOpen } = this.state
@@ -28,7 +24,6 @@ class Navbar extends React.Component<any> {
                 <Icon onClick={() => { this.setState({ sideBarOpen: true }) }} glyph="menu" />
                 <SideBar user={dataUser} open={sideBarOpen} setOpen={() => { this.setState({ sideBarOpen: false }) }} />
             </NavButton>
-
             <IconLink to="/home" data-active={location.includes('home')}>
                 <Icon glyph="home" />
                 <Label> Home </Label>
@@ -42,26 +37,18 @@ class Navbar extends React.Component<any> {
             </IconLink>
             <ButtonArticle />
             <IconLink to="/writearticle" > <Label>Write Article</Label></IconLink>
-            <Notification  />
+            <Notification />
+            <Search />
             <UIPopUp trigger={<Button data-active={true}>   Setting</Button>}>
                 <div style={{ display: 'flex' }}>
-                    <Subscribe to={[userContainer]} >
-                        {
-                            container => {
-                                const { login } = container.state
-                                return <Wrapper>{!login ? <IconLink to="/login">Login</IconLink> :
-                                    <>
-                                        <StyledCard><Search /></StyledCard>
-                                        <StyledCard><IconLink to="/profile"> Profile</IconLink></StyledCard>
-                                        <StyledCard><IconLink to="/stories">Stories</IconLink></StyledCard>
-                                        <StyledCard><IconLink to="/bookmarks">Bookmark</IconLink></StyledCard>
-                                        <StyledCard><IconLink to="/writearticle" >Write Article</IconLink></StyledCard>
-                                        <StyledCard style={{ backgroundColor: theme.warn.default }}><IconLink to="/logout" >Logout</IconLink></StyledCard>
-                                    </>}
-                                </Wrapper>
-                            }
-                        }
-                    </Subscribe>
+                    <Wrapper>
+                      
+                        <IconLink to="/profile"> Profile</IconLink>
+                        <IconLink to="/stories">Stories</IconLink>
+                        <IconLink to="/bookmarks">Bookmark</IconLink>
+                        <IconLink to="/writearticle">Write Article</IconLink>
+                        <IconLink to="/logout" >Logout</IconLink>
+                    </Wrapper>
                 </div>
             </UIPopUp>
         </Nav>
@@ -69,33 +56,24 @@ class Navbar extends React.Component<any> {
 }
 
 const NavButton = styled(LogoLink)`
-position : relative;
+    position : relative;
 `
 const Wrapper = styled(FlexCol)`
-
     width  :100%;
+    box-shadow: ${Shadow.high};
+    ${IconLink}{
+        padding: 10px 20px;
+        color: ${props => props.theme.text.default};
+        width: auto;
+        margin: 0px;
+        font-stretch : 800;
+        border-bottom: 1px solid  ${props => props.theme.bg.border};
+        &:hover{
+            background :  ${props => props.theme.bg.wash};
+            box-shadow : none;
+        }
+    }
 `
-const StyledCard = styled(Card)`
-  display: flex;
-  flex-direction: column;
-  box-shadow: ${Shadow.high} ${({ theme }) => hexa(theme.bg.reverse, 0.15)};
-  overflow: hidden;
-  align-items: stretch;
-  display: inline-block;
-  
-  width  : 100%;
-  border-radius: 8px;
-  margin  : 0px;
-  padding : 10px;
-    a{
-       color : ${props => props.theme.text.reverse};
-   }
-    &:hover {
-    background-color : ${props => props.theme.bg.reverse};
-  
-}
-    
-`;
 const Button = styled(IconLink.withComponent('a'))`
     cursor : pointer;
     // background-color : ${props => props.theme.settings.default};

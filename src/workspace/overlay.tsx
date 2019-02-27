@@ -4,7 +4,6 @@ import UIWidget from '../Components/UI/UIWidget';
 // import { Input } from '../Components/styled/base';
 
 export default function OverLay({ getRef, imgSrc }) {
-    const refOverLay = React.useRef(null)
     const [state, setState] = React.useState([0, 0, 0, 0])
     function handleMouseDown(event) {
         const arrtrEvent = event.target.getAttribute('data-event')

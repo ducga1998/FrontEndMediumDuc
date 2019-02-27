@@ -25,6 +25,7 @@ import history from './history'
 import { H1 } from "./Components/styled/base";
 import ManagerAccount from './Views/User/Admin/ManagerAccount'
 import ManagerArticles from './Views/User/Admin/MangerArticle'
+import UIWidget, { Portal } from "src/Components/UI/UIWidget";
 const About = () => <div>
     Web design by Nguyen Minh duc
     <H1>Facebook : <a href="https://www.facebook.com/duc.ceh.cnna">https://www.facebook.com/duc.ceh.cnna</a></H1>
@@ -82,7 +83,7 @@ const AppRouter = () => {
                      <Route path ="/managerAccount" component={isAuth(ManagerAccount)} />
                     <Route path ="/managerArticles" component={isAuth(ManagerArticles)} />
                     </>:null}
-                 
+                 <Portal />
                 </Layout>
             </Switch>
         </Router>

@@ -1,19 +1,15 @@
 import * as React from 'react';
 import { Link } from "react-router-dom";
-import { Subscribe } from 'unstated-x';
+
 import { FlexRow, FlexCol, H2, P } from '../../../Components/styled/base';
 import { AvatarImage } from '../../../Components/styled/avatar';
-// import userContainer from '../../Container/userContainer';
-// import { H2, FlexRow, FlexCol, P } from './Components/styled/base';
-// import { AvatarImage } from '../../Components/styled/avatar';
-// import './index.css';
+
 interface IAuthor {
     author: any,
     type: string
 }
 const AuthorRank = ({ author, type }: IAuthor) => {
-    
-    //"count", "idUser", "name", "avatarLink", "biographical"]
+
     console.log('ahutorgvjksnd', author)
 
     return author.map(item => {

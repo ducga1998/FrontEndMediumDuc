@@ -64,43 +64,41 @@ const OverLaySearch = styled(OverLay)`
    background : rgb(33, 34, 34);
    align-items: flex-start;
    .width-80 {
-       width : 80%;
-       .wrapper--search{
-        display: flex;
-        .close {
-            cursor : pointer;
-        }
+        width : 80%;
+       .wrapper--search {
+            display: flex;
+            .close {
+                cursor : pointer;
+            }
         }
     .label--search {
         color: #3e4141;
-    font-size: 30px;
-    padding: 30px;
-    color: #3e4141;
+        font-size: 30px;
+        padding: 30px;
+        color: #3e4141;
     }
-   }
+}
     
 `
 const Wrapper = styled.div`
-${fontStack}
-    span.close{
-    display: block;
-    margin: 35px;
-    cursor: pointer;
-    color: #fff;
-    margin-left: auto;
-    padding: 0;
-    border-width: 0;
-    background-color: transparent;
+        ${fontStack}
+        display : flex;
+        span.close{
+        display: block;
+        margin: 0px;
+        cursor: pointer;
+        color: #fff;
+        margin-left: auto;
+        padding: 0;
+        border-width: 0;
+        background-color: transparent;
     }
     sgv {
         height: 48px;
         width: 48px;
-        }
+    }
     & .wrapper--search{
         display: flex;
-    }
-    .search--input{
-       
     }
    
 `
