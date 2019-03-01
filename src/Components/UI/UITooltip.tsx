@@ -20,18 +20,47 @@ export default class UITooltip extends React.Component<any> {
         let count = 0
         let dom = findDomToolTip(count , e.target) as HTMLElement ||null
         if (dom && dom.getAttribute('data-tooltip')) {
+            
             const text = dom.getAttribute('data-tooltip')
             dom.scroll
             const domToolTip = this.refToolTip.current
             domToolTip.innerHTML = text
-            const { top, left, width } = dom.getBoundingClientRect()
+            const { top, left, width, height } = dom.getBoundingClientRect()
+           
             const view = dom.ownerDocument.defaultView
             const scrollTop = view.scrollY
             domToolTip.style.display = "inline-block"
-            
+            let leftTooltip  =   left  , topTooltip = top + scrollTop  ;
             const widthToolTip = domToolTip.getBoundingClientRect().width
-            domToolTip.style.left = `${left + width / 2 - (widthToolTip / 2)}px`;
-            domToolTip.style.top = `${top - 30 + scrollTop}px`
+            const heightToolTip = domToolTip.getBoundingClientRect().height
+            // if(top  + heightToolTip > window.innerHeight) {
+            //     topTooltip = top  - heightToolTip -10 + 'px'
+            //     leftTooltip = left + 'px'
+            //     console.log('th1')
+            // }
+            // else {
+            //     topTooltip = top  + heightToolTip +10 + 'px'
+            //     leftTooltip = left + 'px'
+            //     console.log('th2')
+            // }
+            if( left + widthToolTip  > window.innerWidth ) {
+              
+                leftTooltip = left - widthToolTip ;   
+                
+            }
+            
+
+            // else{
+            //     topTooltip =  top + 'px'
+            //     leftTooltip = `${left + widthToolTip + 5}px`;
+            //     console.log('th1')
+            // }
+
+            domToolTip.style.top = topTooltip  + 'px'
+            domToolTip.style.left = leftTooltip +'px'
+
+           
+           
         }
     }
     handleMouseLeave = (e) => {
@@ -45,7 +74,7 @@ export default class UITooltip extends React.Component<any> {
             onMouseOverCapture={this.handleMouseOver}
             onMouseOutCapture={this.handleMouseLeave}
         >
-        <H3> <$ToolTip ref={this.refToolTip} /></H3> 
+         <$ToolTip ref={this.refToolTip}  />
             {this.props.children}
         </div>
     }

@@ -13,9 +13,7 @@ import Profile from './Views/Profile/HomeProfile';
 import ViewUser from './Views/Profile/OtherProfile';
 import userContainer from "./Container/userContainer";
 import UILoading from "./Components/UI/UILoading";
-import AllRoomChat from './Views/RoomChat/listRoom'
 import ChatMessage from './Views/RoomChat/ChatAsDesign'
-import DetailRoomChat from './Views/RoomChat/DetailRoomChat'
 import { logoutBackend } from './API/client'
 import { notificationFuncSocket } from "./socketClient/notificationSocket";
 import Stories from "./Views/Article/Stories";
@@ -64,7 +62,6 @@ const AppRouter = () => {
         return <Router history={history} >
             <Switch>
                 <Layout>
-                    <Route path="/chat" component={isAuth(AllRoomChat)} />
                     <Route path="/about/" component={About} />
                     <Route path="/user/:id" component={isAuth(ViewUser)} />
                     <Route path="/login" component={Login} />
@@ -76,7 +73,6 @@ const AppRouter = () => {
                     <Route path="/store/:id" component={isAuth(StoreDetail)} />
                     <Route path="/profile" component={isAuth(Profile)} />
                     <Route path="/writearticle" component={isAuth(WriteArticle)} />
-                    <Route path="/chatRoom/:id" component={isAuth(DetailRoomChat)} />
                     <Route path="/chatMessage" component= {isAuth(ChatMessage)} />
                     <Route path="/bookmarks" component={isAuth(ArticleBookMark)} />
                         {user && user.decentraliz === 3? <>  

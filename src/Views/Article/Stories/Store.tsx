@@ -4,8 +4,6 @@ import articleContainer from '../../../Container/articleContainer';
 import userContainer from '../../../Container/userContainer';
 import Author from '../../Author';
 import { getArticleById } from '../../../API/articleAPI';
-import UIRichText from '../../../Components/UI/UIRichText';
-import { SubscribeOne } from 'unstated-x';
 import { updateDataArticle, updateContent } from '../WriteArticle';
 import MediumDraft from '../WriteArticle/mediumDraft';
 import { fontStack } from '../../../Components/styled/base';
@@ -39,9 +37,7 @@ class WriteArticle extends React.Component<any> {
             return null
         }
         return <$Align>
-            <div style={{
-                width: '70%'
-            }}>
+            <div className= "width70">
                 <Author idUser={idUser} avatarLink={avatarLink} totalFollow={10} name={name} totalArticle={articles.length} />
                 <MediumDraft
                     onChangeTitle={value => updateDataArticle('titleArticle', value)}
@@ -63,6 +59,9 @@ const $Align = styled.div`
         /* flex-direction : column; */
         justify-content : center;
         font-size : 1.5em;
+        .width70{
+            width : 70%;
+        }
 `
 
 export default WriteArticle 

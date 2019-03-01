@@ -44,8 +44,6 @@ class ArticleBookMark extends React.Component<IStories> {
                 }) : <h2>NO Article  :), fuck own account stupid </h2>}
             </$ViewArticle>
         </$ArticleDetail>
-
-        // console.log(followContainer)
     }
 }
 //"idArticle", "hashTag", "category", "comment", "totalClap", "notification", "contentArticle", "titleArticle", "imageArticle", "createTime", "__typename"

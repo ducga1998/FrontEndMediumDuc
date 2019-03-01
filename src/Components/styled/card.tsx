@@ -5,13 +5,6 @@ import * as React from 'react';
 import styled from 'styled-components';
 import { FlexCol } from './base';
 
-
-
-
-function CardPure(props) {
-  return <StyledCard {...props}>{props.children}</StyledCard>
-}
-
 export const StyledCard = styled(FlexCol) <any>`
   background: ${props => props.theme.bg.default};
   position: relative;

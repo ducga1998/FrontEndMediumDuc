@@ -1,10 +1,9 @@
 import * as React from 'react';
-import Footer from './footer';
+
 import Navigation from './Header/Navigation/navbar';
 import styled from 'styled-components';
 import NavBar from '../workspace/navbar';
 import userContainer from '../Container/userContainer';
-const link = "https://vnno-vn-6-tf-mp3-s1-zmp3.zadn.vn/32d773f747b0aeeef7a1/6121980357253417684?authen=exp=1550832150~acl=/32d773f747b0aeeef7a1/*~hmac=b4340446be26717f947826f6802c550e"
 export default function Layout(props) {
   const [openNavBar, setOpenNavBar] = React.useState(false)
   function toggleNavBar() {
@@ -15,7 +14,6 @@ export default function Layout(props) {
     {login ? <Navigation openNavBar={toggleNavBar} /> : null}
     <NavBar open={openNavBar} setOpen={toggleNavBar} />
       {props.children}
-    <Footer />
   </Body>
 }
 const Body = styled.div`
@@ -24,7 +22,6 @@ const Body = styled.div`
   width: 100%;
   height: 100vh;
   background: ${props => {
-    // background layout project 
     if (location.pathname === '/login' || location.pathname === '/register') {
       return props.theme.bg.reverse
     }
@@ -35,6 +32,3 @@ const Body = styled.div`
     max-height: ${window.innerHeight}px;
   }
 `;
-const Slogan = styled.i`
-    padding : 0px 0px 0px 10px;
-`

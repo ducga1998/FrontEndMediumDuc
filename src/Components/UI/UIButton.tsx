@@ -74,25 +74,21 @@ export default function UIButton({ type , to,
     </Button>
 }
 const ButtonLink = styled(StyledOutlineButton.withComponent(Link))`
-
-display: flex;
-
-flex: none;
-
-align-items: center;
-justify-content: center;
-border-radius: 12px;
-font-weight: 700;
-white-space: nowrap;
-word-break: keep-all;
-cursor: pointer;
-font-size: 14px;
-line-height: 1;
-position: relative;
-text-align: center;
-padding: 12px 16px;
-background-color: #7B16FF;
-background: transparent;
-background-image: none;
-font-weight: 600;
+    display: flex;
+    flex: none;
+    align-items: center;
+    justify-content: center;
+    border-radius: 12px;
+    white-space: nowrap;
+    word-break: keep-all;
+    cursor: pointer;
+    font-size: 14px;
+    line-height: 1;
+    position: relative;
+    text-align: center;
+    padding: 12px 16px;
+    background-color: #7B16FF;
+    background: transparent;
+    background-image: none;
+    font-weight: 600;
 `

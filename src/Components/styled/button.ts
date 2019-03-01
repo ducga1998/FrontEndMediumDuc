@@ -15,7 +15,7 @@ const baseButton = css`
   font-weight: 700;
   white-space: nowrap;
   word-break: keep-all;
-  /* transition: ${Transition.hover.off}; */
+  transition: ${Transition.hover.off};
   cursor: pointer;
   font-size: 14px;
   line-height: 1;

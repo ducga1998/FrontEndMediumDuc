@@ -16,7 +16,6 @@ function handleTypeNotification(type, data) {
     titleArticle = filterStringHTML(titleArticle)
     let notification
     switch (type) {
-    
         case 'Bookmark':
             notification = <div><Link to={`/user/${idUser}`}>{name}</Link> <i>đã bookmark bài {titleArticle} của bạn</i></div>
             break;
@@ -96,9 +95,7 @@ const DropDown = styled.div`
         overflow-y : scroll;
         height : 100%;
     }
-    ${Card}:nth-child(2){
-        background : red;
-    }
+   
    
 `
 

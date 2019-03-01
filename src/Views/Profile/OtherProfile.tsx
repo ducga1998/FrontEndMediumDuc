@@ -42,7 +42,6 @@ class ViewUserDetail extends React.Component<IViewUserCurrent> {
                         open={open}
                         onClickOutSide={() => this.setState({ open: false })}
                         closeMoDal={() => this.setState({ open: false })}>
-                        {/* </div> */}
                         <H1>Please paste link avatar need change</H1>
                         <UIInput onChange={(value) => this.setState({ newAvatarLink: value })} />
                         <UIButton onMouseDown={() => { }}>Update Avatar</UIButton>
@@ -51,7 +50,6 @@ class ViewUserDetail extends React.Component<IViewUserCurrent> {
 
                 <UIFieldAlgin flex={9} >
                     <$Author>
-
                         {[{ name }, { birthday }, { location }, { biographical }].map((item, key) => {
                             console.log(key)
                             const info = Object.keys(item)[0]
@@ -82,25 +80,15 @@ const WrapperAvatar  = styled(FlexCol)`
 
 `
 const Backgroud = styled(FlexRow)<any>`
-background-size: cover;
-width : 100%;
-height : 500px;
-background-color : blue;
-align-items : flex-end;
-justify-content : center;
-background-image : url(${(props : any) => props.src?props.src:'./default.jpg'});
+    background-size: cover;
+    width : 100%;
+    height : 500px;
+    background-color : blue;
+    align-items : flex-end;
+    justify-content : center;
+    background-image : url(${(props : any) => props.src?props.src:'./default.jpg'});
 `
 //"idArticle", "hashTag", "category", "comment", "totalClap", "notification", "contentArticle", "titleArticle", "imageArticle", "createTime", "__typename"
-const Img = styled.img`
-    cursor : pointer;
-    width : 200px;
-    height : 200px;
-    border-radius : 50%;
-    :hover {
-        background-color : #000066;
-        transition : .3s;
-    }
-    `
 const $Author = styled.div`
     h3 {
         margin : 0px;
