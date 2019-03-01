@@ -1,18 +1,18 @@
 
-import UIButton from '../../../Components/UI/UIButton';
+import UIButton from 'src/Components/UI/UIButton';
 
 import * as React from 'react'
-import { IMAGE_SOURCE_DEFAULT } from '../../../help/define';
+import { IMAGE_SOURCE_DEFAULT } from 'src/help/define';
 import styled from 'styled-components';
 import { toast } from 'react-toastify';
-import userContainer from '../../../Container/userContainer';
-import { socketNotication } from '../../../socketClient/socket';
-import commentAllContainer from '../../../Container/commentContainer';
-import { renderElement } from '../../../Core/renderElement';
-import { Input, FlexCol, FlexRow } from '../../../Components/styled/base';
-import { AvatarImage } from '../../../Components/styled/avatar';
+import userContainer from 'src/Container/userContainer';
+import { socketNotication } from 'src/socketClient/socket';
+import commentAllContainer from 'src/Container/commentContainer';
+import { renderElement } from 'src/Core/renderElement';
+import { Input, FlexCol, FlexRow } from 'src/Components/styled/base';
+import { AvatarImage } from 'src/Components/styled/avatar';
 import uuid from 'uuid'
-import { addComment } from '../../../API/commentAPI';
+import { addComment } from 'src/API/commentAPI';
 interface IFormRely {
     context: any,
     idRely?: string,
@@ -37,33 +37,28 @@ const FormComment = ({ context, idRely, onChange }: IFormRely) => {
             input = { ...input, ...{ idRely } }
          
         }
-        const { user: { idUser } } = context
+        const { user: { idUser  } } = context
+        let userComment = context.user
         // socket notification from backend
         socketNotication({ content, idUser }, idRely ? 'RelyComment' : 'Comment')
-        setContent('')
-        const idComment = uuid()
-        let newComment = await addComment({...input , ...{idComment}}) as any
-        console.log('newComment',newComment)
-        newComment = {
-            ...newComment ,...{userComment : {avatarLink,name}}
-        }
-
+        let newComment = await addComment(input) ;
+        console.log('relyxasx',newComment)
         onChange(newComment)
+        setContent('')
     }
     function handleKeyPress(event) {
         if (event.charCode === 13) {
             handleAddComment()
+            
         }
 
     }
-    return <$Aglin >
-        <FlexRow>
-            <Avatar
-                className="smallAvatar"
-                src={avatarLink ? avatarLink : IMAGE_SOURCE_DEFAULT} /> <b>{name}
-            </b>
-        </FlexRow>
-        <WrapperFromComment>
+    return <$Aglin>
+        <div className = "wrapperAvatar">
+            <AvatarImage
+                src={avatarLink ? avatarLink : IMAGE_SOURCE_DEFAULT} /> <b>{name}</b>
+        </div>
+        <div  className = "wrapperAvatar">
             <$FormComment placeholder="Comment something ....."
                 value={content}
                 onKeyPress={handleKeyPress}
@@ -72,18 +67,10 @@ const FormComment = ({ context, idRely, onChange }: IFormRely) => {
                 style={{ flex: 2 }}
                 onMouseDown={handleAddComment}>Comment
             </UIButton>
-        </WrapperFromComment>
+            </div>
     </$Aglin>
-
-
 }
-const WrapperFromComment = styled(FlexRow)`
-    margin  : 0px 0px 20px 0px; 
-`
-const Avatar = styled(AvatarImage)`
-    margin-right : 20px;
-    margin-bottom : 20px;
-`
+
 const $FormComment = styled(Input)`
     flex : 10;
 `
@@ -91,5 +78,10 @@ const $Aglin = styled(FlexCol)`
     background-color  : ${props => props.theme.generic.default};
     padding : 10px;
     border-radius : 20px;
+    .wrapperAvatar {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+    }
 `
 export default renderElement(FormComment)

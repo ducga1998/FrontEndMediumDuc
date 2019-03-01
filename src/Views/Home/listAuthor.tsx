@@ -1,8 +1,6 @@
 import * as React from 'react';
-import userContainer from '../../Container/userContainer';
 import RankAll from './Rank/index'
 import { rankData } from '../../API/fetchAPI';
-import { render } from 'react-dom';
 const cachRank  = new Map()
 class ListAuthor extends React.Component {
     // const [rankState, setRankState] =  React.useState(null)

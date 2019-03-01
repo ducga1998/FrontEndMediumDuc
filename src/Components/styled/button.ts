@@ -6,6 +6,7 @@ import styled, { css } from 'styled-components';
 import { Shadow, Transition, hexa } from '../styled/base';
 import theme from '../../theme';
 // css Base for all button 
+// margin , padding,
 const baseButton = css`
   display: flex;
   flex: none;
@@ -30,7 +31,6 @@ const baseButton = css`
             : `${Shadow.high} ${hexa(props.theme.bg.reverse, 0.15)}`};
     opacity: ${(props: any) => (props.disabled ? '0.5' : '1')};
   }
-
   /* if an icon and label are both present, add space around the label*/
   div + span,
   span + span {
@@ -42,7 +42,7 @@ const baseButton = css`
         ${theme.text.reverse};
       color: ${theme.text.reverse};
       transition: ${Transition.hover.on};
-    background : #4400cee3;
+      background : #4400cee3;
       &:hover,
       &:focus {
         box-shadow: inset 0 ${true ? '-2px' : '-4px'} 0
