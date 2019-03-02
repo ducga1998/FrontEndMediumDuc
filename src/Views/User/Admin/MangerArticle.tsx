@@ -31,7 +31,7 @@ class ManagerArticles extends React.Component<IManagerArticles> {
         return <UIFieldAlgin horizontal>
             {articles && articles.length > 0 ? articles.map((item, key) => {
                 const article = { ...item, ...{ user: { idUser, avatarLink, name } } }
-                return <UIFieldAlgin>
+                return <UIFieldAlgin key={key}>
                     <Article style={{ pointerEvents : 'none'}} vectical key={key} typeArticle='store' article={article} />
                     <UIButton icon="delete" category="danger" onMouseDown={() => { }} >Delete</UIButton>
                     <UIButton  icon ="edit" category="space" onMouseDown={() => { }} >Update Detail </UIButton>

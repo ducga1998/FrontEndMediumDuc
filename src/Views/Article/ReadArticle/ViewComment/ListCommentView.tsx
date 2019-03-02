@@ -5,7 +5,7 @@ import Comment from './Comment'
 const ListCommnentView  =  ({ allComments }) => {
     
     return allComments.length > 0 ? allComments.map((item: any, key) => {
-        const { idRely } = item
+        const { idRely , idComment } = item
         let dataRely = []
         // split data : relyComment  and NormalComment
         if (!idRely) {
@@ -15,10 +15,8 @@ const ListCommnentView  =  ({ allComments }) => {
                     return comment.idRely === item.idComment
                 }
             })
-        }
-         // render all comment ro
-         return <Comment normalComment={item} relyComments={dataRely} />
-        
+            return <Comment key={idComment} normalComment={item} relyComments={dataRely} />
+        }        
     }) :
         <H2 style={{ textAlign: 'center', color: 'gray' }}>  NO  Comment,  : ))) cmt vào cho vui đi thằng ngu</H2>
 }

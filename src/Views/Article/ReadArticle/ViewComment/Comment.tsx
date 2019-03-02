@@ -6,45 +6,45 @@ import { AvatarImage } from "../../../../Components/styled/avatar";
 import renderHTML from 'react-render-html';
 import * as React from "react";
 import { renderElement } from "src/Core/renderElement";
-import { H5, H2 } from "src/Components/styled/base";
+import { H5, H2, P, H3, FlexCol, FlexRow } from "src/Components/styled/base";
 export default renderElement(
     function renderComment({ normalComment, context, relyComments }) {
-        console.log('context',context)
         const [open, setOpen] = React.useState(false)
         const [relys, setRelys] = React.useState(relyComments ? relyComments : [])
-        const { user : {avatarLink, name } } = context
-        const { createdAt, content, idComment, idRely } = normalComment
+        const { user: { avatarLink, name } } = context
+        const { createdAt, content, idComment } = normalComment
         function addCommentRely(rely) {
             relys.push(rely);
             setRelys(relys)
         }
-            return <>
-                <NormalCommnet {...{ idComment, avatarLink, content, createdAt, relys, setOpen , open }} />
-                
-                {
-                    open   && <WrapperRely>
+        return <>
+            <NormalCommnet {...{ idComment, avatarLink, content, createdAt, relys, setOpen, open, name }} />
+            {
+                open && <WrapperRely>
                     {
-                        relys.length > 0 ? relys.map(item => <NormalCommnet {...item}  setOpen={setOpen} open={open} />)
+                        relys.length > 0 ? relys.map(item => <NormalCommnet {...{ ...item, ...{ avatarLink, setOpen, open, name } }} />)
                             : null
                     }
-                    <FormComment 
-                    onChange={addCommentRely} 
-                    idRely={idComment} />
-                    </WrapperRely>
-                }
-            </>
+                    <FormComment
+                        onChange={addCommentRely}
+                        idRely={idComment} />
+                </WrapperRely>
+            }
+        </>
     }
 )
-const NormalCommnet = ({ idComment, avatarLink, content, createdAt, relys, setOpen , open }) => {
+const NormalCommnet = ({ idComment, avatarLink, content, createdAt, relys, setOpen, open, name }) => {
     return <$Comment data-id={idComment}
         onMouseDown={(event) => setOpen(!open)}>
         <AvatarImage src={avatarLink ? avatarLink : IMAGE_SOURCE_DEFAULT} />
-        <$Content  >
-            <H2>{renderHTML(content)}</H2>
-            <br />
+        <$Content>
+            <FlexRow style={{ alignItems: 'center' }}>
+                <H2>{name + " :"} </H2>
+                <H3> {renderHTML(content)}</H3>
+            </FlexRow>
             <H5>{timeDifference(new Date(), new Date(createdAt))}</H5>
         </$Content>
-       {relys && relys.length > 0  &&  <H2>{relys.length} Rely comment</H2> } 
+        {relys && relys.length > 0 && <H2>{relys.length} Rely comment</H2>}
     </$Comment>
 }
 const WrapperRely = styled.div`
@@ -67,9 +67,11 @@ const $Content = styled.div`
         margin-bottom : 10px;
         transition: 0.2s;
     }
+    ${H2} {
+        color : ${props => props.theme.brand.default};
+    }
 `
 const $Comment = styled.div`
-    align-items: center;
     border-bottom: 1px solid  ${props => props.theme.bg.border};
     display : flex;
     padding: 30px 0px 30px 60px;

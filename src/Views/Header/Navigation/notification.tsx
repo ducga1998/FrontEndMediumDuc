@@ -57,10 +57,10 @@ export default function Notification() {
         <Icon glyph="notification" />
         {open && <><DropDown onMouseDown={(event) =>dieEvent(event)} onMouseLeave ={ () => setOpen(false) }  >
           <div className="pduc-overflow">  {
-                data && data.length > 0 ? data.map(notifi => {
+                data && data.length > 0 ? data.map((notifi , key) => {
                     const { type, notificationData: { avatarLink, name }, time } = notifi
                     const view = handleTypeNotification(type, notifi.notificationData)
-                    return <Card >
+                    return <Card key={key} >
                         <UIFieldAlgin>
                             <AvatarImage size={30} src={avatarLink} />
                             <H3>{name}</H3>

@@ -7,11 +7,9 @@ import styled from 'styled-components';
 import { toast } from 'react-toastify';
 import userContainer from 'src/Container/userContainer';
 import { socketNotication } from 'src/socketClient/socket';
-import commentAllContainer from 'src/Container/commentContainer';
 import { renderElement } from 'src/Core/renderElement';
-import { Input, FlexCol, FlexRow } from 'src/Components/styled/base';
+import { Input, FlexCol } from 'src/Components/styled/base';
 import { AvatarImage } from 'src/Components/styled/avatar';
-import uuid from 'uuid'
 import { addComment } from 'src/API/commentAPI';
 interface IFormRely {
     context: any,
@@ -38,7 +36,6 @@ const FormComment = ({ context, idRely, onChange }: IFormRely) => {
          
         }
         const { user: { idUser  } } = context
-        let userComment = context.user
         // socket notification from backend
         socketNotication({ content, idUser }, idRely ? 'RelyComment' : 'Comment')
         let newComment = await addComment(input) ;
@@ -49,9 +46,7 @@ const FormComment = ({ context, idRely, onChange }: IFormRely) => {
     function handleKeyPress(event) {
         if (event.charCode === 13) {
             handleAddComment()
-            
         }
-
     }
     return <$Aglin>
         <div className = "wrapperAvatar">
@@ -67,7 +62,7 @@ const FormComment = ({ context, idRely, onChange }: IFormRely) => {
                 style={{ flex: 2 }}
                 onMouseDown={handleAddComment}>Comment
             </UIButton>
-            </div>
+        </div>
     </$Aglin>
 }
 

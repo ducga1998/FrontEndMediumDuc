@@ -12,9 +12,9 @@ const AuthorRank = ({ author, type }: IAuthor) => {
 
     console.log('ahutorgvjksnd', author)
 
-    return author.map(item => {
+    return author.map((item , key) => {
         const { count, idUser, name, avatarLink, biographical } = item
-        return <FlexCol>
+        return <FlexCol key={key}>
             <FlexRow>
                 <Link to="/profile" ><AvatarImage plan radius={15} src={avatarLink} /></Link>
                 <Link className="name" to={`/user/${idUser}`}>

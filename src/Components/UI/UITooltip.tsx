@@ -3,7 +3,7 @@ import * as React from 'react';
 import styled from 'styled-components';
 import { H3 } from '../styled/base';
 function findDomToolTip(count , dom){
-    if(count  > 5 || !dom){
+    if(count  > 3 || !dom){
         return  null
     }
     if(dom && dom.getAttribute('data-tooltip')){
@@ -19,10 +19,10 @@ export default class UITooltip extends React.Component<any> {
        e.preventDefault()
         let count = 0
         let dom = findDomToolTip(count , e.target) as HTMLElement ||null
+      
         if (dom && dom.getAttribute('data-tooltip')) {
-            
+            console.log(dom)
             const text = dom.getAttribute('data-tooltip')
-            dom.scroll
             const domToolTip = this.refToolTip.current
             domToolTip.innerHTML = text
             const { top, left, width, height } = dom.getBoundingClientRect()
@@ -30,9 +30,10 @@ export default class UITooltip extends React.Component<any> {
             const view = dom.ownerDocument.defaultView
             const scrollTop = view.scrollY
             domToolTip.style.display = "inline-block"
-            let leftTooltip  =   left  , topTooltip = top + scrollTop  ;
+            let leftTooltip  =   left  
             const widthToolTip = domToolTip.getBoundingClientRect().width
             const heightToolTip = domToolTip.getBoundingClientRect().height
+            let topTooltip = top + scrollTop -  heightToolTip - 5  ;
             // if(top  + heightToolTip > window.innerHeight) {
             //     topTooltip = top  - heightToolTip -10 + 'px'
             //     leftTooltip = left + 'px'
@@ -45,11 +46,9 @@ export default class UITooltip extends React.Component<any> {
             // }
             if( left + widthToolTip  > window.innerWidth ) {
               
-                leftTooltip = left - widthToolTip ;   
+                leftTooltip = left - widthToolTip -25 ;   
                 
             }
-            
-
             // else{
             //     topTooltip =  top + 'px'
             //     leftTooltip = `${left + widthToolTip + 5}px`;
@@ -87,6 +86,7 @@ const $ToolTip = styled.div`
     position: absolute;
     padding: 10px;
     border-radius: 10px;
-    display : none;
+    display : flex;
+    width  : auto;
     pointer-events : none;
 `

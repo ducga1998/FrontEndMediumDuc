@@ -4,8 +4,11 @@ import { Link, withRouter } from 'react-router-dom';
 import { createLocation } from 'history';
 
 export default withRouter(
-  ({ staticContext, history, location, match, ...rest }: any) => (
-    <Link
+ ({ staticContext, history, location, match ,  ...rest }: any) => {
+  const {TypeDom}  =  rest
+  let Dom  = TypeDom ? React.createElement(TypeDom) : Link;
+  console.log(Dom ,TypeDom) ;
+  return <Link
       {...rest}
       onClick={evt => {
         if (rest.onClick) rest.onClick(evt);
@@ -20,5 +23,5 @@ export default withRouter(
         }
       }}
     />
-  )
-);
+}
+)

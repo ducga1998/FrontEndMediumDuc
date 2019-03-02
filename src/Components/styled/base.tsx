@@ -277,16 +277,16 @@ export const Span = styled.span`
 `;
 // hoizatal 
 export const FlexRow = styled.div`
- ${fontStack};
+ 
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
   /* align-items: center; */
+  
  
 `;
 // vectical 
 export const FlexCol = styled.div`
- ${fontStack};
   display: flex;
   flex-direction: column;
   justify-content: flex-start;

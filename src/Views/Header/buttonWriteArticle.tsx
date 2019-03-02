@@ -63,7 +63,7 @@ export default function ButtonArticle({ history }: any) {
                             trigger={<Button >Public Article</Button>}>
                             {arrHashTag.length > 0 ?
                                 <div>{arrHashTag.map((item, key) => {
-                                    return <FlexRow><H2 style={{flex : 1}} >{item}</H2>
+                                    return <FlexRow key = {key}><H2 style={{flex : 1}} >{item}</H2>
                                         <UIButton icon="delete"
                                         style={{padding : '0px'}}
                                             onMouseDown={() => {

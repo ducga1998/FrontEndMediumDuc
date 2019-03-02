@@ -10,7 +10,6 @@ export interface IArticleContainer {
     titleArticle: String
 
 }
-let createTime = new Date().toUTCString()
 export const registryComment = new Map()
 class CommentAllContainer extends Container<any>{
     constructor(state) {

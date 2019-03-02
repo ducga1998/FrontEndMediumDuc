@@ -35,7 +35,7 @@ export default function Article({ article, typeArticle, vectical, horizontal, st
     const linkSwitchArticle = typeArticle && typeArticle === 'store' ? `/store/${idArticle}` : `/article/${idArticle}`
 
     return <$Article style={style || undefined} vectical={vectical || undefined}>
-        <Link to={linkSwitchArticle}>
+        <Link to={linkSwitchArticle} TypeDom="div">
             {vectical ?
                 <AvatarImage size={80} radius="24px" src={`${imageArticle !== defaultImg ? backgroundArticle : './backgroundDefault.jpg'}`} />
                 : <WrapperImg>
@@ -69,7 +69,7 @@ export default function Article({ article, typeArticle, vectical, horizontal, st
 }
 
 const WrapperHashTag = styled(Section)`
-flex-wrap: wrap;
+    flex-wrap: wrap;
 `
 const WrapperImg = styled.div`
 width : 100%;

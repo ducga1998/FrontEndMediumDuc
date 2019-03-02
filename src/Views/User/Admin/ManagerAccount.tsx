@@ -1,6 +1,6 @@
 import * as React from 'react';
 import styled from 'styled-components';
-import { FlexCol, H2,  H3, Gradient } from '../../../Components/styled/base';
+import { FlexCol, H2, H3, Gradient } from '../../../Components/styled/base';
 import { getAllUser, updateInfomation, deleteUserById } from '../../../API/client';
 import { AvatarImage } from '../../../Components/styled/avatar';
 import UIButton from '../../../Components/UI/UIButton';
@@ -26,9 +26,9 @@ export default class ManagerAccount extends React.Component<any> {
         this.setState({ listUser })
     }
     async deleteUser(idUser) {
-       const listUser =  this.state.listUser.filter((user :any)=> user.idUser !== idUser)
-       this.setState({listUser})
-       await deleteUserById(idUser)
+        const listUser = this.state.listUser.filter((user: any) => user.idUser !== idUser)
+        this.setState({ listUser })
+        await deleteUserById(idUser)
     }
     updateUser() {
 
@@ -39,9 +39,9 @@ export default class ManagerAccount extends React.Component<any> {
     //idUser", "name", "avatarLink", "biographical", "birthday", "location", "decentraliz", "articles", "__typename"
     render() {
         const { listUser, open, userSelect } = this.state
-      
+
         return <><FlexCol>
-                <Header  />
+            <Header />
             {listUser.length > 0 && listUser.map((user: any, key) => {
                 const { idUser, name, avatarLink, biographical, birthday, location, decentraliz, articles } = user
                 const role = decentraliz === 1 ? 'User Normal' : 'Admin'
@@ -52,9 +52,9 @@ export default class ManagerAccount extends React.Component<any> {
                     <UIFieldAlgin flex={3} >    <H2 > {name}</H2> </UIFieldAlgin >
                     <UIFieldAlgin flex={3} >    <H3> Role : </H3><HightLigth>{role}</HightLigth> </UIFieldAlgin >
                     <UIFieldAlgin flex={3} >
-                     
-                        <UIButton icon="delete" category="danger"style={{}} onMouseDown={() => {this.deleteUser(idUser)}}>Delete</UIButton>
-                        <UIButton icon="profile"category="space" style={{}} onMouseDown={() => this.detailInfoUser(user)}>Detail</UIButton>
+
+                        <UIButton icon="delete" category="danger" style={{}} onMouseDown={() => { this.deleteUser(idUser) }}>Delete</UIButton>
+                        <UIButton icon="profile" category="space" style={{}} onMouseDown={() => this.detailInfoUser(user)}>Detail</UIButton>
                     </UIFieldAlgin >
                 </UIFieldAlgin></Wrapper>
             })}
@@ -81,44 +81,48 @@ async function updateProfile(input) {
     console.log('newInfoUser', newInfoUser)
     return newInfoUser
 }
-async function handleUpdateInfo(value ,info , user){
-    const input = omit({...user , ...{[info] : value}} , ['articles','__typename'])
-    console.log('output data' , input )
+async function handleUpdateInfo(value, info, user) {
+    const input = omit({ ...user, ...{ [info]: value } }, ['articles', '__typename'])
+    console.log('output data', input)
     await updateProfile(input)
 }
-function RenderUser({user} :any) {
+function RenderUser({ user }: any) {
     React.useEffect(() => {
 
-    },[user])
+    }, [user])
     if (!user) {
         return <>'Loading ...'</>
     }
-    
-    const {  name, avatarLink, biographical, birthday, location} = user
+
+    const { name, avatarLink, biographical, birthday, location } = user
     return <>
         <AvatarImage src={avatarLink} size={80} />
-        {[{ name }, { birthday }, { location }, { biographical } ,{avatarLink}].map((item, key) => {
-            console.log('name',name)
+        {[{ name }, { birthday }, { location }, { biographical }, { avatarLink }].map((item, key) => {
+            console.log('name', name)
             const info = Object.keys(item)[0]
             const value = item[info]
-            return <UIEditer onUpdateProfile={async (value : string) => await handleUpdateInfo(value , info ,user)} info={info} key={key} content={value} />
+            return <UIEditer
+                key={key}
+                onUpdateProfile={async (value: string) => await handleUpdateInfo(value, info, user)}
+                info={info}
+                content={value} />
         })}
     </>
 }
-function Header(){
-   return  <Wrapper header><UIFieldAlgin style={{ justifyContent: 'center', margin: '10px' }} vectical>
-    <UIFieldAlgin flex={3}>
-       <H2>Avatar User</H2> 
-    </UIFieldAlgin>
-    <UIFieldAlgin flex={3} >    <H2 >Name </H2> </UIFieldAlgin >
-    <UIFieldAlgin flex={3} >    <H2> Role  </H2></UIFieldAlgin >
-    <UIFieldAlgin flex={3} >
-        <H2>Settings</H2> 
-    </UIFieldAlgin >
-</UIFieldAlgin></Wrapper>
+function Header() {
+    return <Wrapper header><UIFieldAlgin style={{ justifyContent: 'center', margin: '10px' }} vectical>
+        <UIFieldAlgin flex={3}>
+            <H2>Avatar User</H2>
+        </UIFieldAlgin>
+        <UIFieldAlgin flex={3} >    <H2 >Name </H2> </UIFieldAlgin >
+        <UIFieldAlgin flex={3} >    <H2> Role  </H2></UIFieldAlgin >
+        <UIFieldAlgin flex={3} >
+            <H2>Settings</H2>
+        </UIFieldAlgin >
+    </UIFieldAlgin></Wrapper>
 }
 const Wrapper = styled.div<any>`
-background-image: ${(props : any)  => props.header? Gradient('#7b16ff85','#34aadc') : 'none'};
+background-image: ${(props: any) => props.header ? Gradient('#7b16ff85', '#34aadc') : 'none'};
     cursor : pointer;
     &:hover {
         background-color : ${props => props.theme.bg.wash};

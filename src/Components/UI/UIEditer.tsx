@@ -44,13 +44,16 @@ export default function UIEditer({ info, content , onUpdateProfile }: IUIEditer)
             handleOnClick()
         }
     }
-    return <div><Propety onClick={(e: any) => { setOpen(!open); }} ><b>{info} : </b>{(value ? value : '')}
+    return <>
+        <Propety onClick={(e: any) => { setOpen(!open); }} ><b>{info} : </b>{(value ? value : '')}
         <Glyphicon glyph="edit" /></Propety>
-        {open ? <$Flex>
+        {
+            open && <$Flex>
             <UIInput autoFocus onKeyPress={handleOnPress}  refInput={inputref} onChange={() => { }} placeholder={info} />
             <UIButton style={{ "margin-left": "20px" }} onMouseDown={handleOnClick}>Edit</UIButton>
-        </$Flex> : null}
-    </div>
+        </$Flex> 
+        }
+    </>
 
 }
 const $Flex = styled.div`

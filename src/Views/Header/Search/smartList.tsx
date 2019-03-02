@@ -10,7 +10,7 @@ export default class SmartList extends React.Component<any> {
             return null
         }
         return <ul>
-            {smartList.map(item => <Li><A onClick={() => {
+            {smartList.map((item , key) => <Li key={key}><A onClick={() => {
                 location.href = `/article/${item.idArticle}`
                 this.props.close();
 

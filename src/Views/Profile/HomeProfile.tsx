@@ -1,141 +1,115 @@
+import UIEditer from '../../Components/UI/UIEditer';
 import * as React from 'react';
 import { getAllInformationUser } from 'src/API/client';
 import styled from 'styled-components';
+import userContainer from '../../Container/userContainer';
 import srcImg from '../../image/9284571_300x300.jpeg';
 import UILoading from '../../Components/UI/UILoading';
-import Article from '../Article';
-import followAllContainer from '../../Container/followContainer';
-import { Subscribe } from 'unstated-x';
-import { H3, H1, FlexRow } from '../../Components/styled/base';
-import { StyledSolidButton } from '../../Components/styled/button';
-import { socketNotication } from '../../socketClient/socket';
-interface IViewUserDetail {
+import UIButton from '../../Components/UI/UIButton';
+import UIModal from '../../Components/UI/UIModal';
+import UIInput from '../../Components/UI/UIInput';
+import { H1, H4, FlexRow, FlexCol, H2 } from '../../Components/styled/base';
+import UIFieldAlgin from '../../Components/UI/UIFieldAlgin';
+import { AvatarImage } from '../../Components/styled/avatar';
+import Tabs from 'src/workspace/tabs';
+
+interface IViewUserCurrent {
     match: any
 }
-class ViewUserDetail extends React.Component<IViewUserDetail> {
+class ViewUserDetail extends React.Component<IViewUserCurrent> {
     state = {
         dataUser: null,
-        ownProfileId: ''
+        isChangePass: false,
+        newAvatarLink: '',
+        open: false,
     }
     async componentDidMount() {
-        const { match: { params: { id } } } = this.props
-        followAllContainer.gotoProfileOtherUser(id)
-        const dataUser = await getAllInformationUser(id)
-        await this.setState({ dataUser, ownProfileId: id })
-    }
-    async follow(idUser) {
-        socketNotication({ idUser }, 'Follow')
-        await followAllContainer.follow(idUser)
+        const { idUser } = userContainer.state.dataUser
+        const dataUser = await getAllInformationUser(idUser)
+        await this.setState({ dataUser })
     }
     render() {
-        const { ownProfileId, dataUser } = this.state as any
-        return <Subscribe to={[followAllContainer]}>
-            {
-                followAll => {
-                    const { userFollow } = followAll.state
-                    // iam filter , get followContainer have idUser Ohter
-                    const item = userFollow.find(item => item.ownProfileId === ownProfileId)
-                    if (!item || !dataUser) {
-                        return <UILoading />
-                    }
-                    const { articles, avatarLink, name, idUser, location, biographical, birthday } = dataUser as any;
-                    const { followContainer } = item
-                    console.log('aritcle', articles)
-                    return <Subscribe to={[followContainer]}>
-                        {
-                            container => {
-                                const { allUserFollow, isFollow } = container.state
-                                return <$ArticleDetail>
-                                    <$Content >
-                                        <Left>
-                                            <$Author>
-                                                <Img src={avatarLink ? avatarLink : srcImg} />
-                                                <H3>Name : {name}</H3>
-                                                <H3> Location : {location} </H3>
-                                                <H3> Article : {articles.length}</H3>
-                                                <H3>Birthday : {birthday}</H3>
-                                            </$Author>
-                                            {/* <Author avatarLink={avatarLink} totalFollow={10} name={name} totalArticle={articles.length} /> */}
-                                        </Left>
+        const { dataUser, open } = this.state
+        if (dataUser) {
+            const { articles, avatarLink, name, location, biographical, birthday } = dataUser as any;
+            return <$ArticleDetail>
+                <Backgroud src="https://i.ytimg.com/vi/X42N5384rLk/maxresdefault.jpg" >
+                    <UIModal title="Form Change AvatarLink" trigger={<WrapperAvatar><AvatarImage  size={200}
+                            src={avatarLink ? avatarLink : srcImg} />  <H2 style={{textAlign: 'center'}}>{name}</H2></WrapperAvatar>
+                          } openModal={() => this.setState({ open: true })}
+                        open={open}
+                        onClickOutSide={() => this.setState({ open: false })}
+                        closeMoDal={() => this.setState({ open: false })}>
+                        <H1>Please paste link avatar need change</H1>
+                        <UIInput onChange={(value) => this.setState({ newAvatarLink: value })} />
+                        <UIButton onMouseDown={() => { }}>Update Avatar</UIButton>
+                    </UIModal>
+                </Backgroud>
 
-                                        <Right>
-                                            {isFollow ? <StyledSolidButton
-                                                hoverColor="text.placeholder"
-                                                color="text.alt"
-                                                onClick={async () => { await followAllContainer.unfollow(idUser) }}>
-                                                Unfollow
-                                                </StyledSolidButton>
-                                                :
-                                                <StyledSolidButton
-                                                    hoverColor="space.default"
-                                                    color="space.alt"
-                                                    onClick={() => { this.follow(ownProfileId) }}>
-                                                    Follow
-                                                  </StyledSolidButton>
-                                            }
-                                            {allUserFollow && allUserFollow.length > 0 ?
-                                                <$ListAvatarUserFollow>
-                                                    {
-                                                        allUserFollow.map((item: any, key) => {
-                                                            const { name } = item.userFollow
-                                                            return <img key={key} data-tooltip={name} src={`${item.userFollow.avatarLink ? item.userFollow.avatarLink : srcImg}`} />
-                                                        })}
+                <UIFieldAlgin flex={9} >
+                    <$Author>
+                        {[{ name }, { birthday }, { location }, { biographical }].map((item, key) => {
+                            const info = Object.keys(item)[0]
+                            const value = item[info]
+                            return <UIEditer  onUpdateProfile={(value) => { userContainer.updateProfile({ [info]: value }) }} info={info} key={key} content={value} />
+                        })}
+                        <H4> Article : {articles.length}</H4>
+                        <UIButton onMouseDown={() => { this.setState({ isChangePass: true }) }}>Change password</UIButton>
+                    </$Author>
 
-                                                </$ListAvatarUserFollow> : <p><b>No user Follow :((</b></p>}
-                                            <div>
-                                                Bio : <div ><H1>{biographical}</H1></div>
-                                            </div>
-                                        </Right>
-                                    </$Content >
-                                    <hr />
-                                    <H3> All Article <b style={{ color: "#4797db" }} >{name} </b> has write</H3>
-                                    <$ListArticle>
-                                        {
-                                            articles && articles.length > 0 ? articles.map((item, key) => {
-                                                return <Article article={item} />
-
-                                            }) :
-                                                <h2>NO Article  :), fuck own account stupid </h2>
-                                        }
-                                    </$ListArticle>
-                                </$ArticleDetail>
-                            }
-                        }
-                    </Subscribe>
-
-                }
-            }
-        </Subscribe>
+                </UIFieldAlgin>
+                <UIFieldAlgin flex={3}>
+                    {/* <UIEditer info={'biographical'} content={biographical ? biographical : ''} /> */}
+                </UIFieldAlgin>
+                <hr />
+                <Tabs items={[{name : 'abc' , component: <div>nguyen minh duc</div>},{name : 'ducccc' , component: <div>nguyen minh ducascjkasc</div>}]} />
+            </$ArticleDetail>
+        }
+        return <UILoading />
     }
 }
+const WrapperAvatar  = styled(FlexCol)`
+    background-color: #ffffff;
+    padding: 20px;
+    align-items : center;
+    border-radius: 10px;
+    box-shadow: 1px 1px 14px 0px black;
+    transform: translateY(50%);
+
+`
+const Backgroud = styled(FlexRow)<any>`
+    background-size: cover;
+    width : 100%;
+    height : 500px;
+    background-color : blue;
+    align-items : flex-end;
+    justify-content : center;
+    background-image : url(${(props : any) => props.src?props.src:'./default.jpg'});
+`
 //"idArticle", "hashTag", "category", "comment", "totalClap", "notification", "contentArticle", "titleArticle", "imageArticle", "createTime", "__typename"
-const $ListAvatarUserFollow = styled.div`
-    margin : 10px;
-    & img {
-    width : 40px;
-    height : 40px;
-    margin-left : 3px;
-    border-radius:50%;
+const $Author = styled.div`
+    h3 {
+        margin : 0px;
+        padding : 10px;
+    }
+    h3 .glyphicon {
+                opacity : 0;
+        transition : .3s;
+        cursor : pointer;
+    }
+    h3:hover {
+        background-color: #f8f8f8;
+    }
+    h3:hover .glyphicon{
+        opacity : 1;
+        transition : .3s;
+    }
+    h3 span {
+    float : right;
     }
 `
-const Img = styled.img`
-    width : 200px;
-    height : 200px;
-    border-radius : 50%;
+const $ArticleDetail = styled(FlexCol)<any>`
+
 `
-const $Author = styled.div``
-const $ArticleDetail = styled.div``
-const $ListArticle = styled(FlexRow)`
-    flex-wrap : wrap;
-    align-items: initial;
-`
-const $Content = styled.div`
-    display : flex;
-`
-const Left = styled.div`
-    flex : 5;
-`
-const Right = styled.div`
-    flex : 6;
-`
+
 export default ViewUserDetail

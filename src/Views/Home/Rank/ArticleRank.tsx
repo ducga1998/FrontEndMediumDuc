@@ -11,11 +11,11 @@ const ArticleRank = ({ article, type }: IArticle) => {
     //"count", "idUser", "name", "avatarLink", "biographical"]
 
 
-    return article.map(item => {
+    return article.map((item , key) => {
 
         const { user: { avatarLink, idUser, name }, idArticle, titleArticle, imageArticle, count } = item
         // const {count , idUser , name , avatarLink ,biographical } = item
-        return <FlexCol>
+        return <FlexCol key ={key}>
             <FlexRow data-tooltip={filterStringHTML(titleArticle, true, 100)}   >
                 <Link to={`/article/${idArticle}`} >
                     <AvatarImage plan sizeBorder="2px" radius={0} size={40} src={imageArticle} />

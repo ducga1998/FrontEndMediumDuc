@@ -27,8 +27,9 @@ class Stories extends React.Component<IStories> {
 
         return <>
             <H1> All Article {name}</H1>
-            <UIFieldAlgin horizontal>
-                {articles && articles.length > 0 ? articles.map((item, key) => {
+            <UIFieldAlgin horizontal style={{ flexWrap  : 'wrap' , flex : 'auto'}}>
+                {
+                    articles && articles.length > 0 ? articles.map((item, key) => {
                     const article = {...item , ...{user : { idUser ,  avatarLink , name }}}
                     return <Article key={key} typeArticle='store' article={article}  />
                 }) : <H2> NO Article  :), fuck own account stupid </H2>}
