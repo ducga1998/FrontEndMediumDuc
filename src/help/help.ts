@@ -13,10 +13,11 @@ export function getVariableNam(variable) {
 
 export function convertDataToGraphQL(API: any) {
     if (API && API['data']) {
+        console.log("API['data']",API['data'])
         // Object.assign()
         return API['data'][Object.keys(API['data'])[0]]
     }
-    return {}
+    return []
 }
 export function dieEvent(event){
     event.preventDefault()

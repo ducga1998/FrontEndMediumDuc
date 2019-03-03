@@ -6,9 +6,14 @@ import UILoading from '../../Components/UI/UILoading';
 import Article from '../Article';
 import followAllContainer from '../../Container/followContainer';
 import { Subscribe } from 'unstated-x';
-import { H3, H1, FlexRow } from '../../Components/styled/base';
+import { H3, H1, FlexRow, FlexCol, H2 } from '../../Components/styled/base';
 import { StyledSolidButton } from '../../Components/styled/button';
 import { socketNotication } from '../../socketClient/socket';
+import UIFieldAlgin from '../../Components/UI/UIFieldAlgin';
+import UIEditer from 'src/Components/UI/UIEditer';
+import UIButton from 'src/Components/UI/UIButton';
+import UIModal from 'src/Components/UI/UIModal';
+import { AvatarImage } from 'src/Components/styled/avatar';
 interface IViewUserDetail {
     match: any
 }
@@ -28,7 +33,6 @@ class ViewUserDetail extends React.Component<IViewUserDetail> {
         await followAllContainer.follow(idUser)
     }
     render() {
-        // return "okokokcoascbhasbch"
         const { ownProfileId, dataUser } = this.state as any
         return <Subscribe to={[followAllContainer]}>
             {
@@ -41,25 +45,29 @@ class ViewUserDetail extends React.Component<IViewUserDetail> {
                     }
                     const { articles, avatarLink, name, idUser, location, biographical, birthday } = dataUser as any;
                     const { followContainer } = item
+                    console.log('articlesarticlesarticles ' , articles)
                     return <Subscribe to={[followContainer]}>
                         {
                             container => {
                                 const { allUserFollow, isFollow } = container.state
-                                return <$ArticleDetail>
-                                    <$Content >
-                                        <Left>
-                                            <$Author>
-                                                <Img src={avatarLink ? avatarLink : srcImg} />
-                                                <H3>Name : {name}</H3>
-                                                <H3> Location : {location} </H3>
-                                                <H3> Article : {articles.length}</H3>
-                                                <H3>Birthday : {birthday}</H3>
-                                            </$Author>
-                                            {/* <Author avatarLink={avatarLink} totalFollow={10} name={name} totalArticle={articles.length} /> */}
-                                        </Left>
-
-                                        <Right>
-                                            {isFollow ? <StyledSolidButton
+                                return <$WrapperProfile>
+                                    <Backgroud src="https://i.ytimg.com/vi/X42N5384rLk/maxresdefault.jpg" >
+                                        <WrapperAvatar>
+                                            <AvatarImage size={200}
+                                                src={avatarLink ? avatarLink : srcImg} /> 
+                                            <H2 style={{ textAlign: 'center' }}>{name}</H2>
+                                        </WrapperAvatar>
+                                    </Backgroud>
+    
+                                    <UIFieldAlgin vectical  >
+                                        <$Author>
+                                            <H3>  B: {birthday}</H3>
+                                            <H3> Article : {location}</H3>
+                                            <H3> Article : {biographical}</H3>
+                                            <H3> Article : {articles.length}</H3>
+                                        </$Author>
+                                        <div className="md-listarticle">
+                                        {isFollow ? <StyledSolidButton
                                                 hoverColor="text.placeholder"
                                                 color="text.alt"
                                                 onClick={async () => { await followAllContainer.unfollow(idUser) }}>
@@ -73,32 +81,22 @@ class ViewUserDetail extends React.Component<IViewUserDetail> {
                                                     Follow
                                                   </StyledSolidButton>
                                             }
+                                            <div className="md-listFollow">
                                             {allUserFollow && allUserFollow.length > 0 ?
-                                                <$ListAvatarUserFollow>
+                                                <>
                                                     {
                                                         allUserFollow.map((item: any, key) => {
                                                             const { name } = item.userFollow
-                                                            return <img key={key} data-tooltip={name} src={`${item.userFollow.avatarLink ? item.userFollow.avatarLink : srcImg}`} />
+                                                            return <AvatarImage key={key} data-tooltip={name} src={`${item.userFollow.avatarLink ? item.userFollow.avatarLink : srcImg}`} />
                                                         })}
 
-                                                </$ListAvatarUserFollow> : <p><b>No user Follow :((</b></p>}
-                                            <div>
-                                                Bio : <div ><H1>{biographical}</H1></div>
+                                                </> : <p><b>No user Follow :((</b></p>}
+                                        <UIButton  to={`/chatMessage/${ownProfileId}/${name}`} />
                                             </div>
-                                        </Right>
-                                    </$Content >
-                                    <hr />
-                                    <H3> All Article <b style={{ color: "#4797db" }} >{name} </b> has write</H3>
-                                    <$ListArticle>
-                                        {
-                                            articles && articles.length > 0 ? articles.map((item, key) => {
-                                                return <Article article={item} />
-
-                                            }) :
-                                                <h2>NO Article  :), fuck own account stupid </h2>
-                                        }
-                                    </$ListArticle>
-                                </$ArticleDetail>
+                                        </div>
+                                    </UIFieldAlgin>
+                                   
+                                </$WrapperProfile>
                             }
                         }
                     </Subscribe>
@@ -109,33 +107,54 @@ class ViewUserDetail extends React.Component<IViewUserDetail> {
     }
 }
 //"idArticle", "hashTag", "category", "comment", "totalClap", "notification", "contentArticle", "titleArticle", "imageArticle", "createTime", "__typename"
-const $ListAvatarUserFollow = styled.div`
-    margin : 10px;
-    & img {
-    width : 40px;
-    height : 40px;
-    margin-left : 3px;
-    border-radius:50%;
+const WrapperAvatar = styled(FlexCol)`
+    background-color: #ffffff;
+    padding: 20px;
+    align-items : center;
+    border-radius: 10px;
+    box-shadow: 1px 1px 14px 0px black;
+    transform: translateY(50%);
+
+`
+const Backgroud = styled(FlexRow) <any>`
+    background-size: cover;
+    width : 100%;
+    height : 500px;
+    background-color : blue;
+    align-items : flex-end;
+    justify-content : center;
+    background-image : url(${(props: any) => props.src ? props.src : './default.jpg'});
+`
+//"idArticle", "hashTag", "category", "comment", "totalClap", "notification", "contentArticle", "titleArticle", "imageArticle", "createTime", "__typename"
+const $Author = styled.div`
+    flex : 4;
+    background : red;
+    h3 {
+        margin : 0px;
+        padding : 10px;
+    }
+    h3 .glyphicon {
+        opacity : 0;
+        transition : .3s;
+        cursor : pointer;
+    }
+    h3:hover {
+        background-color: #f8f8f8;
+    }
+    h3:hover .glyphicon{
+        opacity : 1;
+        transition : .3s;
+    }
+    h3 span {
+    float : right;
     }
 `
-const Img = styled.img`
-    width : 200px;
-    height : 200px;
-    border-radius : 50%;
+const $WrapperProfile = styled(FlexCol)`
+    .md-listarticle {
+        flex : 8;
+        .md-listFollow {
+        }
+    }
 `
-const $Author = styled.div``
-const $ArticleDetail = styled.div``
-const $ListArticle = styled(FlexRow)`
-    flex-wrap : wrap;
-    align-items: initial;
-`
-const $Content = styled.div`
-    display : flex;
-`
-const Left = styled.div`
-    flex : 5;
-`
-const Right = styled.div`
-    flex : 6;
-`
+
 export default ViewUserDetail

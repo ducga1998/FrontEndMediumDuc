@@ -3,7 +3,6 @@ import { client } from "./client";
 import { convertDataToGraphQL } from "../help/help";
 export function bookMark(bookMark: any) {
     let input: any = bookMark;
-    console.log(input)
     return new Promise(async resolve => {
         const API = await client.mutate({
             mutation: gql`

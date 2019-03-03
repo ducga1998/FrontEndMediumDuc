@@ -3,7 +3,6 @@ import { Nav, LogoLink, IconLink, Label } from '../../../Components/styled/nav';
 import Icon from '../../../Components/Icon';
 import Search from '../Search/search';
 import ButtonArticle from '../buttonWriteArticle';
-
 import userContainer from '../../../Container/userContainer';
 import styled from 'styled-components';
 import UIPopUp from '../../../Components/UI/UIPopUp';
@@ -28,7 +27,7 @@ class Navbar extends React.Component<any> {
                 <Icon glyph="home" />
                 <Label> Home </Label>
             </IconLink>
-            <IconLink to="/chatMessage" data-active={location.includes('chat')}>
+            <IconLink to="/chatMessage/no" data-active={location.includes('chat')}>
                 <Icon glyph="message" />
                 <Label> Chat</Label>
             </IconLink>
@@ -76,8 +75,6 @@ const Wrapper = styled(FlexCol)`
 `
 const Button = styled(IconLink.withComponent('a'))`
     cursor : pointer;
-    // background-color : ${props => props.theme.settings.default};
-    // border-left : 5px solid ${props => props.theme.bg.default};
 
 `
 export default Navbar
