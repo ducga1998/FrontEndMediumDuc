@@ -5,17 +5,17 @@ import Comment from './Comment'
 const ListCommnentView  =  ({ allComments }) => {
     
     return allComments.length > 0 ? allComments.map((item: any, key) => {
-        const { idRely , idComment } = item
-        let dataRely = []
-        // split data : relyComment  and NormalComment
-        if (!idRely) {
-            // loop all comment, find idComment  === idRely 
-            dataRely = allComments.filter((comment: any) => {
-                if (comment.idRely) {
-                    return comment.idRely === item.idComment
+        const { idReply , idComment } = item
+        let dataReply = []
+        // split data : replyComment  and NormalComment
+        if (!idReply) {
+            // loop all comment, find idComment  === idReply 
+            dataReply = allComments.filter((comment: any) => {
+                if (comment.idReply) {
+                    return comment.idReply === item.idComment
                 }
             })
-            return <Comment key={idComment} normalComment={item} relyComments={dataRely} />
+            return <Comment key={idComment} normalComment={item} replyComments={dataReply} />
         }        
     }) :
         <H2 style={{ textAlign: 'center', color: 'gray' }}>  NO  Comment,  : ))) cmt vào cho vui đi thằng ngu</H2>

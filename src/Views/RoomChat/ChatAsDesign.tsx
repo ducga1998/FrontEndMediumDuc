@@ -68,7 +68,6 @@ export default class ChatMessage extends React.Component<IListRoom> {
         active: '',
         messages: [],
         valueChat: '',
-        idRoom: "",
         newUserChat: {},
         rooms: listInfoUser,
         selectingRoom : null
@@ -76,15 +75,11 @@ export default class ChatMessage extends React.Component<IListRoom> {
     socket
     refViewChat: any = React.createRef()
     async componentDidMount() {
-        console.log(this)
         const { match: { params: { id ,  name} } } = this.props ; 
-        console.log('name',name)
-        const rooms =  await getRoomChat(id)  as any []// all room for we  =))  
-        console.log('rooms',rooms)
-        const flag =  rooms.filter(item => item.idUserReceive === id) // check room do ton tai chua
+        const rooms =  await getRoomChat(id)  as any [] ;// all room for we  =))  
+        const flag =  rooms.filter(item => item.idUserReceive === id); // check room do ton tai chua
         console.log('flag',flag)
         // create room if no room eexi
-       console.log(id !== 'no' && flag.length === 0)
         if (id !== 'no' && flag.length === 0) {
             const idCommunication  =  uuid()
             const newRoomChat = {
@@ -93,8 +88,7 @@ export default class ChatMessage extends React.Component<IListRoom> {
                 idCommunication
             }
             rooms.push(newRoomChat)
-                console.log('roooms', rooms , newRoomChat)
-                this.setState({  rooms  })
+            this.setState({  rooms  })
         }
         this.setState({rooms})
         this.socket = new SocketMessageChat()
@@ -113,11 +107,12 @@ export default class ChatMessage extends React.Component<IListRoom> {
         if (!selectingRoom) {
             this.socket.leave(idCommunication)
         }
+        
         // query as idCommunication 
         /*
             1 : thay doi thong tin room dang chon
             2 : thay doi toan bo tin nhan vi da chon room khac
-            4 : thay cong socket 
+            3 : thay cong socket 
         */
         console.log('data rooom selection ' ,room)
         const messages = await getAllMessageByIdUserReceive(idCommunication)
@@ -135,8 +130,6 @@ export default class ChatMessage extends React.Component<IListRoom> {
             toast.error("Please, not empty, fill out input : )")
             return
         }
-        
-        
         const { scrollHeight } = this.refViewChat
         this.setState({ messages: [...messages, ...[dataMess]], valueChat: '' }, () => {
             this.refViewChat.scrollTo({
@@ -157,13 +150,12 @@ export default class ChatMessage extends React.Component<IListRoom> {
     }
     render() {
         const {idUser}   = userContainer.state.dataUser
-        const { active, messages, valueChat, rooms, idRoom  , selectingRoom} = this.state
+        const { active, messages, valueChat, rooms  , selectingRoom} = this.state
         return <$Wrapper>
             <PeasonList>
                 {
                     rooms.map((room, key) => {
                         const {idCommunication} = room
-                        
                         return <div key={key} className={`item_Message ${idCommunication === active ? "active" : ''}`}
                         onClick={
                             () => {
@@ -192,7 +184,7 @@ export default class ChatMessage extends React.Component<IListRoom> {
                     <div className="view_chat" ref={(e) => this.refViewChat = e} >
                         {
                             messages.map((message, key) => {
-                            const { contentMessage, role ,  idUserReceive } = message as any
+                            const { contentMessage,  idUserReceive } = message as any
                             return <div className={`item_chat ${idUser === idUserReceive? "friend" : "me"} `} key={key}>
                                 <div className="item_chat_value">{contentMessage}</div>
                             </div>

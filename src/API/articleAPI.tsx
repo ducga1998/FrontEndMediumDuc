@@ -25,7 +25,6 @@ export function updateArticleToClient(article: any) {
             }
         })
         resolve(convertDataToGraphQL(API))
-
     })
 }
 export function getDataSearch() {
@@ -41,7 +40,6 @@ export function getDataSearch() {
                     `
         })
         resolve(convertDataToGraphQL(API))
-
     })
 }
 

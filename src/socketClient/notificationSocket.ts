@@ -11,7 +11,7 @@ export function notificationFuncSocket(user: any) {
             if (type === 'Comment') {
                 toastNotification(`${name} đã ${type} vào bài viết  : ${filterStringHTML(titleArticle)} của bạn `)
             }
-            if(type === 'RelyComment'){
+            if(type === 'ReplyComment'){
                 toastNotification(`${name} đã trả lời bình luận của bạn tại bài viết${filterStringHTML(titleArticle)}`)
             }
             if (type === 'Follow') {

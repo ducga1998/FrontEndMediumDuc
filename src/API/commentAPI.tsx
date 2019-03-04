@@ -15,7 +15,7 @@ export function getAllCommentinArtcileCurrent(idUser: string , first :number , o
                             idArticle
                             content
                             createdAt
-                            idRely
+                            idReply
                             userComment {
                                 name
                                 avatarLink
@@ -36,7 +36,7 @@ export function getAllCommentinArtcileCurrent(idUser: string , first :number , o
 //MUATION 
 // this is function felp we add comment into a article , 
 // input : idArticle and  content comment ?  . Iam not sure  :v 
-export function addComment(input: { idComment : string ,  idUser: string,  content: string , idRely?: string }) {
+export function addComment(input: { idComment : string ,  idUser: string,  content: string , idReply?: string }) {
     return new Promise(async resolve => {
         const API = await client.mutate({
             mutation: gql`
@@ -70,7 +70,7 @@ export function addComment(input: { idComment : string ,  idUser: string,  conte
 
     })
 } 
-export function addRelyComment(input: { idUser: string, idArticle: string, content: string , idRely :string }) {
+export function addReplyComment(input: { idUser: string, idArticle: string, content: string , idReply :string }) {
     return new Promise(async resolve => {
         const API = await client.mutate({
             mutation: gql`

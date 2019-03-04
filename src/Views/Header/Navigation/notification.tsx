@@ -25,8 +25,8 @@ function handleTypeNotification(type, data) {
         case 'Comment':
             notification = <div><Link to={`/user/${idUser}`}>{name}</Link> <i>đã comment trong bài viết {titleArticle} của bạn</i></div>
             break;
-        case 'RelyComment':
-            notification = <div><Link to={`/user/${idUser}`}>{name}</Link> <i>đã rely comment trong bài viết {titleArticle} của bạn</i></div>
+        case 'ReplyComment':
+            notification = <div><Link to={`/user/${idUser}`}>{name}</Link> <i>đã reply comment trong bài viết {titleArticle} của bạn</i></div>
             break
         default:
             notification

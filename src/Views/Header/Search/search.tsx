@@ -1,6 +1,5 @@
 import * as React from 'react'
 import UIInput from '../../../Components/UI/UIInput';
-
 import styled from 'styled-components';
 import buttonX from './buttonX.svg'
 import { getDataSearch } from '../../../API/articleAPI';

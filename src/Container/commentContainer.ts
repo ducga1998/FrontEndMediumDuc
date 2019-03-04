@@ -15,17 +15,17 @@ class CommentAllContainer extends Container<any>{
     constructor(state) {
         super(state)
     }
-    addRely(input, idrely) {
+    addReply(input, idreply) {
 
     }
     async addCommentInArticle(input : any) {
         const idComment = uuid()
-        const { content, idArticle, idUser ,idRely} = input
+        const { content, idArticle, idUser ,idReply} = input
         // this is new comment data 
         //request to backend
         // B1 : 
         let newComment = await addComment({...input , ...{idComment}}) as any
-        if(idRely){
+        if(idReply){
             return
         }
         // B2 :  add to container on front end

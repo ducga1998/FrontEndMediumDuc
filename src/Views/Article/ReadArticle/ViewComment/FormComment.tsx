@@ -11,12 +11,12 @@ import { renderElement } from 'src/Core/renderElement';
 import { Input, FlexCol } from 'src/Components/styled/base';
 import { AvatarImage } from 'src/Components/styled/avatar';
 import { addComment } from 'src/API/commentAPI';
-interface IFormRely {
+interface IFormReply {
     context: any,
-    idRely?: string,
+    idReply?: string,
     onChange: (event: any) => any
 }
-const FormComment = ({ context, idRely, onChange }: IFormRely) => {
+const FormComment = ({ context, idReply, onChange }: IFormReply) => {
     const [content, setContent] = React.useState('')
     const { idArticle } = context
     const { avatarLink, name } = userContainer.state.dataUser
@@ -31,15 +31,15 @@ const FormComment = ({ context, idRely, onChange }: IFormRely) => {
             idArticle,
 
         } as any
-        if (idRely && onChange) {
-            input = { ...input, ...{ idRely } }
-         
+        if (idReply && onChange) {
+            input = { ...input, ...{ idReply } }
+
         }
-        const { user: { idUser  } } = context
+        const { user: { idUser } } = context
         // socket notification from backend
-        socketNotication({ content, idUser }, idRely ? 'RelyComment' : 'Comment')
-        let newComment = await addComment(input) ;
-        console.log('relyxasx',newComment)
+        socketNotication({ content, idUser }, idReply ? 'ReplyComment' : 'Comment')
+        let newComment = await addComment(input);
+        console.log('replyxasx', newComment)
         onChange(newComment)
         setContent('')
     }
@@ -49,11 +49,11 @@ const FormComment = ({ context, idRely, onChange }: IFormRely) => {
         }
     }
     return <$Aglin>
-        <div className = "wrapperAvatar">
+        <div className="wrapperAvatar">
             <AvatarImage
                 src={avatarLink ? avatarLink : IMAGE_SOURCE_DEFAULT} /> <b>{name}</b>
         </div>
-        <div  className = "wrapperAvatar">
+        <div className="wrapperAvatar">
             <$FormComment placeholder="Comment something ....."
                 value={content}
                 onKeyPress={handleKeyPress}
@@ -61,7 +61,7 @@ const FormComment = ({ context, idRely, onChange }: IFormRely) => {
             <UIButton
                 style={{ flex: 2 }}
                 onMouseDown={handleAddComment}>Comment
-            </UIButton>
+                    </UIButton>
         </div>
     </$Aglin>
 }

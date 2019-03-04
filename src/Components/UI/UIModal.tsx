@@ -4,7 +4,6 @@ import styled from 'styled-components';
 
 import theme from '../../theme';
 import UIWidget from './UIWidget';
-import UIButton from './UIButton';
 import { OverLay } from '../styled/overlay';
 import { H1 } from '../styled/base';
 // const { useEffect, useState } = React
@@ -34,8 +33,6 @@ export default function UIModal({ trigger, children, title, width, height, close
         }} >
             <$Header><H1>{title ? title : 'Header Modal '}</H1></$Header>
             <$Content height={height} width={width}> {children}</$Content>
-
-           
         </$Modal>
     </$Background>
     </UIWidget> </>
@@ -49,15 +46,6 @@ const $Header = styled.header`
     height: 100px;
 
 `
-
-const $Footer = styled.div`
-display : flex;
-justify-content : flex-end;
-background-color : ${props => props.theme.bg.default};
-border-top: 1px solid black;
-padding: 10px;
-`
-
 const $Content = styled.div<{ height?: string, width?: string }>`
     padding : 10px;
     height : ${props => props.height ? props.height : 'auto'};
@@ -65,9 +53,9 @@ const $Content = styled.div<{ height?: string, width?: string }>`
     background-color: ${theme.bg.default};
 `
 const $Modal = styled.div<{ width?: string, height?: string }>`
-display : flex;
-flex-direction : column;
-z-index : 10;
+    display : flex;
+    flex-direction : column;
+    z-index : 10;
     width : ${(props: any) => props.width ? props.width : 'auto'};
     height: ${(props: any) => props.height ? props.height : 'auto'};
     flex-direction: column;
