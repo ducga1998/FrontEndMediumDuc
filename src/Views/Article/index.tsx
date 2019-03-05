@@ -31,7 +31,7 @@ export default function Article({ article, typeArticle, vectical, horizontal, st
     }
 
     const { name, avatarLink, idUser } = user
-    const backgroundArticle = `http://localhost:4000/img/${imageArticle}`
+const backgroundArticle = `http://localhost:4000/img/${imageArticle}`
     const linkSwitchArticle = typeArticle && typeArticle === 'store' ? `/store/${idArticle}` : `/article/${idArticle}`
 
     return <$Article style={style || undefined} vectical={vectical || undefined}>

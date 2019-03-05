@@ -15,6 +15,14 @@ export function getRoomById() {
                                 idUser
                                 contentMessage
                             }
+                            ownerUserInfo{
+                                name
+                                avatarLink
+                            }
+                            clientInfo{
+                                name
+                                avatarLink
+                            }
                         }
                     }
                     `
@@ -34,7 +42,16 @@ export function getRoomById() {
                         idUser
                         idRoom
                         idUserReceive
+                        ownerUserInfo{
+                                name
+                                avatarLink
+                        }
+                        clientInfo{
+                                name
+                                avatarLink
+                        }
                     }
+                    
             }
             `,
             variables: {

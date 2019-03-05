@@ -1,6 +1,7 @@
 import { Block, ImageSideButton, addNewBlock } from 'medium-draft';
 import * as React from 'react'
 import articleContainer from '../../../Container/articleContainer';
+import { LINK_DEVELOPMENT } from 'src/help/help';
 export default class CustomImageSideButton extends ImageSideButton <any , {images : string[]}>{
  
   props: any;
@@ -24,7 +25,7 @@ export default class CustomImageSideButton extends ImageSideButton <any , {image
               }
             
               this.props.setEditorState(addNewBlock(this.props.getEditorState(), Block.IMAGE, {
-                src: `http://localhost:4000/img/${name}`,
+                src: `${LINK_DEVELOPMENT}/img/${name}`,
               }));
             }
           });

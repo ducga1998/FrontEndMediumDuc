@@ -1,15 +1,10 @@
 import * as React from 'react';
 
 import styled from 'styled-components';
-import { IMAGE_SOURCE_DEFAULT } from 'src/help/define';
 import FormComment from './FormComment';
-import { AvatarImage } from 'src/Components/styled/avatar';
-import { H2 } from 'src/Components/styled/base';
-import userContainer from 'src/Container/userContainer';
 import { getAllCommentinArtcileCurrent } from 'src/API/commentAPI';
 
 import { StyledTextButton } from 'src/Components/styled/button';
-import { timeDifference } from 'src/help/util';
 import UIButton from 'src/Components/UI/UIButton';
 import ListCommentView from './ListCommentView';
 interface IViewComment {

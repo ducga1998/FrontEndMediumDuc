@@ -23,3 +23,5 @@ export function dieEvent(event){
     event.preventDefault()
     event.stopPropagation()
 }
+
+export const LINK_DEVELOPMENT = process.env.NODE_ENV === 'production' ?'':'http://localhost:4000'
