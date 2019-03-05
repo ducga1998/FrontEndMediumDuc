@@ -6,50 +6,59 @@ import ButtonArticle from '../buttonWriteArticle';
 import userContainer from '../../../Container/userContainer';
 import styled from 'styled-components';
 import UIPopUp from '../../../Components/UI/UIPopUp';
-import { Shadow,  FlexCol } from '../../../Components/styled/base';
+import { Shadow, FlexCol } from '../../../Components/styled/base';
 import SideBar from './SideBar';
 import Notification from './notification'
+import { AvatarImage } from 'src/Components/styled/avatar';
 class Navbar extends React.Component<any> {
     state = {
         sideBarOpen: false,
         notificationOpen: false
     }
     render() {
-        const { dataUser } = userContainer.state
+        const { dataUser  } = userContainer.state
+        const {avatarLink} = dataUser
         const { sideBarOpen } = this.state
         const location = window.location.href
         return <Nav>
-            <NavButton to="/" onClick={async (e: Event) => { e.preventDefault(); await this.setState({ sideBarOpen: true }) }}>
-                <Icon onClick={() => { this.setState({ sideBarOpen: true }) }} glyph="menu" />
-                <SideBar user={dataUser} open={sideBarOpen} setOpen={() => { this.setState({ sideBarOpen: false }) }} />
-            </NavButton>
-            <IconLink to="/home" data-active={location.includes('home')}>
-                <Icon glyph="home" />
-                <Label> Home </Label>
-            </IconLink>
-            <IconLink to="/chatMessage/no" data-active={location.includes('chat')}>
-                <Icon glyph="message" />
-                <Label> Chat</Label>
-            </IconLink>
-            <IconLink to="/about" data-active={location.includes('about')}>
-                <Label> About </Label>
-            </IconLink>
-            <ButtonArticle />
-            <IconLink to="/writearticle" > <Label>Write Article</Label></IconLink>
-            <Notification />
-            <Search />
-            <UIPopUp trigger={<Button data-active={true}>   Setting</Button>}>
-                <div style={{ display: 'flex' }}>
-                    <Wrapper>
-                      
-                        <IconLink to="/profile"> Profile</IconLink>
-                        <IconLink to="/stories">Stories</IconLink>
-                        <IconLink to="/bookmarks">Bookmark</IconLink>
-                        <IconLink to="/writearticle">Write Article</IconLink>
-                        <IconLink to="/logout" >Logout</IconLink>
-                    </Wrapper>
-                </div>
-            </UIPopUp>
+            <Nav>
+                <NavButton to="/" onClick={async (e: Event) => { e.preventDefault(); await this.setState({ sideBarOpen: true }) }}>
+                    <Icon onClick={() => { this.setState({ sideBarOpen: true }) }} glyph="menu" />
+                    <SideBar user={dataUser} open={sideBarOpen} setOpen={() => { this.setState({ sideBarOpen: false }) }} />
+                </NavButton>
+
+                <IconLink to="/home" data-active={location.includes('home')}>
+                    <Icon glyph="home" />
+                    <Label> Home </Label>
+                </IconLink>
+                <IconLink to="/chatMessage/no" data-active={location.includes('chat')}>
+                    <Icon glyph="message" />
+                    <Label> Chat</Label>
+                </IconLink>
+                <IconLink to="/about" data-active={location.includes('about')}>
+                    <i className="fas fa-info" /> <Label>About</Label>
+                </IconLink>
+            </Nav>
+            <Nav>
+                <ButtonArticle />
+                <IconLink to="/writearticle" ><i className="fas fa-pencil-alt" />  </IconLink>
+                <Notification />
+                <Search />
+                <UIPopUp trigger={<div style={{backgroundColor : 'white'}}  >
+                <AvatarImage size={30} src={avatarLink} />
+                </div>}>
+                    <div style={{ display: 'flex' }}>
+                        <Wrapper>
+
+                            <IconLink to="/profile"><i className="fas fa-user-circle"/> <Label>Profile</Label></IconLink>
+                            <IconLink to="/stories"><i className="fas fa-store-alt"/><Label>Stories</Label></IconLink>
+                            <IconLink to="/bookmarks"><i className="fas fa-bookmark"/> <Label>Bookmark</Label></IconLink>
+                            <IconLink to="/writearticle"><i className="fas fa-pencil-alt" /><Label>Write</Label></IconLink>
+                            <IconLink to="/logout" ><i className="fal fa-sign-out" /><Label>Logout</Label></IconLink>
+                        </Wrapper>
+                    </div>
+                </UIPopUp>
+            </Nav>
         </Nav>
     }
 }

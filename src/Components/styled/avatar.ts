@@ -1,7 +1,7 @@
 
 import styled from 'styled-components';
 
-export const AvatarImage = styled.img<{ plan ?: boolean , radius ?: any ,sizeBorder ?: string , size ?: number}>`
+export const AvatarImage = styled.img<{  plan ?: boolean , radius ?: any ,sizeBorder ?: string , size ?: number}>`
   cursor : pointer;
   margin : 10px;
   background-color: transparent;

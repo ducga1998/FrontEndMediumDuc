@@ -20,14 +20,18 @@ function renderButton() {
     }
     console.log('countButton', countButton, count % first)
 
-    return <Section>{Array(countButton).fill(1).map((item, key) => {
+    return <Section>
+
+    {Array(countButton).fill(1).map((item, key) => {
         return <SubscribeOne to={allArticleContainer} bind={['offset']}key={key} >
             {
                 () => {
 
                     const { offset } = allArticleContainer.state
                     console.log(offset, key)
-                    return <UIButton style={{ margin: '2px' }} active={key === offset} keyButton={key} onMouseDown={handleOnClick}>{key + 1}</ UIButton >
+                    return<> <UIButton style={{ margin: '2px' }} active={key === offset} keyButton={key} onMouseDown={handleOnClick}>{key + 1}</ UIButton >
+                   
+                    </>
                 }
             }
         </SubscribeOne>

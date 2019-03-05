@@ -59,7 +59,8 @@ export const allArticleContainer = new AllArticleContainer({
     registryArticle: [],
     first: 8,
     offset: 0,
-    count: 0
+    count: 0,
+    vectical : false
 })
 class Article extends Container<any> {
 

@@ -4,7 +4,7 @@ import { getAllArticle } from '../../API/articleAPI';
 import Article from '../Article';
 import { Subscribe } from 'unstated-x';
 import { allArticleContainer } from '../../Container/articleContainer';
-import { FlexCol, FlexRow, H2 } from '../../Components/styled/base';
+import {  FlexRow} from '../../Components/styled/base';
 // import Footer from './footer'
 export default class ListArticle extends React.Component<any> {
     state = {
@@ -25,7 +25,7 @@ export default class ListArticle extends React.Component<any> {
         return <Subscribe to={[allArticleContainer]}>
             {
                 container => {
-                    const { registryArticle } = container.state
+                    const { registryArticle , vectical  } = container.state
 
                     return <$ListArticle>
                     {
@@ -34,7 +34,7 @@ export default class ListArticle extends React.Component<any> {
                             return <Subscribe   key={key} to={[articleContainer]}>
                                 {
                                     () => { 
-                                        return <Article  article ={articleContainer.state}/>
+                                        return <Article vectical={vectical}  article ={articleContainer.state}/>
                                     }
                                 }
                             </Subscribe>

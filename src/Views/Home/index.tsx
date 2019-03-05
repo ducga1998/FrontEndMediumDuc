@@ -10,7 +10,6 @@ export default function Home() {
     return <$Content>
         <$ListArticle >
             <Pagination />
-           
             <ListArticle />
         </$ListArticle>
         <$ListAuthor>
