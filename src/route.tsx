@@ -73,7 +73,7 @@ const AppRouter = () => {
                     <Route path="/store/:id" component={isAuth(StoreDetail)} />
                     <Route path="/profile" component={isAuth(Profile)} />
                     <Route path="/writearticle" component={isAuth(WriteArticle)} />
-                    <Route path="/chatMessage/:id/:name" component= {isAuth(ChatMessage)} />
+                    <Route path="/chatMessage/:id" component= {isAuth(ChatMessage)} />
                     <Route path="/bookmarks" component={isAuth(ArticleBookMark)} />
                         {user && user.decentraliz === 3? <>  
                      <Route path ="/managerAccount" component={isAuth(ManagerAccount)} />

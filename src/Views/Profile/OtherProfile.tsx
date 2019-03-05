@@ -45,29 +45,30 @@ class ViewUserDetail extends React.Component<IViewUserDetail> {
                     }
                     const { articles, avatarLink, name, idUser, location, biographical, birthday } = dataUser as any;
                     const { followContainer } = item
-                    console.log('articlesarticlesarticles ' , articles)
+                    console.log('articlesarticlesarticles ', articles)
                     return <Subscribe to={[followContainer]}>
                         {
                             container => {
                                 const { allUserFollow, isFollow } = container.state
+                                console.log('allUserFollow',allUserFollow)
                                 return <$WrapperProfile>
                                     <Backgroud src="https://i.ytimg.com/vi/X42N5384rLk/maxresdefault.jpg" >
                                         <WrapperAvatar>
                                             <AvatarImage size={200}
-                                                src={avatarLink ? avatarLink : srcImg} /> 
+                                                src={avatarLink ? avatarLink : srcImg} />
                                             <H2 style={{ textAlign: 'center' }}>{name}</H2>
                                         </WrapperAvatar>
                                     </Backgroud>
-    
+
                                     <UIFieldAlgin vectical  >
                                         <$Author>
-                                            <H3>  B: {birthday}</H3>
+                                            <H3> B: {birthday}</H3>
                                             <H3> Article : {location}</H3>
                                             <H3> Article : {biographical}</H3>
                                             <H3> Article : {articles.length}</H3>
                                         </$Author>
                                         <div className="md-listarticle">
-                                        {isFollow ? <StyledSolidButton
+                                            {isFollow ? <StyledSolidButton
                                                 hoverColor="text.placeholder"
                                                 color="text.alt"
                                                 onClick={async () => { await followAllContainer.unfollow(idUser) }}>
@@ -82,20 +83,20 @@ class ViewUserDetail extends React.Component<IViewUserDetail> {
                                                   </StyledSolidButton>
                                             }
                                             <div className="md-listFollow">
-                                            {allUserFollow && allUserFollow.length > 0 ?
-                                                <>
-                                                    {
-                                                        allUserFollow.map((item: any, key) => {
-                                                            const { name } = item.userFollow
-                                                            return <AvatarImage key={key} data-tooltip={name} src={`${item.userFollow.avatarLink ? item.userFollow.avatarLink : srcImg}`} />
-                                                        })}
+                                                {allUserFollow && allUserFollow.length > 0 ?
+                                                    <>
+                                                        {
+                                                            allUserFollow.map((item: any, key) => {
+                                                                const { name } = item.userFollow
+                                                                return <AvatarImage key={key} data-tooltip={name} src={`${item.userFollow.avatarLink ? item.userFollow.avatarLink : srcImg}`} />
+                                                            })}
 
-                                                </> : <p><b>No user Follow :((</b></p>}
-                                        <UIButton  to={`/chatMessage/${ownProfileId}/${name}`} />
+                                                    </> : <p><b>No user Follow :((</b></p>}
+                                                <UIButton to={`/chatMessage/${ownProfileId}`} />
                                             </div>
                                         </div>
                                     </UIFieldAlgin>
-                                   
+
                                 </$WrapperProfile>
                             }
                         }

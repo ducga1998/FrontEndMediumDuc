@@ -27,7 +27,7 @@ class Navbar extends React.Component<any> {
                 <Icon glyph="home" />
                 <Label> Home </Label>
             </IconLink>
-            <IconLink to="/chatMessage/no/ok" data-active={location.includes('chat')}>
+            <IconLink to="/chatMessage/no" data-active={location.includes('chat')}>
                 <Icon glyph="message" />
                 <Label> Chat</Label>
             </IconLink>

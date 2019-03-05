@@ -5,7 +5,6 @@ import styled from 'styled-components';
 import { getArticleById } from '../../../API/articleAPI';
 import UILoading from '../../../Components/UI/UILoading';
 import Author from '../../Author';
-import commentContainer from '../../../Container/commentContainer';
 import UIReaction from '../../../Components/UI/UIReaction';
 import { StyledSolidButton } from '../../../Components/styled/button';
 import {  H2, H4, H3 } from '../../../Components/styled/base';
@@ -28,7 +27,6 @@ class ReadArticle extends React.Component<IReadArticleType> {
     }
     async componentDidMount() {
         const { match: { params: { id } } } = this.props
-        commentContainer.getAllCommentByIdArticle(id ,  0 , 5)
         const article = await getArticleById(id) as any
         if (article) {
             notificationSocket.emit('join', userContainer.state.dataUser.idUser)
