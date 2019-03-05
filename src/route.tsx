@@ -62,6 +62,7 @@ const AppRouter = () => {
         return <Router history={history} >
             <Switch>
                 <Layout>
+                     <Route path="/" component={Login} />
                     <Route path="/about/" component={About} />
                     <Route path="/user/:id" component={isAuth(ViewUser)} />
                     <Route path="/login" component={Login} />

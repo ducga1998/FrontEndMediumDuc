@@ -13,8 +13,9 @@ const defaultOptions = {
     },
   }
   const cache = new InMemoryCache();
+  const LINK = process.env.NODE_ENV  === 'production'? '':'http://localhost:3000'
 export const client = new ApolloClient({
-    uri: "http://localhost:3000/graphql",
+    uri: `${LINK}/graphql`,
     
     // defaultOptions : defaultOptions
 })
