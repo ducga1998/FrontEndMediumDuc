@@ -50,25 +50,16 @@ class ViewUserDetail extends React.Component<IViewUserDetail> {
                         {
                             container => {
                                 const { allUserFollow, isFollow } = container.state
-                                console.log('allUserFollow',allUserFollow)
+                                console.log('allUserFollow', allUserFollow)
                                 return <$WrapperProfile>
-                                    <Backgroud src="https://i.ytimg.com/vi/X42N5384rLk/maxresdefault.jpg" >
+                                    <Backgroud src='/background.jpg' >
                                         <WrapperAvatar>
                                             <AvatarImage size={200}
                                                 src={avatarLink ? avatarLink : srcImg} />
                                             <H2 style={{ textAlign: 'center' }}>{name}</H2>
                                         </WrapperAvatar>
-                                    </Backgroud>
-
-                                    <UIFieldAlgin vectical  >
-                                        <$Author>
-                                            <H3> B: {birthday}</H3>
-                                            <H3> Article : {location}</H3>
-                                            <H3> Article : {biographical}</H3>
-                                            <H3> Article : {articles.length}</H3>
-                                        </$Author>
-                                        <div className="md-listarticle">
-                                            {isFollow ? <StyledSolidButton
+                                        <div className="md-contact-box">
+                                        {isFollow ? <StyledSolidButton
                                                 hoverColor="text.placeholder"
                                                 color="text.alt"
                                                 onClick={async () => { await followAllContainer.unfollow(idUser) }}>
@@ -82,18 +73,42 @@ class ViewUserDetail extends React.Component<IViewUserDetail> {
                                                     Follow
                                                   </StyledSolidButton>
                                             }
+                                             <UIButton to={`/chatMessage/${ownProfileId}`}>Chat </UIButton>
+                                        </div>
+                                    </Backgroud>
+
+                                    <UIFieldAlgin vectical  >
+                                        <$Author>
+                                            <H3> Birthday: {birthday}</H3>
+                                            <H3> Place : {location}</H3>
+                                            <H3> BIO : {biographical}</H3>
+                                            <H3> Article Count : {articles.length}</H3>
+                                        </$Author>
+                                        <div className="md-listarticle">
+                                           
                                             <div className="md-listFollow">
                                                 {allUserFollow && allUserFollow.length > 0 ?
                                                     <>
                                                         {
                                                             allUserFollow.map((item: any, key) => {
+                                                                console.log('item', item)
+                                                                if (!item.userFollow) {
+                                                                    return null
+                                                                }
                                                                 const { name } = item.userFollow
                                                                 return <AvatarImage key={key} data-tooltip={name} src={`${item.userFollow.avatarLink ? item.userFollow.avatarLink : srcImg}`} />
                                                             })}
 
                                                     </> : <p><b>No user Follow :((</b></p>}
-                                                <UIButton to={`/chatMessage/${ownProfileId}`} />
+                                                <UIFieldAlgin horizontal style={{ flexWrap: 'wrap', flex: 'auto' }}>
+                                                    {
+                                                        articles && articles.length > 0 ? articles.map((item, key) => {
+                                                            const article = { ...item, ...{ user: { idUser, avatarLink, name } } }
+                                                            return <Article vectical key={key}  article={article} />
+                                                        }) : <H2> NO Article  :), fuck own account stupid </H2>}
+                                                </UIFieldAlgin>
                                             </div>
+                                           
                                         </div>
                                     </UIFieldAlgin>
 
@@ -109,27 +124,33 @@ class ViewUserDetail extends React.Component<IViewUserDetail> {
 }
 //"idArticle", "hashTag", "category", "comment", "totalClap", "notification", "contentArticle", "titleArticle", "imageArticle", "createTime", "__typename"
 const WrapperAvatar = styled(FlexCol)`
+    margin: 20px;
     background-color: #ffffff;
     padding: 20px;
     align-items : center;
     border-radius: 10px;
     box-shadow: 1px 1px 14px 0px black;
-    transform: translateY(50%);
-
 `
 const Backgroud = styled(FlexRow) <any>`
     background-size: cover;
     width : 100%;
     height : 500px;
-    background-color : blue;
+    flex : 12;
+
     align-items : flex-end;
-    justify-content : center;
+    justify-content : flex-start;
     background-image : url(${(props: any) => props.src ? props.src : './default.jpg'});
+    .md-contact-box{
+        display: flex;
+        flex: 9;
+        justify-content: flex-end;
+        padding: 0px 120px 20px 0px;
+    }
 `
 //"idArticle", "hashTag", "category", "comment", "totalClap", "notification", "contentArticle", "titleArticle", "imageArticle", "createTime", "__typename"
 const $Author = styled.div`
     flex : 4;
-    background : red;
+    background :  #f8f8f8;
     h3 {
         margin : 0px;
         padding : 10px;
@@ -150,7 +171,7 @@ const $Author = styled.div`
     float : right;
     }
 `
-const $WrapperProfile = styled(FlexCol)`
+const $WrapperProfile = styled.div`
     .md-listarticle {
         flex : 8;
         .md-listFollow {

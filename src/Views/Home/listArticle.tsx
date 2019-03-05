@@ -6,7 +6,6 @@ import { Subscribe } from 'unstated-x';
 import { allArticleContainer } from '../../Container/articleContainer';
 import { FlexCol, FlexRow, H2 } from '../../Components/styled/base';
 // import Footer from './footer'
-const { useEffect, useState } = React as any
 export default class ListArticle extends React.Component<any> {
     state = {
         value: '',

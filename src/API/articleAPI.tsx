@@ -110,16 +110,10 @@ export function getAllArticle(first = 5, offset = 0) {
                                 idUser
                                 hashTag
                                 category
-                                comment {
-                                    idUser
-                                    idArticle
-                                    content
-                                }
                                 bookmark {
                                     idUserBookMark
                                 }
                                 totalClap
-                                notification
                                 contentArticle
                                 imageArticle
                                 titleArticle

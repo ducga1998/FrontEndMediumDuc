@@ -31,7 +31,7 @@ export default function Article({ article, typeArticle, vectical, horizontal, st
     }
 
     const { name, avatarLink, idUser } = user
-const backgroundArticle = `http://localhost:4000/img/${imageArticle}`
+    const backgroundArticle = `http://localhost:4000/img/${imageArticle}`
     const linkSwitchArticle = typeArticle && typeArticle === 'store' ? `/store/${idArticle}` : `/article/${idArticle}`
 
     return <$Article style={style || undefined} vectical={vectical || undefined}>
@@ -43,14 +43,14 @@ const backgroundArticle = `http://localhost:4000/img/${imageArticle}`
                 </WrapperImg>}
 
         </Link>
-    <$DetailArticle>
+        <$DetailArticle>
             <UIFieldAlgin>
                 <H1 style={{ flex: 6 }}>
                     <Link to={linkSwitchArticle}>{renderHTML(filterStringHTML(titleArticle, false, 35))}</Link>
                 </H1>
                 {
                     vectical ? null : <> <$TotalClap><i className="fa fa-bookmark" /> {bookmark ? bookmark.length : 0}</$TotalClap>
-                    <$TotalComment><i className="fa fa-comment" /> {comment ? comment.length : 0}</$TotalComment></>}
+                        <$TotalComment><i className="fa fa-comment" /> {comment ? comment.length : 0}</$TotalComment></>}
             </UIFieldAlgin>
             <H4> {timeDifference(new Date(), new Date(createTime))}</H4> <br />
             <H4><b>Content : </b>{renderHTML(filterStringHTML(contentArticle))}<Link to={linkSwitchArticle}> Read more ...</Link></H4>
