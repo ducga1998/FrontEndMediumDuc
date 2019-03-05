@@ -8,9 +8,11 @@ import UIButton from '../../Components/UI/UIButton';;
 import { fontStack } from '../../Components/styled/base';
 import { toast } from 'react-toastify';
 import { getAllInformationUser } from 'src/API/client';
-import { getAllMessageByIdUserReceive, getRoomChat } from 'src/API/messageAPI';
+import { getAllMessageByIdUserReceive } from 'src/API/messageAPI';
 import uuid from 'uuid'
 import userContainer from '../../Container/userContainer';
+import { createRoom, getRoomById } from '../../API/roomAPI';
+
 interface IListRoom {
     match?: any
 }
@@ -20,44 +22,43 @@ const listInfoUser = [
         nameUserReceive: "duc",
         time: "now",
         newMessage: "ok roi nha",
-        idCommunication  : "AfA"
+        idRoom  : "AfA"
     },
     {
         idUserReceive: "B",
         nameUserReceive: "duc",
         time: "now",
         newMessage: "ok roi nha",
-        idCommunication  : "A2A"
+        idRoom  : "A2A"
     },
     {
         idUserReceive: "C",
         nameUserReveice: "duc",
         time: "now",
         newMessage: "ok roi nha",
-        idCommunication  : "A3A"
+        idRoom  : "A3A"
     },
     {
         idUserReceive: "D",
         nameUserReceive: "duc",
         time: "now",
         newMessage: "ok roi nha",
-        idCommunication  : "AAr"
+        idRoom  : "AAr"
     },
     {
         idUserReceive: "E",
         nameUserReceive: "duc",
         time: "now",
         newMessage: "ok roi nha",
-        idCommunication  : "AAe"
+        idRoom  : "AAe"
     },
     {
         idUserReceive: "F",
         nameUserReceive: "duc",
         time: "now",
         newMessage: "ok roi nha",
-        idCommunication  : "AAr"
-    },
-
+        idRoom  : "AAr"
+    }
 ]
 //save tat ca tin nhan nha 
 // cai nao load truoc thi load
@@ -70,26 +71,34 @@ export default class ChatMessage extends React.Component<IListRoom> {
         valueChat: '',
         newUserChat: {},
         rooms: listInfoUser,
-        selectingRoom : null
+        selectingRoom : null,
+        firstSend : false,
+        isOwner : true
     }
     socket
     refViewChat: any = React.createRef()
     async componentDidMount() {
         const { match: { params: { id ,  name} } } = this.props ; 
-        const rooms =  await getRoomChat(id)  as any [] ;// all room for we  =))  
-        const flag =  rooms.filter(item => item.idUserReceive === id); // check room do ton tai chua
+        const rooms =  await getRoomById()  as any [] ;// all room for we  =))  
+        const flag2 =  rooms.filter(item => item.idUser === id); // client
+        const flag =  rooms.filter(item => item.idUserReceive === id); // owner room 
         console.log('flag',flag)
+        if(flag2.length === 0){
+            console.log('it " s owner rooom')
+            this.setState({isOwner : false })
+        }
         // create room if no room eexi
-        if (id !== 'no' && flag.length === 0) {
-            const idCommunication  =  uuid()
-            const newRoomChat = {
-                idUserReceive : id, 
-                nameUserReceive : name,
-                idCommunication
-            }
-            rooms.push(newRoomChat)
+        if (id !== 'no' && flag.length === 0 && flag2.length === 0) {
+          const infoNewRoom =  await createRoom(
+                {
+                    idRoom : uuid(),
+                    idUserReceive : id, 
+                }
+            )
+            rooms.push(infoNewRoom)
             this.setState({  rooms  })
         }
+        console.log('rooms',rooms)
         this.setState({rooms})
         this.socket = new SocketMessageChat()
         this.socket.on('receviceMessage', data => {
@@ -99,64 +108,86 @@ export default class ChatMessage extends React.Component<IListRoom> {
     
     }
     selecteUserChat = async (room ) => {
+        const { scrollHeight } = this.refViewChat
+        setTimeout( () => {
+            this.refViewChat.scrollTo({
+                top: scrollHeight, behavior: 'smooth'
+            });
+        } , 1500)
         console.log('room  ' , room)
         // info in room include : tin nhan cuoi cung , ten ng nhan va gui 
-        const { idCommunication } = room
+        const { idRoom , messages } = room
         const { selectingRoom } = this.state
         // disconnect user old, if not select user else not leave
         if (!selectingRoom) {
-            this.socket.leave(idCommunication)
+            this.socket.leave(idRoom)
         }
         
-        // query as idCommunication 
+        // query as idRoom 
         /*
             1 : thay doi thong tin room dang chon
             2 : thay doi toan bo tin nhan vi da chon room khac
             3 : thay cong socket 
         */
-        console.log('data rooom selection ' ,room)
-        const messages = await getAllMessageByIdUserReceive(idCommunication)
         console.log('all message room' , messages)
-        this.setState({  messages  , active : idCommunication  ,  selectingRoom : room }, () => {
-            this.socket.join(idCommunication)
+        if(messages && messages.length  === 0){
+            this.setState({firstSend : true})
+        }
+
+        this.setState({  messages : messages?messages : [] , active : idRoom  ,  selectingRoom : room }, () => {
+            this.socket.join(idRoom)
         })
     }
    
     // tao idComm khi user chat lan dau => 
     sendMessage = (dataMess, stateSend = false) => {
+        const {contentMessage , idUser , idUserReceive} = dataMess
         const { match: { params: {    name} } } = this.props ; 
-        const { messages ,valueChat } = this.state
-        if (valueChat === '') {
+        const { messages  } = this.state
+        if (contentMessage === '') {
             toast.error("Please, not empty, fill out input : )")
             return
         }
         const { scrollHeight } = this.refViewChat
+        const  idUserCurrent = userContainer.state.dataUser.idUser
+        const isOwner = idUserCurrent === idUser ? true : false
+        // isOwner => A send B => idUser : A , idUserReceive : B
+        // not isOwner => B -> send A => idUser : B => idUserReceice : A
+        // handle socket send message 
+        // bug if we after : idUser + idUserReceive   ma co 2 idRoom
+        const idFinal = isOwner ?idUserReceive : idUser;
+        dataMess.idUserReceive = idFinal 
+        dataMess.idUser = idUserCurrent
+        dataMess.stateSend = stateSend
+        // const finalData = ({...dataMess , ...{idUserReceive  : idFinal, idUser : idUserCurrent });
+       
         this.setState({ messages: [...messages, ...[dataMess]], valueChat: '' }, () => {
             this.refViewChat.scrollTo({
                 top: scrollHeight, behavior: 'smooth'
             });
 
         })
-        const  {idUser }  = userContainer.state.dataUser
         if (stateSend) return 
+       
+     
         console.log('dataMess', dataMess )
-        // handle socket send message 
-        // bug if we after : idUser + idUserReceive   ma co 2 idCommunication 
-        this.socket.send('sendMessage', {...dataMess , ...{idUser , nameUserReveice : name}})
-
+       
+        // console.log('idFinal',idFinal)
+        this.socket.send('sendMessage', dataMess)
+      
     }
     handleFocus = () => {
         this.socket.send('loading')
     }
     render() {
-        const {idUser}   = userContainer.state.dataUser
-        const { active, messages, valueChat, rooms  , selectingRoom} = this.state
+        const idUserCurrent  = userContainer.state.dataUser.idUser
+        const { active, messages, valueChat, rooms  , selectingRoom} = this.state as any
         return <$Wrapper>
             <PeasonList>
                 {
                     rooms.map((room, key) => {
-                        const {idCommunication} = room
-                        return <div key={key} className={`item_Message ${idCommunication === active ? "active" : ''}`}
+                        const {idRoom} = room
+                        return <div key={key} className={`item_Message ${idRoom === active ? "active" : ''}`}
                         onClick={
                             () => {
                                 this.selecteUserChat(room )
@@ -183,9 +214,14 @@ export default class ChatMessage extends React.Component<IListRoom> {
                 </div>
                     <div className="view_chat" ref={(e) => this.refViewChat = e} >
                         {
-                            messages.map((message, key) => {
-                            const { contentMessage,  idUserReceive } = message as any
-                            return <div className={`item_chat ${idUser === idUserReceive? "friend" : "me"} `} key={key}>
+                           messages &&  messages.map((message, key) => {
+                               const idOwnrRoom= selectingRoom.idUser
+                               const { contentMessage,  idUserReceive , idUser ,stateSend } = message as any
+                            const isOwner =  idOwnrRoom === idUser? true :false
+                           
+                            // const flag = idUserCurrent ===  idUserReceive ?
+                            const idUserMessage = message['idUser']
+                            return <div data-tooltip={idUser} className={`item_chat ${(stateSend || idUserCurrent !== idUser)? "friend" : "me"} `} key={key}>
                                 <div className="item_chat_value">{contentMessage}</div>
                             </div>
 
@@ -198,11 +234,12 @@ export default class ChatMessage extends React.Component<IListRoom> {
                                 (event) => {
                                     if (event.charCode === 13) {
                                         const contentMessage = event.target.value
-                                        const { idUserReceive , idCommunication} = selectingRoom as any
+                                        const { idUserReceive , idRoom, idUser} = selectingRoom as any
                                         this.sendMessage({
                                             contentMessage,
-                                            idUserReceive ,
-                                            idCommunication
+                                            idUserReceive , // client
+                                            idRoom,
+                                            idUser // owner
                                         })
                                     }
                                 }
@@ -213,9 +250,9 @@ export default class ChatMessage extends React.Component<IListRoom> {
                             // onMouseDown={() => { this.sendMessage({ contentMessage: valueChat, role: 1, idRoom }) }}
                         >
                             Send
-                    </UIButton >
+                    </UIButton>
                         </div>
-                    }</>
+                    </>
                 }
             </ChatZone>
         </$Wrapper>

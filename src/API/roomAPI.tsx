@@ -1,42 +1,20 @@
 import gql from "graphql-tag";
 import { client } from "./client";
 import { convertDataToGraphQL } from "../help/help";
-//QUERY
-export function getAllRoomFromBackEnd() {
+export function getRoomById() {
     return new Promise(async resolve => {
         const API = await client.query({
             query: gql`
                     query {
-                        getAllRoom( id  : "vsdv"){
+                        getRoomById( id : "A"){
                             idUser
                             idRoom
-                            connections {
+                            idUserReceive
+                            messages {
+                                idUserReceive
                                 idUser
-                                socketid
+                                contentMessage
                             }
-                            title
-                        }
-                    }
-                    `
-        })
-        resolve(convertDataToGraphQL(API))
-    })
-}
-
-
-export function getRoomstoIdUser(idUser) {
-    return new Promise(async resolve => {
-        const API = await client.query({
-            query: gql`
-                    query {
-                        getRoomByIdUser( id : "${idUser}"){
-                            idUser
-                            idRoom
-                            connections {
-                                idUser
-                                socketid
-                            }
-                            title
                         }
                     }
                     `
@@ -46,4 +24,23 @@ export function getRoomstoIdUser(idUser) {
 }
 //MUTATION
  // hash tag not Mutation
-
+ export function createRoom(input: any) {
+     console.log('createRoo,',input  )
+    return new Promise(async resolve => {
+        const API = await client.mutate({
+            mutation: gql`
+                mutation CreateRoom($input: inputRoom) {
+                    createRoom(input: $input) {
+                        idUser
+                        idRoom
+                        idUserReceive
+                    }
+            }
+            `,
+            variables: {
+                input
+            }
+        })
+            resolve(convertDataToGraphQL(API));
+    })
+}
