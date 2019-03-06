@@ -136,13 +136,13 @@ export default class ChatMessage extends React.Component<IListRoom> {
                                 }
                             }>
                             <AvatarImage src={avatarLink}/>
-                            <h2 className="name_people">
+                            <h2 className="md-name_people">
                                 {name}
                             </h2>
-                            <div className="time_message">
+                            <div className="md-time_message">
                                 {room.time}
                             </div>
-                            <div className="new_message">
+                            <div className="md-new_message">
                                 {room.newMessage}
                             </div>
                         </div>
@@ -152,24 +152,24 @@ export default class ChatMessage extends React.Component<IListRoom> {
             </PeasonList>
             <ChatZone>
                 {selectingRoom && <>
-                    <div className="title_chatZone">
+                    <div className="md-title_chatZone">
                         <h1>{selectingRoom.ownerUserInfo.idUser === idUserCurrent?selectingRoom.ownerUserInfo.name:
                                     selectingRoom.clientInfo.name}</h1>
                     </div>
-                    <div className="view_chat" ref={(e) => this.refViewChat = e} >
+                    <div className="md-view_chat" ref={(e) => this.refViewChat = e} >
                         {
                             messages && messages.map((message, key) => {
                                 const { contentMessage, idUser, stateSend, ownerUserInfo: { name, avatarLink } } = message as any
                                 return <div className={`item_chat ${(stateSend || idUserCurrent !== idUser) ? "friend" : "me"} `} key={key}>
                                     <div className={`item_chat_wrapper ${stateSend || idUserCurrent !== idUser ? "friend" : "me"}`}>
                                         <AvatarImage size={40} src={avatarLink} data-tooltip={name} />
-                                        <div className="item_chat_value"  >{contentMessage}</div>
+                                        <div className="md-item_chat_value"  >{contentMessage}</div>
                                     </div>
                                 </div>
 
                             })}
                     </div>
-                    <div className="input_chat" >
+                    <div className="md-input_chat" >
                         <UIInput
                             onChange={(valueChat) => { this.setState({ valueChat }) }}
                             onKeyPress={
@@ -208,23 +208,23 @@ const ChatZone = styled.div`
     padding : 10px;
     display : flex;
     flex-direction : column;
-    .title_chatZone {
+    md-title_chatZone {
         border-bottom :1px solid gray;
     }
-    .view_chat {
+    .md-view_chat {
         display : flex;
         overflow : scroll;
         height : 100%;
         flex-direction : column;
-        .item_chat {
+        .md-item_chat {
             margin : 10px;
         
-        .item_chat_wrapper{
+        .md-item_chat_wrapper{
             align-items: center;
             display : flex;
           
         }
-        .item_chat_value {
+        .md-item_chat_value {
                 padding: 10px 20px;
                 background: #00aaff;
                 color: white;
@@ -232,10 +232,10 @@ const ChatZone = styled.div`
                 border-radius: 21px;
                 font-size : 24px;
         }
-        .friend {
+        .md-friend {
             margin-left : 100px;
         }
-        .me {
+        .md-me {
             flex-direction: row-reverse;
             margin-right :100px;
             .item_chat_value {
@@ -244,7 +244,7 @@ const ChatZone = styled.div`
         }
         }
     }
-    .input_chat{
+    .md-input_chat{
         display : flex;
         padding : 10px;
         bottom: 0px;

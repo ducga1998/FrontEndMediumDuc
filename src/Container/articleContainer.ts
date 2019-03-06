@@ -49,11 +49,6 @@ class AllArticleContainer extends Container<IAllArticleContainer> {
         }
     }
     // addArticle will structure  {
-    addArticle() {
-
-        //add article in registryArticle 
-
-    }
 }
 export const allArticleContainer = new AllArticleContainer({
     registryArticle: [],

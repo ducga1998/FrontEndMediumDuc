@@ -19,27 +19,25 @@ interface IFormReply {
 const FormComment = ({ context, idReply, onChange }: IFormReply) => {
     const [content, setContent] = React.useState('')
     const { idArticle } = context
-    const { avatarLink, name } = userContainer.state.dataUser
+    const { avatarLink, name , idUser : idUserLogin} = userContainer.state.dataUser
     const handleAddComment = async () => {
         if (content === '') {
             toast.error('Comment not empty !!!. Please write something ')
             return
         }
-        let input = {
+        let comment = {
             content,
-            idUser: userContainer.state.dataUser.idUser,
+            idUser: idUserLogin,
             idArticle,
 
         } as any
         if (idReply && onChange) {
-            input = { ...input, ...{ idReply } }
-
+            comment = { ...comment, ...{ idReply } }
         }
         const { user: { idUser } } = context
         // socket notification from backend
         socketNotication({ content, idUser }, idReply ? 'ReplyComment' : 'Comment')
-        let newComment = await addComment(input);
-        console.log('replyxasx', newComment)
+        let newComment = await addComment(comment);
         onChange(newComment)
         setContent('')
     }

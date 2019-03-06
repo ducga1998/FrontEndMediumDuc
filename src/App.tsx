@@ -1,11 +1,12 @@
 import * as React from 'react';
-import { ToastContainer, Slide, Zoom, Flip, Bounce } from 'react-toastify';
+
 import 'react-toastify/dist/ReactToastify.css';
 import styled from 'styled-components';
 import { Provider } from 'unstated-x';
 import AppRouter from './route';
 import UITooltip from './Components/UI/UITooltip';
 import { UITheme } from './Components/UI/UITheme';
+import Toast from './workspace/toast'
 import './app.css'
 class App extends React.Component {
   public render() {
@@ -15,10 +16,9 @@ class App extends React.Component {
             <$BoxAlgin>
               <AppRouter />
             </$BoxAlgin>
-            <ToastContainer transition={Zoom} autoClose={4000} />
+            <Toast />
           </Provider>
         </UITooltip>
-
       </UITheme>
   }
 }
