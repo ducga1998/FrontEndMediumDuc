@@ -9,7 +9,7 @@ module.exports = function (app) {
 		'target': 'http://localhost:4000',
 		'secure': false
 	}))
-	app.use(proxy(['/rank'], {
+	app.use(proxy(['/api/rank'], {
 		'target': 'http://localhost:4000',
 		'secure': false
 	}))

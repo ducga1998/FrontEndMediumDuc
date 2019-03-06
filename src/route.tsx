@@ -24,6 +24,7 @@ import { H1 } from "./Components/styled/base";
 import ManagerAccount from './Views/User/Admin/ManagerAccount'
 import ManagerArticles from './Views/User/Admin/MangerArticle'
 import UIWidget, { Portal } from "src/Components/UI/UIWidget";
+import { exact } from "prop-types";
 const About = () => <div>
     Web design by Nguyen Minh duc
     <H1>Facebook : <a href="https://www.facebook.com/duc.ceh.cnna">https://www.facebook.com/duc.ceh.cnna</a></H1>
@@ -62,24 +63,26 @@ const AppRouter = () => {
         return <Router history={history} >
             <Switch>
                 <Layout>
-                     <Route path="/" component={Login} />
-                    <Route path="/about/" component={About} />
-                    <Route path="/user/:id" component={isAuth(ViewUser)} />
-                    <Route path="/login" component={Login} />
-                    <Route path="/logout" component={logout} />
-                    <Route path="/register" component={Register} />
-                    <Route path="/article/:id" component={ReadArticle} />
-                    <Route path="/home" component={isAuth(Home)} />
-                    <Route path="/stories" component={isAuth(Stories)} />
-                    <Route path="/store/:id" component={isAuth(StoreDetail)} />
-                    <Route path="/profile" component={isAuth(Profile)} />
-                    <Route path="/writearticle" component={isAuth(WriteArticle)} />
-                    <Route path="/chatMessage/:id" component= {isAuth(ChatMessage)} />
-                    <Route path="/bookmarks" component={isAuth(ArticleBookMark)} />
+                    {/* <Route exact component={Login} /> */}
+                    
+                    <Route exact path="/about/" component={About} />
+                    <Route exact path="/user/:id" component={isAuth(ViewUser)} />
+                    <Route exact path="/login" component={Login} />
+                    <Route exact path="/logout" component={logout} />
+                    <Route exact path="/register" component={Register} />
+                    <Route exact path="/article/:id" component={ReadArticle} />
+                    <Route exact path="/home" component={isAuth(Home)} />
+                    <Route exact path="/stories" component={isAuth(Stories)} />
+                    <Route exact path="/store/:id" component={isAuth(StoreDetail)} />
+                    <Route exact path="/profile" component={isAuth(Profile)} />
+                    <Route exact path="/writearticle" component={isAuth(WriteArticle)} />
+                    <Route exact path="/chatMessage/:id" component= {isAuth(ChatMessage)} />
+                    <Route exact path="/bookmarks" component={isAuth(ArticleBookMark)} />
                         {user && user.decentraliz === 3? <>  
-                     <Route path ="/managerAccount" component={isAuth(ManagerAccount)} />
-                    <Route path ="/managerArticles" component={isAuth(ManagerArticles)} />
+                     <Route exact path ="/managerAccount" component={isAuth(ManagerAccount)} />
+                    <Route exact path ="/managerArticles" component={isAuth(ManagerArticles)} />
                     </>:null}
+                    <Route exact path="/"  component={redirect('/login')} />
                  <Portal />
                 </Layout>
             </Switch>
@@ -90,6 +93,7 @@ const AppRouter = () => {
             container => {
 
                 const { dataUser } = container.state
+                
                 const dataCache = localStorage.getItem('duc-app-medium-login')
                 if (dataCache && !dataUser) {
                     return <UILoading />

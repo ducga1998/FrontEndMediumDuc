@@ -11,6 +11,7 @@ import { Label } from '../../Components/styled/button';
 import UIInput from '../../Components/UI/UIInput';
 import { FlexCol, P, H3, H2, H1 } from '../../Components/styled/base';
 import { AvatarImage } from '../../Components/styled/avatar';
+import { redirect } from '../../route';
 
 const { useState, useEffect, useRef } = React
 function CheckUser(user, password) {
@@ -24,7 +25,6 @@ const MESSAGETOOLTIP = "nhìn tao thì quay ngược màn hình lại thử xem 
 export default function Login({ history }) {
     const [name, setValueName] = useState('')
     const [password, setValuePassword] = useState('')
-    const refLink: any = useRef(null)
     async function handleLogin(e) {
         const dataUser = await userContainer.login({ username: name, password })
         if (!dataUser) {
@@ -35,9 +35,18 @@ export default function Login({ history }) {
         }
 
     }
-    return <$Form>
+    useEffect(() => {
+        const {login} = userContainer.state  
+        console.log('lgoin' ,login)
+        if(login){
+             history.push('/home')
+        }
+    } , [])
+
+    
+    return <$Form>  <div className="center">
+      
         
-        <div className="center">
         <AvatarImage style={  { transform: 'rotate(180deg)'}} size ={300} src="./default.jpg" data-tooltip={MESSAGETOOLTIP}/>
         </div>
         <H1 className="center">Login</H1>
@@ -58,7 +67,6 @@ export default function Login({ history }) {
     </$Form>
 }
 const $Form = styled.div`
-/* transform:  */
     width : 500px;
     margin : auto;
     .center {

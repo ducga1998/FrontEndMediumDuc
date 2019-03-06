@@ -48,7 +48,7 @@ const NormalCommnet = ({ idComment, avatarLink, content, createdAt, replys, setO
     </$Comment>
 }
 const WrapperReply = styled.div`
-padding  : 10px 0px 0px 40px;
+    padding  : 10px 0px 0px 40px;
 `
 const $Content = styled.div`
     &:focus {
