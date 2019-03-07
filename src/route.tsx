@@ -23,8 +23,10 @@ import history from './history'
 import { H1 } from "./Components/styled/base";
 import ManagerAccount from './Views/User/Admin/ManagerAccount'
 import ManagerArticles from './Views/User/Admin/MangerArticle'
+
 import UIWidget, { Portal } from "src/Components/UI/UIWidget";
 import { exact } from "prop-types";
+import PageEditer from "./workspace/PageEditer";
 const About = () => <div>
     Web design by Nguyen Minh duc
     <H1>Facebook : <a href="https://www.facebook.com/duc.ceh.cnna">https://www.facebook.com/duc.ceh.cnna</a></H1>
@@ -78,6 +80,7 @@ const AppRouter = () => {
                     <Route exact path="/writearticle" component={isAuth(WriteArticle)} />
                     <Route exact path="/chatMessage/:id" component= {isAuth(ChatMessage)} />
                     <Route exact path="/bookmarks" component={isAuth(ArticleBookMark)} />
+                    <Route exact path="/drapdrop"  component={PageEditer}/>
                         {user && user.decentraliz === 3? <>  
                      <Route exact path ="/managerAccount" component={isAuth(ManagerAccount)} />
                     <Route exact path ="/managerArticles" component={isAuth(ManagerArticles)} />

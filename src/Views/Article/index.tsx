@@ -101,7 +101,7 @@ const $Article = styled(FlexCol) <any>`
     ${props => props.vectical ? 'flex-direction: row;' : ''};
     align-items : initial;
     position :relative;
-    width :   ${props => props.vectical ? '100%' : '400px'};
+    width :   ${props => props.vectical ? '100%' : '23%'};
     border-radius : 5px;
     transition : .3s;
     cursor : pointer;

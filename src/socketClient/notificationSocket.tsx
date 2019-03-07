@@ -3,7 +3,7 @@ import { toast } from "react-toastify";
 import { filterStringHTML } from "../help/help";
 import * as React from 'react'
 import styled from "styled-components";
-import { H2, H3 } from "src/Components/styled/base";
+import {  H3 } from "src/Components/styled/base";
 import { AvatarImage } from "../Components/styled/avatar";
 import { Label } from "../Components/styled/button";
 export function notificationFuncSocket(user: any) {

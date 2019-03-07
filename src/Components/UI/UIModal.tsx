@@ -31,7 +31,7 @@ export default function UIModal({ trigger, children, title, width, height, close
         <$Modal onMouseDown={(e: any) => {
             e.stopPropagation();
         }} >
-            <$Header><H1>{title ? title : 'Header Modal '}</H1></$Header>
+          {title && <$Header><H1>{title}</H1></$Header>}  
             <$Content height={height} width={width}> {children}</$Content>
         </$Modal>
     </$Background>

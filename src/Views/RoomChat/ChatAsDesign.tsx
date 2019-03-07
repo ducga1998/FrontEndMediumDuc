@@ -3,7 +3,7 @@ import * as React from 'react';
 import styled from 'styled-components';
 import UIInput from '../../Components/UI/UIInput';
 import UIButton from '../../Components/UI/UIButton';;
-import { fontStack } from '../../Components/styled/base';
+import { fontStack, H2 } from '../../Components/styled/base';
 import { toast } from 'react-toastify';
 import uuid from 'uuid'
 import userContainer from '../../Container/userContainer';
@@ -11,6 +11,7 @@ import { createRoom, getRoomById } from '../../API/roomAPI';
 import SocketMessageChat from 'src/socketClient/messageChatSocket';
 import { getAllMessageByIdUserReceive } from '../../API/messageAPI';
 import { AvatarImage } from '../../Components/styled/avatar';
+import UIModal from '../../Components/UI/UIModal';
 
 interface IListRoom {
     match?: any
@@ -23,6 +24,7 @@ export default class ChatMessage extends React.Component<IListRoom> {
         valueChat: '',
         rooms: [],
         selectingRoom: null,
+        open  : false
     }
     socket
     refViewChat: any = React.createRef()
@@ -120,7 +122,7 @@ export default class ChatMessage extends React.Component<IListRoom> {
     }
     render() {
         const idUserCurrent = userContainer.state.dataUser.idUser
-        const { active, messages, valueChat, rooms, selectingRoom } = this.state as any
+        const { active, messages, valueChat, rooms, selectingRoom , open } = this.state as any
         return <$Wrapper>
             <PeasonList>
                 {
@@ -129,13 +131,13 @@ export default class ChatMessage extends React.Component<IListRoom> {
                         const {idUser}  = ownerUserInfo;
                         
                         const {name , avatarLink}  =  idUser ===  idUserCurrent? ownerUserInfo: clientInfo
-                        return <div key={key} className={`item_Message ${idRoom === active ? "active" : ''}`}
+                        return <div key={key} className={`md-item_Message ${idRoom === active ? "active" : ''}`}
                             onClick={
                                 () => {
                                     this.selecteUserChat(room)
                                 }
                             }>
-                            <AvatarImage src={avatarLink}/>
+                            <AvatarImage size={50} src={avatarLink}/>
                             <h2 className="md-name_people">
                                 {name}
                             </h2>
@@ -151,7 +153,7 @@ export default class ChatMessage extends React.Component<IListRoom> {
                 }
             </PeasonList>
             <ChatZone>
-                {selectingRoom && <>
+                {selectingRoom ? <>
                     <div className="md-title_chatZone">
                         <h1>{selectingRoom.ownerUserInfo.idUser === idUserCurrent?selectingRoom.ownerUserInfo.name:
                                     selectingRoom.clientInfo.name}</h1>
@@ -160,8 +162,8 @@ export default class ChatMessage extends React.Component<IListRoom> {
                         {
                             messages && messages.map((message, key) => {
                                 const { contentMessage, idUser, stateSend, ownerUserInfo: { name, avatarLink } } = message as any
-                                return <div className={`item_chat ${(stateSend || idUserCurrent !== idUser) ? "friend" : "me"} `} key={key}>
-                                    <div className={`item_chat_wrapper ${stateSend || idUserCurrent !== idUser ? "friend" : "me"}`}>
+                                return <div className={`md-item_chat md-${(stateSend || idUserCurrent !== idUser) ? "friend" : "me"} `} key={key}>
+                                    <div className={`md-item_chat_wrapper md-${stateSend || idUserCurrent !== idUser ? "friend" : "me"}`}>
                                         <AvatarImage size={40} src={avatarLink} data-tooltip={name} />
                                         <div className="md-item_chat_value"  >{contentMessage}</div>
                                     </div>
@@ -171,6 +173,7 @@ export default class ChatMessage extends React.Component<IListRoom> {
                     </div>
                     <div className="md-input_chat" >
                         <UIInput
+                        autoFocus
                             onChange={(valueChat) => { this.setState({ valueChat }) }}
                             onKeyPress={
                                 (event) => {
@@ -193,14 +196,33 @@ export default class ChatMessage extends React.Component<IListRoom> {
                         // onMouseDown={() => { this.sendMessage({ contentMessage: valueChat, role: 1, idRoom }) }}
                         >
                             Send
+
                     </UIButton>
                     </div>
-                </>
+                </> : <Placeholder>
+                   <UIModal 
+                    openModal={() => {this.setState({open : true})}}
+                    open ={open}
+                    closeMoDal={() => {this.setState({open : false})}} 
+                    trigger={<img src="/default2.png" />} 
+                    onClickOutSide={() => {this.setState({open : false})}}
+                   >
+                   
+                   <img src="/hello.png" />
+                   </UIModal>
+                </Placeholder>
                 }
             </ChatZone>
         </$Wrapper>
     }
 }
+const Placeholder = styled.div`
+    display : flex;
+    justify-content : center;
+    img {
+        cursor : pointer;
+    }
+`
 const ChatZone = styled.div`
     flex : 9;
     height : 100%;
@@ -208,13 +230,15 @@ const ChatZone = styled.div`
     padding : 10px;
     display : flex;
     flex-direction : column;
-    md-title_chatZone {
-        border-bottom :1px solid gray;
+    .md-title_chatZone {
+        border-bottom :1px solid #dbdbdb;
+        padding-left : 10px;
     }
     .md-view_chat {
         display : flex;
         overflow : scroll;
         height : 100%;
+        background : #f7f7f7;
         flex-direction : column;
         .md-item_chat {
             margin : 10px;
@@ -238,7 +262,7 @@ const ChatZone = styled.div`
         .md-me {
             flex-direction: row-reverse;
             margin-right :100px;
-            .item_chat_value {
+            .md-item_chat_value {
                 background : #d0d2d3;
             }
         }
@@ -265,32 +289,34 @@ const PeasonList = styled.div`
     /* height : 600px; */
     height : 100%;
     overflow : scroll;
-    background : white;
-    .item_Message {
+    background : ${props => props.theme.bg.default};    
+    border-right : 1px solid #d2d2d2;
+    .md-item_Message {
+        display : flex;
         transition : .1s;
-        padding : 30px;
-        border-bottom : 1px solid black;
-        background-color :#f4f7f9;
+        padding : 20px;
+        border-bottom :1px solid #d2d2d2;
+        background-color :#efefef;
         cursor : pointer;
         &:hover {
             background: #eff3f6;
-            .name_people{
+            .md-name_people{
                 
             }
         }
-        .name_people{
-            color : gray;
+        .md-name_people{
+            color : #1A051D;
         }
-        .time_message{
-            color : black;
+        .md-time_message{
+            color : #1A051D;
         }
-        .new_message{
+        .md-new_message{
 
         }
         &.active {
-            background : #ced7df;
+            background : #efefef;
             &:hover {
-                background : #bbc2c9
+                background : #e8e8e8
             }
         }
     }
