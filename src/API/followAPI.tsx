@@ -48,11 +48,8 @@ export function follow(input: any) {
             }
         })
 
-        if (API) {
-            // const { data: { addCommentIntoArticle } } = API
+    
             resolve(convertDataToGraphQL(API));
-        }
-        resolve({})
     })
 }
 export function unFollow(input: any) {
@@ -77,10 +74,7 @@ export function unFollow(input: any) {
                 input
             }
         })
-        if (API) {
-            // const { data: { addCommentIntoArticle } } = API
+    
             resolve(convertDataToGraphQL(API));
-        }
-        resolve({})
     })
 }

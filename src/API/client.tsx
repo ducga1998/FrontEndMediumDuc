@@ -1,22 +1,22 @@
 import ApolloClient from "apollo-boost";
 import gql from "graphql-tag";
 import { convertDataToGraphQL } from "../help/help";
-import {InMemoryCache} from 'apollo-cache-inmemory'
+import { InMemoryCache } from 'apollo-cache-inmemory'
 const defaultOptions = {
     watchQuery: {
-      fetchPolicy: 'network-only',
-      errorPolicy: 'ignore',
+        fetchPolicy: 'network-only',
+        errorPolicy: 'ignore',
     },
     query: {
-      fetchPolicy: 'network-only',
-      errorPolicy: 'all',
+        fetchPolicy: 'network-only',
+        errorPolicy: 'all',
     },
-  }
-  const cache = new InMemoryCache();
-  const LINK = process.env.NODE_ENV  === 'production'? '':'http://localhost:3000'
+}
+const cache = new InMemoryCache();
+const LINK = process.env.NODE_ENV === 'production' ? '' : 'http://localhost:3000'
 export const client = new ApolloClient({
     uri: `${LINK}/graphql`,
-    
+
     // defaultOptions : defaultOptions
 })
 export function logoutBackend() {
@@ -57,9 +57,9 @@ export function updateInfomation(user: any) {
         resolve(convertDataToGraphQL(API))
     })
 }
-export function deleteUserById(id){
-    
-   
+export function deleteUserById(id) {
+
+
     return new Promise(async resolve => {
         const API = client.mutate({
             mutation: gql`
@@ -78,8 +78,8 @@ export function deleteUserById(id){
                 id
             }
         })
-        if (API) resolve(convertDataToGraphQL(API))
-        resolve({})
+        resolve(convertDataToGraphQL(API))
+
     })
 }
 export function addUser(user: any) {
@@ -106,8 +106,8 @@ export function addUser(user: any) {
                 input
             }
         })
-        if (API) resolve(convertDataToGraphQL(API))
-        resolve({})
+        resolve(convertDataToGraphQL(API))
+
     })
 }
 //QUERY
@@ -150,8 +150,8 @@ export function getAllInformationUser(idUser: string) {
             }
             `
         })
-        if (API) resolve(convertDataToGraphQL(API))
-        resolve({})
+        resolve(convertDataToGraphQL(API))
+
     })
 }
 export function checkLoginUser(user: any) {
@@ -212,8 +212,8 @@ export function getAllUser() {
             }
             `
         })
-        if (API) resolve(convertDataToGraphQL(API))
-        resolve({})
+        resolve(convertDataToGraphQL(API))
+
     })
 }
 

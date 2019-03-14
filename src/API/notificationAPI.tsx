@@ -19,7 +19,6 @@ export function getAllNotificationByIdUser(first , offset) {
             }
             `
         })
-        if (API) resolve(convertDataToGraphQL(API))
-        resolve({})
+        resolve(convertDataToGraphQL(API))
     })
 }

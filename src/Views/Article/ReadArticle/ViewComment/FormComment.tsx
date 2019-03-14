@@ -16,6 +16,7 @@ interface IFormReply {
     idReply?: string,
     onChange: (event: any) => any
 }
+
 const FormComment = ({ context, idReply, onChange }: IFormReply) => {
     const [content, setContent] = React.useState('')
     const { idArticle } = context

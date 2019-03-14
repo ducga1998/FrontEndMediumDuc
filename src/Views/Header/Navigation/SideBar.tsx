@@ -30,25 +30,23 @@ export default class SideBar extends React.Component<{ open: boolean, setOpen: a
         const { user: { name, avatarLink ,decentraliz , biographical } } = this.props
         console.log('opennnn ok ', this.props.open)
         return <> <UIWidget>
-            {this.props.open ? <OverLayNavBar open onMouseDown={this.handleMouseDown} >
+                {this.props.open ? <OverLayNavBar open onMouseDown={this.handleMouseDown} >
                 <WrapperSideBar onMouseDown={(event) => { event.stopPropagation() }} >
                    <FlexCol style={{justifyContent : 'flex-end'}}>
                    <UIButton onMouseDown={this.handleMouseDown} icon="view-back" category="sidebar"  style={{alignSelf:  'flex-end' , margin : '10px', padding : '5px'}} type="soild"  /> </FlexCol> 
                     <UIFieldAlgin 
-                     shadow = {`2px -1px 20px 2px ${theme.brand.alt}`}
-                    style={{
-                        alignItems: 'flex-start',
-                        padding: '20px',
-                        backgroundColor: '#ffffff',
-                        borderRadius: '6px',
-                        margin: '10px'
-                    }} 
-                    horizontal
-                 
+                        shadow = {`2px -1px 20px 2px ${theme.brand.alt}`}
+                        style={{
+                            alignItems: 'flex-start',
+                            padding: '20px',
+                            backgroundColor: '#ffffff',
+                            borderRadius: '6px',
+                            margin: '10px'
+                        }} 
+                        horizontal
                     >
                     <H2>WellCome to {name}</H2>
-                    <UIFieldAlgin   >
-                    
+                    <UIFieldAlgin >
                         <AvatarImage src={avatarLink} size={80} radius="24px" />
                         <UIFieldAlgin horizontal style={{ paddingLeft: '10px' }}>
                             <H3>{name}</H3>
@@ -56,16 +54,19 @@ export default class SideBar extends React.Component<{ open: boolean, setOpen: a
                         </UIFieldAlgin>
                     </UIFieldAlgin>
                     </UIFieldAlgin>
-                    <UIFieldAlgin horizontal > 
-                       <TextCard to="/profile"> <Icon glyph="home" /> Profile</TextCard>
-                       <TextCard to="/stories">Stories</TextCard>
+                    <UIFieldAlgin horizontal> 
+                        <TextCard to="/profile"> <Icon glyph="home" /> Profile</TextCard>
+                        <TextCard to="/stories">Stories</TextCard>
                         <TextCard to="/bookmarks">Bookmark</TextCard>
-                        {decentraliz === 3?<>
-                        <TextCard to="/managerAccount">Manager All Account</TextCard>
-                        <TextCard to="/managerArticles">Manager Articles</TextCard>
-                        </>:null}
+                        {
+                            decentraliz === 3?
+                                <>
+                                    <TextCard to="/managerAccount">Manager All Account</TextCard>
+                                    <TextCard to="/managerArticles">Manager Articles</TextCard>
+                                </>
+                            :null
+                        }
                     </UIFieldAlgin>
-                 
                 </WrapperSideBar>
             </OverLayNavBar> : null}
         </UIWidget> </>
@@ -79,8 +80,7 @@ const OverLayNavBar = styled(OverLay)`
 `
 const TextCard = styled(IconLink)`
     margin: 2px 10px;
-    
-   justify-content : flex-start;
+    justify-content : flex-start;
     padding : 20px;
     font-size : 16px;
     font-stretch : 800;
