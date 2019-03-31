@@ -15,7 +15,7 @@ const ArticleRank = ({ article, type }: IArticle) => {
 
         const { user: { avatarLink, idUser, name }, idArticle, titleArticle, imageArticle, count } = item
         // const {count , idUser , name , avatarLink ,biographical } = item
-        console.log('imageArticle',imageArticle)
+        // console.log('imageArticle',imageArticle)
         return <FlexCol key ={key}>
             <FlexRow data-tooltip={filterStringHTML(titleArticle, true, 100)}   >
                 <Link to={`/article/${idArticle}`} >

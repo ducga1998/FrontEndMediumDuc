@@ -19,25 +19,25 @@ const Author = ({ name, totalFollow, totalArticle, avatarLink, idUser }: IAuthor
             () => {
                 return <FlexCol>
                     <FlexRow>
-                        <Link to="/profile" ><AvatarImage  src={src} /></Link>
-                            
-                  
+                        <Link to="/profile" ><AvatarImage src={src} /></Link>
+
+
                         <Link className="name" to={`/user/${idUser}`}>
                             <H2 className="caption">
                                 {name}
                             </H2>
-                        </Link>     
-                        </FlexRow>
-                        <FlexRow>
-                          <P> <b>{totalArticle} </b>
-                            Article</P> 
-                         <br />
+                        </Link>
+                    </FlexRow>
+                    <FlexRow>
+                        <P> <b>{totalArticle} </b>
+                            Article</P>
+                        <br />
 
-                            <P><b> {totalFollow} Pepole Follow</b></P>
-                            </FlexRow>
-                            </FlexCol>
-                         
-        
+                        <P><b> {totalFollow} Pepole Follow</b></P>
+                    </FlexRow>
+                </FlexCol>
+
+
             }
         }
     </Subscribe>

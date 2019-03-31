@@ -6,11 +6,11 @@ import uuid from 'uuid/v1';
 import { addUser } from '../../API/client';
 import UIButton from '../../Components/UI/UIButton';
 import UIField from '../../Components/UI/UIField';
-import Link from '../../Components/Link';
+// import Link from '../../Components/Link';
 import { H3, H1 } from 'src/Components/styled/base';
 import { AvatarImage } from 'src/Components/styled/avatar';
 import { Section } from '../../Components/styled/nav';
-import { StyledOutlineButton } from '../../Components/styled/button';
+// import { StyledOutlineButton } from '../../Components/styled/button';
 const { useState } = React
 export default function Register() {
     const [login, setValueLogin] = useState('')
@@ -19,8 +19,6 @@ export default function Register() {
     const [avatarLink, setValueAvatarLink] = useState('')
     const [isRegister, setRegister] = useState(false)
     async function handleRegister() {
-
-
         const user = {
             idUser: uuid(),
             login,
@@ -28,7 +26,6 @@ export default function Register() {
             name,
             avatarLink
         }
-       
         if (name.length > 6 && password.length > 6 ) {
             toast.success("Register success !!");
             await addUser(user) as any
@@ -56,7 +53,7 @@ export default function Register() {
         }} />
 
         <Section>
-        <UIButton onMouseDown={handleRegister} > Register </UIButton> 
+            <UIButton onMouseDown={handleRegister} > Register </UIButton> 
             <UIButton to='/login'> Back </UIButton> 
         </Section>
     </$Form>

@@ -1,6 +1,5 @@
 
 import UIButton from 'src/Components/UI/UIButton';
-
 import * as React from 'react'
 import { IMAGE_SOURCE_DEFAULT } from 'src/help/define';
 import styled from 'styled-components';
@@ -60,7 +59,7 @@ const FormComment = ({ context, idReply, onChange }: IFormReply) => {
             <UIButton
                 style={{ flex: 2 }}
                 onMouseDown={handleAddComment}>Comment
-                    </UIButton>
+            </UIButton>
         </div>
     </$Aglin>
 }

@@ -20,7 +20,7 @@ export default function Rank() {
         console.log('fetchDataRank',fetchDataRank)
         setRankState(fetchDataRank)
        
-    })
+    }, [])
     console.log('rankState',rankState)
     if(!rankState ) return null
     //"rankCountBookMarkArticle", "rankFollow", "rankCountWriteArticle"]

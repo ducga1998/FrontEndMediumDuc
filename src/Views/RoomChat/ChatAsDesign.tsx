@@ -3,7 +3,7 @@ import * as React from 'react';
 import styled from 'styled-components';
 import UIInput from '../../Components/UI/UIInput';
 import UIButton from '../../Components/UI/UIButton';;
-import { fontStack, H2 } from '../../Components/styled/base';
+import { fontStack } from '../../Components/styled/base';
 import { toast } from 'react-toastify';
 import uuid from 'uuid'
 import userContainer from '../../Container/userContainer';
@@ -55,11 +55,6 @@ export default class ChatMessage extends React.Component<IListRoom> {
     }
     selecteUserChat = async (room) => {
         const { scrollHeight } = this.refViewChat
-        setTimeout(() => {
-            this.refViewChat.scrollTo({
-                top: scrollHeight, behavior: 'smooth'
-            });
-        }, 1500)
         console.log('room  ', room)
 
         // info in room include : tin nhan cuoi cung , ten ng nhan va gui 

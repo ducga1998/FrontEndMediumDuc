@@ -6,7 +6,7 @@ import { AvatarImage } from "../../../../Components/styled/avatar";
 import renderHTML from 'react-render-html';
 import * as React from "react";
 import { renderElement } from "src/Core/renderElement";
-import { H5, H2, P, H3, FlexCol, FlexRow } from "src/Components/styled/base";
+import { H5, H2, P, H3, FlexRow } from "src/Components/styled/base";
 export default renderElement(
     function renderComment({ normalComment, context, replyComments }) {
         const [open, setOpen] = React.useState(false)
@@ -18,11 +18,11 @@ export default renderElement(
             setReplys(replys)
         }
         return <>
-            <NormalCommnet {...{ idComment, avatarLink, content, createdAt, replys, setOpen, open, name }} />
+            <NormalComment {...{ idComment, avatarLink, content, createdAt, replys, setOpen, open, name }} />
             {
                 open && <WrapperReply>
                     {
-                        replys.length > 0 ? replys.map(item => <NormalCommnet {...{ ...item, ...{ avatarLink, setOpen, open, name } }} />)
+                        replys.length > 0 ? replys.map(item => <NormalComment {...{ ...item, ...{ avatarLink, setOpen, open, name } }} />)
                             : null
                     }
                     <FormComment
@@ -33,7 +33,7 @@ export default renderElement(
         </>
     }
 )
-const NormalCommnet = ({ idComment, avatarLink, content, createdAt, replys, setOpen, open, name }) => {
+const NormalComment = ({ idComment, avatarLink, content, createdAt, replys, setOpen, open, name }) => {
     return <$Comment data-id={idComment}
         onMouseDown={(event) => setOpen(!open)}>
         <AvatarImage src={avatarLink ? avatarLink : IMAGE_SOURCE_DEFAULT} />

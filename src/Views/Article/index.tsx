@@ -52,14 +52,19 @@ export default function Article({ article, typeArticle, vectical, horizontal, st
                     vectical ? null : <> <$TotalClap><i className="fa fa-bookmark" /> {bookmark ? bookmark.length : 0}</$TotalClap>
                         <$TotalComment><i className="fa fa-comment" /> {comment ? comment.length : 0}</$TotalComment></>}
             </UIFieldAlgin>
-            <H4> {timeDifference(new Date(), new Date(createTime))}</H4> <br />
+            <UIFieldAlgin>
+            <H4> {timeDifference(new Date(), new Date(createTime))}</H4>
+            <br />
             <H4><b>Content : </b>{renderHTML(filterStringHTML(contentArticle))}<Link to={linkSwitchArticle}> Read more ...</Link></H4>
+            </UIFieldAlgin>
             <UIFieldAlgin horizontal={horizontal || undefined}>
                 <AvatarImage plan sizeBorder="2px" src={avatarLink} />
                 <H3><b><Link to={`/user/${idUser}`}>{name === '' ? 'NO NAME' : name}</Link></b></H3>
             </UIFieldAlgin>
             <WrapperHashTag>
-                {hashTag.map((item: any, key: number) => {
+                {hashTag.length > 4 ? <>{hashTag.slice(0, 3).map((item: any, key: number) => {
+                    return <StyledSolidButton>{item}</StyledSolidButton>
+                })}...</>: hashTag.map((item: any, key: number) => {
                     return <StyledSolidButton>{item}</StyledSolidButton>
                 })}
             </WrapperHashTag>
@@ -101,7 +106,7 @@ const $Article = styled(FlexCol) <any>`
     ${props => props.vectical ? 'flex-direction: row;' : ''};
     align-items : initial;
     position :relative;
-    width :   ${props => props.vectical ? '100%' : '23%'};
+    width :   ${props => props.vectical ? '100%' : '330px'};
     border-radius : 5px;
     transition : .3s;
     cursor : pointer;
