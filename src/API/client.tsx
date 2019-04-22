@@ -1,7 +1,7 @@
 import ApolloClient from "apollo-boost";
 import gql from "graphql-tag";
 import { convertDataToGraphQL } from "../help/help";
-import { InMemoryCache } from 'apollo-cache-inmemory'
+// import { InMemoryCache } from 'apollo-cache-inmemory'
 const defaultOptions = {
     watchQuery: {
         fetchPolicy: 'network-only',
@@ -12,7 +12,7 @@ const defaultOptions = {
         errorPolicy: 'all',
     },
 }
-const cache = new InMemoryCache();
+// const cache = new InMemoryCache();
 const LINK = process.env.NODE_ENV === 'production' ? '' : 'http://localhost:3000'
 export const client = new ApolloClient({
     uri: `${LINK}/graphql`,

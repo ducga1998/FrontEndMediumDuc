@@ -52,7 +52,6 @@ export default function Notification() {
         return () => { console.log('un mount if okokok ') }
     }, [])
     return <><NavButton
-            to="/"
             onMouseDown={async (e) => { e.preventDefault(); await setOpen(!open) }}>
         <Icon glyph="notification" />
         {open && <><DropDown onMouseDown={(event) =>dieEvent(event)} onMouseLeave ={ () => setOpen(false) }  >
@@ -99,6 +98,17 @@ const DropDown = styled.div`
    
 `
 
-const NavButton = styled(LogoLink)`
-    position : relative;
-`
+export const NavButton = styled.div`
+ position : relative;
+  color : ${props => props.theme.text.reverse};
+  margin-right: 32px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  cursor : pointer;
+  &:after {
+        margin-top: 4px;
+        font-size: 0.75em;
+      }
+    
+`;

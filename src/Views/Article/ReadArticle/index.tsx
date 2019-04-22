@@ -32,7 +32,6 @@ class ReadArticle extends React.Component<IReadArticleType> {
             notificationSocket.emit('join', userContainer.state.dataUser.idUser)
             await this.setState({ article })
         }
-        
     }
     componentWillUnmount() {
         const {user :  {idUser}}  = this.state.article as any

@@ -23,9 +23,6 @@ const WriteArticle = () => {
     })
     return <$Align>
         <Wrapper  >
-            <button onClick={() => {mscConfirm("Delete?",function(){
-  alert("Post deleted");
-});}} >mscConfirm</button>
             <Author idUser={idUser} avatarLink={avatarLink} totalFollow={10} name={name} totalArticle={articles.length} />
             <MediumDraft
                 onChangeTitle={value => updateDataArticle('titleArticle', value)}

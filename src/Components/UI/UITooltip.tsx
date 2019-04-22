@@ -1,8 +1,6 @@
-
 import * as React from 'react';
 import styled from 'styled-components';
-import { H3 } from '../styled/base';
-function findDomToolTip(count , dom){
+function findDomToolTip(count , dom) : any{
     if(count  > 3 || !dom){
         return  null
     }
@@ -10,62 +8,43 @@ function findDomToolTip(count , dom){
         return dom
     }
     return findDomToolTip(count , dom.parentElement)
-}
-export default class UITooltip extends React.Component<any> {
-    refToolTip: any = React.createRef()
+} 
+export default class UITooltip extends React.Component<any, any> {
+    refToolTip: any 
     handleMouseDown = (e) => {
+
     }
     handleMouseOver = (e) => {
        e.preventDefault()
         let count = 0
-        let dom = findDomToolTip(count , e.target) as HTMLElement ||null
-      
-        if (dom && dom.getAttribute('data-tooltip')) {
-            console.log(dom)
+        let dom = findDomToolTip(count , e.target) as HTMLElement ;
+        if (dom && dom.getAttribute('data-tooltip') && this.refToolTip) {
             const text = dom.getAttribute('data-tooltip')
-            const domToolTip = this.refToolTip.current
+            const domToolTip = this.refToolTip as any
             domToolTip.innerHTML = text
-            const { top, left, width, height } = dom.getBoundingClientRect()
-           
-            const view = dom.ownerDocument.defaultView
-            const scrollTop = view.scrollY
+            if(!domToolTip ) return
+            const { top, left } = dom.getBoundingClientRect() as any
+            // const view : any = dom.ownerDocument.defaultView  
+            // const scrollTop = view.scrollY 
             domToolTip.style.display = "inline-block"
             let leftTooltip  =   left  
             const widthToolTip = domToolTip.getBoundingClientRect().width
             const heightToolTip = domToolTip.getBoundingClientRect().height
-            let topTooltip = top + scrollTop -  heightToolTip - 5  ;
-            // if(top  + heightToolTip > window.innerHeight) {
-            //     topTooltip = top  - heightToolTip -10 + 'px'
-            //     leftTooltip = left + 'px'
-            //     console.log('th1')
-            // }
-            // else {
-            //     topTooltip = top  + heightToolTip +10 + 'px'
-            //     leftTooltip = left + 'px'
-            //     console.log('th2')
-            // }
+            let topTooltip = top  -  heightToolTip - 5  ;
             if( left + widthToolTip  > window.innerWidth ) {
               
                 leftTooltip = left - widthToolTip -25 ;   
-                
             }
-            // else{
-            //     topTooltip =  top + 'px'
-            //     leftTooltip = `${left + widthToolTip + 5}px`;
-            //     console.log('th1')
-            // }
-
             domToolTip.style.top = topTooltip  + 'px'
             domToolTip.style.left = leftTooltip +'px'
-
-           
            
         }
     }
     handleMouseLeave = (e) => {
 
         e.stopPropagation()
-        const domToolTip = this.refToolTip.current
+
+        const domToolTip = this.refToolTip
         domToolTip.style.display = "none"
     }
     render() {
@@ -73,7 +52,7 @@ export default class UITooltip extends React.Component<any> {
             onMouseOverCapture={this.handleMouseOver}
             onMouseOutCapture={this.handleMouseLeave}
         >
-         <$ToolTip ref={this.refToolTip}  />
+         <$ToolTip ref={ e => this.refToolTip  = e}  />
             {this.props.children}
         </div>
     }

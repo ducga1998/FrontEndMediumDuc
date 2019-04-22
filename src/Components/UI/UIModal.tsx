@@ -18,6 +18,7 @@ interface IUIModal {
     open: boolean,
     onClickOutSide: () => any
 }
+
 export default function UIModal({ trigger, children, title, width, height, closeMoDal, openModal, open, onClickOutSide }: IUIModal) {
     let button 
     if(trigger){

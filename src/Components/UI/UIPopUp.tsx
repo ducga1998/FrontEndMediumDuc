@@ -18,7 +18,6 @@ export default function UIPopup({children , trigger ,  width  , height }:IPopUp)
         event.stopPropagation()
         const domButton = event.target
         const domPopUp  = refPopUp.current as any
-        console.log('domPopUp',domPopUp)
         if(domButton && domPopUp) {
             let {top ,left  , width , height} = domButton.getBoundingClientRect()
             top  = top + height

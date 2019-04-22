@@ -6,7 +6,7 @@ import UIButton from '../../../Components/UI/UIButton';
 import { FlexCol, FlexRow, H3, P, Gradient, H1, H2 } from '../../../Components/styled/base';
 import { AvatarImage } from '../../../Components/styled/avatar';
 import UIFieldAlgin from '../../../Components/UI/UIFieldAlgin';
-import StyledCard from '../../../Components/styled/card';
+// import StyledCard from '../../../Components/styled/card';
 import { IconLink } from '../../../Components/styled/nav';
 import Icon from '../../../Components/Icon';
 import theme from '../../../theme';

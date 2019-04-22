@@ -25,7 +25,6 @@ import ManagerAccount from './Views/User/Admin/ManagerAccount'
 import ManagerArticles from './Views/User/Admin/MangerArticle'
 
 import UIWidget, { Portal } from "src/Components/UI/UIWidget";
-import { exact } from "prop-types";
 import PageEditer from "./workspace/PageEditer";
 const About = () => <div>
     Web design by Nguyen Minh duc
@@ -65,8 +64,6 @@ const AppRouter = () => {
         return <Router history={history} >
             <Switch>
                 <Layout>
-                    {/* <Route exact component={Login} /> */}
-                    
                     <Route exact path="/about/" component={About} />
                     <Route exact path="/user/:id" component={isAuth(ViewUser)} />
                     <Route exact path="/login" component={Login} />
@@ -126,8 +123,6 @@ function logout({ history }) {
         await userContainer.setState({ dataUser: null, login: false })
         history.push('/login')
         await logoutBackend()
-        // const data = await logoutBackend()
-        // console.log('logout',data)
     })
     return null
 

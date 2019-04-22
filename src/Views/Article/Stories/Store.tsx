@@ -47,10 +47,6 @@ class WriteArticle extends React.Component<any> {
         </$Align>
     }
 }
-
-
-
-
 const $Align = styled.div`
         ${fontStack}  
         display : flex;

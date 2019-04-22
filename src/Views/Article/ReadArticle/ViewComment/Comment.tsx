@@ -6,7 +6,7 @@ import { AvatarImage } from "../../../../Components/styled/avatar";
 import renderHTML from 'react-render-html';
 import * as React from "react";
 import { renderElement } from "src/Core/renderElement";
-import { H5, H2, P, H3, FlexRow } from "src/Components/styled/base";
+import { H5, H2, H3, FlexRow } from "src/Components/styled/base";
 export default renderElement(
     function renderComment({ normalComment, context, replyComments }) {
         const [open, setOpen] = React.useState(false)
