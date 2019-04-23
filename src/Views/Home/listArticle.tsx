@@ -19,8 +19,6 @@ export default class ListArticle extends React.Component<any> {
             this.setState({ allArticleData })
         }
     }
-
-
     render() {
         return <Subscribe to={[allArticleContainer]}>
             {
@@ -44,9 +42,6 @@ export default class ListArticle extends React.Component<any> {
             }
         </Subscribe>
     }
-}
-const ListArticleComponent = function({articles}){
-
 }
 const $ListArticle = styled(FlexRow)`
     flex-wrap : wrap;

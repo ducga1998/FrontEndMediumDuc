@@ -23,36 +23,38 @@ export default function UIPopup({children , trigger ,  width  , height }:IPopUp)
             top  = top + height
             const rectPopup = domPopUp.getBoundingClientRect()
             setOpen(!open)
-            const  {innerHeight , innerWidth} = window
+            const  {innerHeight , innerWidth , scrollY} = window
             // domPopUp.style.width = (width - 10) + 'px'
+            // const distance = 
             if(top  +rectPopup.height > innerHeight  && left + width > innerWidth ){
                 console.log('TH1')
-                domPopUp.style.top = (top  - rectPopup.height -10) + 'px'
+                domPopUp.style.top = (top  - rectPopup.height -10 + scrollY) + 'px'
                 domPopUp.style.left = (left - rectPopup.width - 10) + 'px'
+                return 
             }
             //  top - right
             else if (left + rectPopup.width  > innerWidth){
                 console.log('TH2')
-                domPopUp.style.top = top + 'px'
-                domPopUp.style.left = (left - rectPopup.width - 10) + 'px'
-               
+                domPopUp.style.top = top + scrollY + 'px'
+                domPopUp.style.left = (left - rectPopup.width ) + 'px'
+               return 
             }
             // top - left
             else if(left - rectPopup.width  < 0  ){
                 console.log('TH3')
-                domPopUp.style.top = top + 'px'
+                domPopUp.style.top = top + scrollY+ 'px'
                 domPopUp.style.left = (left + rectPopup.width + 10 ) + 'px'
-               
+               return 
             }
             //bottom + right
             else if(top + rectPopup.height > innerHeight ){
                 console.log('TH4')
-                domPopUp.style.top = (top  - rectPopup.height -10) + 'px'
+                domPopUp.style.top = (top + scrollY - rectPopup.height -10) + 'px'
                 domPopUp.style.left = left + 'px'
-               
+               return 
             }
             else {
-                domPopUp.style.top = top  + 'px'
+                domPopUp.style.top = top + scrollY + 'px'
                 domPopUp.style.left = left + 'px'
             }
         }
@@ -63,7 +65,8 @@ export default function UIPopup({children , trigger ,  width  , height }:IPopUp)
         style : { zIndex : 9090 }        
     })
     return <> {Button}  
-            {<UIWidget>
+            {
+            <UIWidget>
                 <Wrapper open={open} data-off="true" onMouseDown={(event) => {  event.stopPropagation() ; console.log(event.target); 
                     
                     if(event.target && event.target.getAttribute('data-off')){

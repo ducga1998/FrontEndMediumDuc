@@ -9,13 +9,8 @@ import { Section } from '../../Components/styled/nav';
 import { AvatarImage } from '../../Components/styled/avatar';
 import UIFieldAlgin from '../../Components/UI/UIFieldAlgin';
 import { timeDifference } from 'src/help/util';
-
-// import { HistoryContext } from '../Layout';
-
 const defaultImg = `http://www.rangerwoodperiyar.com/images/joomlart/demo/default.jpg`
 export interface IArticle {
-
-
     typeArticle?: 'store' | 'view',
     article: any,
     vectical?: boolean,
@@ -36,11 +31,13 @@ export default function Article({ article, typeArticle, vectical, horizontal, st
 
     return <$Article style={style || undefined} vectical={vectical || undefined}>
         <Link to={linkSwitchArticle} TypeDom="div">
-            {vectical ?
+            {
+                vectical ?
                 <AvatarImage size={80} radius="24px" src={`${imageArticle !== defaultImg ? backgroundArticle : './backgroundDefault.jpg'}`} />
                 : <WrapperImg>
                     <SrcImage src={`${imageArticle !== defaultImg ? backgroundArticle : './backgroundDefault.jpg'}`} />
-                </WrapperImg>}
+                </WrapperImg>
+            }
 
         </Link>
         <$DetailArticle>
@@ -49,13 +46,17 @@ export default function Article({ article, typeArticle, vectical, horizontal, st
                     <Link to={linkSwitchArticle}>{renderHTML(filterStringHTML(titleArticle, false, 35))}</Link>
                 </H1>
                 {
-                    vectical ? null : <> <$TotalClap><i className="fa fa-bookmark" /> {bookmark ? bookmark.length : 0}</$TotalClap>
-                        <$TotalComment><i className="fa fa-comment" /> {comment ? comment.length : 0}</$TotalComment></>}
+                    vectical ? null : <>
+                        <$TotalClap><i className="fa fa-bookmark" /> {bookmark ? bookmark.length : 0}</$TotalClap>
+                        <$TotalComment><i className="fa fa-comment" /> {comment ? comment.length : 0}</$TotalComment>
+                    </>
+
+                }
             </UIFieldAlgin>
             <UIFieldAlgin>
-            <H4> {timeDifference(new Date(), new Date(createTime))}</H4>
-            <br />
-            <H4><b>Content : </b>{renderHTML(filterStringHTML(contentArticle))}<Link to={linkSwitchArticle}> Read more ...</Link></H4>
+                <H4> {timeDifference(new Date(), new Date(createTime))}</H4>
+                <br />
+                <H4><b>Content : </b>{renderHTML(filterStringHTML(contentArticle))}<Link to={linkSwitchArticle}> Read more ...</Link></H4>
             </UIFieldAlgin>
             <UIFieldAlgin horizontal={horizontal || undefined}>
                 <AvatarImage plan sizeBorder="2px" src={avatarLink} />
@@ -64,7 +65,7 @@ export default function Article({ article, typeArticle, vectical, horizontal, st
             <WrapperHashTag>
                 {hashTag.length > 4 ? <>{hashTag.slice(0, 3).map((item: any, key: number) => {
                     return <StyledSolidButton>{item}</StyledSolidButton>
-                })}...</>: hashTag.map((item: any, key: number) => {
+                })}...</> : hashTag.map((item: any, key: number) => {
                     return <StyledSolidButton>{item}</StyledSolidButton>
                 })}
             </WrapperHashTag>

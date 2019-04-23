@@ -2,9 +2,7 @@ import * as React from 'react';
 import styled from 'styled-components';
 import ListArticle from './listArticle';
 import Pagination from '../pagination';
-import { H2 } from '../../Components/styled/base';
 import Rank from './Rank';
-// import Footer from './footer'
 
 export default function Home() {
     return <WrapperHome>
@@ -23,9 +21,11 @@ display : flex;
 width : 100%;
 .md-list-article{
     flex : 9;
+    height  : 100%;
+    overflow-y: scroll;
 }
 .md-list-rank {
-    flex : 3
+    flex : 3;
 }
 `
 

@@ -15,12 +15,24 @@ class Navbar extends React.Component<any> {
         sideBarOpen: false,
         notificationOpen: false
     }
+    navRef: HTMLElement
+    componentDidMount() {
+        window.addEventListener('scroll', (e: any) => {
+            if (window.scrollY < 1) {
+                this.navRef.style.position = ''
+            }
+            else {
+                this.navRef.style.position = 'fixed'
+            }
+
+        })
+    }
     render() {
-        const { dataUser  } = userContainer.state
-        const {avatarLink} = dataUser
+        const { dataUser } = userContainer.state
+        const { avatarLink } = dataUser
         const { sideBarOpen } = this.state
         const location = window.location.href
-        return <Nav>
+        return <Nav ref={e => this.navRef = e}>
             <Nav>
                 <NavButton to="/" onClick={async (e: Event) => { e.preventDefault(); await this.setState({ sideBarOpen: true }) }}>
                     <Icon onClick={() => { this.setState({ sideBarOpen: true }) }} glyph="menu" />
@@ -44,15 +56,15 @@ class Navbar extends React.Component<any> {
                 <IconLink to="/writearticle" ><i className="fas fa-pencil-alt" />  </IconLink>
                 <Notification />
                 <Search />
-                <UIPopUp trigger={<div style={{backgroundColor : 'white'}}  >
-                <AvatarImage size={30} src={avatarLink} />
+                <UIPopUp trigger={<div style={{ backgroundColor: 'white' }}  >
+                    <AvatarImage size={30} src={avatarLink} />
                 </div>}>
                     <div style={{ display: 'flex' }}>
                         <Wrapper>
 
-                            <IconLink to="/profile"><i className="fas fa-user-circle"/> <Label>Profile</Label></IconLink>
-                            <IconLink to="/stories"><i className="fas fa-store-alt"/><Label>Stories</Label></IconLink>
-                            <IconLink to="/bookmarks"><i className="fas fa-bookmark"/> <Label>Bookmark</Label></IconLink>
+                            <IconLink to="/profile"><i className="fas fa-user-circle" /> <Label>Profile</Label></IconLink>
+                            <IconLink to="/stories"><i className="fas fa-store-alt" /><Label>Stories</Label></IconLink>
+                            <IconLink to="/bookmarks"><i className="fas fa-bookmark" /> <Label>Bookmark</Label></IconLink>
                             <IconLink to="/writearticle"><i className="fas fa-pencil-alt" /><Label>Write</Label></IconLink>
                             <IconLink to="/logout" ><i className="fal fa-sign-out" /><Label>Logout</Label></IconLink>
                         </Wrapper>
