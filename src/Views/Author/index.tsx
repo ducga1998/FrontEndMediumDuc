@@ -32,7 +32,6 @@ const Author = ({ name, totalFollow, totalArticle, avatarLink, idUser }: IAuthor
                         <P> <b>{totalArticle} </b>
                             Article</P>
                         <br />
-
                         <P><b> {totalFollow} Pepole Follow</b></P>
                     </FlexRow>
                 </FlexCol>

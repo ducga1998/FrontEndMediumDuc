@@ -60,7 +60,7 @@ export default function ButtonArticle({ history }: any) {
                                 setOpen(false)
                             }}
                             title="Hash Tag" width="600px"
-                            trigger={<Button >Public Article</Button>}>
+                            trigger={<Button >Public</Button>}>
                             {arrHashTag.length > 0 ?
                                 <div>{arrHashTag.map((item, key) => {
                                     return <FlexRow key = {key}><H2 style={{flex : 1}} >{item}</H2>
@@ -126,7 +126,7 @@ export default function ButtonArticle({ history }: any) {
 
 const Button = styled(IconLink.withComponent('a'))`
     cursor : pointer;
-    background-color : ${props => props.theme.special.default};
-    border-left : 5px solid ${props => props.theme.special.alt};
+    background-color : ${props => props.theme.brand.dark};
+    // border-left : 5px solid ${props => props.theme.special.alt};
 
 `

@@ -24,7 +24,6 @@ class Stories extends React.Component<IStories> {
             return <UILoading />
         }
         const { articles, avatarLink, name, idUser } = dataUser as any;
-
         return <>
             <H1> All Article {name}</H1>
             <UIFieldAlgin horizontal style={{ flexWrap  : 'wrap' , flex : 'auto'}}>

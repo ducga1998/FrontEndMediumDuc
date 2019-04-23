@@ -3,21 +3,15 @@ import styled from 'styled-components';
 import { OverLay } from '../../../Components/styled/overlay';
 import UIWidget from '../../../Components/UI/UIWidget';
 import UIButton from '../../../Components/UI/UIButton';
-import { FlexCol, FlexRow, H3, P, Gradient, H1, H2 } from '../../../Components/styled/base';
+import { FlexCol, H3, P, Gradient, H1, H2 } from '../../../Components/styled/base';
 import { AvatarImage } from '../../../Components/styled/avatar';
 import UIFieldAlgin from '../../../Components/UI/UIFieldAlgin';
-// import StyledCard from '../../../Components/styled/card';
 import { IconLink } from '../../../Components/styled/nav';
 import Icon from '../../../Components/Icon';
 import theme from '../../../theme';
-// import OverLay from './overlay';
 export default class SideBar extends React.Component<{ open: boolean, setOpen: any, user: any }> {
-    componentDidUpdate(prepState, preProps) {
-
-    }
     handleMouseDown = (event) => {
         event.preventDefault()
-        // event.stopPropagation()
         this.props.setOpen(false)
     }
     closeSideBar() {

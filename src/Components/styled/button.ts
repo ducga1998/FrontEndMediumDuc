@@ -42,7 +42,7 @@ const baseButton = css`
         ${theme.text.reverse};
       color: ${theme.text.reverse};
       transition: ${Transition.hover.on};
-      background : #4400cee3;
+    background : ${props => props.theme.brand.dark};
       &:hover,
       &:focus {
         box-shadow: inset 0 ${true ? '-2px' : '-4px'} 0

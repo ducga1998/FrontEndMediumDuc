@@ -241,7 +241,7 @@ export default class MediumDraft extends React.Component<IMediumDraft> {
 
       this.refOverLay.style.left  = (left ) + 'px'
       
-      // console.log('nguyen inh duc' , scrt)
+      console.log('nguyen inh duc' , this.refOverLay)
     }
   }
    blockRendererFn = function(contentBlock) {

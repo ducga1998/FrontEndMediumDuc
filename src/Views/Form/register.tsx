@@ -6,18 +6,15 @@ import uuid from 'uuid/v1';
 import { addUser } from '../../API/client';
 import UIButton from '../../Components/UI/UIButton';
 import UIField from '../../Components/UI/UIField';
-// import Link from '../../Components/Link';
 import { H3, H1 } from 'src/Components/styled/base';
 import { AvatarImage } from 'src/Components/styled/avatar';
 import { Section } from '../../Components/styled/nav';
-// import { StyledOutlineButton } from '../../Components/styled/button';
 const { useState } = React
 export default function Register() {
     const [login, setValueLogin] = useState('')
     const [password, setValuePassword] = useState('')
     const [name, setValueName] = useState('')
     const [avatarLink, setValueAvatarLink] = useState('')
-    const [isRegister, setRegister] = useState(false)
     async function handleRegister() {
         const user = {
             idUser: uuid(),
@@ -33,7 +30,6 @@ export default function Register() {
         else {
             toast.error("Register error !");
         }
-
     }
 
     return <$Form>

@@ -17,7 +17,6 @@ export default class CustomImageSideButton extends ImageSideButton <any , {image
         body: formData,
       }).then((response) => {
         if (response.status === 200) {
-          
           return response.json().then(({name}  : {name : string}) => {
             if (name) {
               if(articleContainer.state.imageArticle === ''){
