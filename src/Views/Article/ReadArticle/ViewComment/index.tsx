@@ -3,7 +3,6 @@ import * as React from 'react';
 import styled from 'styled-components';
 import FormComment from './FormComment';
 import { getAllCommentinArtcileCurrent } from 'src/API/commentAPI';
-
 import { StyledTextButton } from 'src/Components/styled/button';
 import UIButton from 'src/Components/UI/UIButton';
 import ListCommentView from './ListCommentView';

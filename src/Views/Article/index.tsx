@@ -20,10 +20,11 @@ export interface IArticle {
 //  horizontal => normal view . I am see this state very beautifull
 // vectical => state list => for admin list article
 export default function Article({ article, typeArticle, vectical, horizontal, style }: IArticle) {
-    const { hashTag, contentArticle, titleArticle, createTime, idArticle, user, comment, bookmark, imageArticle } = article
+    const { hashTag, contentArticle, titleArticle, createTime, idArticle, user, comment, bookmark, imageArticle , hashTagData } = article
     if (!user) {
         return null
     }
+    console.log('hashTagData ===> ',hashTagData)
     const { name, avatarLink, idUser } = user
     const backgroundArticle = `http://localhost:4000/img/${imageArticle}`
     const linkSwitchArticle = typeArticle && typeArticle === 'store' ? `/store/${idArticle}` : `/article/${idArticle}`
@@ -40,7 +41,7 @@ export default function Article({ article, typeArticle, vectical, horizontal, st
         <$DetailArticle>
             <UIFieldAlgin>
                 <H1 >
-                    <Link to={linkSwitchArticle}>{renderHTML(filterStringHTML(titleArticle, false, 13))}</Link>
+                    <Link to={linkSwitchArticle}>{renderHTML(filterStringHTML(titleArticle, false, vectical ? 60 :  13))}</Link>
                 </H1>
                 {
                     vectical ? null : <UIFieldAlgin style={{marginLeft : '10px'}}>
@@ -74,7 +75,7 @@ const WrapperHashTag = styled(Section)`
 `
 const WrapperImg = styled.div`
 width : 100%;
-height : 300px;
+height : 200px;
 overflow : hidden;
 `
 const SrcImage = styled.img`

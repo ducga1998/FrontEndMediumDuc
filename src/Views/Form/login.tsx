@@ -1,6 +1,5 @@
 
 import * as React from 'react';
-import { Link } from "react-router-dom";
 import { toast } from 'react-toastify';
 import styled from 'styled-components';
 import userContainer from '../../Container/userContainer';
