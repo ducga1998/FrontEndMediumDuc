@@ -24,7 +24,6 @@ class Navbar extends React.Component<any> {
             else {
                 this.navRef.style.position = 'fixed'
             }
-
         })
     }
     render() {
@@ -61,7 +60,6 @@ class Navbar extends React.Component<any> {
                 </div>}>
                     <div style={{ display: 'flex' }}>
                         <Wrapper>
-
                             <IconLink to="/profile"><i className="fas fa-user-circle" /> <Label>Profile</Label></IconLink>
                             <IconLink to="/stories"><i className="fas fa-store-alt" /><Label>Stories</Label></IconLink>
                             <IconLink to="/bookmarks"><i className="fas fa-bookmark" /> <Label>Bookmark</Label></IconLink>

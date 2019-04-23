@@ -30,7 +30,6 @@ function renderButton() {
                     const { offset } = allArticleContainer.state
                     console.log(offset, key)
                     return<> <UIButton style={{ margin: '2px' }} active={key === offset} keyButton={key} onMouseDown={handleOnClick}>{key + 1}</ UIButton >
-                   
                     </>
                 }
             }

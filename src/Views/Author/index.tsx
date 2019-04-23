@@ -2,8 +2,9 @@ import * as React from 'react';
 import { Link } from "react-router-dom";
 import { Subscribe } from 'unstated-x';
 import userContainer from '../../Container/userContainer';
-import { H2, FlexRow, FlexCol, P } from '../../Components/styled/base';
+import { FlexRow, FlexCol, P, H4 } from '../../Components/styled/base';
 import { AvatarImage } from '../../Components/styled/avatar';
+import styled from 'styled-components';
 // import './index.css';
 interface IAuthor {
     name: string,
@@ -17,28 +18,27 @@ const Author = ({ name, totalFollow, totalArticle, avatarLink, idUser }: IAuthor
     return <Subscribe to={[userContainer]}>
         {
             () => {
-                return <FlexCol>
-                    <FlexRow>
-                        <Link to="/profile" ><AvatarImage src={src} /></Link>
-
-
-                        <Link className="name" to={`/user/${idUser}`}>
-                            <H2 className="caption">
-                                {name}
-                            </H2>
-                        </Link>
-                    </FlexRow>
-                    <FlexRow>
-                        <P> <b>{totalArticle} </b>
-                            Article</P>
-                        <br />
-                        <P><b> {totalFollow} Pepole Follow</b></P>
-                    </FlexRow>
-                </FlexCol>
+                return  <WrapperAuthor>
+                        <Link to="/profile"><AvatarImage src={src} /></Link>
+                        <FlexCol>
+                            <Link className="name" to={`/user/${idUser}`}>
+                                <H4 className="caption">
+                                    {name}
+                                </H4>
+                                
+                            </Link>
+                            <P><b> {totalFollow} Follow</b></P>
+                        </FlexCol>
+                    </WrapperAuthor>
+                  
+        
 
 
             }
         }
     </Subscribe>
 }
+const WrapperAuthor = styled(FlexRow)`
+    align-items : center;
+`
 export default Author

@@ -132,9 +132,6 @@ export default class MediumDraft extends React.Component<IMediumDraft> {
       if (e.which === 83) {  /* Key S */
         return 'editor-save';
       }
-      // else if (e.which === 74 /* Key J */) {
-      //  return 'do-nothing';
-      //}
     }
     if (e.altKey === true) {
       if (e.shiftKey === true) {
@@ -167,21 +164,6 @@ export default class MediumDraft extends React.Component<IMediumDraft> {
     return false;
   }
   
-  logData(e) {
-    const es = convertToRaw(this.state.editorState.getCurrentContent());
-    console.log(es);
-    console.log(this.state.editorState.getSelection().toJS());
-    // window.ga('send', 'event', 'draftjs', 'log-data');
-  }
-  renderHTML = (e) =>  {
-    const currentContent = this.state.editorState.getCurrentContent();
-    const eHTML = this.exporter(currentContent);
-    var newWin : any = window.open(
-      `${window.location.pathname}rendered.html`,
-      'windowName',`height=${window.screen.height},width=${window.screen.width}`)
-      console.log('html ',eHTML)
-  }
-
   
   loadSavedData= () =>  {
     const data = window.localStorage.getItem('editor');
@@ -256,12 +238,7 @@ export default class MediumDraft extends React.Component<IMediumDraft> {
     const { editorState, editorEnabled } = this.state;
     return (
       <EditerWrapper ref={this.wrapperEditer}  onMouseDownCapture = {this.handleMouseDown}>
-        {/* <div className="editor-action">
-          <button onClick={this.logData}>Log State</button>
-          <button onClick={this.renderHTML}>Render HTML</button>
-          <button onClick={this.toggleEdit}>Toggle Edit</button>
-        </div> */}
-      
+
       <OverLay  imgSrc={this.state.imgSrc} getRef ={ ( ref) => { this.refOverLay = ref }}  /> 
      
         <Editor
@@ -299,10 +276,8 @@ class Line extends React.Component<any> {
   }
 }
 const EditerWrapper = styled.div`
-    /* position : relative; */
 `
 const newBlockToHTML = (block) => {
-  const blockType = block.type;
   if (block.type === Block.ATOMIC) {
     if (block.text === 'E') {
       return {

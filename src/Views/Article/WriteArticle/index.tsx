@@ -6,10 +6,8 @@ import userContainer from '../../../Container/userContainer';
 import Author from '../../Author';
 import MediumDraft from './mediumDraft';
 import { fontStack } from '../../../Components/styled/base';
-import {mscConfirm} from 'medium-style-confirm'
 
 export const updateDataArticle = debouce(async (value, content) => {
-    console.log('type', value, 'value', content)
     await articleContainer.setState({ isPublicArticle: true, [value]: content })
 }, 1000)
 export const updateContent = debouce(async (content ) => {
@@ -28,9 +26,8 @@ const WriteArticle = () => {
                 onChangeTitle={value => updateDataArticle('titleArticle', value)}
                 onChangeContent={value => updateContent(value)}
              />
-        </Wrapper>
+        </Wrapper>  
     </$Align>
-
 }
 const Wrapper = styled.div`
     width : 70%;
