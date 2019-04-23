@@ -17,6 +17,10 @@ export default class Search extends React.Component {
     async componentWillMount() {
         const afterData = await getDataSearch()
         this.setState({ afterData })
+        window.addEventListener('keyup' ,this.handleKeyPress)
+    }
+    componentWillUnmount() {
+        window.removeEventListener('keyup' ,this.handleKeyPress)
     }
 
     handleOnChange = (e) => {
@@ -32,6 +36,11 @@ export default class Search extends React.Component {
     open = () => {
         this.setState({ isFocus: true })
     }
+    handleKeyPress = event => {
+        if(event.keyCode === 27 ){
+            this.close()
+        }
+    }
     render() {
         const { isFocus, smartList, value } = this.state
         return <Wrapper>
@@ -45,7 +54,9 @@ export default class Search extends React.Component {
                                 <SearchInput
                                     value={value}
                                     autoFocus={true}
-                                    onChange={this.handleOnChange} />
+                                    onChange={this.handleOnChange} 
+                                    onKeyPress={this.handleKeyPress}
+                                    />
                                 <span onMouseDown={this.close} className="close">
                                     <span dangerouslySetInnerHTML={{ __html: buttonX }} />
                                 </span>

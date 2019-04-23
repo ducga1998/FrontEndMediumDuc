@@ -36,19 +36,17 @@ export default function Login({ history }) {
 
     }
     useEffect(() => {
-        const {login} = userContainer.state  
-        console.log('lgoin' ,login)
-        if(login){
-             history.push('/home')
+        const { login } = userContainer.state
+        console.log('lgoin', login)
+        if (login) {
+            history.push('/home')
         }
-    } , [])
+    }, [])
 
-    
+
     return <$Form>  <div className="center">
-      
-        
-        <AvatarImage style={  { transform: 'rotate(180deg)'}} size ={300} src="./default.jpg" data-tooltip={MESSAGETOOLTIP}/>
-        </div>
+        <AvatarImage style={{ transform: 'rotate(180deg)' }} size={300} src="./default.jpg" data-tooltip={MESSAGETOOLTIP} />
+    </div>
         <H1 className="center">Login</H1>
         <Field>
             <H2>Login : </H2>
@@ -58,8 +56,8 @@ export default function Login({ history }) {
             <H2>Password : </H2>
             <UIInput type="password" placeholder="Password .... " value={password} onChange={(value) => {
                 setValuePassword(value)
-            }} /> 
-            </Field>
+            }} />
+        </Field>
         <Section>
             <UIButton onMouseDown={handleLogin}>Login</UIButton>
             <UIButton to='/register' >Register</UIButton>

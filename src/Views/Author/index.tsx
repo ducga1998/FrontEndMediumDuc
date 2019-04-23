@@ -13,7 +13,7 @@ interface IAuthor {
     avatarLink?: string,
     idUser: string
 }
-const Author = ({ name, totalFollow, totalArticle, avatarLink, idUser }: IAuthor) => {
+const Author = ({ name, totalFollow, avatarLink, idUser }: IAuthor) => {
     const src = avatarLink ? avatarLink : "./default.jpg"
     return <Subscribe to={[userContainer]}>
         {
@@ -25,15 +25,10 @@ const Author = ({ name, totalFollow, totalArticle, avatarLink, idUser }: IAuthor
                                 <H4 className="caption">
                                     {name}
                                 </H4>
-                                
                             </Link>
                             <P><b> {totalFollow} Follow</b></P>
                         </FlexCol>
                     </WrapperAuthor>
-                  
-        
-
-
             }
         }
     </Subscribe>

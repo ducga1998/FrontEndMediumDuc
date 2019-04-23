@@ -40,12 +40,12 @@ export default function Article({ article, typeArticle, vectical, horizontal, st
         <$DetailArticle>
             <UIFieldAlgin>
                 <H1 >
-                    <Link to={linkSwitchArticle}>{renderHTML(filterStringHTML(titleArticle, false, 35))}</Link>
+                    <Link to={linkSwitchArticle}>{renderHTML(filterStringHTML(titleArticle, false, 13))}</Link>
                 </H1>
                 {
                     vectical ? null : <UIFieldAlgin style={{marginLeft : '10px'}}>
-                        <$TotalClap><i className="fa fa-bookmark" /> {bookmark ? bookmark.length : 0}</$TotalClap>
-                        <$TotalComment><i className="fa fa-comment" /> {comment ? comment.length : 0}</$TotalComment>
+                        <InfoICon><i className="fa fa-bookmark" />  {bookmark ? bookmark.length : 0}</InfoICon>
+                        <InfoICon><i className="fa fa-comment" /> {comment ? comment.length : 0}</InfoICon>
                     </UIFieldAlgin>
 
                 }
@@ -83,15 +83,14 @@ const SrcImage = styled.img`
     transition-timing-function: linear;
     transition-property: transform;
 `
-const $TotalClap = styled(P)`
+const InfoICon = styled(P)`
     flex : 1;
     font-size : 20px;
-`
-const $TotalComment = styled(P)`
-    flex : 1;
-    display : flex;
-    flex-direction : row;
-    font-size : 20px;
+    display: flex;
+    align-items: center;
+    i{
+        padding :3px;
+    }
 `
 const $DetailArticle = styled.div`
     flex : 8;
