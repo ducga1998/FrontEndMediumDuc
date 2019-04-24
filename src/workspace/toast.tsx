@@ -11,12 +11,12 @@ export default () => {
     </WrapperToast>
 }
 const WrapperToast = styled.div`
-    .md-toast-container{
+    /* .md-toast-container{
         padding : 20px;
     background : ${props => props.theme.bg.default};
     border-radius : 10px;
     }
     .dark-toast {
         border-radius : 10px;
-    }
+    } */
 `

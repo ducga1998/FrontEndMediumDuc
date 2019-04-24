@@ -40,11 +40,11 @@ export default function UIModal({ trigger, children, title, width, height, close
 }
 const $Background = styled(OverLay)``
 const $Header = styled.header`
-    background-color: ${props => props.theme.space.default};
-    padding: 10px;
+    background-color: ${props => props.theme.brand.alt};
+    padding: 5px;
     display: flex;
     align-items: center;
-    height: 100px;
+    height: 60px;
 
 `
 const $Content = styled.div<{ height?: string, width?: string }>`

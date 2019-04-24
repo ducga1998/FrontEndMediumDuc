@@ -187,3 +187,15 @@ function quick_Sort(origArray) {
         return newArray.concat(quick_Sort(left), pivot, quick_Sort(right));
     }
 }
+import escapeRegExp from 'lodash/escapeRegExp';
+export function buildRegExpFromDelimiters(delimiters) {
+    const delimiterChars = delimiters
+      .map((delimiter) => {
+        // See: http://stackoverflow.com/a/34711175/1463681
+        const chrCode = delimiter - 48 * Math.floor(delimiter / 48);
+        return String.fromCharCode(96 <= delimiter ? chrCode : delimiter);
+      })
+      .join('');
+    const escapedDelimiterChars = escapeRegExp(delimiterChars);
+    return new RegExp(`[${escapedDelimiterChars}]+`);
+  }
