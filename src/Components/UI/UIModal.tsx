@@ -38,6 +38,9 @@ export default function UIModal({ trigger, children, title, width, height, close
     </$Background>
     </UIWidget> </>
 }
+const duc = () => {
+     console.log('nguyen minh duc')
+}
 const $Background = styled(OverLay)``
 const $Header = styled.header`
     background-color: ${props => props.theme.brand.alt};

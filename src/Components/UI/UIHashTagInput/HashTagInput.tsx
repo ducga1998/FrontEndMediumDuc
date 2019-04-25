@@ -1,8 +1,7 @@
 import  * as React from 'react';
 import noop from 'lodash/noop';
 import uniq from 'lodash/uniq';
-import Suggestions from './Suggest';
-import ClassNames from 'classnames';
+import Suggestions from './Suggest'
 import memoizeOne from 'memoize-one';
 import Tag from './Tag';
 import { buildRegExpFromDelimiters } from '../../../help/util'
@@ -252,23 +251,8 @@ export default class ReactTags extends React.Component<any, any> {
     const existingKeys = tags.map((tag) => tag.id.toLowerCase());
 
     // Return if tag has been already added
-    if (allowUnique && existingKeys.indexOf(tag.id.toLowerCase()) >= 0) {
-      return;
-    }
-    if (this.props.autocomplete) {
-      const possibleMatches = this.filteredSuggestions(
-        tag[labelField],
-        this.props.suggestions
-      );
 
-      if (
-        (this.props.autocomplete === 1 && possibleMatches.length === 1) ||
-        (this.props.autocomplete === true && possibleMatches.length)
-      ) {
-        tag = possibleMatches[0];
-      }
-    }
-
+    console.log('add tag' ,tag ,this.props.onChange(tag.text))
     // call method to add
     this.props.handleAddition(tag);
 
@@ -283,6 +267,7 @@ export default class ReactTags extends React.Component<any, any> {
   };
 
   handleSuggestionClick = (i)  => {
+    console.log('this.state.suggestions',this.state.suggestions , i)
     this.addTag(this.state.suggestions[i]);
   }
 
@@ -320,6 +305,7 @@ export default class ReactTags extends React.Component<any, any> {
           tag={tag}
           labelField={labelField}
           moveTag={moveTag}
+          onDelete = {this.props.handleDelete}
           onTagClicked={this.handleTagClick}
           classNames={classNames}
         />

@@ -32,7 +32,7 @@ class WriteArticle extends React.Component<any> {
         if (!dataArticle) {
             return <UILoading />
         }
-        const { titleArticle, contentArticle, hashTag } = dataArticle as any
+        const { titleArticle, contentArticle } = dataArticle as any
         if (titleArticle === '' && contentArticle === '') {
             return null
         }

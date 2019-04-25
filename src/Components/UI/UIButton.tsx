@@ -38,7 +38,6 @@ export default function UIButton({ type , to,
         default:
             break;
     }
-   
     let Button 
     switch(type ){
         case 'soild' :

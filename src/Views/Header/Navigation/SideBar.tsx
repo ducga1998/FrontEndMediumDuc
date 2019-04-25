@@ -22,8 +22,7 @@ export default class SideBar extends React.Component<{ open: boolean, setOpen: a
             return null
         }
         const { user: { name, avatarLink ,decentraliz , biographical } } = this.props
-        console.log('opennnn ok ', this.props.open)
-        return <> <UIWidget>
+        return <UIWidget>
                 {this.props.open ? <OverLayNavBar open onMouseDown={this.handleMouseDown} >
                 <WrapperSideBar onMouseDown={(event) => { event.stopPropagation() }} >
                    <FlexCol style={{justifyContent : 'flex-end'}}>
@@ -63,7 +62,7 @@ export default class SideBar extends React.Component<{ open: boolean, setOpen: a
                     </UIFieldAlgin>
                 </WrapperSideBar>
             </OverLayNavBar> : null}
-        </UIWidget> </>
+        </UIWidget> 
     }
 }
 const OverLayNavBar = styled(OverLay)`

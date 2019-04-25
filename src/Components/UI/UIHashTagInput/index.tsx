@@ -22,27 +22,23 @@ export default class UIHashTagInput extends React.Component<IUIHashTagInput> {
         suggestions: this.props.suggestions.map(item => ({ text: item, id: item }))
     };
 
-    handleDelete = (i) => {
-        const { tags } = this.state;
-        this.props.onDelete()
-    }
     handleAddition = (tag) => {
-        this.props.onAdd()
+        this.props.onAdd(tag)
     }
 
 
     render() {
         let { tags ,suggestions } = this.props
+        
         suggestions = this.props.suggestions.map(item => ({ text: item, id: item }))
         tags = this.props.tags.map(item => ({ text: item, id: item }))
         return <ReactHashTag
             tags={tags}
             suggestions={suggestions || []}
             delimiters={delimiters}
-            handleDelete={this.handleDelete}
+            handleDelete={  this.props.onDelete}
             handleAddition={this.handleAddition}
             onChange={this.props.onChange}
-            // handleDrag={this.handleDrag}
             handleTagClick={this.props.onMouseDownHashTag|| undefined}
         />
     }

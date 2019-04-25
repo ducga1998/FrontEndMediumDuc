@@ -70,7 +70,7 @@ export function addComment(input: { idComment : string ,  idUser: string,  conte
 
     })
 } 
-export function addReplyComment(input: { idUser: string, idArticle: string, content: string , idReply :string }) {
+export function addReplyComment(input: { idUser: string, idArticle: string, content: string , idReply :string }) : Promise<any> {
     return new Promise(async resolve => {
         const API = await client.mutate({
             mutation: gql`

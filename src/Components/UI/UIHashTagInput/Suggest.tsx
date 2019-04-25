@@ -1,18 +1,20 @@
 import * as React from 'react';
 import isEqual from 'lodash/isEqual';
 import escape from 'lodash/escape';
+import styled from 'styled-components';
+import UIWidget from '../UIWidget';
 
-const maybeScrollSuggestionIntoView = (suggestionEl, suggestionsContainer) => {
-  const containerHeight = suggestionsContainer.offsetHeight;
+const maybeScrollSuggestionIntoView = (suggestionEl, suggestionsRef) => {
+  const containerHeight = suggestionsRef.offsetHeight;
   const suggestionHeight = suggestionEl.offsetHeight;
   const relativeSuggestionTop =
-    suggestionEl.offsetTop - suggestionsContainer.scrollTop;
+    suggestionEl.offsetTop - suggestionsRef.scrollTop;
 
   if (relativeSuggestionTop + suggestionHeight >= containerHeight) {
-    suggestionsContainer.scrollTop +=
+    suggestionsRef.scrollTop +=
       relativeSuggestionTop - containerHeight + suggestionHeight;
   } else if (relativeSuggestionTop < 0) {
-    suggestionsContainer.scrollTop += relativeSuggestionTop;
+    suggestionsRef.scrollTop += relativeSuggestionTop;
   }
 };
 
@@ -20,7 +22,7 @@ class Suggestions extends React.Component<any> {
   static defaultProps = {
     minQueryLength: 2,
   };
-  suggestionsContainer : any
+  suggestionsRef : any
   shouldComponentUpdate(nextProps) {
     const { props } = this;
     const shouldRenderSuggestions =
@@ -33,27 +35,25 @@ class Suggestions extends React.Component<any> {
         shouldRenderSuggestions(props.query)
     );
   }
-
   componentDidUpdate(prevProps) {
     const { selectedIndex, classNames } = this.props;
 
     if (
-      this.suggestionsContainer &&
+      this.suggestionsRef &&
       prevProps.selectedIndex !== selectedIndex
     ) {
-      const activeSuggestion = this.suggestionsContainer.querySelector(
+      const activeSuggestion = this.suggestionsRef.querySelector(
         classNames.activeSuggestion
       );
 
-      if (activeSuggestion) {
-        maybeScrollSuggestionIntoView(
-          activeSuggestion,
-          this.suggestionsContainer
-        );
-      }
+      // if (activeSuggestion) {
+      //   maybeScrollSuggestionIntoView(
+      //     activeSuggestion,
+      //     this.suggestionsRef
+      //   );
+      // }
     }
   }
-
   markIt = (input, query) => {
     const escapedRegex = query.trim().replace(/[-\\^$*+?.()|[\]{}]/g, '\\$&');
     const { [this.props.labelField]: labelValue } = input;
@@ -80,7 +80,6 @@ class Suggestions extends React.Component<any> {
 
   render() {
     const { props } = this;
-
     const suggestions = props.suggestions.map(
       (item, i)  => {
         return (
@@ -97,24 +96,41 @@ class Suggestions extends React.Component<any> {
         );
       }
     );
-
-    // use the override, if provided
     const shouldRenderSuggestions =
-      props.shouldRenderSuggestions || this.shouldRenderSuggestions;
-    if (suggestions.length === 0 || !shouldRenderSuggestions(props.query)) {
-      return null;
-    }
-
+    props.shouldRenderSuggestions || this.shouldRenderSuggestions;
+  if (suggestions.length === 0 || !shouldRenderSuggestions(props.query)) {
+    return null;
+  }
     return (
-      <div
+        <WrapperSuggestion
         ref={(elem) => {
-          this.suggestionsContainer = elem;
+          this.suggestionsRef = elem;
         }}
-        className={this.props.classNames.suggestions}>
+        >
         <ul> {suggestions} </ul>
-      </div>
+      </WrapperSuggestion>
     );
   }
 }
-
+const WrapperSuggestion = styled.div` 
+  background : ${props => props.theme.brand.default};
+  position : relative;
+  li {
+        display : block;
+        padding : 10px;
+        list-style : none;
+        transition : .1s;
+        background : ${props => props.theme.brand.alt};
+        &:hover {
+            background : ${props => props.theme.brand.border};
+        }
+        border-bottom : 1px solid ${props => props.theme.brand.border}
+    }
+    ul{
+      position : absolute;
+      z-index : 900000000000;
+      padding : 0px;
+      margin : 3px 0px 0px 0px;
+    }
+`
 export default Suggestions;

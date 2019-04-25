@@ -83,7 +83,7 @@ const AppRouter = () => {
                     <Route exact path ="/managerArticles" component={isAuth(ManagerArticles)} />
                     </>:null}
                     <Route exact path="/"  component={redirect('/login')} />
-                 <Portal />
+            
                 </Layout>
             </Switch>
         </Router>

@@ -8,21 +8,22 @@ import articleContainer from '../../Container/articleContainer';
 import UIModal from '../../Components/UI/UIModal';
 import UIButton from '../../Components/UI/UIButton';
 import { IconLink } from '../../Components/styled/nav';
-import UIInput from '../../Components/UI/UIInput';
-import { H2, FlexRow } from '../../Components/styled/base';
+import {  FlexRow } from '../../Components/styled/base';
 import UIHashTagInput from '../../Components/UI/UIHashTagInput'
-export default function ButtonArticle({ history }: any) {
+export default function ButtonArticle() {
     const [open, setOpen] = React.useState(false)
     const [nameHashTag, setNameHashTag] = React.useState('')
 
     let id = uuid()
     const [idArticle, setIdArticle] = React.useState(id)
-    const handleAddHashTag = async () => {
+    const handleAddHashTag = async (tag) => {
+        const {text :nameHashTag  } = tag
         const { arrHashTag } = articleContainer.state
         if (arrHashTag.length > 6 || nameHashTag.length < 0) {
             toast.error('Maximum 6 hash tag and Min > 0!!!!');
             return
         }
+        console.log('nameHashTag',nameHashTag)
         if (arrHashTag.includes(nameHashTag)) {
             toast.error('Name exites!!!');
             return
@@ -31,10 +32,9 @@ export default function ButtonArticle({ history }: any) {
             toast.error('Name hash tag not empty!!!');
             return
         }
-
-        arrHashTag.push(nameHashTag);
+        arrHashTag.push(tag.text);
         await articleContainer.setState({ arrHashTag })
-        await setNameHashTag('')
+        // await setNameHashTag('')
 
     }
     if (window.location.pathname === "/writearticle" || window.location.pathname.match('store')) {
@@ -55,45 +55,25 @@ export default function ButtonArticle({ history }: any) {
                                 setOpen(false)
                             }}
                             width="1000px"
+                            height="400px"
                             trigger={<Button >Public</Button>}>
-                            {arrHashTag.length > 0 ?
-                                <div>
-                                    {arrHashTag.map((item, key) => {
-                                        return <FlexRow key={key}><H2 style={{ flex: 1 }} >{item}</H2>
-                                            <UIButton icon="delete"
-                                                style={{ padding: '0px' }}
-                                                onMouseDown={() => {
-                                                    const arrHasBeenDelete = arrHashTag.filter(itemHashTag => itemHashTag !== item)
-                                                    articleContainer.setState({ arrHashTag: arrHasBeenDelete })
-                                                }} />
-                                        </FlexRow>
-                                    })}
-                                </div>
-                                : null}
+
 
                             <FlexRow>
-                                <UIHashTagInput 
-                                onChange={value => setNameHashTag(value)}
-                                tags={arrHashTag}
-                                 suggestions={[]} 
-                                 onAdd ={() => {
-                                    handleAddHashTag()
-                                 }}
-                                 onDelete ={() => {
-                                    
-                                 }}
-                                 />
-                                <UIInput
-                                    value={nameHashTag}
-                                    placeholder="Enter text"
-                                    onChange={(value) => setNameHashTag(value)}
-                                    onKeyPress={(event) => {
-                                        if (event.charCode === 13) {
-                                            handleAddHashTag()
-                                        }
+                                <UIHashTagInput
+                                    onChange={value => setNameHashTag(value)}
+                                    tags={arrHashTag}
+                                    suggestions={['cácbasjhcasc', 'ccascnasjckjasnnc']}
+                                    onAdd={(tag) => {
+                                        handleAddHashTag(tag)
+                                    }}
+                                    onDelete={(item) => {
+                                        // console.log(':V :V value' , value)
+                                        const arrHasBeenDelete = arrHashTag.filter(itemHashTag => itemHashTag !== item)
+                                        articleContainer.setState({ arrHashTag: arrHasBeenDelete })
                                     }}
                                 />
-                                <UIButton style={{ padding: '0px' }} icon="plus" onMouseDown={handleAddHashTag} />
+
                             </FlexRow>
 
 
