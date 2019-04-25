@@ -65,6 +65,7 @@ export default function ButtonArticle() {
                                     tags={arrHashTag}
                                     suggestions={['cácbasjhcasc', 'ccascnasjckjasnnc']}
                                     onAdd={(tag) => {
+                                        
                                         handleAddHashTag(tag)
                                     }}
                                     onDelete={(item) => {

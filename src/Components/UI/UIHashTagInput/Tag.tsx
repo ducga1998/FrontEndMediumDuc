@@ -4,8 +4,7 @@ import styled from 'styled-components';
 class Tag extends React.Component<any, any> {
     handleDelete = event => {
         const { props } = this
-        const label = props.tag[props.labelField];
-        console.log('label ===>', label)
+        const label = props.tag[props.labelField]
         this.props.onDelete(label)
     }
     render() {
@@ -14,9 +13,7 @@ class Tag extends React.Component<any, any> {
         const {
             tag
         } = props;
-        const tagComponent = (<Span
-            onClick={props.onTagClicked}
-            onKeyDown={props.onTagClicked}
+        return <Span
         >
             {label}
             <span
@@ -26,8 +23,6 @@ class Tag extends React.Component<any, any> {
                 <i className="fas fa-window-close" />
             </span>
         </Span>
-        );
-        return tagComponent
     }
 }
 const Span = styled.span`

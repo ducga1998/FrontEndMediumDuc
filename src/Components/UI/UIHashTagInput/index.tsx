@@ -23,6 +23,7 @@ export default class UIHashTagInput extends React.Component<IUIHashTagInput> {
     };
 
     handleAddition = (tag) => {
+        console.log('tag ====>',tag)
         this.props.onAdd(tag)
     }
 

@@ -1,52 +1,31 @@
-import  * as React from 'react';
+import * as React from 'react';
 import noop from 'lodash/noop';
-import uniq from 'lodash/uniq';
 import Suggestions from './Suggest'
-import memoizeOne from 'memoize-one';
 import Tag from './Tag';
-import { buildRegExpFromDelimiters } from '../../../help/util'
 import { Input } from '../../styled/base';
+import styled from 'styled-components';
 export const KEYS = {
-    ENTER: 13,
-    TAB: 9,
-    BACKSPACE: 8,
-    UP_ARROW: 38,
-    DOWN_ARROW: 40,
-    ESCAPE: 27,
-  };
-  
-  export const DEFAULT_PLACEHOLDER = 'Add new tag';
-  
-  export const DEFAULT_LABEL_FIELD = 'text';
-  
-  export const DEFAULT_CLASSNAMES = {
-    tags: 'ReactTags__tags',
-    tagInput: 'ReactTags__tagInput',
-    tagInputField: 'ReactTags__tagInputField',
-    selected: 'ReactTags__selected',
-    tag: 'ReactTags__tag',
-    remove: 'ReactTags__remove',
-    suggestions: 'ReactTags__suggestions',
-    activeSuggestion: 'ReactTags__activeSuggestion',
-  };
-  
-  export const INPUT_FIELD_POSITIONS = {
-    INLINE: 'inline',
-    TOP: 'top',
-    BOTTOM: 'bottom',
-  };
-  
+  ENTER: 13,
+  TAB: 9,
+  BACKSPACE: 8,
+  UP_ARROW: 38,
+  DOWN_ARROW: 40,
+  ESCAPE: 27,
+};
 
-const updateClassNames  = memoizeOne((classNames) =>
-{
-  return {
-    classNames : {...DEFAULT_CLASSNAMES,...classNames},
-  };
-});
+export const DEFAULT_PLACEHOLDER = 'Add new tag';
+
+
+export const INPUT_FIELD_POSITIONS = {
+  INLINE: 'inline',
+  TOP: 'top',
+  BOTTOM: 'bottom',
+};
+
 
 export default class ReactTags extends React.Component<any, any> {
   static defaultProps = {
-    labelField: DEFAULT_LABEL_FIELD,
+    labelField: 'text',
     suggestions: [],
     delimiters: [KEYS.ENTER, KEYS.TAB],
     autofocus: true,
@@ -54,8 +33,7 @@ export default class ReactTags extends React.Component<any, any> {
     inputFieldPosition: INPUT_FIELD_POSITIONS.INLINE,
     handleDelete: noop,
     handleAddition: noop,
-    allowDeleteFromEmptyInput: true,
-    allowAdditionFromPaste: true,
+
     resetInputOnDelete: true,
     autocomplete: false,
     readOnly: false,
@@ -63,25 +41,19 @@ export default class ReactTags extends React.Component<any, any> {
     allowDragDrop: true,
     tags: [],
   };
-  textInput : any
+  textInput: any
   constructor(props) {
     super(props)
-    const { suggestions, classNames } = props;
+    const { suggestions } = props;
     this.state = {
       suggestions,
       query: '',
       isFocused: false,
       selectedIndex: -1,
       selectionMode: false,
-      classNames: { ...DEFAULT_CLASSNAMES, ...classNames },
     };
   }
 
-  static getDerivedStateFromProps(props)
-  {
-    const { classNames } = props;
-    return updateClassNames(classNames);
-  }
 
   componentDidMount() {
     const { autofocus, readOnly } = this.props;
@@ -90,7 +62,7 @@ export default class ReactTags extends React.Component<any, any> {
     }
   }
 
-  filteredSuggestions = (query, suggestions) =>  {
+  filteredSuggestions = (query, suggestions) => {
     if (this.props.handleFilterSuggestions) {
       return this.props.handleFilterSuggestions(query, suggestions);
     }
@@ -110,7 +82,7 @@ export default class ReactTags extends React.Component<any, any> {
       .indexOf(query.toLowerCase());
   }
 
-  resetAndFocusInput = ()  => {
+  resetAndFocusInput = () => {
     this.setState({ query: '' });
     if (this.textInput) {
       this.textInput.value = '';
@@ -118,7 +90,7 @@ export default class ReactTags extends React.Component<any, any> {
     }
   }
 
-  handleTagClick  = (i, e)  => {
+  handleTagClick = (i, e) => {
     if (this.props.handleTagClick) {
       this.props.handleTagClick(i, e);
     }
@@ -129,7 +101,7 @@ export default class ReactTags extends React.Component<any, any> {
     }
   }
 
-  handleChange = (e)  => {
+  handleChange = (e) => {
     if (this.props.handleInputChange) {
       this.props.handleInputChange(e.target.value);
     }
@@ -148,7 +120,7 @@ export default class ReactTags extends React.Component<any, any> {
     });
   }
 
-  handleFocus = (e) =>  {
+  handleFocus = (e) => {
     const value = e.target.value;
     if (this.props.handleInputFocus) {
       this.props.handleInputFocus(value);
@@ -156,7 +128,7 @@ export default class ReactTags extends React.Component<any, any> {
     this.setState({ isFocused: true });
   }
 
-  handleBlur = (e)  => {
+  handleBlur = (e) => {
     const value = e.target.value;
     if (this.props.handleInputBlur) {
       this.props.handleInputBlur(value);
@@ -167,7 +139,7 @@ export default class ReactTags extends React.Component<any, any> {
     this.setState({ isFocused: false });
   }
 
-  handleKeyDown = (e)  => {
+  handleKeyDown = (e) => {
     const { query, selectedIndex, suggestions, selectionMode } = this.state;
 
     // hide suggestions menu on escape
@@ -218,45 +190,12 @@ export default class ReactTags extends React.Component<any, any> {
     }
   }
 
-  handlePaste = (e)  => {
-    if (!this.props.allowAdditionFromPaste) {
-      return;
-    }
-
-    e.preventDefault();
-
-    const clipboardData = e.clipboardData || window.clipboardData;
-    const clipboardText = clipboardData.getData('text');
-
-    const { maxLength = clipboardText.length } = this.props;
-
-    const maxTextLength = Math.min(maxLength, clipboardText.length);
-    const pastedText = clipboardData.getData('text').substr(0, maxTextLength);
-
-    // Used to determine how the pasted content is split.
-    const delimiterRegExp = buildRegExpFromDelimiters(this.props.delimiters);
-    const tags = pastedText.split(delimiterRegExp);
-
-    // Only add unique tags
-    uniq(tags).forEach((tag) =>
-      this.addTag({ id: tag, [this.props.labelField]: tag })
-    );
-  }
-
   addTag = (tag) => {
     const { tags, labelField, allowUnique } = this.props;
     if (!tag.id || !tag[labelField]) {
       return;
     }
-    const existingKeys = tags.map((tag) => tag.id.toLowerCase());
-
-    // Return if tag has been already added
-
-    console.log('add tag' ,tag ,this.props.onChange(tag.text))
-    // call method to add
     this.props.handleAddition(tag);
-
-    // reset the state
     this.setState({
       query: '',
       selectionMode: false,
@@ -266,37 +205,16 @@ export default class ReactTags extends React.Component<any, any> {
     this.resetAndFocusInput();
   };
 
-  handleSuggestionClick = (i)  => {
-    console.log('this.state.suggestions',this.state.suggestions , i)
+  handleSuggestionClick = (i) => {
+    console.log('this.state.suggestions', this.state.suggestions, i)
     this.addTag(this.state.suggestions[i]);
   }
-
-  handleSuggestionHover = (i) =>  {
-    this.setState({
-      selectedIndex: i,
-      selectionMode: true,
-    });
-  }
-
-  moveTag =  (dragIndex, hoverIndex) =>  {
-    const tags = this.props.tags;
-
-    // locate tags
-    const dragTag = tags[dragIndex];
-
-    // call handler with the index of the dragged tag
-    // and the tag that is hovered
-    this.props.handleDrag(dragTag, dragIndex, hoverIndex);
-  }
-
   getTagItems = () => {
     const {
       tags,
       labelField,
-      allowDragDrop,
+
     } = this.props;
-    const { classNames } = this.state;
-    const moveTag = allowDragDrop ? this.moveTag : null;
     return tags.map((tag, index) => {
       return (
         <Tag
@@ -304,10 +222,8 @@ export default class ReactTags extends React.Component<any, any> {
           index={index}
           tag={tag}
           labelField={labelField}
-          moveTag={moveTag}
-          onDelete = {this.props.handleDelete}
-          onTagClicked={this.handleTagClick}
-          classNames={classNames}
+          onDelete={this.props.handleDelete}
+         
         />
       );
     });
@@ -321,25 +237,19 @@ export default class ReactTags extends React.Component<any, any> {
 
     const {
       placeholder,
-      inline,
-      inputFieldPosition,
     } = this.props;
 
-    const position = !inline ? INPUT_FIELD_POSITIONS.BOTTOM : inputFieldPosition;
 
-    const tagInput = !this.props.readOnly ? (
-      <div className={this.state.classNames.tagInput}>
+    const tagInput = <div >
         <Input
           ref={(input) => {
             this.textInput = input;
           }}
-          className={this.state.classNames.tagInputField}
           placeholder={placeholder}
           onFocus={this.handleFocus}
           onBlur={this.handleBlur}
           onChange={this.handleChange}
           onKeyDown={this.handleKeyDown}
-          onPaste={this.handlePaste}
           value={this.props.inputValue}
         />
 
@@ -349,24 +259,24 @@ export default class ReactTags extends React.Component<any, any> {
           labelField={this.props.labelField}
           selectedIndex={selectedIndex}
           handleClick={this.handleSuggestionClick}
-          handleHover={this.handleSuggestionHover}
-          minQueryLength={this.props.minQueryLength}
-          shouldRenderSuggestions={this.props.shouldRenderSuggestions}
           isFocused={this.state.isFocused}
-          classNames={this.state.classNames}
         />
       </div>
-    ) : null;
+    
 
     return (
-      <div>
-        {position === INPUT_FIELD_POSITIONS.TOP && tagInput}
-      
+      <Wrapper>
+        <div className="pb-duc-wrapper-input">
+          {tagInput}
+        </div>
+        <div className="pb-duc-wrapper-tag">
           {tagItems}
-          {position === INPUT_FIELD_POSITIONS.INLINE && tagInput}
-        {position === INPUT_FIELD_POSITIONS.BOTTOM && tagInput}
-      </div>
+        </div>
+      </Wrapper>
     );
   }
 }
+const Wrapper = styled.div`
+
+`
 

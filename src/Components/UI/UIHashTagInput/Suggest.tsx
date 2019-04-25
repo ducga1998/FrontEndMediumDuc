@@ -2,22 +2,6 @@ import * as React from 'react';
 import isEqual from 'lodash/isEqual';
 import escape from 'lodash/escape';
 import styled from 'styled-components';
-import UIWidget from '../UIWidget';
-
-const maybeScrollSuggestionIntoView = (suggestionEl, suggestionsRef) => {
-  const containerHeight = suggestionsRef.offsetHeight;
-  const suggestionHeight = suggestionEl.offsetHeight;
-  const relativeSuggestionTop =
-    suggestionEl.offsetTop - suggestionsRef.scrollTop;
-
-  if (relativeSuggestionTop + suggestionHeight >= containerHeight) {
-    suggestionsRef.scrollTop +=
-      relativeSuggestionTop - containerHeight + suggestionHeight;
-  } else if (relativeSuggestionTop < 0) {
-    suggestionsRef.scrollTop += relativeSuggestionTop;
-  }
-};
-
 class Suggestions extends React.Component<any> {
   static defaultProps = {
     minQueryLength: 2,
@@ -36,22 +20,12 @@ class Suggestions extends React.Component<any> {
     );
   }
   componentDidUpdate(prevProps) {
-    const { selectedIndex, classNames } = this.props;
+    const { selectedIndex } = this.props;
 
     if (
       this.suggestionsRef &&
       prevProps.selectedIndex !== selectedIndex
     ) {
-      const activeSuggestion = this.suggestionsRef.querySelector(
-        classNames.activeSuggestion
-      );
-
-      // if (activeSuggestion) {
-      //   maybeScrollSuggestionIntoView(
-      //     activeSuggestion,
-      //     this.suggestionsRef
-      //   );
-      // }
     }
   }
   markIt = (input, query) => {
@@ -87,7 +61,6 @@ class Suggestions extends React.Component<any> {
             key={i}
             onMouseDown={props.handleClick.bind(null, i)}
             onTouchStart={props.handleClick.bind(null, i)}
-            onMouseOver={props.handleHover.bind(null, i)}
             className={
               i === props.selectedIndex ? props.classNames.activeSuggestion : ''
             }>
@@ -96,9 +69,8 @@ class Suggestions extends React.Component<any> {
         );
       }
     );
-    const shouldRenderSuggestions =
-    props.shouldRenderSuggestions || this.shouldRenderSuggestions;
-  if (suggestions.length === 0 || !shouldRenderSuggestions(props.query)) {
+   
+  if (suggestions.length === 0 || this.shouldRenderSuggestions(props.query)) {
     return null;
   }
     return (
