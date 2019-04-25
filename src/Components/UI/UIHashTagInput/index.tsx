@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import ReactHashTag from './lir';
+import ReactHashTag from './HashTagInput';
 const KeyCodes = {
     comma: 188,
     enter: 13,
@@ -13,7 +13,8 @@ interface IUIHashTagInput {
     suggestions: any[],
     onDelete : (e ?: any) => any,
     onAdd  : (e ?: any) => any,
-    onMouseDownHashTag ?: (e : any) => any
+    onMouseDownHashTag ?: (e : any) => any,
+    onChange ?:   (e : any) => any
 }
 export default class UIHashTagInput extends React.Component<IUIHashTagInput> {
     state = {
@@ -40,7 +41,7 @@ export default class UIHashTagInput extends React.Component<IUIHashTagInput> {
             delimiters={delimiters}
             handleDelete={this.handleDelete}
             handleAddition={this.handleAddition}
-            onChange={value => console.log('value ====>',value)}
+            onChange={this.props.onChange}
             // handleDrag={this.handleDrag}
             handleTagClick={this.props.onMouseDownHashTag|| undefined}
         />

@@ -73,14 +73,14 @@ export default function ButtonArticle({ history }: any) {
 
                             <FlexRow>
                                 <UIHashTagInput 
+                                onChange={value => setNameHashTag(value)}
                                 tags={arrHashTag}
                                  suggestions={[]} 
                                  onAdd ={() => {
                                     handleAddHashTag()
                                  }}
                                  onDelete ={() => {
-                                    // const arrHasBeenDelete = arrHashTag.filter(itemHashTag => itemHashTag !== item)
-                                    // articleContainer.setState({ arrHashTag: arrHasBeenDelete })
+                                    
                                  }}
                                  />
                                 <UIInput

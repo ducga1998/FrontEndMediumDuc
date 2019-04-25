@@ -1,32 +1,38 @@
-import  * as  React  from 'react';
-import ClassNames from 'classnames';
+import * as  React from 'react';
+import styled from 'styled-components';
 
 class Tag extends React.Component<any, any> {
-    static defaultProps = {
-        labelField: 'text',
-        readOnly: false,
-      };
-  render() {
-    const { props } = this;
-    const label = props.tag[props.labelField];
-    const {
-      tag,
-      classNames,
-    } = props;
-    const { className = '' } = tag;
-    const tagComponent = ( <span
-      className={ClassNames('tag-wrapper', classNames.tag, className)}
-      onClick={props.onTagClicked}
-      onKeyDown={props.onTagClicked}
-      onTouchStart={props.onTagClicked}>
-      {label}
-
-    </span>
-    );
-    return tagComponent
-  }
+    handleDelete = event => {
+        const {props}  = this
+        const label = props.tag[props.labelField];
+        console.log('label ===>',label)
+    }
+    render() {
+        const { props } = this;
+        const label = props.tag[props.labelField];
+        const {
+            tag
+        } = props;
+        const tagComponent = (<span
+            onClick={props.onTagClicked}
+            onKeyDown={props.onTagClicked}
+            >
+            {label}
+            <Span 
+                data-item ={label} 
+                onMouseDown=  {this.handleDelete}
+            >
+                <i className="fas fa-window-close" />
+            </Span>
+        </span>
+        );
+        return tagComponent
+    }
 }
-
-
-
+const Span = styled.span`
+ i {
+     margin : 0px 4px;
+     cursor : pointer;
+ }
+`
 export default Tag
