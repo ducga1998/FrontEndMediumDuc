@@ -1,5 +1,6 @@
 import * as  React from 'react';
 import styled from 'styled-components';
+import { fontStack } from '../../styled/base';
 
 class Tag extends React.Component<any, any> {
     handleDelete = event => {
@@ -13,7 +14,7 @@ class Tag extends React.Component<any, any> {
         const {
             tag
         } = props;
-        return <Span
+        return <Div
         >
             {label}
             <span
@@ -22,19 +23,22 @@ class Tag extends React.Component<any, any> {
             >
                 <i className="fas fa-window-close" />
             </span>
-        </Span>
+        </Div>
     }
 }
-const Span = styled.span`
+const Div = styled.div`
+${fontStack}
  i {
     margin : 0px 4px;
     cursor : pointer;   
     color : ${props => props.theme.warn.default};
  }
+ display: inline-block;
  margin : 5px;
  background : ${props => props.theme.brand.border};
  padding  : 10px 20px;
  transition : .1s;
+ border-radius : 5px;
  &:hover{
      background : ${props => props.theme.brand.alt};
  }

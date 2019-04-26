@@ -13,4 +13,9 @@ module.exports = function (app) {
 		'target': 'http://localhost:4000',
 		'secure': false
 	}))
+	app.use(proxy(['/api/hashtag'], {
+		'target': 'http://localhost:4000',
+		'secure': false
+	}))
 }
+

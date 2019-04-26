@@ -48,7 +48,6 @@ class AllArticleContainer extends Container<IAllArticleContainer> {
             await this.setState({ registryArticle: listContainer, count })
         }
     }
-    // addArticle will structure  {
 }
 export const allArticleContainer = new AllArticleContainer({
     registryArticle: [],
@@ -73,7 +72,7 @@ export interface IArticleContainer {
     imageArticle : string
 }
 class ArticleContainer extends Container<IArticleContainer>{
-    //   =>   request to back end 
+    //  =>   request to back end 
     //  => front end alway have stories
     async addArticle(idArticle) {
         const { contentArticle, titleArticle, arrHashTag  , imageArticle} = this.state
@@ -85,6 +84,8 @@ class ArticleContainer extends Container<IArticleContainer>{
         }
     }
     async updateAricle(idArticle) {
+        // => create hash  
+        // idHashTag, idArticle  , nameArticle
         const { contentArticle, titleArticle, arrHashTag , imageArticle } = this.state
         const { dataUser } = userContainer.state as any
         // const idArticle = uuid()

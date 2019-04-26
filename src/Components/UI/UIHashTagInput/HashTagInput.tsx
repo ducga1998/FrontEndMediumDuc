@@ -230,7 +230,6 @@ export default class ReactTags extends React.Component<any, any> {
   };
 
   render() {
-    const tagItems = this.getTagItems()
     const query = this.state.query.trim(),
       selectedIndex = this.state.selectedIndex,
       suggestions = this.state.suggestions;
@@ -238,9 +237,14 @@ export default class ReactTags extends React.Component<any, any> {
     const {
       placeholder,
     } = this.props;
+    
 
-
-    const tagInput = <div >
+    return (
+      <Wrapper>
+         <div className="pb-duc-wrapper-tag">
+          { this.getTagItems()}
+        </div>
+        <div className="pb-duc-wrapper-input">
         <Input
           ref={(input) => {
             this.textInput = input;
@@ -253,30 +257,26 @@ export default class ReactTags extends React.Component<any, any> {
           value={this.props.inputValue}
         />
 
-        <Suggestions
+        {query.length > 0 && <Suggestions
           query={query}
           suggestions={suggestions}
           labelField={this.props.labelField}
           selectedIndex={selectedIndex}
           handleClick={this.handleSuggestionClick}
           isFocused={this.state.isFocused}
-        />
-      </div>
-    
-
-    return (
-      <Wrapper>
-        <div className="pb-duc-wrapper-input">
-          {tagInput}
+        /> }
         </div>
-        <div className="pb-duc-wrapper-tag">
-          {tagItems}
-        </div>
+       
       </Wrapper>
     );
   }
 }
 const Wrapper = styled.div`
-
+display : flex;
+flex-direction : row;
+.pb-duc-wrapper-input {
+ 
+}
+  
 `
 

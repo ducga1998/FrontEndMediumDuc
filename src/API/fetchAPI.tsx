@@ -3,4 +3,7 @@
 export const rankData = async () => {
     return await fetch('/api/rank').then(data => data.json())
 }
+export const hashTagData = async () => {
+    return await fetch('/api/hashtag').then(data => data.json())
+}
 // something api

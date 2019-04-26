@@ -6,7 +6,7 @@ class Suggestions extends React.Component<any> {
   static defaultProps = {
     minQueryLength: 2,
   };
-  suggestionsRef : any
+  suggestionsRef: any
   shouldComponentUpdate(nextProps) {
     const { props } = this;
     const shouldRenderSuggestions =
@@ -16,7 +16,7 @@ class Suggestions extends React.Component<any> {
       !isEqual(props.suggestions, nextProps.suggestions) ||
       shouldRenderSuggestions(nextProps.query) ||
       shouldRenderSuggestions(nextProps.query) !==
-        shouldRenderSuggestions(props.query)
+      shouldRenderSuggestions(props.query)
     );
   }
   componentDidUpdate(prevProps) {
@@ -55,7 +55,7 @@ class Suggestions extends React.Component<any> {
   render() {
     const { props } = this;
     const suggestions = props.suggestions.map(
-      (item, i)  => {
+      (item, i) => {
         return (
           <li
             key={i}
@@ -69,16 +69,16 @@ class Suggestions extends React.Component<any> {
         );
       }
     );
-   
-  if (suggestions.length === 0 || this.shouldRenderSuggestions(props.query)) {
-    return null;
-  }
+
+    if (props.query.length > 0 &&(suggestions.length === 0 || this.shouldRenderSuggestions(props.query))) {
+      return null;
+    }
     return (
-        <WrapperSuggestion
+      <WrapperSuggestion
         ref={(elem) => {
           this.suggestionsRef = elem;
         }}
-        >
+      >
         <ul> {suggestions} </ul>
       </WrapperSuggestion>
     );

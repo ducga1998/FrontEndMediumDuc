@@ -2,18 +2,17 @@ import * as React from 'react';
 import { toast } from 'react-toastify';
 import styled from 'styled-components';
 import { Subscribe } from 'unstated-x';
-
 import uuid from 'uuid';
 import articleContainer from '../../Container/articleContainer';
 import UIModal from '../../Components/UI/UIModal';
 import UIButton from '../../Components/UI/UIButton';
 import { IconLink } from '../../Components/styled/nav';
-import {  FlexRow } from '../../Components/styled/base';
 import UIHashTagInput from '../../Components/UI/UIHashTagInput'
+import { hashTagData } from 'src/API/fetchAPI';
+const {useEffect} = React as any
 export default function ButtonArticle() {
     const [open, setOpen] = React.useState(false)
-    const [nameHashTag, setNameHashTag] = React.useState('')
-
+    const [suggestion ,setSuggestion] = React.useState([]) as any
     let id = uuid()
     const [idArticle, setIdArticle] = React.useState(id)
     const handleAddHashTag = async (tag) => {
@@ -34,9 +33,13 @@ export default function ButtonArticle() {
         }
         arrHashTag.push(tag.text);
         await articleContainer.setState({ arrHashTag })
-        // await setNameHashTag('')
 
     }
+    useEffect(async ()  => {
+        const suggestion =  await hashTagData()
+        setSuggestion(suggestion.map(item => item.nameHashTag))
+    }, [])
+    
     if (window.location.pathname === "/writearticle" || window.location.pathname.match('store')) {
         return <Subscribe to={[articleContainer]}>
             {
@@ -59,25 +62,20 @@ export default function ButtonArticle() {
                             trigger={<Button >Public</Button>}>
 
 
-                            <FlexRow>
+                           
                                 <UIHashTagInput
-                                    onChange={value => setNameHashTag(value)}
+                                    onChange={value => value}
                                     tags={arrHashTag}
-                                    suggestions={['cácbasjhcasc', 'ccascnasjckjasnnc']}
+                                    suggestions={suggestion }
                                     onAdd={(tag) => {
                                         
                                         handleAddHashTag(tag)
                                     }}
                                     onDelete={(item) => {
-                                        // console.log(':V :V value' , value)
                                         const arrHasBeenDelete = arrHashTag.filter(itemHashTag => itemHashTag !== item)
                                         articleContainer.setState({ arrHashTag: arrHasBeenDelete })
                                     }}
                                 />
-
-                            </FlexRow>
-
-
                             {isUpdate ? <UIButton onMouseDown={async () => {
                                 if (window.location.pathname.match('store')) {
                                     const id = window.location.pathname.replace(/[/]store[/]/, '')
@@ -103,16 +101,13 @@ export default function ButtonArticle() {
                                     toast.error(":( Error , just kidding me, FUCKING CODE FOR ME")
                                 }
                             }}> Public Article  </UIButton>}
-
                         </UIModal>) : null
                 }
             }
         </Subscribe>
     }
     return null
-
 }
-
 const Button = styled(IconLink.withComponent('a'))`
     cursor : pointer;
     background-color : ${props => props.theme.brand.dark};
