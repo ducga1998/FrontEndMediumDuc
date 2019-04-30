@@ -1,3 +1,4 @@
+
 // @flow
 /* eslint no-eval: 0 */
 // $FlowFixMe
@@ -7,7 +8,7 @@ import { Shadow, Transition, hexa } from '../styled/base';
 import theme from '../../theme';
 // css Base for all button 
 // margin , padding,
-const baseButton = css`
+export const baseButton = css`
   display: flex;
   flex: none;
   align-items: center;
@@ -61,6 +62,7 @@ const baseButton = css`
       /* color: ${theme.text.reverse}; */
       transition: ${Transition.hover.on};
     }
+
   }
 
   @media (max-width: 768px) {

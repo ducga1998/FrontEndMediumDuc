@@ -1,8 +1,8 @@
 import * as React from 'react';
 import styled from 'styled-components';
-import { StyledOutlineButton, StyledSolidButton, StyledTextButton } from '../styled/button';
+import { StyledOutlineButton, StyledSolidButton, StyledTextButton, baseButton } from '../styled/button';
 import Icon from '../Icon';
-import { Spinner } from '../styled/base';
+import { Spinner, fontStack } from '../styled/base';
 import { Link } from 'react-router-dom';
 interface IUIButton {
     width ?: any
@@ -38,6 +38,7 @@ export default function UIButton({ type , to,
         default:
             break;
     }
+    console.log('categoryButton',categoryButton)
     let Button 
 switch(type ){
         case 'soild' :
@@ -73,21 +74,6 @@ switch(type ){
     </Button>
 }
 const ButtonLink = styled(StyledOutlineButton.withComponent(Link))`
-    display: flex;
-    flex: none;
-    align-items: center;
-    justify-content: center;
-    border-radius: 12px;
-    white-space: nowrap;
-    word-break: keep-all;
-    cursor: pointer;
-    font-size: 14px;
-    line-height: 1;
-    position: relative;
-    text-align: center;
-    padding: 12px 16px;
-    background-color: #7B16FF;
-    background: transparent;
-    background-image: none;
-    font-weight: 600;
+${baseButton}
+${fontStack}
 `

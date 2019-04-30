@@ -2,15 +2,47 @@ import gql from "graphql-tag";
 import { client } from "./client";
 import { convertDataToGraphQL } from "../help/help";
 //QUERY
-export function getArticleTagByIdHashTag(idHashTag) {
+export function getArticleTagByNameHashTag(idHashTag) {
+    console.log('idHashTag==>',idHashTag)
     return new Promise(async resolve => {
         const API = await client.query({
             query: gql`
                     query {
-                        getArticleTagByIdHashTag( id  : "${idHashTag}"){
+                        getArticleTagByNameHashTag( id  : "${idHashTag}"){
                             idArticle
-                            idHashTag 
-                            nameHashTag 
+                            idUser
+                            hashTag
+                            category
+                            comment {
+                                idUser
+                                idArticle
+                                content
+                            }
+                            bookmark {
+                                idUserBookMark
+                            }
+                            totalClap
+                            notification
+                            contentArticle
+                            imageArticle
+                            titleArticle
+                            createTime
+                            user {
+                                idUser
+                                login
+                        
+                
+                                name
+                                avatarLink
+                                articles {
+                                    idArticle
+                                }
+                            }
+                            hashTagData {
+                                idHashTag
+                                nameHashTag
+                                idArticle
+                            }
                         }
                     }
                     `

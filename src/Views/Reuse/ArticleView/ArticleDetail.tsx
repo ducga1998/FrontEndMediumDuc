@@ -60,7 +60,7 @@ export default function Article({ article, typeArticle, vectical, horizontal, st
             </UIFieldAlgin>
             <WrapperHashTag>
                 {
-                    hashTagData.length > 4 ? <>
+                   hashTagData &&  hashTagData.length > 4 ? <>
                     {
                         hashTag.slice(0, 3).map((item: any, key: number) => 
                          <UIButton type="soild" >{item.nameHashtag}</UIButton>)}...</> : hashTag.map((item: any, key: number) => {

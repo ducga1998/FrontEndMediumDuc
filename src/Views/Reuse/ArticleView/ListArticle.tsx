@@ -1,58 +1,33 @@
 import * as React from 'react';
 import styled from 'styled-components';
-import { getAllArticle } from '../../../API/articleAPI';
 import Article from '../../Reuse/ArticleView/ArticleDetail';
 import { Subscribe } from 'unstated-x';
-import { allArticleContainer } from '../../../Container/articleContainer';
+
 import {  FlexRow} from '../../../Components/styled/base';
-import { getArticleTagByIdHashTag } from '../../../API/hashtagAPI';
+
 // improve list article by data : 30/4/2019
 interface IListArticle  {
-    idHashTag ?: string
-    idUser? :string 
+    listArticle : any[]
+    direction? : boolean
 
 }
 export default class ListArticle extends React.Component<IListArticle> {
-    state = {
-        value: '',
-        allArticleData: []
-    }
-    async componentDidMount() {
-        if(this.props.idHashTag){
-          const  allArticleData =  await getArticleTagByIdHashTag(this.props.idHashTag)
-          console.log('allArticleData',allArticleData)
-          this.setState({ allArticleData })
-          return null
-        }
-        // this is function get all data article, in have data user
-        const allArticleData = await getAllArticle()
-
-        if (allArticleData) {
-            this.setState({ allArticleData })
-        }
-    }
     render() {
-        return <Subscribe to={[allArticleContainer]}>
-            {
-                container => {
-                    const { registryArticle , vectical  } = container.state
-
-                    return <$ListArticle>
+        const{ listArticle ,direction }  = this.props 
+        return <$ListArticle>
+        {
+            listArticle.length > 0 ? listArticle.map((item: any, key) => {
+                const { articleContainer } = item
+                if(!articleContainer) return <Article key={key} vectical={direction}  article ={item}/>
+                return <Subscribe   key={key} to={[articleContainer]}>
                     {
-                        registryArticle.length > 0 ? registryArticle.map((item: any, key) => {
-                            const { articleContainer } = item
-                            return <Subscribe   key={key} to={[articleContainer]}>
-                                {
-                                    () => { 
-                                        return <Article vectical={vectical}  article ={articleContainer.state}/>
-                                    }
-                                }
-                            </Subscribe>
-                        }) : <h1>No article</h1>
-                    }</$ListArticle>
-                }
-            }
-        </Subscribe>
+                        () => { 
+                            return <Article vectical={direction}  article ={articleContainer.state}/>
+                        }
+                    }
+                </Subscribe>
+            }) : <h1>No article</h1>
+        }</$ListArticle>
     }
 }
 const $ListArticle = styled(FlexRow)`

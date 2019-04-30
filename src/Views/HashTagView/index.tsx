@@ -2,29 +2,51 @@ import * as React from 'react';
 import styled from 'styled-components';
 import ListArticle from '../Reuse/ArticleView/ListArticle';
 import Pagination from '../pagination';
-import { getAllHashTag } from 'src/API/hashtagAPI';
+import { getAllHashTag, getArticleTagByNameHashTag } from 'src/API/hashtagAPI';
 import UIButton from '../../Components/UI/UIButton';
-const {useEffect} = React as any
-export default function HashTagView({match}) {
-    const [allHashtag , setData]  = React.useState([]) ;
-    useEffect(async () => {
-        const allHashtag =  await getAllHashTag()
-        console.log('allHashtag === > ',allHashtag)
-        setData(allHashtag)
-    }, [])
-    const { params: { name } }  = match
-    return <WrapperHome>
-        <div className="md-list-article">
-            <Pagination />
-            <ListArticle idHashTag={name} />
-        </div>
-        <div className ="md-list-rank">
-        {allHashtag.map(article  =>{
-            const {idHashTag , nameHashTag , idArticle} = article as any
-            return  <UIButton key={idHashTag}>{nameHashTag}</UIButton>
-        })}
-        </div>
-    </WrapperHome>
+import { H2 } from 'src/Components/styled/base';
+const { useEffect } = React as any
+export default class HashTagView extends React.Component<any> {
+    state = {
+        allHashtag: [],
+        listArticle: []
+    }
+    async componentDidMount() {
+        const { match: { params: { name } } } = this.props as any
+        const allHashtag = await getAllHashTag()
+        const listArticle = await getArticleTagByNameHashTag(name) as any
+        console.log('==> listArticle',listArticle)
+        await this.setState({ allHashtag, listArticle })
+    }
+    async componentDidUpdate(prevProps ,prevState){
+        console.log('prevProps.match.params.name',prevProps.match.params.name, this.props.match.params.name)
+        if(prevProps.match.params.name !== this.props.match.params.name ){
+            console.log('updateeeeeeeeeeeee')
+            const listArticle = await getArticleTagByNameHashTag(this.props.match.params.name) as any
+            await this.setState({  listArticle })
+        }
+    }
+
+    render() {
+        const { match: { params: { name } } } = this.props as any
+        const { listArticle, allHashtag } = this.state
+        return <WrapperHome>
+            <div className="md-list-article">
+                <ListArticle listArticle={listArticle} direction={true} />
+            </div>
+            <div className="md-list-rank">
+                <H2>All Hash Tag</H2>
+                {allHashtag.map(article => {
+                    console.log('name',name)
+                    const { idHashTag, nameHashTag, idArticle } = article as any
+                    return <UIButton category={name === nameHashTag ? 'danger' : undefined} 
+                    style={{display : 'inline-block'}}  
+                    key={idHashTag}
+                     to={`/hashtag/${nameHashTag}`}>{nameHashTag}</UIButton>
+                })}
+            </div>
+        </WrapperHome>
+    }
 }
 
 const WrapperHome = styled.div`
