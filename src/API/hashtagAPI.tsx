@@ -1,36 +1,37 @@
 import gql from "graphql-tag";
 import { client } from "./client";
+import { convertDataToGraphQL } from "../help/help";
 //QUERY
-export function getHashTagByIdHashTag(idHashTag) {
-    return new Promise(resolve => {
-        const data = client.query({
+export function getArticleTagByIdHashTag(idHashTag) {
+    return new Promise(async resolve => {
+        const API = await client.query({
             query: gql`
                     query {
-                        getHashTagByIdHashTag( id  : "${idHashTag}"){
-                            idUser
-                            idHashTag
-                            nameHashTag
+                        getArticleTagByIdHashTag( id  : "${idHashTag}"){
+                            idArticle
+                            idHashTag 
+                            nameHashTag 
                         }
                     }
                     `
         })
-        resolve(data)
+       resolve(convertDataToGraphQL(API))
     })
 }
-export function getAllHashTag(idHashTag) : Promise<any> {
-    return new Promise(resolve => {
-        const data = client.query({
+export function getAllHashTag() : Promise<any> {
+    return new Promise(async resolve => {
+        const API = await client.query({
             query: gql`
                     query {
-                        getHashTagByIdHashTag( id  : "${idHashTag}"){
-                            idUser
-                            idHashTag
-                            nameHashTag
+                        getHashTagAll {
+                            idArticle
+                            idHashTag 
+                            nameHashTag 
                         }
                     }
                     `
         })
-        resolve(data)
+        resolve(convertDataToGraphQL(API))
     })
 }
 

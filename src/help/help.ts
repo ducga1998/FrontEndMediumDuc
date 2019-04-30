@@ -1,4 +1,4 @@
-// import  from 'socket.io-client'
+
 export function filterStringHTML(str: any, flag: boolean = false , lengthString = 10): string {
     if (flag) {
         return str.replace(/<\/?[^>]+(>|$)/g, "")
@@ -13,8 +13,6 @@ export function getVariableNam(variable) {
 
 export function convertDataToGraphQL(API: any) {
     if (API && API['data']) {
-        console.log("API['data']",API['data'])
-        // Object.assign()
         return API['data'][Object.keys(API['data'])[0]]
     }
     return []

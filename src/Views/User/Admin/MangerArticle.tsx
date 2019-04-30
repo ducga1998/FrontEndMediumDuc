@@ -2,7 +2,7 @@ import * as React from 'react';
 import { getAllInformationUser } from 'src/API/client';
 import userContainer from '../../../Container/userContainer';
 import UILoading from '../../../Components/UI/UILoading';
-import Article from '../../Article';
+import Article from '../../Reuse/ArticleView/ArticleDetail';
 import { H2 } from '../../../Components/styled/base';
 import UIFieldAlgin from '../../../Components/UI/UIFieldAlgin';
 import UIButton from '../../../Components/UI/UIButton';

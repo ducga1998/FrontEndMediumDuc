@@ -1,6 +1,6 @@
 import * as React from 'react';
 import styled from 'styled-components';
-import ListArticle from './listArticle';
+import ListArticle from '../Reuse/ArticleView/ListArticle';
 import Pagination from '../pagination';
 import Rank from './Rank';
 

@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { getAllArticleHashBeenBookMark } from '../../../API/bookmarkAPI';
 import userContainer from '../../../Container/userContainer';
 import UILoading from '../../../Components/UI/UILoading';
-import Article from '../../Article';
+import Article from '../../Reuse/ArticleView/ArticleDetail';
 import { FlexRow } from '../../../Components/styled/base';
 interface IStories {
     match: any

@@ -1,15 +1,16 @@
 import * as React from 'react';
 import styled from 'styled-components';
-import { getAllArticle } from '../../API/articleAPI';
-import Article from '../Article';
+import { getAllArticle } from '../../../API/articleAPI';
+import Article from '../../Reuse/ArticleView/ArticleDetail';
 import { Subscribe } from 'unstated-x';
-import { allArticleContainer } from '../../Container/articleContainer';
-import {  FlexRow} from '../../Components/styled/base';
+import { allArticleContainer } from '../../../Container/articleContainer';
+import {  FlexRow} from '../../../Components/styled/base';
+import { getArticleTagByIdHashTag } from '../../../API/hashtagAPI';
 // improve list article by data : 30/4/2019
 interface IListArticle  {
     idHashTag ?: string
     idUser? :string 
-    
+
 }
 export default class ListArticle extends React.Component<IListArticle> {
     state = {
@@ -17,6 +18,12 @@ export default class ListArticle extends React.Component<IListArticle> {
         allArticleData: []
     }
     async componentDidMount() {
+        if(this.props.idHashTag){
+          const  allArticleData =  await getArticleTagByIdHashTag(this.props.idHashTag)
+          console.log('allArticleData',allArticleData)
+          this.setState({ allArticleData })
+          return null
+        }
         // this is function get all data article, in have data user
         const allArticleData = await getAllArticle()
 

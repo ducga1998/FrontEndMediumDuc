@@ -1,15 +1,15 @@
 import * as React from 'react';
 import renderHTML from 'react-render-html';
 import styled from 'styled-components';
-import { filterStringHTML } from '../../help/help';
-import { H1, FlexCol, P, H4, H3 } from '../../Components/styled/base';
-import { StyledSolidButton } from '../../Components/styled/button';
-import { Section } from '../../Components/styled/nav';
-import { AvatarImage } from '../../Components/styled/avatar';
-import UIFieldAlgin from '../../Components/UI/UIFieldAlgin';
+import { filterStringHTML } from '../../../help/help';
+import { H1, FlexCol, P, H4, H3 } from '../../../Components/styled/base';
+import { StyledSolidButton } from '../../../Components/styled/button';
+import { Section } from '../../../Components/styled/nav';
+import { AvatarImage } from '../../../Components/styled/avatar';
+import UIFieldAlgin from '../../../Components/UI/UIFieldAlgin';
 import { timeDifference } from 'src/help/util';
-import Link from '../../Components/Link';
-import UIButton from '../../Components/UI/UIButton';
+import Link from '../../../Components/Link';
+import UIButton from '../../../Components/UI/UIButton';
 const defaultImg = `http://www.rangerwoodperiyar.com/images/joomlart/demo/default.jpg`
 export interface IArticle {
     typeArticle?: 'store' | 'view',
@@ -25,7 +25,6 @@ export default function Article({ article, typeArticle, vectical, horizontal, st
     if (!user) {
         return null
     }
-    console.log('hashTagData ===> ',hashTagData)
     const { name, avatarLink, idUser } = user
     const backgroundArticle = `http://localhost:4000/img/${imageArticle}`
     const linkSwitchArticle = typeArticle && typeArticle === 'store' ? `/store/${idArticle}` : `/article/${idArticle}`
