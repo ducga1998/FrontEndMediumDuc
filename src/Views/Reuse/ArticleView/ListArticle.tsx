@@ -13,7 +13,8 @@ interface IListArticle  {
 }
 export default class ListArticle extends React.Component<IListArticle> {
     render() {
-        const{ listArticle ,direction }  = this.props 
+        const{ listArticle ,direction }  = this.props ;
+        console.log('listArticle',listArticle)
         return <$ListArticle>
         {
             listArticle.length > 0 ? listArticle.map((item: any, key) => {

@@ -131,11 +131,11 @@ export function getAllArticle(first = 5, offset = 0) {
                                     name
                                     avatarLink
                                 }
-                            hashTagData {
-                                idHashTag
-                                nameHashTag
-                                idArticle
-                            }
+                                hashTagData {
+                                    idHashTag
+                                    nameHashTag
+                                    idArticle
+                                }
                         }
                     }
                     `
