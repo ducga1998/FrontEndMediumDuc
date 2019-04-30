@@ -18,7 +18,7 @@ export default class UIWidget extends React.Component<any> {
        UIWidget.zindex --
     }
     render() {
-        return ReactDOM.createPortal(this.props.children,  document.getElementById('pb-duc-modal-render') as any) 
+        return ReactDOM.createPortal(this.props.children,  document.body) 
 
     }
 }

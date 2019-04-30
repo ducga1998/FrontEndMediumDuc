@@ -32,9 +32,9 @@ export default function Article({ article, typeArticle, vectical, horizontal, st
         <Link to={linkSwitchArticle} TypeDom="div">
             {
                 vectical ?
-                <AvatarImage size={80} radius="24px" src={`${imageArticle !== defaultImg ? backgroundArticle : './backgroundDefault.jpg'}`} />
+                <AvatarImage size={80} radius="24px" src={`${imageArticle ? backgroundArticle : './backgroundDefault.jpg'}`} />
                 : <WrapperImg>
-                    <SrcImage src={`${imageArticle !== defaultImg ? backgroundArticle : './backgroundDefault.jpg'}`} />
+                    <SrcImage src={`${imageArticle ? backgroundArticle : './backgroundDefault.jpg'}`} />
                 </WrapperImg>
             }
         </Link>
@@ -55,7 +55,7 @@ export default function Article({ article, typeArticle, vectical, horizontal, st
                 <H4>{renderHTML(filterStringHTML(contentArticle))}<Link to={linkSwitchArticle}> Read more ...</Link></H4>
           
             <UIFieldAlgin horizontal={horizontal || undefined}>
-                <AvatarImage plan sizeBorder="2px" src={avatarLink} />
+                <AvatarImage plan sizeBorder="2px" src={avatarLink|| './backgroundDefault'} />
                 <H3><b><Link to={`/user/${idUser}`}>{name === '' ? 'NO NAME' : name}</Link></b></H3>
             </UIFieldAlgin>
             <WrapperHashTag>

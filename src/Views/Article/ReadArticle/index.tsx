@@ -75,7 +75,7 @@ class ReadArticle extends React.Component<IReadArticleType> {
     }
 }
 const WrapperReadArticle = styled.div`
-    margin : auto;
+    margin :0  auto;
     width : 70%;
     background : rgb(255, 255, 255);
     .pb-duc-introduce-author {

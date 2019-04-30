@@ -1,11 +1,9 @@
 import * as React from 'react';
 import styled from 'styled-components';
 import ListArticle from '../Reuse/ArticleView/ListArticle';
-import Pagination from '../pagination';
 import { getAllHashTag, getArticleTagByNameHashTag } from 'src/API/hashtagAPI';
 import UIButton from '../../Components/UI/UIButton';
 import { H2 } from 'src/Components/styled/base';
-const { useEffect } = React as any
 export default class HashTagView extends React.Component<any> {
     state = {
         allHashtag: [],
@@ -32,6 +30,7 @@ export default class HashTagView extends React.Component<any> {
         const { listArticle, allHashtag } = this.state
         return <WrapperHome>
             <div className="md-list-article">
+            <H2>Hash Tag : {name}</H2>
                 <ListArticle listArticle={listArticle} direction={true} />
             </div>
             <div className="md-list-rank">
