@@ -8,12 +8,6 @@ import UIModal from '../../../Components/UI/UIModal';
 import UIFieldAlgin from '../../../Components/UI/UIFieldAlgin';
 import UIEditer from '../../../Components/UI/UIEditer';
 import omit from 'lodash/omit'
-// import Footer from './footer'
-interface IManagerAccount {
-    listUser: any,
-    delete: any,
-    update: any
-}
 export default class ManagerAccount extends React.Component<any> {
     state = {
         listUser: [],
@@ -30,9 +24,6 @@ export default class ManagerAccount extends React.Component<any> {
         this.setState({ listUser })
         await deleteUserById(idUser)
     }
-    updateUser() {
-
-    }
     detailInfoUser(user) {
         this.setState({ open: true, userSelect: user })
     }
@@ -43,7 +34,7 @@ export default class ManagerAccount extends React.Component<any> {
         return <><FlexCol>
             <Header />
             {listUser.length > 0 && listUser.map((user: any, key) => {
-                const { idUser, name, avatarLink, biographical, birthday, location, decentraliz, articles } = user
+                const { idUser, name, avatarLink, decentraliz } = user
                 const role = decentraliz === 1 ? 'User Normal' : 'Admin'
                 return <Wrapper onDoubleClick={() => this.detailInfoUser(user)}><UIFieldAlgin key={key} style={{ justifyContent: 'center', margin: '10px' }} vectical>
                     <UIFieldAlgin flex={3}>

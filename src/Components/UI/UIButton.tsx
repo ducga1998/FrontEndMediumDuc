@@ -39,7 +39,7 @@ export default function UIButton({ type , to,
             break;
     }
     let Button 
-    switch(type ){
+switch(type ){
         case 'soild' :
         Button = StyledSolidButton
         break;

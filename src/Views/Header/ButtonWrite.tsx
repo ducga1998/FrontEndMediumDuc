@@ -22,7 +22,6 @@ export default function ButtonArticle() {
             toast.error('Maximum 6 hash tag and Min > 0!!!!');
             return
         }
-        console.log('nameHashTag',nameHashTag)
         if (arrHashTag.includes(nameHashTag)) {
             toast.error('Name exites!!!');
             return
@@ -45,8 +44,6 @@ export default function ButtonArticle() {
             {
                 (container: any) => {
                     const { isPublicArticle, isUpdate, arrHashTag } = container.state
-
-
                     return isPublicArticle ?
                         (<UIModal open={open} openModal={() => {
                             setOpen(true)
@@ -59,10 +56,7 @@ export default function ButtonArticle() {
                             }}
                             width="1000px"
                             height="400px"
-                            trigger={<Button >Public</Button>}>
-
-
-                           
+                            trigger={<Button >Public</Button>}>                         
                                 <UIHashTagInput
                                     onChange={value => value}
                                     tags={arrHashTag}

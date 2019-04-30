@@ -4,5 +4,4 @@ export default class UILayout extends React.Component {
     
 }
 const layout = styled.div`
-
 `

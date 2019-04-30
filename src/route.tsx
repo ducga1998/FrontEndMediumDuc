@@ -74,6 +74,7 @@ const AppRouter = () => {
                     <Route exact path="/stories" component={isAuth(Stories)} />
                     <Route exact path="/store/:id" component={isAuth(StoreDetail)} />
                     <Route exact path="/profile" component={isAuth(Profile)} />
+                    <Route exact path="" />
                     <Route exact path="/writearticle" component={isAuth(WriteArticle)} />
                     <Route exact path="/chatMessage/:id" component= {isAuth(ChatMessage)} />
                     <Route exact path="/bookmarks" component={isAuth(ArticleBookMark)} />

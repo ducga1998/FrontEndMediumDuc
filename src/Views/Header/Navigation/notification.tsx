@@ -49,7 +49,7 @@ export default function Notification() {
     useEffect(async () => {
         const allNotification = await getAllNotificationByIdUser(0, 10)
         setData(allNotification)
-        return () => { console.log('un mount if okokok ') }
+      return null
     }, [])
     return <><NavButton
             onMouseDown={async (e) => { e.preventDefault(); await setOpen(!open) }}>
@@ -94,8 +94,6 @@ const DropDown = styled.div`
         overflow-y : scroll;
         height : 100%;
     }
-   
-   
 `
 
 export const NavButton = styled.div`

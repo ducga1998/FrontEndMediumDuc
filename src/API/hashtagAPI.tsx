@@ -1,21 +1,15 @@
 import gql from "graphql-tag";
 import { client } from "./client";
 //QUERY
-export function getAllInfomationUserFollowYour(idUser) {
+export function getHashTagByIdHashTag(idHashTag) {
     return new Promise(resolve => {
         const data = client.query({
             query: gql`
                     query {
-                        getAllInfomationUserFollowYour( id  : "${idUser}"){
+                        getHashTagByIdHashTag( id  : "${idHashTag}"){
                             idUser
-                            idUserFollow
-                            userFollow {
-                                name
-                                avatarLink
-                                articles {
-                                    idArticle
-                                }
-                            }
+                            idHashTag
+                            nameHashTag
                         }
                     }
                     `
@@ -23,6 +17,20 @@ export function getAllInfomationUserFollowYour(idUser) {
         resolve(data)
     })
 }
-//MUTATION
- // hash tag not Mutation
+export function getAllHashTag(idHashTag) : Promise<any> {
+    return new Promise(resolve => {
+        const data = client.query({
+            query: gql`
+                    query {
+                        getHashTagByIdHashTag( id  : "${idHashTag}"){
+                            idUser
+                            idHashTag
+                            nameHashTag
+                        }
+                    }
+                    `
+        })
+        resolve(data)
+    })
+}
 

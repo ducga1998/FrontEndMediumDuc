@@ -9,9 +9,6 @@ interface IAuthor {
     type: string
 }
 const AuthorRank = ({ author, type }: IAuthor) => {
-
-    console.log('ahutorgvjksnd', author)
-
     return author.map((item , key) => {
         const { count, idUser, name, avatarLink, biographical } = item
         return <FlexCol key={key}>
@@ -28,9 +25,5 @@ const AuthorRank = ({ author, type }: IAuthor) => {
             </FlexRow>
         </FlexCol>
     })
-    // const src = avatarLink ? avatarLink : "./default.jpg"
-
-
-
 }
 export default AuthorRank

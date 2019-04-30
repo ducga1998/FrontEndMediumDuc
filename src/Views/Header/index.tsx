@@ -3,27 +3,21 @@ import { MenuItem, Nav, NavDropdown, NavItem, Row } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import { Subscribe } from 'unstated-x';
 import userContainer from '../../Container/userContainer';
-// import BrowserHistory from 'react-router/lib/BrowserHistory'
-import ButtonArticle from './buttonWriteArticle';
+import ButtonArticle from './ButtonWrite';
 import Search from './Search/search';
 import Navbar from './Navigation/navbar';
-import DropDown from '../../Components/UI/UIDropDown'
 class Navication extends React.Component<any, any>{
 
     public render() {
 
         return <Row>
-
-
             <Navbar />
-            {/* <DropDown >caskjcnasncasc</DropDown> */}
             <Nav pullRight>
                 <NavItem eventKey={1}><NavItem /><Search /></NavItem>
                 {window.location.pathname === '/home' ? <NavItem eventKey={1} href="#">
                     <Link to="/writearticle" > Write Article</Link>
                 </NavItem> : null}
                 <ButtonArticle />
-
                 <Subscribe to={[userContainer]} >
                     {
                         container => {
@@ -42,7 +36,6 @@ class Navication extends React.Component<any, any>{
                         }
                     }
                 </Subscribe>
-
             </Nav>
 
         </Row >

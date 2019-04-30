@@ -7,7 +7,6 @@ export const Truncate = width => css`
   white-space: nowrap;
   min-width: 0;
 `;
-//  medthod : gradient , shawdow
 export const Gradient = (g1, g2 , g3= '0%') => css`radial-gradient(ellipse farthest-corner at top left, ${g1} ${g3}, ${g2} 100%)`;
 export const Shadow = {
   low: '0 2px 8px rgba(23,26,33, 0.15)',

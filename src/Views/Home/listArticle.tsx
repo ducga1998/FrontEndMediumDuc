@@ -5,8 +5,13 @@ import Article from '../Article';
 import { Subscribe } from 'unstated-x';
 import { allArticleContainer } from '../../Container/articleContainer';
 import {  FlexRow} from '../../Components/styled/base';
-// import Footer from './footer'
-export default class ListArticle extends React.Component<any> {
+// improve list article by data : 30/4/2019
+interface IListArticle  {
+    idHashTag ?: string
+    idUser? :string 
+    
+}
+export default class ListArticle extends React.Component<IListArticle> {
     state = {
         value: '',
         allArticleData: []

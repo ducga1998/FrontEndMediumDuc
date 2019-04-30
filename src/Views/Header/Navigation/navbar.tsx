@@ -2,7 +2,7 @@ import * as React from 'react';
 import { Nav, LogoLink, IconLink, Label } from '../../../Components/styled/nav';
 import Icon from '../../../Components/Icon';
 import Search from '../Search/search';
-import ButtonArticle from '../buttonWriteArticle';
+import ButtonArticle from '../ButtonWrite';
 import userContainer from '../../../Container/userContainer';
 import styled from 'styled-components';
 import UIPopUp from '../../../Components/UI/UIPopUp';

@@ -9,6 +9,7 @@ import { AvatarImage } from '../../Components/styled/avatar';
 import UIFieldAlgin from '../../Components/UI/UIFieldAlgin';
 import { timeDifference } from 'src/help/util';
 import Link from '../../Components/Link';
+import UIButton from '../../Components/UI/UIButton';
 const defaultImg = `http://www.rangerwoodperiyar.com/images/joomlart/demo/default.jpg`
 export interface IArticle {
     typeArticle?: 'store' | 'view',
@@ -60,10 +61,11 @@ export default function Article({ article, typeArticle, vectical, horizontal, st
             </UIFieldAlgin>
             <WrapperHashTag>
                 {
-                    hashTag.length > 4 ? <>
+                    hashTagData.length > 4 ? <>
                     {
-                        hashTag.slice(0, 3).map((item: any, key: number) =>  <StyledSolidButton>{item}</StyledSolidButton>)}...</> : hashTag.map((item: any, key: number) => {
-                        return <StyledSolidButton>{item}</StyledSolidButton>
+                        hashTag.slice(0, 3).map((item: any, key: number) => 
+                         <UIButton type="soild" >{item.nameHashtag}</UIButton>)}...</> : hashTag.map((item: any, key: number) => {
+                        return <UIButton  type="soild" >{item}</UIButton>
                 })}
             </WrapperHashTag>
         </$DetailArticle>
