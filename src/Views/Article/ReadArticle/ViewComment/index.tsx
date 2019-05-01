@@ -49,8 +49,6 @@ export default class ViewComment extends React.Component<IViewComment> {
                         onMouseDown = {this.handleLoadMore}> Load More 
                  </LoadMoreButton> 
             </>
-        
-    
     }
 }
 const LoadMoreButton = styled(StyledTextButton)`

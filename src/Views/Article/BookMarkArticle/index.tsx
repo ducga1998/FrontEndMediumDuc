@@ -2,13 +2,10 @@ import * as React from 'react';
 import styled from 'styled-components';
 import { getAllArticleHashBeenBookMark } from '../../../API/bookmarkAPI';
 import userContainer from '../../../Container/userContainer';
-import UILoading from '../../../Components/UI/UILoading';
 import Article from '../../Reuse/ArticleView/ArticleDetail';
 import { FlexRow } from '../../../Components/styled/base';
-interface IStories {
-    match: any
-}
-class ArticleBookMark extends React.Component<IStories> {
+import UILoading from '../../../Components/UI/UILoading';
+class ArticleBookMark extends React.Component {
     state = {
         dataBookMark: []
     }
@@ -16,28 +13,18 @@ class ArticleBookMark extends React.Component<IStories> {
         const { idUser  } = userContainer.state.dataUser
         const dataBookMark = await getAllArticleHashBeenBookMark(idUser) as any
         this.setState({ dataBookMark })
-        
-    }
+    }   
 
     render() {
         const { dataBookMark } = this.state as any
-        console.log('state', this.state)
-        if (!dataBookMark) {
-            return <UILoading />
-        }
-
         return <>
             <h1> All Article BookMarked {name}</h1>
             <$ViewArticle>
                 {
                     dataBookMark && dataBookMark.length > 0 ? dataBookMark.map((item, key) => {
-                    const { articleBookMark, userOwnArticle } = item
-                    const { hashTag, contentArticle, titleArticle, createTime, idArticle
-                    } = articleBookMark
-                    const article = {...articleBookMark , ...{user : userOwnArticle} }
-                    console.log('articlearticle',article)
+                    const { articleBookMark } = item
+                    const article = {...articleBookMark , ...{user : userContainer.state.dataUser } }
                     return <Article article={article} />
-
                 }) : <h2>NO Article  :), fuck own account stupid </h2>}
             </$ViewArticle>
         </>
@@ -49,3 +36,12 @@ const $ViewArticle = styled(FlexRow)`
 `
 
 export default ArticleBookMark
+class Core  extends React.Component{
+    state = {
+        isLoading : false
+    }
+
+    render(){
+        return <UILoading />
+    }
+}

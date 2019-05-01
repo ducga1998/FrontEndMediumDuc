@@ -13,6 +13,7 @@ import ViewComment from './ViewComment';
 import { notificationSocket } from 'src/socketClient/socket';
 import userContainer from '../../../Container/userContainer';
 import { timeDifference } from 'src/help/util';
+import UIButton from '../../../Components/UI/UIButton';
 
 interface IReadArticleType {
     match: any,
@@ -41,7 +42,7 @@ class ReadArticle extends React.Component<IReadArticleType> {
     render() {
         const { article }: any = this.state
         if (article) {
-            const { user: { idUser, avatarLink, name }, idArticle, contentArticle, titleArticle, hashTag, createTime } = article
+            const { user: { idUser, avatarLink, name }, idArticle, contentArticle, titleArticle, hashTagData, createTime } = article
             return <ArticleContext.Provider value={article}>
                 <UIReaction idArticle={idArticle} idUseOwnArticler={idUser} titleArticle={titleArticle} />
                 <WrapperReadArticle>
@@ -54,11 +55,12 @@ class ReadArticle extends React.Component<IReadArticleType> {
                         <P>{renderHTML(contentArticle)} </P>
                         <Section>
                             {
-                                hashTag.map((item, key) =>
-                                    <StyledSolidButton
+                                hashTagData && hashTagData.map((hashTag, key) =>
+                                    <UIButton
+                                        to={`/hashtag/${hashTag.nameHashTag}`}
                                         key={key}
-                                        style={{ fontSize: '15px', margin: '0px 2px' }}>{item}
-                                    </StyledSolidButton>
+                                        style={{ fontSize: '15px', margin: '0px 2px' }}>{hashTag.nameHashTag}
+                                    </UIButton>
                                 )
                             }
                         </Section>

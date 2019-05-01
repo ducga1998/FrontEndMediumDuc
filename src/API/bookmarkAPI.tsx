@@ -38,7 +38,12 @@ export function getAllArticleHashBeenBookMark(idUser) {
                             articleBookMark{
                                 idArticle
                                 idUser
-                                hashTag
+                                imageArticle
+                                hashTagData {
+                                    idHashTag
+                                    nameHashTag
+                                    idArticle
+                                }
                                 category
                                 contentArticle
                                 titleArticle

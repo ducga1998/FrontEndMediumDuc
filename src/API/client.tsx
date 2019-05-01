@@ -127,10 +127,14 @@ export function getAllInformationUser(idUser: string) {
                     biographical
                     articles {
                         idArticle
-                        hashTag
                         category
                         comment {
                             idUser
+                            idArticle
+                        }
+                        hashTagData {
+                            idHashTag
+                            nameHashTag
                             idArticle
                         }
                         totalClap
