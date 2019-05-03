@@ -39,7 +39,4 @@ const NotificationStyle = (props) => {
     </WrapperNotification>
 }
 const WrapperNotification = styled.div`
-    /* padding : 20px; */
-    /* background : ${props => props.theme.bg.default}; */
-    /* border-radius : 20px; */
 `

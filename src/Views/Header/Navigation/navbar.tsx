@@ -46,9 +46,13 @@ class Navbar extends React.Component<any> {
                     <Icon glyph="message" />
                     <Label> Chat</Label>
                 </IconLink>
+                <IconLink to="/community" data-active={location.includes('community')}>
+                    <i className="fas fa-users" /> <Label>Community</Label>
+                </IconLink>
                 <IconLink to="/about" data-active={location.includes('about')}>
                     <i className="fas fa-info" /> <Label>About</Label>
                 </IconLink>
+              
             </Nav>
             <Nav>
                 <ButtonArticle />

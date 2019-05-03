@@ -27,6 +27,7 @@ import ManagerArticles from './Views/User/Admin/MangerArticle'
 import UIWidget, { Portal } from "src/Components/UI/UIWidget";
 import PageEditer from "./workspace/PageEditer";
 import HashTagView from "./Views/HashTagView";
+import Community from "src/Views/Community";
 const About = () => <div>
     Web design by Nguyen Minh duc
     <H1>Facebook : <a href="https://www.facebook.com/duc.ceh.cnna">https://www.facebook.com/duc.ceh.cnna</a></H1>
@@ -81,6 +82,7 @@ const AppRouter = () => {
                     <Route exact path="/bookmarks" component={isAuth(ArticleBookMark)} />
                     <Route exact path="/drapdrop"  component={PageEditer}/>
                     <Route  exact path="/hashtag/:name" component={HashTagView}/>
+                    <Route exact path="/community" component={Community} />
                         {user && user.decentraliz === 3? <>  
                      <Route exact path ="/managerAccount" component={isAuth(ManagerAccount)} />
                     <Route exact path ="/managerArticles" component={isAuth(ManagerArticles)} />
