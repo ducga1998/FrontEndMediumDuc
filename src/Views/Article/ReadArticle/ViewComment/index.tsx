@@ -5,7 +5,8 @@ import FormComment from './FormComment';
 import { getAllCommentinArtcileCurrent } from 'src/API/commentAPI';
 import { StyledTextButton } from 'src/Components/styled/button';
 import UIButton from 'src/Components/UI/UIButton';
-import ListCommentView from './ListCommentView';
+import ListCommentView from './ListCommentView';;
+import UIPlaceHolder from '../../../../Components/UI/UIPlaceholder';
 interface IViewComment {
     idArticle: string,
 
@@ -40,7 +41,7 @@ export default class ViewComment extends React.Component<IViewComment> {
     render() {
         const { allComments } = this.state
         if (allComments.length < 0) {
-            return <UIButton isLoading />
+            return <UIPlaceHolder  />
         }
         return <>
                 <FormComment onChange={(comment) => { this.handleComment(comment) }} />
