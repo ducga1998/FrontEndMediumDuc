@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { getAllInformationUser } from 'src/API/client';
+import { getAllInformationUser } from 'src/API/userAPI';
 import userContainer from '../../../Container/userContainer';
 import UILoading from '../../../Components/UI/UILoading';
 import Article from '../../Reuse/ArticleView/ArticleDetail';

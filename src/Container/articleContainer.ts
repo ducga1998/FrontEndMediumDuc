@@ -1,6 +1,6 @@
 import { Container } from 'unstated-x';
 import { updateArticleToClient, getAllArticle, countArticle } from '../API/articleAPI';
-import { addArticleToClient } from '../API/client';
+import { addArticleToClient } from '../API/articleAPI';
 import userContainer from './userContainer';
 interface IAllArticleContainer {
     registryArticle: any[],

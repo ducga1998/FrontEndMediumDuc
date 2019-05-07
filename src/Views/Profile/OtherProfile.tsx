@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { getAllInformationUser } from 'src/API/client';
+import { getAllInformationUser } from 'src/API/userAPI';
 import styled from 'styled-components';
 import srcImg from '../../image/9284571_300x300.jpeg';
 import UILoading from '../../Components/UI/UILoading';

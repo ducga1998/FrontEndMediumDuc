@@ -14,7 +14,7 @@ import ViewUser from './Views/Profile/OtherProfile';
 import userContainer from "./Container/userContainer";
 import UILoading from "./Components/UI/UILoading";
 import ChatMessage from './Views/RoomChat/ChatAsDesign'
-import { logoutBackend } from './API/client'
+import { logoutBackend } from './API/userAPI'
 import { notificationFuncSocket } from "./socketClient/notificationSocket";
 import Stories from "./Views/Article/Stories";
 import StoreDetail from "./Views/Article/Stories/Store";
