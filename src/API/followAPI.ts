@@ -1,7 +1,13 @@
+import { IUsertype } from './userAPI';
 import gql from "graphql-tag";
 import { client } from "./client";
 import { convertDataToGraphQL } from "../help/help";
-export function getAllInfomationUserFollowYour(idUser) {
+export interface IFollowType {
+    idUser
+    idUserFollow
+    userFollow ?:IUsertype
+}
+export function getAllInfomationUserFollowYour(idUser): Promise<IFollowType[]> {
     return new Promise(async resolve => {
         const API = await client.query({
             query: gql`

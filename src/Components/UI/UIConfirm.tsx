@@ -37,7 +37,6 @@ export default class UIConfirm extends React.Component<IUIConfirm> {
                     <UIButton onMouseDown={this.handleMouseDownCancel} >{customBtnCancel || 'Cancel'}</UIButton>
                 </UIFieldAlgin>
             </UIFieldAlgin>
-
         </UIWidget>
     }
 }

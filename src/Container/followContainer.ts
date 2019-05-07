@@ -10,7 +10,7 @@ class FollowAllContainer extends Container<any>{
     async gotoProfileOtherUser(ownProfileId) {
         const idUserFollow = userContainer.state.dataUser.idUser
         // fetch data to datbase
-        const allUserFollow = await getAllInfomationUserFollowYour(ownProfileId) as any[]
+        const allUserFollow = await getAllInfomationUserFollowYour(ownProfileId)
         const followContainer = new FollowContainer({ allUserFollow })
         const itemFollow = {
             ownProfileId,

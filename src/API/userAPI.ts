@@ -2,7 +2,7 @@ import { IArticleType } from './articleAPI';
 import gql from "graphql-tag";
 import { convertDataToGraphQL } from "../help/help";
 import { client } from "./client";
-interface IUsertype {
+export interface IUsertype {
     idUser :string 
     name ?:string
     avatarLink ?:string

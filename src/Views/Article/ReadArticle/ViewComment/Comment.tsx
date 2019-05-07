@@ -35,7 +35,7 @@ export default renderElement(
 )
 const NormalComment = ({ idComment, avatarLink, content, createdAt, replys, setOpen, open, name }) => {
     return <$Comment data-id={idComment}
-        onMouseDown={(event) => setOpen(!open)}>
+        onMouseDown={() => setOpen(!open)}>
         <AvatarImage src={avatarLink ? avatarLink : IMAGE_SOURCE_DEFAULT} />
         <$Content>
             <FlexRow style={{ alignItems: 'center' }}>
