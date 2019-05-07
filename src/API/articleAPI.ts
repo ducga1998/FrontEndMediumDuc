@@ -1,10 +1,50 @@
+
 import gql from "graphql-tag";
 import { client } from "./client";
 import { convertDataToGraphQL } from "../help/help";
-export function updateArticleToClient(article: any) {
-    console.log('article', article)
-    let input: any = article;
-    console.log(input)
+export interface IArticleType {
+    idArticle : string
+    idUser : string
+    category ?: string[]
+    bookmark ?: any
+    totalClap : number
+    contentArticle :string 
+    imageArticle :string
+    titleArticle :string
+    createTime :string
+    user ?:any
+    hashTagData ?: any
+    comment : any
+}
+export function addArticleToClient(input) {
+    return new Promise(async resolve => {
+        const API = await client.mutate({
+            mutation: gql`
+            mutation AddArticle($input : ArticleInput) {
+                addArticle(input : $input) {
+                    idUser
+                    hashTag
+                    category
+                    imageArticle
+                    comment {
+                            idUser
+                            idArticle
+                        }
+                    totalClap
+                    notification
+                    createTime
+                }
+            }
+          `,
+            variables: {
+                input
+            }
+        })
+        resolve(convertDataToGraphQL(API))
+
+    })
+}
+export function updateArticleToClient(input: any) {
     return new Promise(async resolve => {
         const API = await client.mutate({
             mutation: gql`
@@ -43,7 +83,7 @@ export function getDataSearch() {
     })
 }
 
-export function countArticle() {
+export function countArticle() : Promise<number> {
     return new Promise(async resolve => {
         const API = await client.query({
             query: gql`
@@ -56,7 +96,7 @@ export function countArticle() {
 
     })
 }
-export function getArticleById(id) {
+export function getArticleById(id)  : Promise<IArticleType>{
     return new Promise(async resolve => {
         const API = await client.query({
             query: gql`
@@ -105,7 +145,7 @@ export function getArticleById(id) {
     })
 }
 //get all article in database
-export function getAllArticle(first = 5, offset = 0) {
+export function getAllArticle(first = 5, offset = 0) : Promise<IArticleType[]> {
     return new Promise(async resolve => {
         const API = await client.query({
             query: gql`

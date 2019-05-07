@@ -3,7 +3,7 @@ import { toast } from 'react-toastify';
 import styled from 'styled-components';
 
 import uuid from 'uuid/v1';
-import { addUser } from '../../API/client';
+import { addUser } from '../../API/userAPI';
 import UIButton from '../../Components/UI/UIButton';
 import UIField from '../../Components/UI/UIField';
 import { H3, H1 } from 'src/Components/styled/base';

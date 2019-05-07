@@ -2,7 +2,7 @@ import gql from "graphql-tag";
 import { client } from "./client"
 import { convertDataToGraphQL } from "src/help/help";
 // add message not here, beause it add in socket 
-export function getAllMessageByIdUserReceive(idRoom) {
+export function getAllMessageByIdUserReceive(idRoom :string) {
   
     // why we query message idUserReceive beause ??? => 
     return new Promise(async  resolve => {

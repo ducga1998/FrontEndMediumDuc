@@ -13,7 +13,7 @@ interface StateSearch {
     smartList : any[]
     isFocus : boolean
 }
-export default class Search extends React.Component <any,StateSearch >{
+export default class Search extends React.Component <{},StateSearch >{
     state = {
         value: '',
         isFocus: false,

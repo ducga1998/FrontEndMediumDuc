@@ -3,16 +3,16 @@ import * as React from 'react'
 import * as  ReactDOM from 'react-dom'
 import styled from 'styled-components';
 
-let refWPotarl  : any
+let refWPotarl  : HTMLElement | null
 export const Portal  = () => <OverLay ref={ (e : any) => refWPotarl = e} />
  
-export default class UIWidget extends React.Component<any> {
-    static zindex  =  1000
+export default class UIWidget extends React.Component {
+    static zindex  : number =  1000
     componentDidMount() {
-        const dom = ReactDOM.findDOMNode(this) as any
+        const dom = ReactDOM.findDOMNode(this) as (HTMLElement | null| undefined)
         
         if (!dom  || typeof dom !== 'object' ||  !dom['style'] ) { return }
-        dom.style.zIndex = UIWidget.zindex++
+        dom.style.zIndex = UIWidget.zindex++ + ''
     }
     componentWillUnmount(){
        UIWidget.zindex --

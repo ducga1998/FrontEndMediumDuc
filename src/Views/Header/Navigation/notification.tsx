@@ -4,13 +4,12 @@ import { StyledCard } from "../../../Components/styled/card";
 import * as React from 'react'
 import Icon from "../../../Components/Icon";
 import { H3, Shadow } from "../../../Components/styled/base";
-import { getAllNotificationByIdUser } from "../../../API/notificationAPI";
+import { getAllNotificationByIdUser, IdNotificationType } from "../../../API/notificationAPI";
 import { AvatarImage } from "../../../Components/styled/avatar";
 import { filterStringHTML, dieEvent } from "../../../help/help";
 import UIFieldAlgin from "../../../Components/UI/UIFieldAlgin";
 import Link from "src/Components/Link";
 import { StyledTextButton } from "../../../Components/styled/button";
-const { useEffect, useState } = React as any
 function handleTypeNotification(type, data) {
     let { name, titleArticle, idUser } = data
     titleArticle = filterStringHTML(titleArticle)
@@ -34,23 +33,23 @@ function handleTypeNotification(type, data) {
     return notification
 }
 export default function Notification() {
-    const [data, setData] = useState([])
-    const [offset, setOffset] = useState(0)
-    const [open, setOpen] = useState()
+    const [data, setData] = React.useState([] as IdNotificationType[] ) 
+    const [offset, setOffset] = React.useState(0)
+    const [open, setOpen] = React.useState(false)
     async function handleLoadMore(event) {
         event.preventDefault()
         event.stopPropagation()
         const count = offset + 10
         await setOffset(count)
-        const allNotification = await getAllNotificationByIdUser(count, 10) as any[]
+        const allNotification = await getAllNotificationByIdUser(count, 10)
 
         setData([...allNotification , ...data ])
     }
-    useEffect(async () => {
+    React.useEffect(async () => {
         const allNotification = await getAllNotificationByIdUser(0, 10)
         setData(allNotification)
       return null
-    }, [])
+    }, []) 
     return <><NavButton
             onMouseDown={async (e) => { e.preventDefault(); await setOpen(!open) }}>
         <Icon glyph="notification" />

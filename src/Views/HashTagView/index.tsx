@@ -4,20 +4,20 @@ import ListArticle from '../Reuse/ArticleView/ListArticle';
 import { getAllHashTag, getArticleTagByNameHashTag } from 'src/API/hashtagAPI';
 import UIButton from '../../Components/UI/UIButton';
 import { H2, H1 } from 'src/Components/styled/base';
-export default class HashTagView extends React.Component<any> {
+export default class HashTagView extends React.Component<{match : {params : {name : string}}}> {
     state = {
         allHashtag: [],
         listArticle: []
     }
     async componentDidMount() {
-        const { match: { params: { name } } } = this.props as any
+        const { match: { params: { name } } } = this.props 
         const allHashtag = await getAllHashTag()
         const listArticle = await getArticleTagByNameHashTag(name) as any
         await this.setState({ allHashtag, listArticle })
     }
     async componentDidUpdate(prevProps, prevState) {
         if (prevProps.match.params.name !== this.props.match.params.name) {
-            const listArticle = await getArticleTagByNameHashTag(this.props.match.params.name) as any
+            const listArticle = await getArticleTagByNameHashTag(this.props.match.params.name);
             await this.setState({ listArticle })
         }
     }

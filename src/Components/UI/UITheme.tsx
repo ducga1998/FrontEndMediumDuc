@@ -3,7 +3,7 @@ import { ThemeProvider } from 'styled-components';
 
 import theme from '../../theme';
 // import { render } from 'react-dom';
-export class  UITheme extends React.Component<any>{
+export class  UITheme extends React.Component{
     // const [theme , setTheme]
     state = {theme}
     render(){

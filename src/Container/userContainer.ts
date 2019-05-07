@@ -1,5 +1,5 @@
 import { Container } from 'unstated-x';
-import { checkLoginUser, updateInfomation } from '../API/client';
+import { checkLoginUser, updateInfomation } from '../API/userAPI';
 // import {  } from 'react-router';
 interface IUserContainer {
     dataUser : any ,

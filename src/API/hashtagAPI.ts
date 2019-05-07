@@ -1,8 +1,14 @@
+import { IArticleType } from './articleAPI';
 import gql from "graphql-tag";
 import { client } from "./client";
 import { convertDataToGraphQL } from "../help/help";
 //QUERY
-export function getArticleTagByNameHashTag(idHashTag) {
+export interface IHashtTagType {
+    idArticle :string
+    idHashTag :string
+    nameHashTag :string 
+}
+export function getArticleTagByNameHashTag(idHashTag :string): Promise<IArticleType[]> {
     return new Promise(async resolve => {
         const API = await client.query({
             query: gql`
@@ -49,7 +55,7 @@ export function getArticleTagByNameHashTag(idHashTag) {
        resolve(convertDataToGraphQL(API))
     })
 }
-export function getAllHashTag() : Promise<any> {
+export function getAllHashTag() : Promise<IHashtTagType[]> {
     return new Promise(async resolve => {
         const API = await client.query({
             query: gql`

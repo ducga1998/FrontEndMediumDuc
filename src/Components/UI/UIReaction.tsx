@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { Subscribe } from 'unstated-x';
 import allBookMarkContainer from '../../Container/bookMarkContainer';
 import UIWidget from './UIWidget';
-import Icon, { Glyph } from '../Icon';
+import Icon from '../Icon';
 import { socketNotication } from '../../socketClient/socket';
 interface IUIReaction {
     idUseOwnArticler?: string
@@ -12,7 +12,7 @@ interface IUIReaction {
 }   
 const { useEffect } = React as any
 export default function UIReaction({ idUseOwnArticler, idArticle ,titleArticle}: IUIReaction) {
-    const refReaction = React.useRef(null) as any
+    const refReaction = React.useRef(null);
     useEffect(() => {
         allBookMarkContainer.isBookMark({ idArticle })
     })

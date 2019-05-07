@@ -3,7 +3,7 @@ import * as React from "react";
 declare module "react" {
     function useState<T>(initialState: T | (() => T)): [T, (newState: T) => void];
     function useEffect(
-        create: () => void | (() => void),
+        create: () => any | (() => any),
         inputs?: ReadonlyArray<unknown>
     ): void;
     function useContext<T>(foo: React.Context<T>): T;

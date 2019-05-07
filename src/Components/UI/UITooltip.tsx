@@ -9,11 +9,8 @@ function findDomToolTip(count , dom) : any{
     }
     return findDomToolTip(count , dom.parentElement)
 } 
-export default class UITooltip extends React.Component<any, any> {
+export default class UITooltip extends React.Component {
     refToolTip: any 
-    handleMouseDown = (e) => {
-
-    }
     handleMouseOver = (e) => {
        e.preventDefault()
         let count = 0
@@ -23,7 +20,7 @@ export default class UITooltip extends React.Component<any, any> {
             const domToolTip = this.refToolTip as any
             domToolTip.innerHTML = text
             if(!domToolTip ) return
-            const { top, left } = dom.getBoundingClientRect() as any
+            const { top, left } = dom.getBoundingClientRect() as ClientRect
             // const view : any = dom.ownerDocument.defaultView  
             // const scrollTop = view.scrollY 
             domToolTip.style.display = "inline-block"
@@ -48,7 +45,8 @@ export default class UITooltip extends React.Component<any, any> {
         domToolTip.style.display = "none"
     }
     render() {
-        return <div onMouseDownCapture={this.handleMouseDown}
+        return <div
+        
             onMouseOverCapture={this.handleMouseOver}
             onMouseOutCapture={this.handleMouseLeave}
         >

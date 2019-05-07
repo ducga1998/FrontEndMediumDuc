@@ -9,27 +9,19 @@ import UIFieldAlgin from '../../../Components/UI/UIFieldAlgin';
 import { timeDifference } from 'src/help/util';
 import Link from '../../../Components/Link';
 import UIButton from '../../../Components/UI/UIButton';
-export interface IArticle {
+import { IArticleType } from 'src/API/articleAPI';
+export interface IArticleDetail {
     typeArticle?: 'store' | 'view',
     article: IArticleType,
     vectical?: boolean,
     horizontal?: boolean
     style?: any
 }
-export interface IArticleType {
-     contentArticle : string
-     titleArticle : string
-     createTime : string 
-     idArticle :string
-     user :any
-     comment : any[]
-     bookmark : any []
-     imageArticle :string | undefined
-     hashTagData  : any[]
-}
+
+
 //  horizontal => normal view . I am see this state very beautifull
 // vectical => state list => for admin list article
-export default function Article({ article, typeArticle, vectical, horizontal, style }: IArticle) {
+export default function Article({ article, typeArticle, vectical, horizontal, style }: IArticleDetail) {
     const { contentArticle, titleArticle, createTime, idArticle, user, comment, bookmark, imageArticle, hashTagData } = article
     if (!user) {
         return null

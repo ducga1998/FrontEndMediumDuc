@@ -17,9 +17,9 @@ export default function UIPopup({children , trigger ,  width  , height }:IPopUp)
     function updatePosition(event){
         event.stopPropagation()
         const domButton = event.target
-        const domPopUp  = refPopUp.current as any
+        const domPopUp  = refPopUp.current as HTMLElement | null
         if(domButton && domPopUp) {
-            let {top ,left  , width , height} = domButton.getBoundingClientRect()
+            let {top ,left  , width , height} = domButton.getBoundingClientRect() as ClientRect
             top  = top + height
             const rectPopup = domPopUp.getBoundingClientRect()
             setOpen(!open)
@@ -67,9 +67,13 @@ export default function UIPopup({children , trigger ,  width  , height }:IPopUp)
     return <> {Button}  
             {
             <UIWidget>
-                <Wrapper open={open} data-off="true" onMouseDown={(event) => {  event.stopPropagation() ; console.log(event.target); 
-                    
-                    if(event.target && event.target.getAttribute('data-off')){
+                <Wrapper 
+                open={open} 
+                data-off="true" 
+                onMouseDown={(event : React.MouseEvent<HTMLElement>) => {  
+                    event.stopPropagation() ; 
+                    const dom = event.target as HTMLElement
+                    if(dom && dom.getAttribute('data-off')){
                             setOpen(false)
                         }
                 }} > 
@@ -82,8 +86,7 @@ export default function UIPopup({children , trigger ,  width  , height }:IPopUp)
         }
     </>
 }
-const Wrapper  = styled.div<any>`
- 
+const Wrapper  = styled.div<{open  ?: boolean}>`
  visibility : ${props => props.open? 'visible' : 'hidden'};
  
  position : absolute;
@@ -93,7 +96,7 @@ const Wrapper  = styled.div<any>`
  top : 0px;
  left : 0px;
 `
-const Popup = styled(FlexCol)<any>`
+const Popup = styled(FlexCol)<{width ?: string , height ?: string}>`
     width: ${props => props.width};
     height :${props => props.height};
     display : block;
