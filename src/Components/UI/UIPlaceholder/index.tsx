@@ -13,7 +13,6 @@ export const skeletonKeyframes = keyframes`
     background-position: calc(200px + 100%) 0;
   }
 `;
-
 export const skeletonClass = css`
   background-color: ${defaultBaseColor};
   background-image: linear-gradient(
@@ -63,7 +62,6 @@ export default class UIPlaceHolder extends React.Component<any> {
     </span> 
       elements.push(Span);
     }
-
     const Wrapper = this.props.wrapper;
     return (
       <span>

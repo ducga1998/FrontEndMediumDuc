@@ -69,7 +69,7 @@ switch(type ){
         hoverColor={categoryButton||undefined}
     >   
     {isLoading ?<Spinner /> : null}
-    {icon?  <Icon tipText="KOKOKKO" glyph={icon} /> :  null}
+    {icon?  <Icon  glyph={icon} /> :  null}
     {children}
     </Button>
 }

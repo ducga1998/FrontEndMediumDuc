@@ -223,7 +223,7 @@ export default class ReactTags extends React.Component<any, any> {
           tag={tag}
           labelField={labelField}
           onDelete={this.props.handleDelete}
-         
+
         />
       );
     });
@@ -237,36 +237,36 @@ export default class ReactTags extends React.Component<any, any> {
     const {
       placeholder,
     } = this.props;
-    
+
 
     return (
       <Wrapper>
-         <div className="pb-duc-wrapper-tag">
-          { this.getTagItems()}
+        <div className="pb-duc-wrapper-tag">
+          {this.getTagItems()}
         </div>
         <div className="pb-duc-wrapper-input">
-        <Input
-          ref={(input) => {
-            this.textInput = input;
-          }}
-          placeholder={placeholder}
-          onFocus={this.handleFocus}
-          onBlur={this.handleBlur}
-          onChange={this.handleChange}
-          onKeyDown={this.handleKeyDown}
-          value={this.props.inputValue}
-        />
+          <Input
+            ref={(input) => {
+              this.textInput = input;
+            }}
+            placeholder={placeholder}
+            onFocus={this.handleFocus}
+            onBlur={this.handleBlur}
+            onChange={this.handleChange}
+            onKeyDown={this.handleKeyDown}
+            value={this.props.inputValue}
+          />
 
-        {query.length > 0 && <Suggestions
-          query={query}
-          suggestions={suggestions}
-          labelField={this.props.labelField}
-          selectedIndex={selectedIndex}
-          handleClick={this.handleSuggestionClick}
-          isFocused={this.state.isFocused}
-        /> }
+          {query.length > 0 && <Suggestions
+            query={query}
+            suggestions={suggestions}
+            labelField={this.props.labelField}
+            selectedIndex={selectedIndex}
+            handleClick={this.handleSuggestionClick}
+            isFocused={this.state.isFocused}
+          />}
         </div>
-       
+
       </Wrapper>
     );
   }

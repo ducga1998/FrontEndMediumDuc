@@ -61,8 +61,25 @@ export default function Login({ history }) {
             <UIButton onMouseDown={handleLogin}>Login</UIButton>
             <UIButton to='/register' >Register</UIButton>
         </Section>
+        <Social>
+            <UIButton>Facebook</UIButton>
+            <UIButton  icon="github" style={{backgroundColor  :'black'}}>Github</UIButton>
+        </Social>
     </$Form>
 }
+const Social = styled.div`
+    display : flex;
+    
+    a {
+    
+    }
+    .facebook{
+
+    }
+    .github {
+        
+    }
+`
 const $Form = styled.div`
     width : 500px;
     margin : auto;

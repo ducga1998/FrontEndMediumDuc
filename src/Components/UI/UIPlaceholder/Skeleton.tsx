@@ -5,7 +5,6 @@ import {
   defaultBaseColor,
   defaultHighlightColor
 } from "./index";
-
 export default class SkeletonTheme extends React.Component {
   static defaultProps = {
     color: defaultBaseColor,
@@ -27,7 +26,6 @@ export default class SkeletonTheme extends React.Component {
       }
     `;
   }
-
   render() {
     return <div className={this.themeClass}>{this.props.children}</div>;
   }

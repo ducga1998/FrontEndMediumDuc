@@ -44,6 +44,7 @@ export default class ViewComment extends React.Component<IViewComment> {
             return <UIPlaceHolder  />
         }
         return <>
+         {/* <UIPlaceHolder  /> */}
                 <FormComment onChange={(comment) => { this.handleComment(comment) }} />
                 <ListCommentView allComments ={allComments} />
                 <LoadMoreButton 

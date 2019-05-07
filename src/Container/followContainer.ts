@@ -5,10 +5,7 @@ class FollowAllContainer extends Container<any>{
 
     constructor(data) {
         super(data)
-        console.log(data)
-        // this.getRoomByIdUser()
     }
-    // idUserOwnAccoutCurrent = userContainer.state.dataUser.idUser
     // this function will call when me  into idUser other
     async gotoProfileOtherUser(ownProfileId) {
         const idUserFollow = userContainer.state.dataUser.idUser

@@ -16,7 +16,6 @@ const defaultOptions = {
 const LINK = process.env.NODE_ENV === 'production' ? '' : 'http://localhost:3000'
 export const client = new ApolloClient({
     uri: `${LINK}/graphql`,
-
     // defaultOptions : defaultOptions
 })
 export function logoutBackend() {
@@ -58,8 +57,6 @@ export function updateInfomation(user: any) {
     })
 }
 export function deleteUserById(id) {
-
-
     return new Promise(async resolve => {
         const API = client.mutate({
             mutation: gql`
@@ -195,7 +192,6 @@ export function checkLoginUser(user: any) {
     })
 }
 export function getAllUser() {
-
     return new Promise(async resolve => {
         const API = await client.query({
             query: gql`
@@ -220,7 +216,6 @@ export function getAllUser() {
 
     })
 }
-
 export function addArticleToClient(article: any) {
     let input: any = article;
     console.log(input)
