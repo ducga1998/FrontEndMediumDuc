@@ -11,10 +11,21 @@ import Link from '../../../Components/Link';
 import UIButton from '../../../Components/UI/UIButton';
 export interface IArticle {
     typeArticle?: 'store' | 'view',
-    article: any,
+    article: IArticleType,
     vectical?: boolean,
     horizontal?: boolean
     style?: any
+}
+export interface IArticleType {
+     contentArticle : string
+     titleArticle : string
+     createTime : string 
+     idArticle :string
+     user :any
+     comment : any[]
+     bookmark : any []
+     imageArticle :string | undefined
+     hashTagData  : any[]
 }
 //  horizontal => normal view . I am see this state very beautifull
 // vectical => state list => for admin list article

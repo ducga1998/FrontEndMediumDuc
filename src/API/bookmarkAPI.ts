@@ -1,8 +1,8 @@
 import gql from "graphql-tag";
 import { client } from "./client";
 import { convertDataToGraphQL } from "../help/help";
-export function bookMark(bookMark: any) {
-    let input: any = bookMark;
+export function bookMark(input) {
+   
     return new Promise(async resolve => {
         const API = await client.mutate({
             mutation: gql`
@@ -58,9 +58,9 @@ export function getAllArticleHashBeenBookMark(idUser) {
     })
 }
 // get all article in database
-export function unBookMark(bookMark: any) {
+export function unBookMark(input) {
 
-    let input: any = bookMark;
+    
     return new Promise(async resolve => {
         const API = await client.mutate({
             mutation: gql`
@@ -81,7 +81,6 @@ export function unBookMark(bookMark: any) {
     })
 }
 export function isBookMarkToClient({ idUser, idArticle }) {
-    console.log('isBookMarkToClient', idArticle, idUser)
     return new Promise(async resolve => {
         const API = await client.query({
             query: gql`

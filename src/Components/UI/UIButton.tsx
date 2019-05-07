@@ -5,11 +5,11 @@ import Icon from '../Icon';
 import { Spinner, fontStack } from '../styled/base';
 import { Link } from 'react-router-dom';
 interface IUIButton {
-    width ?: any
-    height ?:any
+    width ?: string
+    height ?:string
     children?: any
-    onMouseDown?: (e: any) => any,
-    style?: any,
+    onMouseDown?: (e: any) => void,
+    style?: Object,
     keyButton?: number,
     active?: boolean,
     icon ? :string
@@ -34,13 +34,12 @@ export default function UIButton({ type , to,
             case 'sidebar' : 
             categoryButton ="brand.default"
             break;
-    
         default:
             break;
     }
     console.log('categoryButton',categoryButton)
     let Button 
-switch(type ){
+        switch(type ){
         case 'soild' :
         Button = StyledSolidButton
         break;
@@ -52,9 +51,10 @@ switch(type ){
     }
     if(to){
         return  <ButtonLink  style={style} to={to}
-        color={categoryButton||undefined}
-        hoverColor={categoryButton||undefined}
-        >{children} 
+            color={categoryButton||undefined}
+            hoverColor={categoryButton||undefined}
+            >
+        {children} 
          </ButtonLink>
     }
     if(isLoading) {

@@ -155,7 +155,7 @@ export function getAllInformationUser(idUser: string) {
 
     })
 }
-export function checkLoginUser(user: any) {
+export function checkLoginUser(user: {username : string  , password : string}) {
     const { username, password } = user;
     return new Promise(async resolve => {
         const API = await client.query({
@@ -216,9 +216,7 @@ export function getAllUser() {
 
     })
 }
-export function addArticleToClient(article: any) {
-    let input: any = article;
-    console.log(input)
+export function addArticleToClient(input) {
     return new Promise(async resolve => {
         const API = await client.mutate({
             mutation: gql`

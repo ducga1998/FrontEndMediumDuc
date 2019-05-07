@@ -2,19 +2,25 @@ import * as React from 'react'
 import styled from 'styled-components';
 
 
-export default class SmartList extends React.Component<any> {
+export default class SmartList extends React.Component<{smartList : {titleArticle : string ,idArticle  :string  }[] , close : () => void}> {
     render() {
         const { smartList } = this.props
-        console.log('smartList', smartList)
         if (!smartList) {
             return null
         }
         return <ul>
-            {smartList.map((item , key) => <Li key={key}><A onClick={() => {
-                location.href = `/article/${item.idArticle}`
-                this.props.close();
+            {smartList.map((item, key) =>
+                <Li key={key}>
+                    <A onClick={() => {
+                        location.href = `/article/${item.idArticle}`
+                        this.props.close();
 
-            }}>{item.titleArticle}</A></Li>)}
+                    }}>
+                        {item.titleArticle}
+                    </A>
+                </Li>
+            )
+            }
         </ul>
     }
 }

@@ -6,14 +6,14 @@ interface IUIField {
     titleField?: String;
     help?: Boolean;
     label?: String;
-    onChange: (e: any) => any
+    onChange: (e: string) => void
     placeholder?: String
     value?: String | any
     type?: String
     minLength?: number
     maxLength?: number
 }
-export default class UIField extends React.Component<IUIField, any> {
+export default class UIField extends React.Component<IUIField> {
     static defaultProps = {
         type: 'text'
     }

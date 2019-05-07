@@ -3,7 +3,6 @@ import { client } from "./client";
 import { convertDataToGraphQL } from "../help/help";
 //QUERY
 export function getArticleTagByNameHashTag(idHashTag) {
-    console.log('idHashTag==>',idHashTag)
     return new Promise(async resolve => {
         const API = await client.query({
             query: gql`

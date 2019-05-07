@@ -14,9 +14,25 @@ import { AvatarImage } from '../../Components/styled/avatar';
 import UIModal from '../../Components/UI/UIModal';
 
 interface IListRoom {
-    match?: any
+    match: {
+        params  :  {
+            id : string
+        }
+    }
 }
-
+interface IMessages {
+    idUserReceive :string
+    idUser :string
+    contentMessage :string
+}
+export interface IRoom {
+    idUser :string
+    idRoom :string
+    idUserReceive :string
+    messages : IMessages
+    ownerUserInfo :any
+    clientInfo : any
+}
 export default class ChatMessage extends React.Component<IListRoom> {
     state = {
         active: '',
@@ -30,7 +46,7 @@ export default class ChatMessage extends React.Component<IListRoom> {
     refViewChat: any = React.createRef()
     async componentDidMount() {
         const { match: { params: { id } } } = this.props;
-        const rooms = await getRoomById() as any[];// all room for we  =))  
+        const rooms = await getRoomById()  ;// all room for we  =))  
         const flag2 = rooms.filter(item => item.idUser === id); // client
         const flag = rooms.filter(item => item.idUserReceive === id); // owner room 
         // create room if no room eexi
@@ -44,19 +60,15 @@ export default class ChatMessage extends React.Component<IListRoom> {
             rooms.push(infoNewRoom)
             this.setState({ rooms })
         }
-        console.log('rooms', rooms)
         this.setState({ rooms })
         this.socket = new SocketMessageChat()
         this.socket.on('receviceMessage', data => {
-            console.log('recevice message   ', data)
             this.sendMessage(data, true)
         })
 
     }
     selecteUserChat = async (room) => {
         const { scrollHeight } = this.refViewChat
-        console.log('room  ', room)
-
         // info in room include : tin nhan cuoi cung , ten ng nhan va gui 
         const { idRoom } = room
         const messages = await getAllMessageByIdUserReceive(idRoom)

@@ -7,7 +7,13 @@ import SmartList from './smartList';
 import { Input, fontStack } from '../../../Components/styled/base';
 import { OverLay } from 'src/Components/styled/overlay';
 import UIWidget from 'src/Components/UI/UIWidget';
-export default class Search extends React.Component {
+interface StateSearch {
+    value :string
+    afterData : any[]
+    smartList : any[]
+    isFocus : boolean
+}
+export default class Search extends React.Component <any,StateSearch >{
     state = {
         value: '',
         isFocus: false,
@@ -15,7 +21,7 @@ export default class Search extends React.Component {
         smartList: []
     }
     async componentWillMount() {
-        const afterData = await getDataSearch()
+        const afterData = await getDataSearch() as any[]
         this.setState({ afterData })
         window.addEventListener('keyup' ,this.handleKeyPress)
     }

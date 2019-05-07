@@ -47,7 +47,6 @@ export default function Register() {
         <UIField type="text" titleField="Link avatar" placeholder="Link avatar .... " value={avatarLink} onChange={(value) => {
             setValueAvatarLink(value)
         }} />
-
         <Section>
             <UIButton onMouseDown={handleRegister} > Register </UIButton> 
             <UIButton to='/login'> Back </UIButton> 
