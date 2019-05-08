@@ -1,8 +1,20 @@
 import gql from "graphql-tag";
 import { client } from "./client";
 import { convertDataToGraphQL } from "../help/help";
+import { IUsertype } from "./userAPI";
+import { IArticleType } from "./articleAPI";
 //QUERIES 
-export function getAllCommentinArtcileCurrent(idUser: string , first :number , offset : number ) {
+export interface ICommentType {
+    idUser :string
+    idComment :string
+    idArticle :string
+    content :string
+    createdAt : string
+    idReply ?: string
+    userComment ?: IUsertype
+    articleComment ?:IArticleType
+}
+export function getAllCommentinArtcileCurrent(idUser: string , first :number , offset : number ): Promise<ICommentType[]>{
     console.log('999', idUser)
     return new Promise(async resolve => {
         const API = await client.query({
@@ -36,7 +48,7 @@ export function getAllCommentinArtcileCurrent(idUser: string , first :number , o
 //MUATION 
 // this is function felp we add comment into a article , 
 // input : idArticle and  content comment ?  . Iam not sure  :v 
-export function addComment(input: { idComment : string ,  idUser: string,  content: string , idReply?: string }) {
+export function addComment(input: { idComment : string ,  idUser: string,  content: string , idReply?: string }) :Promise<ICommentType>{
     return new Promise(async resolve => {
         const API = await client.mutate({
             mutation: gql`
@@ -70,7 +82,7 @@ export function addComment(input: { idComment : string ,  idUser: string,  conte
 
     })
 } 
-export function addReplyComment(input: { idUser: string, idArticle: string, content: string , idReply :string }) : Promise<any> {
+export function addReplyComment(input: { idUser: string, idArticle: string, content: string , idReply :string }) : Promise<ICommentType> {
     return new Promise(async resolve => {
         const API = await client.mutate({
             mutation: gql`
@@ -94,8 +106,6 @@ export function addReplyComment(input: { idUser: string, idArticle: string, cont
                 input
             }
         })
-
-        // const { data: { addCommentIntoArticle } } = API
         resolve(convertDataToGraphQL(API));
     })
 } 

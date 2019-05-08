@@ -1,22 +1,21 @@
 import * as React from 'react';
 import styled from 'styled-components';
-import { getAllArticleHashBeenBookMark } from '../../../API/bookmarkAPI';
+import { getAllArticleHashBeenBookMark, IBookMarkType } from '../../../API/bookmarkAPI';
 import userContainer from '../../../Container/userContainer';
 import Article from '../../Reuse/ArticleView/ArticleDetail';
 import { FlexRow } from '../../../Components/styled/base';
-import UILoading from '../../../Components/UI/UILoading';
-class ArticleBookMark extends React.Component {
+class ArticleBookMark extends React.Component<{} > {
     state = {
-        dataBookMark: []
+        dataBookMark: [] as IBookMarkType[]
     }
     async componentDidMount() {
         const { idUser  } = userContainer.state.dataUser
-        const dataBookMark = await getAllArticleHashBeenBookMark(idUser) as any
+        const dataBookMark = await getAllArticleHashBeenBookMark(idUser) ;
         this.setState({ dataBookMark })
     }   
 
     render() {
-        const { dataBookMark } = this.state as any
+        const { dataBookMark } = this.state 
         return <>
             <h1> All Article BookMarked {name}</h1>
             <$ViewArticle>
@@ -36,12 +35,3 @@ const $ViewArticle = styled(FlexRow)`
 `
 
 export default ArticleBookMark
-class Core  extends React.Component{
-    state = {
-        isLoading : false
-    }
-
-    render(){
-        return <UILoading />
-    }
-}

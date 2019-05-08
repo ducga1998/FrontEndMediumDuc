@@ -8,7 +8,7 @@ interface IUIButton {
     width ?: string
     height ?:string
     children?: any
-    onMouseDown?: (e: any) => void,
+    onMouseDown?: (e: React.MouseEvent<HTMLElement>) => void,
     style?: Object,
     keyButton?: number,
     active?: boolean,

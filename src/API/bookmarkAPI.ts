@@ -1,7 +1,16 @@
+import { IArticleType } from 'src/API/articleAPI';
+import { IUsertype } from './userAPI';
 import gql from "graphql-tag";
 import { client } from "./client";
 import { convertDataToGraphQL } from "../help/help";
-export function bookMark(input) {
+export interface  IBookMarkType {
+    idUser :string
+    idArticle :string
+    idUserBookMark ?:  string
+    userOwnArticle ?:IUsertype
+    articleBookMark : IArticleType
+}
+export function bookMark(input ) : Promise<IBookMarkType> {
    
     return new Promise(async resolve => {
         const API = await client.mutate({
@@ -22,7 +31,7 @@ export function bookMark(input) {
 
     })
 }
-export function getAllArticleHashBeenBookMark(idUser) {
+export function getAllArticleHashBeenBookMark(idUser) : Promise<IBookMarkType[]> {
     return new Promise(async resolve => {
         const API = await client.query({
             query: gql`
@@ -58,7 +67,7 @@ export function getAllArticleHashBeenBookMark(idUser) {
     })
 }
 // get all article in database
-export function unBookMark(input) {
+export function unBookMark(input) : Promise<IBookMarkType> {
 
     
     return new Promise(async resolve => {
@@ -80,7 +89,7 @@ export function unBookMark(input) {
 
     })
 }
-export function isBookMarkToClient({ idUser, idArticle }) {
+export function isBookMarkToClient({ idUser, idArticle }) :Promise<Boolean> {
     return new Promise(async resolve => {
         const API = await client.query({
             query: gql`

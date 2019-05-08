@@ -70,7 +70,7 @@ export function deleteUserById(id:string) :Promise<IUsertype> {
 
     })
 }
-export function addUser(user)  :Promise<IUsertype>{
+export function addUser(user) :Promise<IUsertype>{
     const { idUser, login, password, decentraliz, avatarLink, name } = user
     const input = {
         idUser, login, password, decentraliz, avatarLink, name

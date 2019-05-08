@@ -30,8 +30,8 @@ export function getAllInfomationUserFollowYour(idUser): Promise<IFollowType[]> {
 }
 //MUTATION
 // define input  => idUser and idUserFollow 
-export function follow(input: any) {
-    console.log('input follow', input)
+export function follow(input) {
+    // console.log('input follow', input)
     return new Promise(async resolve => {
         const API = await client.mutate({
             mutation: gql`
@@ -58,7 +58,7 @@ export function follow(input: any) {
             resolve(convertDataToGraphQL(API));
     })
 }
-export function unFollow(input: any) {
+export function unFollow(input) {
     return new Promise(async resolve => {
         const API = await client.mutate({
             mutation: gql`

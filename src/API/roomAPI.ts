@@ -33,8 +33,7 @@ export function getRoomById() : Promise<IRoom[]> {
 }
 //MUTATION
  // hash tag not Mutation
- export function createRoom(input: any) : Promise<IRoom>{
-     console.log('createRoo,',input  )
+ export function createRoom(input) : Promise<IRoom>{
     return new Promise(async resolve => {
         const API = await client.mutate({
             mutation: gql`

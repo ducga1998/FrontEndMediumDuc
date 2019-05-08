@@ -55,7 +55,7 @@ const FormComment = ({ context, idReply, onChange }: IFormReply) => {
             <$FormComment placeholder="Comment something ....."
                 value={content}
                 onKeyPress={handleKeyPress}
-                onChange={e => setContent(e.target.value)} />
+                onChange={(e : React.ChangeEvent<HTMLInputElement>  ) => setContent(e.target.value)} />
             <UIButton
                 style={{ flex: 2 }}
                 onMouseDown={handleAddComment}>Comment

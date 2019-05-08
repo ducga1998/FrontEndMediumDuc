@@ -12,13 +12,13 @@ interface IUIInput {
     placeholder?: string,
     type?: string
     refInput?: any,
-    onKeyPress?: (e: any) => any,
-    onFocus?: (e: any) => any
+    onKeyPress?: (e: React.KeyboardEvent<HTMLInputElement>) => void,
+    onFocus?: (e: React.FocusEvent<HTMLElement>) => void
     autoFocus?: boolean
 
 }
 export default class UIInput extends React.Component<IUIInput> {
-    inputRef: any = React.createRef()
+    inputRef :React.RefObject<HTMLInputElement> = React.createRef()
     componentDidUpdate() {
 
     }
@@ -29,7 +29,7 @@ export default class UIInput extends React.Component<IUIInput> {
             type={type || undefined}
             autoFocus={autoFocus || undefined}
             onKeyPress={onKeyPress}
-            ref={refInput}
+            ref={  refInput }
             placeholder={placeholder || undefined}
             style={style}
             onChange={e => {

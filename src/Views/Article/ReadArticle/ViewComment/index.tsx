@@ -10,8 +10,12 @@ interface IViewComment {
     idArticle: string,
 
 }
+interface IStateViewComment {
+    offset : number,
+    allComments : IViewComment[] 
+}
 // refactor all code for comment 
-export default class ViewComment extends React.Component<IViewComment> {
+export default class ViewComment extends React.Component<IViewComment , IStateViewComment> {
     state = {
         allComments: [],
         offset: 0,
@@ -34,7 +38,7 @@ export default class ViewComment extends React.Component<IViewComment> {
         const { idArticle } = this.props
         const first = 5
         const offset = this.state.offset + first
-        const newArrComment = await getAllCommentinArtcileCurrent(idArticle, first, offset) as any[]
+        const newArrComment = await getAllCommentinArtcileCurrent(idArticle, first, offset);
         this.setState({ allComments: [...this.state.allComments, ...newArrComment], offset })
     }
     render() {

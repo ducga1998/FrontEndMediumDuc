@@ -183,9 +183,10 @@ export default class ChatMessage extends React.Component<IListRoom> {
                         autoFocus
                             onChange={(valueChat) => { this.setState({ valueChat }) }}
                             onKeyPress={
-                                (event) => {
+                                (event :React.KeyboardEvent<HTMLInputElement>) => {
                                     if (event.charCode === 13) {
-                                        const contentMessage = event.target.value
+                                        // const dom = event.target
+                                        const contentMessage = event.currentTarget.value
                                         const { idUserReceive, idRoom, idUser ,ownerUserInfo } = selectingRoom as any
                                         this.sendMessage({
                                             contentMessage,

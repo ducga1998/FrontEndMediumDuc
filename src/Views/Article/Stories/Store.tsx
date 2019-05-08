@@ -9,7 +9,7 @@ import MediumDraft from '../WriteArticle/mediumDraft';
 import { fontStack } from '../../../Components/styled/base';
 import UILoading from '../../../Components/UI/UILoading';
 
-class WriteArticle extends React.Component<any> {
+class WriteArticle extends React.Component<{match : { params : {id : string}}}> {
     state = {
         dataArticle: null
     }
