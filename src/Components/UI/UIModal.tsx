@@ -27,7 +27,9 @@ export default function UIModal({ trigger, children, title, width, height, close
             },
         })
     }
-    return <>{button?button : null} <UIWidget> <$Background onMouseDown={onClickOutSide} open={open}>
+    return <>
+    {button ? button : null} 
+    <UIWidget> <$Background onMouseDown={onClickOutSide} open={open}>
         <$Modal onMouseDown={(e: any) => {
             e.stopPropagation();
         }} >

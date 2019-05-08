@@ -5,13 +5,13 @@ import styled from 'styled-components';
 
 
 interface IUIInput {
-    onChange: (e: any) => any,
+    onChange: (e: string) => void,
     value?: string | number,
     size?: 'xs' | 'ls' | 'sm',
     style?: any,
     placeholder?: string,
     type?: string
-    refInput?: any,
+    refInput?: (string & React.RefObject<HTMLInputElement>),
     onKeyPress?: (e: React.KeyboardEvent<HTMLInputElement>) => void,
     onFocus?: (e: React.FocusEvent<HTMLElement>) => void
     autoFocus?: boolean

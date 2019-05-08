@@ -1,4 +1,3 @@
-
 import UIButton from 'src/Components/UI/UIButton';
 import * as React from 'react'
 import { IMAGE_SOURCE_DEFAULT } from 'src/help/define';

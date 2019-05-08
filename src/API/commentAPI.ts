@@ -75,7 +75,6 @@ export function addComment(input: { idComment : string ,  idUser: string,  conte
         },
         
     )
-
         // const { data: { addCommentIntoArticle } } = API
         resolve(convertDataToGraphQL(API));
 

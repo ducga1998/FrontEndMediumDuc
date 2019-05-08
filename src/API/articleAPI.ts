@@ -1,11 +1,11 @@
 import { IUsertype } from './userAPI';
 
 import gql from "graphql-tag";
-import { client } from "./client";
-import { convertDataToGraphQL } from "../help/help";
-import { IHashtTagType } from './hashtagAPI';
-import { ICommentType } from './commentAPI';
-import { IBookMarkType } from './bookmarkAPI';
+import { client } from "./client"
+import { convertDataToGraphQL } from "../help/help"
+import { IHashtTagType } from './hashtagAPI'
+import { ICommentType } from './commentAPI'
+import { IBookMarkType } from './bookmarkAPI'
 export interface IArticleType {
     idArticle : string
     idUser : string

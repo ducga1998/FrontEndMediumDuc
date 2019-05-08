@@ -9,6 +9,7 @@ import userContainer from '../../Container/userContainer';
 import UIButton from './UIButton';
 import UIInput from './UIInput';
 import { H3, baseHover } from '../styled/base';
+import { InputType } from 'types/input';
 
 const { useState, useRef } = React
 interface IUIEditer {
@@ -19,10 +20,9 @@ interface IUIEditer {
 export default function UIEditer({ info, content , onUpdateProfile }: IUIEditer) {
     const [open, setOpen] = useState(false)
     const [value, setValue] = useState(content)
-    const inputref = useRef(null) as any
+    const inputref = useRef(null) as InputType  ;
     React.useEffect(() => {
-        // setValue(content)
-        if (inputref.current) {
+        if (inputref && inputref.current) {
             inputref.current.value = (value ? value : '')
         }
     } ) 
