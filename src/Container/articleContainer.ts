@@ -1,5 +1,5 @@
 import { Container } from 'unstated-x';
-import { updateArticleToClient, getAllArticle, countArticle } from '../API/articleAPI';
+import { updateArticleToClient, getAllArticle, countArticle, IArticleType } from '../API/articleAPI';
 import { addArticleToClient } from '../API/articleAPI';
 import userContainer from './userContainer';
 interface IAllArticleContainer {
@@ -28,7 +28,7 @@ class AllArticleContainer extends Container<IAllArticleContainer> {
             this.setState({ registryArticle: dataCache })
             return
         }
-        const allArticle = await getAllArticle(first, offset) as any
+        const allArticle = await getAllArticle(first, offset) 
         const count = await countArticle() as number
         // console.log('dataFake', dataFake)
         if (allArticle) {
@@ -69,7 +69,7 @@ export interface IArticleContainer {
     arrHashTag: any,
     imageArticle : string
 }
-class ArticleContainer extends Container<IArticleContainer>{
+export class ArticleContainer extends Container<IArticleContainer>{
     //  =>   request to back end 
     //  => front end alway have stories
     async addArticle(idArticle) {

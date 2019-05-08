@@ -1,20 +1,24 @@
+import { IUsertype } from './userAPI';
 
 import gql from "graphql-tag";
 import { client } from "./client";
 import { convertDataToGraphQL } from "../help/help";
+import { IHashtTagType } from './hashtagAPI';
+import { ICommentType } from './commentAPI';
+import { IBookMarkType } from './bookmarkAPI';
 export interface IArticleType {
     idArticle : string
     idUser : string
     category ?: string[]
-    bookmark ?: any
+    bookmark ?: IBookMarkType[]
     totalClap : number
     contentArticle :string 
     imageArticle :string
     titleArticle :string
     createTime :string
-    user ?:any
-    hashTagData ?: any
-    comment : any
+    user :IUsertype
+    hashTagData ?: IHashtTagType[]
+    comment : ICommentType[]
 }
 export function addArticleToClient(input) {
     return new Promise(async resolve => {

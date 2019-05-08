@@ -5,7 +5,7 @@ import userContainer from "../Container/userContainer";
 export interface IdNotificationType {
     idNotification ?:string 
     idUser ?:string  
-    type  ?: any
+    type  ?: string
     notificationData ?: any
     time ?: string 
 }

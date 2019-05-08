@@ -1,9 +1,9 @@
 import * as React from 'react'
-import { FlexRow, FlexCol, H1 } from '../../../Components/styled/base';
+import {  FlexCol, H1 } from '../../../Components/styled/base';
 import RankAuthor from './AuthorRank';
 import RankArticle from './ArticleRank'
 import { rankData } from '../../../API/fetchAPI';
-import styled from 'styled-components';
+import { IArticleType } from '../../../API/articleAPI';
 const cachRank  = new Map()
 const {useEffect ,useState} = React as any
 export default function Rank() {
@@ -34,13 +34,20 @@ export default function Rank() {
         </FlexCol>
 }
 function RankFollow({rankFollow}){
-    return <> <H1>The Best Author have follow</H1><RankAuthor type="follow" author={rankFollow}   /></>
+    return <> 
+        <H1>The Best Author have follow</H1>
+        <RankAuthor type="follow" author={rankFollow}   />
+    </>
 }
 function RankWriteArticle({rankWriteArticle}) {
-    return <><H1>The Best Author have count write article</H1><RankAuthor type="article" author={rankWriteArticle} /></>
+    return <>
+        <H1>The Best Author have count write article</H1>
+        <RankAuthor type="article" author={rankWriteArticle} />
+    </>
 }
-function RankBookMarkArticle({rankBookMark}){
-    return <><H1>The best Article have bookmark</H1>
-    <RankArticle article={rankBookMark}></RankArticle>
+function RankBookMarkArticle({rankBookMark } : {rankBookMark : (IArticleType & {count : number})[]}){
+    return <> 
+        <H1>The best Article have bookmark</H1>
+        <RankArticle article={rankBookMark } />
     </>
 }

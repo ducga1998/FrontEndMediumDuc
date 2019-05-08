@@ -7,7 +7,7 @@ import theme from '../../theme';
 export const Wrapper = styled.div`
   display: inline-block;
 
-  ${(props: any) =>
+  ${(props: {darkContext ?: boolean}) =>
         props.darkContext &&
         css`
       > button {
@@ -24,7 +24,7 @@ export const Wrapper = styled.div`
 `;
 
 export const Absolute = styled.div`
-  display: ${(props: any) => (props.open ? 'flex' : 'none')};
+  display: ${(props: {open  ?:boolean}) => (props.open ? 'flex' : 'none')};
   position: fixed;
   left: 0;
   top: 0;

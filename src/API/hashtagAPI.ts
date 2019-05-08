@@ -2,7 +2,6 @@ import { IArticleType } from './articleAPI';
 import gql from "graphql-tag";
 import { client } from "./client";
 import { convertDataToGraphQL } from "../help/help";
-//QUERY
 export interface IHashtTagType {
     idArticle :string
     idHashTag :string

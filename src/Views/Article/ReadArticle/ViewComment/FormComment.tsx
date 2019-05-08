@@ -10,10 +10,11 @@ import { renderElement } from 'src/Core/renderElement';
 import { Input, FlexCol } from 'src/Components/styled/base';
 import { AvatarImage } from 'src/Components/styled/avatar';
 import { addComment } from 'src/API/commentAPI';
+import { IArticleType } from 'src/API/articleAPI';
 interface IFormReply {
-    context: any,
+    context: IArticleType,
     idReply?: string,
-    onChange: (event: any) => any
+    onChange: (e) =>  void
 }
 
 const FormComment = ({ context, idReply, onChange }: IFormReply) => {

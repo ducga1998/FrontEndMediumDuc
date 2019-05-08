@@ -6,7 +6,7 @@ interface IUIFieldAlgin {
     vectical ?:boolean
     horizontal?: boolean
     flex ?:number ,
-    children : any
+    children : React.ReactNode
     style  ?: any
     shadow ?: string
 }

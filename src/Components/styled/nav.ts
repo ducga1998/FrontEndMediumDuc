@@ -1,10 +1,6 @@
-// import { theme } from './../../theme/index';
 import Link from '../Link';
-// @flow
 import styled, { css } from 'styled-components';
 import { FlexRow, hexa, fontStack, Transition } from './base';
- //  have
-
 export const Nav = styled(FlexRow)`
   width: 100%;
   background: ${({ theme }) =>theme.text.default };
@@ -72,14 +68,12 @@ export const IconLink = styled(Link)`
   position: relative;
   width: 100%;
   color : ${props => props.theme.text.reverse};
-  /* transition : ${Transition.hover.off}; */
   &:hover {
     opacity: 1;
     box-shadow: inset 0 -4px 0 ${({ theme }) => theme.bg.default};
     transition : ${Transition.hover.on};
   }
-
-  ${/* handles unseen notification counts for both DMs and Notifications */ ''} ${(props: any) =>
+ ${(props: any) =>
         props.withCount &&
         css`
         > .icon:after {

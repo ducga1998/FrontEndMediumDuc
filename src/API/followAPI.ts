@@ -3,9 +3,9 @@ import gql from "graphql-tag";
 import { client } from "./client";
 import { convertDataToGraphQL } from "../help/help";
 export interface IFollowType {
-    idUser
-    idUserFollow
-    userFollow ?:IUsertype
+    idUser :string
+    idUserFollow : string
+    userFollow ?:IUsertype[]
 }
 export function getAllInfomationUserFollowYour(idUser): Promise<IFollowType[]> {
     return new Promise(async resolve => {

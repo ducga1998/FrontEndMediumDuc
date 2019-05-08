@@ -12,6 +12,7 @@ import SocketMessageChat from 'src/socketClient/messageChatSocket';
 import { getAllMessageByIdUserReceive } from '../../API/messageAPI';
 import { AvatarImage } from '../../Components/styled/avatar';
 import UIModal from '../../Components/UI/UIModal';
+import { IUsertype } from '../../API/userAPI';
 
 interface IListRoom {
     match: {
@@ -29,9 +30,9 @@ export interface IRoom {
     idUser :string
     idRoom :string
     idUserReceive :string
-    messages : IMessages
-    ownerUserInfo :any
-    clientInfo : any
+    messages : IMessages[]
+    ownerUserInfo :IUsertype
+    clientInfo : IUsertype
 }
 export default class ChatMessage extends React.Component<IListRoom> {
     state = {

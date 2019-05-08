@@ -3,16 +3,16 @@ import { toast } from 'react-toastify';
 import styled from 'styled-components';
 import { Subscribe } from 'unstated-x';
 import uuid from 'uuid';
-import articleContainer from '../../Container/articleContainer';
+import articleContainer, { ArticleContainer } from '../../Container/articleContainer';
 import UIModal from '../../Components/UI/UIModal';
 import UIButton from '../../Components/UI/UIButton';
 import { IconLink } from '../../Components/styled/nav';
 import UIHashTagInput from '../../Components/UI/UIHashTagInput'
 import { hashTagData } from 'src/API/fetchAPI';
-const {useEffect} = React as any
+const {useEffect} = React 
 export default function ButtonArticle() {
     const [open, setOpen] = React.useState(false)
-    const [suggestion ,setSuggestion] = React.useState([]) as any
+    const [suggestion ,setSuggestion] = React.useState([] as string[]) 
     let id = uuid()
     const [idArticle, setIdArticle] = React.useState(id)
     const handleAddHashTag = async (tag) => {
@@ -42,7 +42,7 @@ export default function ButtonArticle() {
     if (window.location.pathname === "/writearticle" || window.location.pathname.match('store')) {
         return <Subscribe to={[articleContainer]}>
             {
-                (container: any) => {
+                (container: ArticleContainer) => {
                     const { isPublicArticle, isUpdate, arrHashTag } = container.state
                     return isPublicArticle ?
                         (<UIModal open={open} openModal={() => {

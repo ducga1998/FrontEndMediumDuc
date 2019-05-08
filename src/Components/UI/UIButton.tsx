@@ -7,7 +7,7 @@ import { Link } from 'react-router-dom';
 interface IUIButton {
     width ?: string
     height ?:string
-    children?: any
+    children?: React.ReactNode
     onMouseDown?: (e: React.MouseEvent<HTMLElement>) => void,
     style?: Object,
     keyButton?: number,

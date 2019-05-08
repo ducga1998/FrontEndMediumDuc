@@ -1,17 +1,13 @@
 import * as React from 'react';
-import { getAllInformationUser } from 'src/API/userAPI';
+import { getAllInformationUser, IUsertype } from 'src/API/userAPI';
 import userContainer from '../../../Container/userContainer';
 import UILoading from '../../../Components/UI/UILoading';
 import Article from '../../Reuse/ArticleView/ArticleDetail';
-import { H2, H1, FlexRow } from '../../../Components/styled/base';
-import UIFieldAlgin from '../../../Components/UI/UIFieldAlgin';
+import { H2, H1, FlexRow } from '../../../Components/styled/base';;
 import styled from 'styled-components';
-interface IStories {
-    match: any
-}
-class Stories extends React.Component<IStories> {
+class Stories extends React.Component {
     state = {
-        dataUser: null,
+        dataUser: {} as  IUsertype,
         ownProfileId: ''
     }
     async componentDidMount() {
@@ -20,11 +16,11 @@ class Stories extends React.Component<IStories> {
         await this.setState({ dataUser })
     }
     render() {
-        const {  dataUser } = this.state as any
+        const {  dataUser } = this.state 
         if (!dataUser) {
             return <UILoading />
         }
-        const { articles, avatarLink, name, idUser } = dataUser as any;
+        const { articles, avatarLink, name, idUser } = dataUser ;
         return <>
             <H1> All Article {name}</H1>
             <$ListArticle  >

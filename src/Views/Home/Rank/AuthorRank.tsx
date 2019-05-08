@@ -9,11 +9,14 @@ interface IAuthor {
     type: string
 }
 const AuthorRank = ({ author, type }: IAuthor) => {
-    return author.map((item , key) => {
+    return <>
+    { author.map((item , key) => {
         const { count, idUser, name, avatarLink, biographical } = item
         return <FlexCol key={key}>
             <FlexRow>
-                <Link to="/profile" ><AvatarImage plan radius={15} src={avatarLink} /></Link>
+                <Link to="/profile" >
+                    <AvatarImage plan radius={15} src={avatarLink} />
+                </Link>
                 <Link className="name" to={`/user/${idUser}`}>
                     <H2 className="caption">
                         {name}
@@ -24,6 +27,7 @@ const AuthorRank = ({ author, type }: IAuthor) => {
                 <P><b> {count} {type === 'follow' ? 'People Follow' : 'Article'}</b></P>
             </FlexRow>
         </FlexCol>
-    })
+    })}
+    </>
 }
 export default AuthorRank

@@ -6,21 +6,20 @@ import theme from '../../theme';
 import UIWidget from './UIWidget';
 import { OverLay } from '../styled/overlay';
 import { H1 } from '../styled/base';
-// const { useEffect, useState } = React
 interface IUIModal {
-    trigger?: any
+    trigger?: React.ReactElement<any>
     title?: string
-    children?: any
+    children?: React.ReactNode
     width?: string
     height?: string,
-    closeMoDal: () => any,
-    openModal: () => any,
+    closeMoDal: () => void,
+    openModal: () => void,
     open: boolean,
-    onClickOutSide: () => any
+    onClickOutSide: () => void
 }
 
 export default function UIModal({ trigger, children, title, width, height, closeMoDal, openModal, open, onClickOutSide }: IUIModal) {
-    let button 
+    let button ;
     if(trigger){
          button = React.cloneElement(trigger, {
             onClick: () => {
@@ -37,9 +36,6 @@ export default function UIModal({ trigger, children, title, width, height, close
         </$Modal>
     </$Background>
     </UIWidget> </>
-}
-const duc = () => {
-     console.log('nguyen minh duc')
 }
 const $Background = styled(OverLay)``
 const $Header = styled.header`

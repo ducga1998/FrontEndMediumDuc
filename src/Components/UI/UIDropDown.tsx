@@ -32,11 +32,11 @@ const StyledCard = styled(Card)`
 `;
 
 interface IUIDropDown {
-  trigger: any,
-  children: any
+  trigger: React.ReactElement<any>,
+  children: React.ReactNode
 }
 export default class UIDropDown extends React.Component<IUIDropDown> {
-  refDropDown  : any  = React.createRef()
+  refDropDown  : React.RefObject<HTMLElement>  = React.createRef()
   state  = {
     open : false
   }

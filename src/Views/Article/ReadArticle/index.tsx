@@ -2,7 +2,7 @@
 import * as React from 'react';
 import renderHTML from 'react-render-html';
 import styled from 'styled-components';
-import { getArticleById } from '../../../API/articleAPI';
+import { getArticleById, IArticleType } from '../../../API/articleAPI';
 import UILoading from '../../../Components/UI/UILoading';
 import Author from '../../Author';
 import UIReaction from '../../../Components/UI/UIReaction';
@@ -16,31 +16,31 @@ import { timeDifference } from 'src/help/util';
 import UIButton from '../../../Components/UI/UIButton';
 
 interface IReadArticleType {
-    match: any,
-    router?: any,
-    route?: any
+    match: {params  : {id  : string}},
 }
-export const ArticleContext = React.createContext(null)
+export const ArticleContext = React.createContext({})
 class ReadArticle extends React.Component<IReadArticleType> {
     state = {
-        article: null,
+        article: {
+            user : {}
+        } as IArticleType ,
     }
     async componentDidMount() {
         const { match: { params: { id } } } = this.props
-        const article = await getArticleById(id) as any
+        const article = await getArticleById(id)
         if (article) {
             notificationSocket.emit('join', userContainer.state.dataUser.idUser)
             await this.setState({ article })
         }
     }
     componentWillUnmount() {
-        const { user: { idUser } } = this.state.article as any
+        const { user: { idUser } } = this.state.article 
         if (idUser !== userContainer.state.dataUser.idUser) {
             notificationSocket.emit('leave', idUser)
         }
     }
     render() {
-        const { article }: any = this.state
+        const { article } = this.state
         if (article) {
             const { user: { idUser, avatarLink, name }, idArticle, contentArticle, titleArticle, hashTagData, createTime } = article
             return <ArticleContext.Provider value={article}>
@@ -48,7 +48,7 @@ class ReadArticle extends React.Component<IReadArticleType> {
                 <WrapperReadArticle>
                     <div className="pb-duc-introduce-author" >
                         <H1> {renderHTML(titleArticle)} </H1>
-                        <Author idUser={idUser} avatarLink={avatarLink} totalFollow={10} name={name} totalArticle={213} />
+                        <Author idUser={idUser} avatarLink={avatarLink} totalFollow={10} name={name|| ''} totalArticle={213} />
                         <P style={{color : '#b2b2b2'}}>{timeDifference(new Date(), new Date(createTime))}</P>
                     </div>
                     <div className="pb-duc-content-article">
