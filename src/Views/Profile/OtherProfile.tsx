@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { getAllInformationUser } from 'src/API/userAPI';
+import { getAllInformationUser, IUsertype } from 'src/API/userAPI';
 import styled from 'styled-components';
 import srcImg from '../../image/9284571_300x300.jpeg';
 import UILoading from '../../Components/UI/UILoading';
@@ -17,7 +17,7 @@ interface IViewUserDetail {
 }
 class ViewUserDetail extends React.Component<IViewUserDetail> {
     state = {
-        dataUser: null,
+        dataUser: {} as IUsertype,
         ownProfileId: ''
     }
     async componentDidMount() {
@@ -31,7 +31,7 @@ class ViewUserDetail extends React.Component<IViewUserDetail> {
         await followAllContainer.follow(idUser)
     }
     render() {
-        const { ownProfileId, dataUser } = this.state as any
+        const { ownProfileId, dataUser } = this.state 
         return <Subscribe to={[followAllContainer]}>
             {
                 followAll => {
@@ -41,7 +41,7 @@ class ViewUserDetail extends React.Component<IViewUserDetail> {
                     if (!item || !dataUser) {
                         return <UILoading />
                     }
-                    const { articles, avatarLink, name, idUser, location, biographical, birthday } = dataUser as any;
+                    const { articles, avatarLink, name, idUser, location, biographical, birthday } = dataUser 
                     const { followContainer } = item
                     console.log('articlesarticlesarticles ', articles)
                     return <Subscribe to={[followContainer]}>
@@ -101,8 +101,8 @@ class ViewUserDetail extends React.Component<IViewUserDetail> {
                                                 <UIFieldAlgin horizontal style={{ flexWrap: 'wrap', flex: 'auto' }}>
                                                     {
                                                         articles && articles.length > 0 ? articles.map((item, key) => {
-                                                            const article = { ...item, ...{ user: { idUser, avatarLink, name } } }
-                                                            return <Article vectical key={key}  article={article} />
+                                                            // const article = { ...item, ...{ user: { idUser, avatarLink, name } } }
+                                                            return <Article vectical key={key}  article={item} />
                                                         }) : <H2> NO Article  :), fuck own account stupid </H2>}
                                                 </UIFieldAlgin>
                                             </div>

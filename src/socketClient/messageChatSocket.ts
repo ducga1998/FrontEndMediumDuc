@@ -16,7 +16,6 @@ export default class SocketMessageChat {
         this.socket.on(eventName, callback)
     }
     join(idUser) {
-        console.log('okk', idUser)
         this.socket.emit('join', idUser)
     }
 

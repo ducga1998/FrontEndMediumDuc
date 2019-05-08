@@ -17,7 +17,7 @@ class Navbar extends React.Component<any> {
     }
     navRef: HTMLElement
     componentDidMount() {
-        window.addEventListener('scroll', (e: any) => {
+        window.addEventListener('scroll', (e : UIEvent) => {
             if (window.scrollY < 1) {
                 this.navRef.style.position = ''
             }
@@ -33,7 +33,7 @@ class Navbar extends React.Component<any> {
         const location = window.location.href
         return <Nav ref={e => this.navRef = e}>
             <Nav>
-                <NavButton to="/" onClick={async (e: Event) => { e.preventDefault(); await this.setState({ sideBarOpen: true }) }}>
+                <NavButton to="/" onClick={async (e) => { e.preventDefault(); await this.setState({ sideBarOpen: true }) }}>
                     <Icon onClick={() => { this.setState({ sideBarOpen: true }) }} glyph="menu" />
                     <SideBar user={dataUser} open={sideBarOpen} setOpen={() => { this.setState({ sideBarOpen: false }) }} />
                 </NavButton>

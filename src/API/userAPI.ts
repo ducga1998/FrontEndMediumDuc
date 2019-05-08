@@ -9,7 +9,7 @@ export interface IUsertype {
     biographical ?:string
     birthday ?:string
     location ?:string
-    articles ?: IArticleType[]
+    articles : IArticleType[]
 }
 export function logoutBackend() {
     return new Promise(resolve => {
@@ -98,7 +98,7 @@ export function addUser(user) :Promise<IUsertype>{
     })
 }
 //QUERY
-export function getAllInformationUser(idUser: string)  :Promise<IUsertype> {
+export function getAllInformationUser(idUser: string) :Promise<IUsertype> {
 
     return new Promise(async resolve => {
         const API = await client.query({

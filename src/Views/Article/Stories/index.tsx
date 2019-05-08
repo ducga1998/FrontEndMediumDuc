@@ -20,15 +20,15 @@ class Stories extends React.Component {
         if (!dataUser) {
             return <UILoading />
         }
-        const { articles, avatarLink, name, idUser } = dataUser ;
+        const { articles, avatarLink, name, idUser  } = dataUser ;
         return <>
             <H1> All Article {name}</H1>
             <$ListArticle  >
                 {
                     articles && articles.length > 0 ? articles.map((item, key) => {
-                    const article = {...item , ...{user : { idUser ,  avatarLink , name }}}
-                    return <Article key={key} typeArticle='store' article={article}  />
-                }) : <H2> NO Article  :), fuck own account stupid </H2>}
+                    // const article = {...item , ...{user : { idUser ,  avatarLink , name }}}
+                    return <Article key={key} typeArticle='store' article={item}  />
+                }) : <H2> No Article :), fuck own account stupid </H2>}
             </$ListArticle>
         </>
     }

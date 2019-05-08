@@ -11,7 +11,7 @@ export interface IArticleType {
     idUser : string
     category ?: string[]
     bookmark ?: IBookMarkType[]
-    totalClap : number
+    totalClap ?: number
     contentArticle :string 
     imageArticle :string
     titleArticle :string
