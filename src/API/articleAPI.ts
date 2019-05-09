@@ -72,7 +72,7 @@ export function updateArticleToClient(input: any) {
         resolve(convertDataToGraphQL(API))
     })
 }
-export function getDataSearch() {
+export function getDataSearch() : Promise<{idArticle : string , titleArticle  : string}[]> {
     return new Promise(async resolve => {
         const API = await client.query({
             query: gql`

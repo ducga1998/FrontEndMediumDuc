@@ -1,6 +1,6 @@
 import UIEditer from '../../Components/UI/UIEditer';
 import * as React from 'react';
-import { getAllInformationUser } from 'src/API/userAPI';
+import { getAllInformationUser, IUsertype } from 'src/API/userAPI';
 import styled from 'styled-components';
 import userContainer from '../../Container/userContainer';
 import srcImg from '../../image/9284571_300x300.jpeg';
@@ -18,7 +18,7 @@ interface IViewUserCurrent {
 }
 class ViewUserDetail extends React.Component<IViewUserCurrent> {
     state = {
-        dataUser: null,
+        dataUser: {} as IUsertype,
         isChangePass: false,
         newAvatarLink: '',
         open: false,

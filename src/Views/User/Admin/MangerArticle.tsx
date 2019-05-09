@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { getAllInformationUser } from 'src/API/userAPI';
+import { getAllInformationUser, IUsertype } from 'src/API/userAPI';
 import userContainer from '../../../Container/userContainer';
 import UILoading from '../../../Components/UI/UILoading';
 import Article from '../../Reuse/ArticleView/ArticleDetail';
@@ -11,7 +11,7 @@ interface IManagerArticles {
 }
 class ManagerArticles extends React.Component<IManagerArticles> {
     state = {
-        dataUser: null,
+        dataUser: {} as IUsertype,
         ownProfileId: ''
     }
     async componentDidMount() {
@@ -30,9 +30,9 @@ class ManagerArticles extends React.Component<IManagerArticles> {
 
         return <UIFieldAlgin horizontal>
             {articles && articles.length > 0 ? articles.map((item, key) => {
-                const article = { ...item, ...{ user: { idUser, avatarLink, name } } }
+                // const article = { ...item, ...{ user: { idUser, avatarLink, name } } }
                 return <UIFieldAlgin key={key}>
-                    <Article style={{ pointerEvents : 'none'}} vectical key={key} typeArticle='store' article={article} />
+                    <Article style={{ pointerEvents : 'none'}} vectical key={key} typeArticle='store' article={item} />
                     <UIButton icon="delete" category="danger" onMouseDown={() => { }} >Delete</UIButton>
                     <UIButton  icon ="edit" category="space" onMouseDown={() => { }} >Update Detail </UIButton>
                 </UIFieldAlgin>

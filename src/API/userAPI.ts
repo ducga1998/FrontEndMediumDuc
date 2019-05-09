@@ -4,8 +4,8 @@ import { convertDataToGraphQL } from "../help/help";
 import { client } from "./client";
 export interface IUsertype {
     idUser :string 
-    name ?:string
-    avatarLink ?:string
+    name :string
+    avatarLink :string
     biographical ?:string
     birthday ?:string
     location ?:string

@@ -2,26 +2,24 @@ import * as React from 'react'
 import {  FlexCol, H1 } from '../../../Components/styled/base';
 import RankAuthor from './AuthorRank';
 import RankArticle from './ArticleRank'
-import { rankData } from '../../../API/fetchAPI';
+import { rankData, Irank } from '../../../API/fetchAPI';
 import { IArticleType } from '../../../API/articleAPI';
 const cachRank  = new Map()
 const {useEffect ,useState} = React 
 export default function Rank() {
-    const [rankState, setRankState]  = useState(null); 
-    console.log('rankState',rankState)
+    const [rankState, setRankState]   = useState({}) as [Irank , any]
+ 
     useEffect(async () => {
         if(cachRank.get('cache')){
             setRankState( cachRank.get('cache') )
             return
         }
         const fetchDataRank = await rankData()
-       
         cachRank.set('cache' , fetchDataRank)
-        console.log('fetchDataRank',fetchDataRank)
+       
         setRankState(fetchDataRank)
        
     }, [])
-    console.log('rankState',rankState)
     if(!rankState ) return null
     //"rankCountBookMarkArticle", "rankFollow", "rankCountWriteArticle"]
     const {rankCountBookMarkArticle , rankFollow,rankCountWriteArticle} = rankState

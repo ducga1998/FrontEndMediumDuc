@@ -25,6 +25,8 @@ interface IMessages {
     idUserReceive :string
     idUser :string
     contentMessage :string
+    stateSend ?: any
+    ownerUserInfo : IUsertype
 }
 export interface IRoom {
     idUser :string
@@ -33,14 +35,17 @@ export interface IRoom {
     messages : IMessages[]
     ownerUserInfo :IUsertype
     clientInfo : IUsertype
+    newMessage ?: IMessages
+    time : string
+
 }
 export default class ChatMessage extends React.Component<IListRoom> {
     state = {
         active: '',
-        messages: [],
+        messages: [] as IMessages[],
         valueChat: '',
-        rooms: [],
-        selectingRoom: null,
+        rooms: []  as IRoom[],
+        selectingRoom: {} as IRoom,
         open  : false
     }
     socket
