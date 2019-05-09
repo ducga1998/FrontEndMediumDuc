@@ -1,9 +1,12 @@
 import { Container } from 'unstated-x';;
 import { getAllInfomationUserFollowYour, follow, unFollow } from '../API/followAPI';
 import userContainer from './userContainer';
-class FollowAllContainer extends Container<any>{
+interface IStateAllContainer {
+    userFollow : any
+}
+class FollowAllContainer<State extends IStateAllContainer> extends Container<IStateAllContainer>{
 
-    constructor(data) {
+    constructor(data : State) {
         super(data)
     }
     // this function will call when me  into idUser other
@@ -71,7 +74,11 @@ class FollowAllContainer extends Container<any>{
         await unFollow({ idUser: ownProfileId, idUserFollow })
     }
 }
-class FollowContainer extends Container<any> {
+interface IFollowState {
+    allUserFollow : any[],
+    isFollow : boolean
+}
+class FollowContainer<State extends object> extends Container<IFollowState> {
     constructor(state) {
         super(state)
         state = {

@@ -6,7 +6,7 @@ import { convertDataToGraphQL } from "../help/help";
 export interface  IBookMarkType {
     idUser :string
     idArticle :string
-    idUserBookMark ?:  string
+    idUserBookMark ?: string
     userOwnArticle ?:IUsertype
     articleBookMark : IArticleType
 }

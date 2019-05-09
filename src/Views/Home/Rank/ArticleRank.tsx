@@ -4,11 +4,11 @@ import { FlexRow, FlexCol, H2, P } from '../../../Components/styled/base';
 import { AvatarImage } from '../../../Components/styled/avatar';
 import { filterStringHTML, LINK_DEVELOPMENT } from '../../../help/help';
 import { IArticleType } from 'src/API/articleAPI';
-interface IArticle {
+interface IRankArticle {
     article: (IArticleType & {count : number})[],
     type?: string
 }
-function ArticleRank ({ article, type }: IArticle) {
+function ArticleRank ({ article, type }: IRankArticle) {
     return<> {
         article.map((item , key) => {
             const { idArticle, titleArticle, imageArticle, count } = item

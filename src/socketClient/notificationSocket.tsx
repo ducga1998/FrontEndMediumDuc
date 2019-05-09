@@ -6,7 +6,8 @@ import styled from "styled-components";
 import {  H3 } from "src/Components/styled/base";
 import { AvatarImage } from "../Components/styled/avatar";
 import { Label } from "../Components/styled/button";
-export function notificationFuncSocket(user: any) {
+import { IUsertype } from "../API/userAPI";
+export function notificationFuncSocket(user: IUsertype) {
     if (user && user.idUser) {
         // now, user create room 
         notificationSocket.emit('join', user.idUser)
