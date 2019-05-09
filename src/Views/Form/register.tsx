@@ -25,7 +25,7 @@ export default function Register() {
         }
         if (name.length > 6 && password.length > 6 ) {
             toast.success("Register success !!");
-            await addUser(user) as any
+            await addUser(user) 
         }
         else {
             toast.error("Register error !");

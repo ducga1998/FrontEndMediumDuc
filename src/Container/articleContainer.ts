@@ -1,9 +1,7 @@
-// import { IArticleType } from './../API/articleAPI';
 import { Container } from 'unstated-x';
 import { updateArticleToClient, getAllArticle, countArticle, IArticleType } from '../API/articleAPI';
 import { addArticleToClient } from '../API/articleAPI';
 import userContainer from './userContainer';
-import { IUsertype } from '../API/userAPI';
 interface IAllArticleContainer {
     registryArticle: {
         articleContainer: Article,
@@ -12,7 +10,6 @@ interface IAllArticleContainer {
     first: number,
     offset: number,
     count: number,
-    // notification: String
 }
 
 let createTime = new Date().toUTCString()
@@ -46,7 +43,7 @@ class AllArticleContainer<State extends IAllArticleContainer> extends Container<
                     articleContainer,
                     idArticle
                 }
-            }) as any[]
+            })
             cacheArticle.set(offset, listContainer)
             await this.setState({ registryArticle: listContainer, count })
         }
@@ -79,7 +76,7 @@ export class ArticleContainer extends Container<IArticleContainer>{
     //  => front end alway have stories
     async addArticle(idArticle) {
         const { contentArticle, titleArticle, arrHashTag, imageArticle } = this.state
-        const { dataUser } = userContainer.state as any
+        const { dataUser } = userContainer.state 
 
         if (dataUser) {
             const { idUser } = dataUser
@@ -90,7 +87,7 @@ export class ArticleContainer extends Container<IArticleContainer>{
         // => create hash  
         // idHashTag, idArticle  , nameArticle
         const { contentArticle, titleArticle, arrHashTag, imageArticle } = this.state
-        const { dataUser } = userContainer.state as any
+        const { dataUser } = userContainer.state 
         // const idArticle = uuid()
         if (dataUser) {
             const { idUser } = dataUser

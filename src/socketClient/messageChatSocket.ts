@@ -3,7 +3,7 @@ import { messageChatSocket } from "./socket";
 export default class SocketMessageChat {
     socket = messageChatSocket
     constructor() {
-        // this.socket = messageChatSocket as any
+        // this.socket = messageChatSocket 
         this.socket.on('connection', () => {
             console.log('connection socket')
         })

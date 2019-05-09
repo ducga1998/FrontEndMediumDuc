@@ -10,7 +10,7 @@ interface IUIReaction {
     idArticle: string
     titleArticle : string
 }   
-const { useEffect } = React as any
+const { useEffect } = React 
 export default function UIReaction({ idUseOwnArticler, idArticle ,titleArticle}: IUIReaction) {
     const refReaction = React.useRef(null);
     useEffect(() => {

@@ -6,8 +6,8 @@ import theme from '../../theme';
 import UIWidget from './UIWidget';
 const {  useState  ,useRef} = React
 interface IPopUp {
-    children ?: any 
-    trigger?:any
+    children ?: React.ReactNodeArray | React.ReactNode 
+    trigger :React.ReactElement<any>
     width  ?:string
     height?:string
 }

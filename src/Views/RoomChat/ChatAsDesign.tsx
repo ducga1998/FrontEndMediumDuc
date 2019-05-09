@@ -130,7 +130,7 @@ export default class ChatMessage extends React.Component<IListRoom> {
     }
     render() {
         const idUserCurrent = userContainer.state.dataUser.idUser
-        const { active, messages, valueChat, rooms, selectingRoom , open } = this.state as any
+        const { active, messages, valueChat, rooms, selectingRoom , open } = this.state 
         return <$Wrapper>
             <PeasonList>
                 {
@@ -169,7 +169,7 @@ export default class ChatMessage extends React.Component<IListRoom> {
                     <div className="md-view_chat" ref={(e) => this.refViewChat = e} >
                         {
                             messages && messages.map((message, key) => {
-                                const { contentMessage, idUser, stateSend, ownerUserInfo: { name, avatarLink } } = message as any
+                                const { contentMessage, idUser, stateSend, ownerUserInfo: { name, avatarLink } } = message 
                                 return <div className={`md-item_chat md-${(stateSend || idUserCurrent !== idUser) ? "friend" : "me"} `} key={key}>
                                     <div className={`md-item_chat_wrapper md-${stateSend || idUserCurrent !== idUser ? "friend" : "me"}`}>
                                         <AvatarImage size={40} src={avatarLink} data-tooltip={name} />
@@ -188,7 +188,7 @@ export default class ChatMessage extends React.Component<IListRoom> {
                                     if (event.charCode === 13) {
                                         // const dom = event.target
                                         const contentMessage = event.currentTarget.value
-                                        const { idUserReceive, idRoom, idUser ,ownerUserInfo } = selectingRoom as any
+                                        const { idUserReceive, idRoom, idUser ,ownerUserInfo } = selectingRoom 
                                         this.sendMessage({
                                             contentMessage,
                                             idUserReceive, // client

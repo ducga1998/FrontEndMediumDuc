@@ -1,18 +1,18 @@
 import * as React from 'react';
 import styled from 'styled-components';
 import ListArticle from '../Reuse/ArticleView/ListArticle';
-import { getAllHashTag, getArticleTagByNameHashTag } from 'src/API/hashtagAPI';
+import { getAllHashTag, getArticleTagByNameHashTag, IHashtTagType } from 'src/API/hashtagAPI';
 import UIButton from '../../Components/UI/UIButton';
 import { H2, H1 } from 'src/Components/styled/base';
 export default class HashTagView extends React.Component<{match : {params : {name : string}}}> {
     state = {
-        allHashtag: [],
+        allHashtag: [] as IHashtTagType[],
         listArticle: []
     }
     async componentDidMount() {
         const { match: { params: { name } } } = this.props 
         const allHashtag = await getAllHashTag()
-        const listArticle = await getArticleTagByNameHashTag(name) as any
+        const listArticle = await getArticleTagByNameHashTag(name) 
         await this.setState({ allHashtag, listArticle })
     }
     async componentDidUpdate(prevProps, prevState) {
@@ -23,7 +23,7 @@ export default class HashTagView extends React.Component<{match : {params : {nam
     }
 
     render() {
-        const { match: { params: { name } } } = this.props as any
+        const { match: { params: { name } } } = this.props 
         const { listArticle, allHashtag } = this.state
         return <WrapperHome>
             <div className="md-list-article">
@@ -33,7 +33,7 @@ export default class HashTagView extends React.Component<{match : {params : {nam
             <div className="md-list-hashtag">
                 <H2>All Hash Tag</H2>
                 {allHashtag.map(article => {
-                    const { idHashTag, nameHashTag } = article as any
+                    const { idHashTag, nameHashTag } = article 
                     return <UIButton category={name === nameHashTag ? 'danger' : undefined}
                         style={{ display: 'inline-block' }}
                         key={idHashTag}

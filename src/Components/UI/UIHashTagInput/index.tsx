@@ -10,8 +10,8 @@ const delimiters = [KeyCodes.comma, KeyCodes.enter];
 
 interface IUIHashTagInput {
     tags: any[]
-    suggestions: any[],
-    onDelete : (e ?: any) => any,
+    suggestions:any[],
+    onDelete : (e ) => void
     onAdd  : (e ?: any) => any,
     onMouseDownHashTag ?: (e : any) => any,
     onChange ?:   (e : any) => any

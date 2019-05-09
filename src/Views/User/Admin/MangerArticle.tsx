@@ -22,11 +22,11 @@ class ManagerArticles extends React.Component<IManagerArticles> {
         await this.setState({ dataUser })
     }
     render() {
-        const { dataUser } = this.state as any
+        const { dataUser } = this.state 
         if (!dataUser) {
             return <UILoading />
         }
-        const { articles, avatarLink, name, idUser } = dataUser as any;
+        const { articles, avatarLink, name, idUser } = dataUser ;
 
         return <UIFieldAlgin horizontal>
             {articles && articles.length > 0 ? articles.map((item, key) => {

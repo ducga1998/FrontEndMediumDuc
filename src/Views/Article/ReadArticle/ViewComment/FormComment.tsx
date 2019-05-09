@@ -8,7 +8,7 @@ import { socketNotication } from 'src/socketClient/socket';
 import { renderElement } from 'src/Core/renderElement';
 import { Input, FlexCol } from 'src/Components/styled/base';
 import { AvatarImage } from 'src/Components/styled/avatar';
-import { addComment } from 'src/API/commentAPI';
+import { addComment, ICommentType } from 'src/API/commentAPI';
 import { IArticleType } from 'src/API/articleAPI';
 interface IFormReply {
     context: IArticleType,
@@ -30,7 +30,7 @@ const FormComment = ({ context, idReply, onChange }: IFormReply) => {
             idUser: idUserLogin,
             idArticle,
 
-        } as any
+        } as ICommentType
         if (idReply && onChange) {
             comment = { ...comment, ...{ idReply } }
         }

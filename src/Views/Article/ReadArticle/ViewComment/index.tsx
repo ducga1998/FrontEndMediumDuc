@@ -12,25 +12,25 @@ interface IViewComment {
 }
 interface IStateViewComment {
     offset : number,
-    allComments : IViewComment[] 
+    allComment : IViewComment[] 
 }
 // refactor all code for comment 
 export default class ViewComment extends React.Component<IViewComment , IStateViewComment> {
     state = {
-        allComments: [],
+        allComment: [],
         offset: 0,
     }
     async componentDidMount() {
         const first = 5
         const { idArticle } = this.props
-        const allComments = await getAllCommentinArtcileCurrent(idArticle, first, this.state.offset)
-        this.setState({ allComments })
+        const allComment = await getAllCommentinArtcileCurrent(idArticle, first, this.state.offset)
+        this.setState({ allComment })
     }
     handleComment = (comment) => {
         this.setState({
-            allComments: [
+            allComment: [
                 comment,
-                ...this.state.allComments,
+                ...this.state.allComment,
             ]
         })
     }
@@ -39,16 +39,16 @@ export default class ViewComment extends React.Component<IViewComment , IStateVi
         const first = 5
         const offset = this.state.offset + first
         const newArrComment = await getAllCommentinArtcileCurrent(idArticle, first, offset);
-        this.setState({ allComments: [...this.state.allComments, ...newArrComment], offset })
+        this.setState({ allComment: [...this.state.allComment, ...newArrComment], offset })
     }
     render() {
-        const { allComments } = this.state
-        if (allComments.length < 0) {
+        const { allComment } = this.state
+        if (allComment.length < 0) {
             return <UIPlaceHolder  />
         }
         return <>
                 <FormComment onChange={(comment) => { this.handleComment(comment) }} />
-                <ListCommentView allComments ={allComments} />
+                <ListCommentView allComment ={allComment} />
                 <LoadMoreButton 
                         onMouseDown = {this.handleLoadMore}> Load More 
                  </LoadMoreButton> 

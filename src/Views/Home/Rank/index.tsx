@@ -5,7 +5,7 @@ import RankArticle from './ArticleRank'
 import { rankData } from '../../../API/fetchAPI';
 import { IArticleType } from '../../../API/articleAPI';
 const cachRank  = new Map()
-const {useEffect ,useState} = React as any
+const {useEffect ,useState} = React 
 export default function Rank() {
     const [rankState, setRankState]  = useState(null); 
     console.log('rankState',rankState)

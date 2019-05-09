@@ -8,7 +8,7 @@ interface IUIInput {
     onChange: (e: string) => void,
     value?: string | number,
     size?: 'xs' | 'ls' | 'sm',
-    style?: any,
+    style?: React.CSSProperties,
     placeholder?: string,
     type?: string
     refInput?: (string & React.RefObject<HTMLInputElement>),

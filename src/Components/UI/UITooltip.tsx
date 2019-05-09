@@ -17,7 +17,7 @@ export default class UITooltip extends React.Component {
         let dom = findDomToolTip(count , e.target) as HTMLElement ;
         if (dom && dom.getAttribute('data-tooltip') && this.refToolTip) {
             const text = dom.getAttribute('data-tooltip')
-            const domToolTip = this.refToolTip as any
+            const domToolTip = this.refToolTip 
             domToolTip.innerHTML = text
             if(!domToolTip ) return
             const { top, left } = dom.getBoundingClientRect() as ClientRect

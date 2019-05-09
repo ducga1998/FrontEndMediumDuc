@@ -29,7 +29,7 @@ export const convertTimestampToTime = (timestamp: Date) => {
     } else {
         cleanHours = hours > 12 ? hours - 12 : hours; // else show proper am/pm -- todo: support 24hr time
     }
-    let minutes = date.getMinutes() as any
+    let minutes = date.getMinutes() as  string | number
     minutes = minutes >= 10 ? minutes : '0' + minutes.toString(); // turns 4 minutes into 04 minutes
     let ampm = hours >= 12 ? 'pm' : 'am'; // todo: support 24hr time
     return `${cleanHours}:${minutes}${ampm}`;

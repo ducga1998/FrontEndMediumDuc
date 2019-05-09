@@ -1,5 +1,6 @@
 import * as React from "react";
 import { css, keyframes } from "emotion";
+import { CSSProperties } from "react";
 
 export const defaultBaseColor = "#eee";
 
@@ -40,16 +41,16 @@ export default class UIPlaceHolder extends React.Component<any> {
   };
 
   render() {
-    const elements = [] as any
+    const elements = [] as JSX.Element[]
     for (let i = 0; i < this.props.count; i++) {
       let style = {
         animation:
           `${skeletonKeyframes} ` +
           String(this.props.duration) +
           "s ease-in-out infinite"
-      } as any
+      } as CSSProperties
       if (this.props.width != null) {
-        style.width = this.props.width;
+        style.width = this.props.width + '';
       }
       if (this.props.height != null) {
         style.height = this.props.height;
@@ -59,7 +60,7 @@ export default class UIPlaceHolder extends React.Component<any> {
       }
       const Span = <span key={i} className={skeletonClass} style={style}>
       &zwnj;
-    </span> 
+    </span> as JSX.Element
       elements.push(Span);
     }
     const Wrapper = this.props.wrapper;

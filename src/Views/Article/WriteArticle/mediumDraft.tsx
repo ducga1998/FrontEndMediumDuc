@@ -422,8 +422,8 @@ class AtomicEmbedComponent extends React.Component<IAtomicEmbedComponent> {
     }
   }
   getScript =  ()  => {
-    const script = document.createElement('script') as any;
-    script.async = 1;
+    const script = document.createElement('script')  as HTMLScriptElement
+    script.async = true;
     script.src = '//cdn.embedly.com/widgets/platform.js';
     script.onload = () => {
       window.embedly();

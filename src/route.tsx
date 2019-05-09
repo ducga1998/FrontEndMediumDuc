@@ -35,7 +35,7 @@ const About = () => <div>
 </div>
 
 
-const { useEffect } = React as any
+const { useEffect } = React 
 const AppRouter = () => {
     useEffect(async () => {
         if (localStorage.getItem('duc-app-medium-login')) {

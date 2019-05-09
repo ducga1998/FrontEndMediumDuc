@@ -9,7 +9,7 @@ export default function OverLay({ getRef, imgSrc }) {
         const arrtrEvent = event.target.getAttribute('data-event')
         console.log('arrtrEvent', arrtrEvent)
         console.log(imgSrc)
-        const domImg = document.querySelectorAll('[src="' + imgSrc + '"]')[0] as any
+        const domImg = document.querySelectorAll('[src="' + imgSrc + '"]')[0] 
         if (domImg) {
             switch (arrtrEvent) {
                 case 'Center':

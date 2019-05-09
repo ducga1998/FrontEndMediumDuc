@@ -14,7 +14,7 @@ const Profile = ({ avatarLink, name, totalFollow, dataArticle, listPeopleFollow 
         return () => { console.log('cascasn') }
 
     })
-    // const { avatarLink, name, articles } = userContainer.state.dataUser as any
+    // const { avatarLink, name, articles } = userContainer.state.dataUser 
     return <$Content >
         <Left>
 

@@ -21,7 +21,7 @@ export default class Search extends React.Component <{},StateSearch >{
         smartList: []
     }
     async componentWillMount() {
-        const afterData = await getDataSearch() as any[]
+        const afterData = await getDataSearch() ;
         this.setState({ afterData })
         window.addEventListener('keyup' ,this.handleKeyPress)
     }

@@ -15,6 +15,7 @@ class Tag extends React.Component<any, any> {
             tag
         } = props;
         return <Div
+        
         >
             {label}
             <span

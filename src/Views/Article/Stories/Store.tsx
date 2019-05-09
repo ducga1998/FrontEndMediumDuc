@@ -3,20 +3,20 @@ import styled from 'styled-components';
 import articleContainer from '../../../Container/articleContainer';
 import userContainer from '../../../Container/userContainer';
 import Author from '../../Author';
-import { getArticleById } from '../../../API/articleAPI';
+import { getArticleById, IArticleType } from '../../../API/articleAPI';
 import { updateDataArticle, updateContent } from '../WriteArticle';
 import MediumDraft from '../WriteArticle/mediumDraft';
 import { fontStack } from '../../../Components/styled/base';
 import UILoading from '../../../Components/UI/UILoading';
 
-class WriteArticle extends React.Component<{match : { params : {id : string}}}> {
+class WriteArticle extends React.Component<{match : { params : {id : string}}} , {dataArticle : IArticleType}> {
     state = {
-        dataArticle: null
+        dataArticle: {} as IArticleType
     }
     async componentDidMount() {
         const { params: { id } } = this.props.match
         await articleContainer.setState({ isUpdate: true, idArticleNeedUpdate: id })
-        const dataArticle = await getArticleById(id) as any
+        const dataArticle = await getArticleById(id) 
         // console.log('dataArticle', dataArticle)
         if (dataArticle) {
             console.log('data article to store ', dataArticle)
@@ -32,7 +32,7 @@ class WriteArticle extends React.Component<{match : { params : {id : string}}}> 
         if (!dataArticle) {
             return <UILoading />
         }
-        const { titleArticle, contentArticle } = dataArticle as any
+        const { titleArticle, contentArticle } = dataArticle ;
         if (titleArticle === '' && contentArticle === '') {
             return null
         }
