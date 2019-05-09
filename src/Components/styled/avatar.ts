@@ -8,7 +8,7 @@ margin : 0px 10px 0px 0px;
   width: ${props => (props.size ? `${props.size}px` : '30px')};
   height: ${props => (props.size ? `${props.size}px` : '30px')};
   border-radius: ${props => props.radius?props.radius : '50%'};
-  border : ${props => props.sizeBorder? props.sizeBorder : '2px'} solid ${props => props.theme.bg.reverse};
+  border : ${props => props.sizeBorder? props.sizeBorder : '2px'} solid ${(props) => props.theme.bg.reverse};
         &:hover {
           border : ${props => props.sizeBorder? props.sizeBorder : '2px'} solid ${props => props.theme.brand.default};
         }

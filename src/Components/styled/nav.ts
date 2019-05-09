@@ -1,5 +1,5 @@
 import Link from '../Link';
-import styled, { css } from 'styled-components';
+import styled, { css, ThemeProps } from 'styled-components';
 import { FlexRow, hexa, fontStack, Transition } from './base';
 export const Nav = styled(FlexRow)`
   width: 100%;
@@ -73,7 +73,7 @@ export const IconLink = styled(Link)`
     box-shadow: inset 0 -4px 0 ${({ theme }) => theme.bg.default};
     transition : ${Transition.hover.on};
   }
- ${(props: any) =>
+ ${(props : (ThemeProps<any> & {withCount : string})) =>
         props.withCount &&
         css`
         > .icon:after {

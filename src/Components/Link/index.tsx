@@ -4,7 +4,7 @@ import { Link, withRouter } from 'react-router-dom';
 import { createLocation } from 'history';
 
 export default withRouter(
- ({ staticContext, history, location, match ,  ...rest }: any) => {
+ ({ staticContext, history, location, match ,  ...rest }) => {
   const {TypeDom}  =  rest
   return <Link
       {...rest}

@@ -4,10 +4,11 @@ import Article from '../../Reuse/ArticleView/ArticleDetail';
 import { Subscribe } from 'unstated-x';
 
 import {  FlexRow} from '../../../Components/styled/base';
+import { IArticleType } from '../../../API/articleAPI';
 
 // improve list article by data : 30/4/2019
 interface IListArticle  {
-    listArticle : any[]
+    listArticle : IArticleType[]
     direction? : boolean
 
 }

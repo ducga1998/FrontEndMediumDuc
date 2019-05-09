@@ -1,7 +1,7 @@
 import UIButton from 'src/Components/UI/UIButton';
 import * as React from 'react'
 import { IMAGE_SOURCE_DEFAULT } from 'src/help/define';
-import styled from 'styled-components';
+import styled, { DefaultTheme } from 'styled-components';
 import { toast } from 'react-toastify';
 import userContainer from 'src/Container/userContainer';
 import { socketNotication } from 'src/socketClient/socket';
@@ -68,7 +68,7 @@ const $FormComment = styled(Input)`
     flex : 10;
 `
 const $Aglin = styled(FlexCol)`
-    background-color  : ${props => props.theme.generic.default};
+    background-color  : ${(props ) => props.theme.generic.default};
     padding : 10px;
     border-radius : 20px;
     .wrapperAvatar {

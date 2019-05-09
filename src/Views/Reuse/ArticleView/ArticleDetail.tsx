@@ -15,7 +15,7 @@ export interface IArticleDetail {
     article: IArticleType,
     vectical?: boolean,
     horizontal?: boolean
-    style?: any
+    style?: React.CSSProperties
 }
 
 

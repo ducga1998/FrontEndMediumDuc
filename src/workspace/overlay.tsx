@@ -77,7 +77,7 @@ export default function OverLay({ getRef, imgSrc }) {
 const Wrapper = styled.div`
 position : absolute;
 z-index : 22;
-border : 3px solid ${props => props.theme.brand.default};
+border : 3px solid ${(props  ) => props.theme.brand.default};
 `
 const Full = styled.div`
     width : 100%;
