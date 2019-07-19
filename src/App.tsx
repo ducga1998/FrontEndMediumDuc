@@ -10,16 +10,16 @@ import Toast from './workspace/toast'
 import './app.css'
 class App extends React.Component {
   public render() {
-    return  <UITheme>
-        <UITooltip>
-          <Provider>
-            <$BoxAlgin>
-              <AppRouter />
-            </$BoxAlgin>
-            <Toast />
-          </Provider>
-        </UITooltip>
-      </UITheme>
+    return <UITheme>
+      <UITooltip>
+        <Provider>
+          <$BoxAlgin>
+            <AppRouter />
+          </$BoxAlgin>
+          <Toast />
+        </Provider>
+      </UITooltip>
+    </UITheme>
   }
 }
 const $BoxAlgin = styled.div`

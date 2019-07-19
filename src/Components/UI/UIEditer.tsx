@@ -1,9 +1,6 @@
 
 
 import *  as React from 'react'
-
-import { Glyphicon } from 'react-bootstrap';
-
 import styled from 'styled-components';
 import userContainer from '../../Container/userContainer';
 import UIButton from './UIButton';
@@ -44,18 +41,18 @@ export default function UIEditer({ info, content , onUpdateProfile }: IUIEditer)
             handleOnClick()
         }
     }
-    return <>
-        <Propety onClick={(e: any) => { setOpen(!open); }} ><b>{info} : </b>{(value ? value : '')}
-        <Glyphicon glyph="edit" /></Propety>
+    return <div>
+        <Propety onClick={(e: any) => { setOpen(!open); }} ><b>{info} : </b>{(value ? value : '')} 
         {
             open && <$Flex>
             <UIInput autoFocus onKeyPress={handleOnPress}  refInput={inputref} onChange={() => { }} placeholder={info} />
             <UIButton style={{ "margin-left": "20px" }} onMouseDown={handleOnClick}>Edit</UIButton>
         </$Flex> 
         }
-    </>
+        </Propety>
+    </div>
 
-}
+};
 const $Flex = styled.div`
     display : flex;
 `

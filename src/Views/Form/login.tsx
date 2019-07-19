@@ -63,7 +63,7 @@ export default function Login({ history }) {
         </Section>
         <Social>
             <UIButton>Facebook</UIButton>
-            <UIButton  icon="github" style={{backgroundColor  :'black'}}>Github</UIButton>
+            <UIButton icon="github" style={{ backgroundColor: 'black' }}>Github</UIButton>
         </Social>
     </$Form>
 }
