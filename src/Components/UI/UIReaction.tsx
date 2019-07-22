@@ -8,10 +8,10 @@ import { socketNotication } from '../../socketClient/socket';
 interface IUIReaction {
     idUseOwnArticler?: string
     idArticle: string
-    titleArticle : string
-}   
-const { useEffect } = React 
-export default function UIReaction({ idUseOwnArticler, idArticle ,titleArticle}: IUIReaction) {
+    titleArticle: string
+}
+const { useEffect } = React as any
+export default function UIReaction({ idUseOwnArticler, idArticle, titleArticle }: IUIReaction) {
     const refReaction = React.useRef(null);
     useEffect(() => {
         allBookMarkContainer.isBookMark({ idArticle })
@@ -33,7 +33,7 @@ export default function UIReaction({ idUseOwnArticler, idArticle ,titleArticle}:
                                         allBookMarkContainer.unBookMarkToClient({ idUseOwnArticler, idArticle })
                                     }
                                     else {
-                                        socketNotication({titleArticle , idUser : idUseOwnArticler} , 'Bookmark')
+                                        socketNotication({ titleArticle, idUser: idUseOwnArticler }, 'Bookmark')
                                         allBookMarkContainer.bookMarkToClient({ idUseOwnArticler, idArticle })
                                     }
                                 }

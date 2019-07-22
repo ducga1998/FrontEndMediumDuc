@@ -19,7 +19,6 @@ import { notificationFuncSocket } from "./socketClient/notificationSocket";
 import Stories from "./Views/Article/Stories";
 import StoreDetail from "./Views/Article/Stories/Store";
 import ArticleBookMark from "./Views/Article/BookMarkArticle";
-import history from './history'
 import { H1 } from "./Components/styled/base";
 import ManagerAccount from './Views/User/Admin/ManagerAccount'
 import ManagerArticles from './Views/User/Admin/MangerArticle'
@@ -35,7 +34,7 @@ const About = () => <div>
 </div>
 
 
-const { useEffect } = React 
+const { useEffect } = React as any as any
 const AppRouter = () => {
     useEffect(async () => {
         if (localStorage.getItem('duc-app-medium-login')) {
@@ -48,22 +47,22 @@ const AppRouter = () => {
         }
     })
     const renderRoutes = (user: any) => {
-    
+
         // this is function help me catch event socket to backend 
         notificationFuncSocket(user)
-        
+
         function isAuth(component) {
-            return user != null ? component: redirect('/login')
+            return user != null ? component : redirect('/login')
         }
-        
-        
+
+
         // check isAdmin ???  => {}   
         //admin thi hon so voi user thuong nhung cai gi ?
         // check on front end , these have admin => render  and check in request 
         // in request have info user => if it 's admin => allow 
-        
 
-        return <Router history={history} >
+
+        return <Router  >
             <Switch>
                 <Layout>
                     <Route exact path="/about/" component={About} />
@@ -78,17 +77,17 @@ const AppRouter = () => {
                     <Route exact path="/profile" component={isAuth(Profile)} />
                     <Route exact path="" />
                     <Route exact path="/writearticle" component={isAuth(WriteArticle)} />
-                    <Route exact path="/chatMessage/:id" component= {isAuth(ChatMessage)} />
+                    <Route exact path="/chatMessage/:id" component={isAuth(ChatMessage)} />
                     <Route exact path="/bookmarks" component={isAuth(ArticleBookMark)} />
-                    <Route exact path="/drapdrop"  component={PageEditer}/>
-                    <Route  exact path="/hashtag/:name" component={HashTagView}/>
+                    <Route exact path="/drapdrop" component={PageEditer} />
+                    <Route exact path="/hashtag/:name" component={HashTagView} />
                     <Route exact path="/community" component={Community} />
-                        {user && user.decentraliz === 3? <>  
-                     <Route exact path ="/managerAccount" component={isAuth(ManagerAccount)} />
-                    <Route exact path ="/managerArticles" component={isAuth(ManagerArticles)} />
-                    </>:null}
-                    <Route exact path="/"  component={redirect('/login')} />
-            
+                    {user && user.decentraliz === 3 ? <>
+                        <Route exact path="/managerAccount" component={isAuth(ManagerAccount)} />
+                        <Route exact path="/managerArticles" component={isAuth(ManagerArticles)} />
+                    </> : null}
+                    <Route exact path="/" component={redirect('/login')} />
+
                 </Layout>
             </Switch>
         </Router>
@@ -98,7 +97,7 @@ const AppRouter = () => {
             container => {
 
                 const { dataUser } = container.state
-                
+
                 const dataCache = localStorage.getItem('duc-app-medium-login')
                 if (dataCache && !dataUser) {
                     return <UILoading />
@@ -112,7 +111,7 @@ const AppRouter = () => {
 
 
 export function redirect(location) {
-    return class   extends React.Component {
+    return class extends React.Component {
         constructor(props) {
             super(props)
             props.history.push(location);

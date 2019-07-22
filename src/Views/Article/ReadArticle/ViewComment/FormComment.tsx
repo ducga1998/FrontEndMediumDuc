@@ -13,13 +13,13 @@ import { IArticleType } from 'src/API/articleAPI';
 interface IFormReply {
     context: IArticleType,
     idReply?: string,
-    onChange: (e) =>  void
+    onChange: (e) => void
 }
 
 const FormComment = ({ context, idReply, onChange }: IFormReply) => {
     const [content, setContent] = React.useState('')
     const { idArticle } = context
-    const { avatarLink, name , idUser : idUserLogin} = userContainer.state.dataUser
+    const { avatarLink, name, idUser: idUserLogin } = userContainer.state.dataUser
     const handleAddComment = async () => {
         if (content === '') {
             toast.error('Comment not empty !!!. Please write something ')
@@ -55,7 +55,7 @@ const FormComment = ({ context, idReply, onChange }: IFormReply) => {
             <$FormComment placeholder="Comment something ....."
                 value={content}
                 onKeyPress={handleKeyPress}
-                onChange={(e : React.ChangeEvent<HTMLInputElement>  ) => setContent(e.target.value)} />
+                onChange={(e: React.ChangeEvent<HTMLInputElement>) => setContent(e.target.value)} />
             <UIButton
                 style={{ flex: 2 }}
                 onMouseDown={handleAddComment}>Comment
@@ -68,7 +68,7 @@ const $FormComment = styled(Input)`
     flex : 10;
 `
 const $Aglin = styled(FlexCol)`
-    background-color  : ${(props ) => props.theme.generic.default};
+    background-color  : ${(props) => props.theme.generic.default};
     padding : 10px;
     border-radius : 20px;
     .wrapperAvatar {

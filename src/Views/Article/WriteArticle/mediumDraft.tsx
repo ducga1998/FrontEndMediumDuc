@@ -10,7 +10,7 @@ import {
   Entity,
   EditorBlock,
   OrderedSet
-}  from 'draft-js';
+} from 'draft-js';
 import {
   Editor,
   StringToTypeMap,
@@ -30,7 +30,7 @@ import {
   blockToHTML,
   entityToHTML,
   styleToHTML
-}  from 'medium-draft/lib/exporter';
+} from 'medium-draft/lib/exporter';
 import 'isomorphic-fetch';
 import mediumDraftImporter from 'medium-draft/lib/importer';
 import './draft.css'
@@ -38,9 +38,9 @@ import OverLay from '../../../workspace/overlay';
 import CustomImageSideButton from './CustomImageSideButton'
 import styled from 'styled-components';
 interface IMediumDraft {
-  onChangeTitle  : (e : any) => any,
-  onChangeContent : (e : string) =>any,
-  initArticle ? : any
+  onChangeTitle: (e: any) => any,
+  onChangeContent: (e: string) => any,
+  initArticle?: any
 }
 const styleMap = {
   'STRIKETHROUGH': {
@@ -52,22 +52,22 @@ export default class MediumDraft extends React.Component<IMediumDraft> {
     editorState: createEditorState(),
     editorEnabled: true,
     placeholder: 'Write here...',
-    imgSrc  : ''
+    imgSrc: ''
   };
-  _editor : any = React.createRef()
-  wrapperEditer : any = React.createRef()
-  onChange = async (editorState, callback?:any  ) => {
+  _editor: any = React.createRef()
+  wrapperEditer: any = React.createRef()
+  onChange = async (editorState, callback?: any) => {
     // console.log(convertToRaw)
     console.log(editorState)
-  //   // console.log('content', editorState)
-  // const domEditer =   document.querySelectorAll('[data-contents="true"]')[0]
-  // console.log(domEditer.innerHTML)
+    //   // console.log('content', editorState)
+    // const domEditer =   document.querySelectorAll('[data-contents="true"]')[0]
+    // console.log(domEditer.innerHTML)
     const currentContent = this.state.editorState.getCurrentContent();
-  // console.log('currentContent',currentContent)
-  const title = currentContent.getFirstBlock().text
+    // console.log('currentContent',currentContent)
+    const title = currentContent.getFirstBlock().text
     const eHTML = this.exporter(currentContent);
-     await this.props.onChangeTitle(title)
-    await  this.props.onChangeContent(eHTML)
+    await this.props.onChangeTitle(title)
+    await this.props.onChangeContent(eHTML)
     // console.log('html',eHTML)
     if (this.state.editorEnabled) {
       this.setState({ editorState }, () => {
@@ -94,18 +94,18 @@ export default class MediumDraft extends React.Component<IMediumDraft> {
   });
   getEditorState = () => this.state.editorState;
   componentDidMount() {
-    if(this.props.initArticle){
+    if (this.props.initArticle) {
       const editorState = createEditorState(convertToRaw(mediumDraftImporter(this.props.initArticle)));
-      this.setState({editorState})
+      this.setState({ editorState })
     }
-   
+
     this.setState({
       placeholder: 'Write something for you  .....',
     });
     // setTimeout(this.fetchData, 1000);
     // this.refs.editor.focus();
   }
-  rendererFn = (setEditorState, getEditorState) =>  {
+  rendererFn = (setEditorState, getEditorState) => {
     const atomicRenderers = {
       embed: AtomicEmbedComponent,
       separator: AtomicSeparatorComponent,
@@ -113,7 +113,7 @@ export default class MediumDraft extends React.Component<IMediumDraft> {
     const rFnOld = rendererFn(setEditorState, getEditorState);
     const rFnNew = (contentBlock) => {
       const type = contentBlock.getType();
-      switch(type) {
+      switch (type) {
         case Block.ATOMIC:
           return {
             component: AtomicBlock,
@@ -127,7 +127,7 @@ export default class MediumDraft extends React.Component<IMediumDraft> {
     };
     return rFnNew;
   }
-  keyBinding = (e) =>  {
+  keyBinding = (e) => {
     if (hasCommandModifier(e)) {
       if (e.which === 83) {  /* Key S */
         return 'editor-save';
@@ -142,15 +142,15 @@ export default class MediumDraft extends React.Component<IMediumDraft> {
           // case 69: return 'toggle-edit-mode';
         }
       }
-      
+
       if (e.which === 72 /* Key H */) {
         return 'toggleinline:HIGHLIGHT';
       }
     }
     return keyBindingFn(e);
   }
-  handleKeyCommand = (command) =>  {
-    console.log('test commad key' , command)
+  handleKeyCommand = (command) => {
+    console.log('test commad key', command)
     if (command === 'editor-save') {
       window.localStorage['editor'] = JSON.stringify(convertToRaw(this.state.editorState.getCurrentContent()));
       // window.ga('send', 'event', 'draftjs', command);
@@ -163,9 +163,9 @@ export default class MediumDraft extends React.Component<IMediumDraft> {
     }
     return false;
   }
-  
-  
-  loadSavedData= () =>  {
+
+
+  loadSavedData = () => {
     const data = window.localStorage.getItem('editor');
     if (data === null) {
       return;
@@ -173,8 +173,8 @@ export default class MediumDraft extends React.Component<IMediumDraft> {
     try {
       const blockData = JSON.parse(data);
       console.log(blockData);
-      this.onChange( EditorState.push(this.state.editorState, convertFromRaw(blockData)), this._editor.focus);
-    } catch(e) {
+      this.onChange(EditorState.push(this.state.editorState, convertFromRaw(blockData)), this._editor.focus);
+    } catch (e) {
       console.log(e);
     }
     // window.ga('send', 'event', 'draftjs', 'load-data', 'localstorage');
@@ -186,7 +186,7 @@ export default class MediumDraft extends React.Component<IMediumDraft> {
       // window.ga('send', 'event', 'draftjs', 'toggle-edit', this.state.editorEnabled + '');
     });
   }
-  handleDroppedFiles = (selection, files) =>  {
+  handleDroppedFiles = (selection, files) => {
     // window.ga('send', 'event', 'draftjs', 'filesdropped', files.length + ' files');
     const file = files[0];
     if (file.type.indexOf('image/') === 0) {
@@ -203,7 +203,7 @@ export default class MediumDraft extends React.Component<IMediumDraft> {
     }
     return NOT_HANDLED
   }
-  handleReturn = (e) =>  {
+  handleReturn = (e) => {
     // const currentBlock = getCurrentBlock(this.state.editorState);
     // var text = currentBlock.getText();
     return NOT_HANDLED;
@@ -211,38 +211,38 @@ export default class MediumDraft extends React.Component<IMediumDraft> {
   handleMouseDown = (event) => {
     // event.stopPropagation()
     console.log(event.target)
-    if(event.target.tagName ==='IMG') {
-      const {width , height , top , left}  = event.target.getBoundingClientRect()
+    if (event.target.tagName === 'IMG') {
+      const { width, height, top, left } = event.target.getBoundingClientRect()
       const view = event.target.ownerDocument.defaultView
       const scrollTop = view.scrollY
       const imgSrc = event.target.getAttribute('src')
-      this.setState({imgSrc})
-      this.refOverLay.style.width  = width + 'px'
-      this.refOverLay.style.height  = height + 'px'
-      this.refOverLay.style.top  = (top + scrollTop) + 'px'
+      this.setState({ imgSrc })
+      this.refOverLay.style.width = width + 'px'
+      this.refOverLay.style.height = height + 'px'
+      this.refOverLay.style.top = (top + scrollTop) + 'px'
 
-      this.refOverLay.style.left  = (left ) + 'px'
-      
-      console.log('nguyen inh duc' , this.refOverLay)
+      this.refOverLay.style.left = (left) + 'px'
+
+      console.log('nguyen inh duc', this.refOverLay)
     }
   }
-   blockRendererFn = function(contentBlock) {
+  blockRendererFn = function (contentBlock) {
     const type = contentBlock.getType()
     switch (type) {
       default:
-        return {component: <Line />, editable: true}
+        return { component: <Line />, editable: true }
     }
   }
-  refOverLay : any = React.createRef()
+  refOverLay: any = React.createRef()
   render() {
     const { editorState, editorEnabled } = this.state;
     return (
-      <EditerWrapper ref={this.wrapperEditer}  onMouseDownCapture = {this.handleMouseDown}>
+      <EditerWrapper ref={this.wrapperEditer} onMouseDownCapture={this.handleMouseDown}>
 
-      <OverLay  imgSrc={this.state.imgSrc} getRef ={ ( ref) => { this.refOverLay = ref }}  /> 
-     
+        <OverLay imgSrc={this.state.imgSrc} getRef={(ref) => { this.refOverLay = ref }} />
+
         <Editor
-          ref={(e) => {this._editor = e;}}
+          ref={(e) => { this._editor = e; }}
           editorState={editorState}
           onChange={this.onChange}
           editorEnabled={editorEnabled}
@@ -256,22 +256,22 @@ export default class MediumDraft extends React.Component<IMediumDraft> {
           rendererFn={this.rendererFn}
           blockRendererFn={this.blockRendererFn}
           customStyleMap={styleMap}
-          orderedSet={OrderedSet}  
+          orderedSet={OrderedSet}
         >
-        
-          </Editor>
+
+        </Editor>
       </EditerWrapper>
     );
   }
 };
 class Line extends React.Component<any> {
-  render () {
+  render() {
     const blockMap = this.props.contentState.getBlockMap().toArray()
     const blockKey = this.props.block.key
     const lineNumber = blockMap.findIndex(block => blockKey === block.key) + 1
-    return <div style={{display: 'flex'}}>
-      <span style={{marginRight: '5px'}}>{lineNumber}</span>
-      <div style={{flex: '1'}}><EditorBlock {...this.props} /></div>
+    return <div style={{ display: 'flex' }}>
+      <span style={{ marginRight: '5px' }}>{lineNumber}</span>
+      <div style={{ flex: '1' }}><EditorBlock {...this.props} /></div>
     </div>
   }
 }
@@ -285,7 +285,7 @@ const newBlockToHTML = (block) => {
         end: '</figure>',
       };
     } else if (block.text === '-') {
-      return <div className="md-block-atomic md-block-atomic-break"><hr/></div>;
+      return <div className="md-block-atomic md-block-atomic-break"><hr /></div>;
     }
   }
   return blockToHTML(block);
@@ -370,12 +370,13 @@ class SeparatorSideButton extends React.Component<any> {
 }
 
 interface EmbedSideButton {
-  setEditorState: ( e  : any) => any 
-  getEditorState: () => any 
-  close: ( ) => any
+  setEditorState: (e: any) => any
+  getEditorState: () => any
+  close: () => any
 }
-class EmbedSideButton extends React.Component<EmbedSideButton> {x
-  onClick = () =>  {
+class EmbedSideButton extends React.Component<EmbedSideButton> {
+  x
+  onClick = () => {
     const url = window.prompt('Enter a URL', 'https://www.youtube.com/watch?v=PMNFaAUs2mo');
     this.props.close();
     if (!url) {
@@ -383,8 +384,8 @@ class EmbedSideButton extends React.Component<EmbedSideButton> {x
     }
     this.addEmbedURL(url);
   }
-  addEmbedURL = (url)  => {
-    const entityKey = Entity.create('embed', 'IMMUTABLE', {url});
+  addEmbedURL = (url) => {
+    const entityKey = Entity.create('embed', 'IMMUTABLE', { url });
     this.props.setEditorState(
       AtomicBlockUtils.insertAtomicBlock(
         this.props.getEditorState(),
@@ -407,7 +408,7 @@ class EmbedSideButton extends React.Component<EmbedSideButton> {x
   }
 }
 interface IAtomicEmbedComponent {
-data : any
+  data: any
 }
 class AtomicEmbedComponent extends React.Component<IAtomicEmbedComponent> {
   state = {
@@ -421,23 +422,23 @@ class AtomicEmbedComponent extends React.Component<IAtomicEmbedComponent> {
       this.renderEmbedly();
     }
   }
-  getScript =  ()  => {
-    const script = document.createElement('script')  as HTMLScriptElement
+  getScript = () => {
+    const script = document.createElement('script') as HTMLScriptElement
     script.async = true;
     script.src = '//cdn.embedly.com/widgets/platform.js';
     script.onload = () => {
-      window.embedly();
+      // window.embedly();
     };
     document.body.appendChild(script);
   }
   renderEmbedly = () => {
-    if (window.embedly) {
-      window.embedly();
-    } else {
-      this.getScript();
-    }
+    // if (window.embedly) {
+    //   window.embedly();
+    // } else {
+    this.getScript();
+    // }
   }
-  enablePreview = () =>  {
+  enablePreview = () => {
     this.setState({
       showIframe: true,
     });

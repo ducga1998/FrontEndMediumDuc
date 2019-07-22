@@ -7,7 +7,7 @@ interface IProfile {
     dataArticle: any[],
     listPeopleFollow: any[]
 }
-const { useEffect } = React
+const { useEffect } = React as any
 const Profile = ({ avatarLink, name, totalFollow, dataArticle, listPeopleFollow }) => {
     useEffect(() => {
         console.log('ahihi')

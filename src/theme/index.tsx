@@ -1,6 +1,6 @@
 
-import {  DefaultTheme } from 'styled-components';
-export const theme  : DefaultTheme = {
+import { DefaultTheme } from 'styled-components';
+export const theme: any = {
     bg: {
         default: '#FFFFFF',
         reverse: '#16171A',
@@ -14,7 +14,7 @@ export const theme  : DefaultTheme = {
         alt: '#2684FF',
         wash: '#B3D4FF',
         border: '#DEEBFF',
-        dark:' #0747A6',
+        dark: ' #0747A6',
     },
     generic: {
         default: '#E6ECF7',
@@ -55,8 +55,8 @@ export const theme  : DefaultTheme = {
         wash: '#FFEDF6',
         border: '#FFCCE5',
     },
-    settings :  {
-        default :'#154983'
+    settings: {
+        default: '#154983'
     }
 };
 

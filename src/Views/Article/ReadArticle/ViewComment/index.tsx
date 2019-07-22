@@ -11,11 +11,11 @@ interface IViewComment {
 
 }
 interface IStateViewComment {
-    offset : number,
-    allComment : IViewComment[] 
+    offset: number,
+    allComment: IViewComment[]
 }
 // refactor all code for comment 
-export default class ViewComment extends React.Component<IViewComment , IStateViewComment> {
+export default class ViewComment extends React.Component<IViewComment, IStateViewComment> {
     state = {
         allComment: [],
         offset: 0,
@@ -44,15 +44,15 @@ export default class ViewComment extends React.Component<IViewComment , IStateVi
     render() {
         const { allComment } = this.state
         if (allComment.length < 0) {
-            return <UIPlaceHolder  />
+            return <UIPlaceHolder />
         }
         return <>
-                <FormComment onChange={(comment) => { this.handleComment(comment) }} />
-                <ListCommentView allComment ={allComment} />
-                <LoadMoreButton 
-                        onMouseDown = {this.handleLoadMore}> Load More 
-                 </LoadMoreButton> 
-            </>
+            <FormComment onChange={(comment) => { this.handleComment(comment) }} />
+            <ListCommentView allComment={allComment} />
+            <LoadMoreButton
+                onMouseDown={this.handleLoadMore}> Load More
+                 </LoadMoreButton>
+        </>
     }
 }
 const LoadMoreButton = styled(StyledTextButton)`

@@ -1,16 +1,15 @@
 
 import styled, { css, ThemedStyledProps } from 'styled-components';
 import { Transition, Shadow, zIndex, hexa } from '../styled/base';
-import theme, { ThemeType } from '../../theme';
-import { DetailedHTMLProps, HTMLAttributes } from 'react';
+import theme from '../../theme';
 
 
 export const Wrapper = styled.div`
   display: inline-block;
 
-  ${(props: {darkContext ?: boolean}) =>
-        props.darkContext &&
-        css`
+  ${(props: { darkContext?: boolean }) =>
+    props.darkContext &&
+    css`
       > button {
         color: ${theme.text.reverse};
         /* transition: ${Transition.hover.off}; */

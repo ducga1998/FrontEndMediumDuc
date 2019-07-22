@@ -1,4 +1,4 @@
-import { FormGroup, ControlLabel, FormControl, HelpBlock } from "react-bootstrap";
+
 import * as React from "react";
 import UIInput from "./UIInput";
 import { Label, H2, FlexCol } from "../styled/base";
@@ -27,18 +27,18 @@ export default class UIField extends React.Component<IUIField> {
     render() {
         const { help, titleField, label, onChange, placeholder, value, type, minLength, maxLength } = this.props
         return (
-            
-                <FlexCol>
+
+            <FlexCol>
                 {label ? <Label>{label}</Label> : null}
                 <H2>{titleField}</H2>
                 <UIInput
                     value={value}
                     placeholder={`${placeholder}`}
-                    onChange={(value:string) => {
+                    onChange={(value: string) => {
                         onChange(value)
                     }}
                 />
-          </FlexCol>
+            </FlexCol>
         );
     }
 }

@@ -29,25 +29,25 @@ export const convertTimestampToTime = (timestamp: Date) => {
     } else {
         cleanHours = hours > 12 ? hours - 12 : hours; // else show proper am/pm -- todo: support 24hr time
     }
-    let minutes = date.getMinutes() as  string | number
+    let minutes = date.getMinutes() as string | number
     minutes = minutes >= 10 ? minutes : '0' + minutes.toString(); // turns 4 minutes into 04 minutes
     let ampm = hours >= 12 ? 'pm' : 'am'; // todo: support 24hr time
     return `${cleanHours}:${minutes}${ampm}`;
 };
 
-export function isMobile() {
-    let userAgent = navigator.userAgent || navigator.vendor || window.opera;
+// export function isMobile() {
+//     let userAgent = navigator.userAgent || navigator.vendor || window.opera;
 
-    if (
-        /windows phone/i.test(userAgent) ||
-        /android/i.test(userAgent) ||
-        (/iPad|iPhone|iPod/.test(userAgent) && !window.MSStream)
-    ) {
-        return true;
-    }
+//     if (
+//         /windows phone/i.test(userAgent) ||
+//         /android/i.test(userAgent) ||
+//         (/iPad|iPhone|iPod/.test(userAgent) && !window.MSStream)
+//     ) {
+//         return true;
+//     }
 
-    return false;
-}
+//     return false;
+// }
 
 export function timeDifference(current: any, previous: any) {
     const msPerMinute = 60 * 1000;
@@ -190,12 +190,12 @@ function quick_Sort(origArray) {
 import escapeRegExp from 'lodash/escapeRegExp';
 export function buildRegExpFromDelimiters(delimiters) {
     const delimiterChars = delimiters
-      .map((delimiter) => {
-        // See: http://stackoverflow.com/a/34711175/1463681
-        const chrCode = delimiter - 48 * Math.floor(delimiter / 48);
-        return String.fromCharCode(96 <= delimiter ? chrCode : delimiter);
-      })
-      .join('');
+        .map((delimiter) => {
+            // See: http://stackoverflow.com/a/34711175/1463681
+            const chrCode = delimiter - 48 * Math.floor(delimiter / 48);
+            return String.fromCharCode(96 <= delimiter ? chrCode : delimiter);
+        })
+        .join('');
     const escapedDelimiterChars = escapeRegExp(delimiterChars);
     return new RegExp(`[${escapedDelimiterChars}]+`);
-  }
+}
