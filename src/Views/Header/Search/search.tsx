@@ -1,19 +1,19 @@
 import * as React from 'react'
 import UIInput from '../../../Components/UI/UIInput';
 import styled from 'styled-components';
-import buttonX from './buttonX.svg'
+// import buttonX from './buttonX.svg'
 import { getDataSearch } from '../../../API/articleAPI';
 import SmartList from './smartList';
 import { Input, fontStack } from '../../../Components/styled/base';
 import { OverLay } from 'src/Components/styled/overlay';
 import UIWidget from 'src/Components/UI/UIWidget';
 interface StateSearch {
-    value :string
-    afterData : any[]
-    smartList : any[]
-    isFocus : boolean
+    value: string
+    afterData: any[]
+    smartList: any[]
+    isFocus: boolean
 }
-export default class Search extends React.Component <{},StateSearch >{
+export default class Search extends React.Component<{}, StateSearch>{
     state = {
         value: '',
         isFocus: false,
@@ -21,12 +21,12 @@ export default class Search extends React.Component <{},StateSearch >{
         smartList: []
     }
     async componentWillMount() {
-        const afterData = await getDataSearch() ;
+        const afterData = await getDataSearch();
         this.setState({ afterData })
-        window.addEventListener('keyup' ,this.handleKeyPress)
+        window.addEventListener('keyup', this.handleKeyPress)
     }
     componentWillUnmount() {
-        window.removeEventListener('keyup' ,this.handleKeyPress)
+        window.removeEventListener('keyup', this.handleKeyPress)
     }
 
     handleOnChange = (e) => {
@@ -43,7 +43,7 @@ export default class Search extends React.Component <{},StateSearch >{
         this.setState({ isFocus: true })
     }
     handleKeyPress = event => {
-        if(event.keyCode === 27 ){
+        if (event.keyCode === 27) {
             this.close()
         }
     }
@@ -60,11 +60,11 @@ export default class Search extends React.Component <{},StateSearch >{
                                 <SearchInput
                                     value={value}
                                     autoFocus={true}
-                                    onChange={this.handleOnChange} 
+                                    onChange={this.handleOnChange}
                                     onKeyPress={this.handleKeyPress}
-                                    />
+                                />
                                 <span onMouseDown={this.close} className="close">
-                                    <span dangerouslySetInnerHTML={{ __html: buttonX }} />
+                                    {/* <span dangerouslySetInnerHTML={{ __html: buttonX }} /> */}
                                 </span>
                             </div>
                             <SmartList smartList={smartList} close={this.close} />

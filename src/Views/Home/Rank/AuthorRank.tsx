@@ -10,24 +10,24 @@ interface IAuthor {
 }
 const AuthorRank = ({ author, type }: IAuthor) => {
     return <>
-    { author.map((item , key) => {
-        const { count, idUser, name, avatarLink, biographical } = item
-        return <FlexCol key={key}>
-            <FlexRow>
-                <Link to="/profile" >
-                    <AvatarImage plan radius={15} src={avatarLink} />
-                </Link>
-                <Link className="name" to={`/user/${idUser}`}>
-                    <H2 className="caption">
-                        {name}
-                    </H2>
-                </Link>
-            </FlexRow>
-            <FlexRow>
-                <P><b> {count} {type === 'follow' ? 'People Follow' : 'Article'}</b></P>
-            </FlexRow>
-        </FlexCol>
-    })}
+        {author && author.map((item, key) => {
+            const { count, idUser, name, avatarLink, biographical } = item
+            return <FlexCol key={key}>
+                <FlexRow>
+                    <Link to="/profile" >
+                        <AvatarImage plan radius={15} src={avatarLink} />
+                    </Link>
+                    <Link className="name" to={`/user/${idUser}`}>
+                        <H2 className="caption">
+                            {name}
+                        </H2>
+                    </Link>
+                </FlexRow>
+                <FlexRow>
+                    <P><b> {count} {type === 'follow' ? 'People Follow' : 'Article'}</b></P>
+                </FlexRow>
+            </FlexCol>
+        })}
     </>
 }
 export default AuthorRank

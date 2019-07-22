@@ -5,14 +5,14 @@ import { AvatarImage } from '../../../Components/styled/avatar';
 import { filterStringHTML, LINK_DEVELOPMENT } from '../../../help/help';
 import { IArticleType } from 'src/API/articleAPI';
 interface IRankArticle {
-    article: (IArticleType & {count : number})[],
+    article: (IArticleType & { count: number })[],
     type?: string
 }
-function ArticleRank ({ article, type }: IRankArticle) {
-    return<> {
-        article.map((item , key) => {
+function ArticleRank({ article, type }: IRankArticle) {
+    return <> {
+        article && article.map((item, key) => {
             const { idArticle, titleArticle, imageArticle, count } = item
-            return <FlexCol key ={key}>
+            return <FlexCol key={key}>
                 <FlexRow data-tooltip={filterStringHTML(titleArticle, true, 100)}   >
                     <Link to={`/article/${idArticle}`} >
                         <AvatarImage plan sizeBorder="2px" radius={0} size={40} src={`${LINK_DEVELOPMENT}/img/${imageArticle}`} />
@@ -27,7 +27,7 @@ function ArticleRank ({ article, type }: IRankArticle) {
                     <P><b> {count} bookMark</b></P>
                 </FlexRow>
             </FlexCol>
-        }) 
+        })
     }
     </>
 }

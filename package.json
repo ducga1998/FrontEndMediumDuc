@@ -40,6 +40,7 @@
     "fs-extra": "8.1.0",
     "graphql": "^14.4.2",
     "html-webpack-plugin": "4.0.0.alpha-2",
+    "http-proxy-middleware": "^0.19.1",
     "jest": "24.8.0",
     "lodash": "^4.17.15",
     "medium-draft": "^0.5.16",

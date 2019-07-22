@@ -7,7 +7,7 @@ export const Truncate = width => css`
   white-space: nowrap;
   min-width: 0;
 `;
-export const Gradient = (g1, g2 , g3= '0%') => css`radial-gradient(ellipse farthest-corner at top left, ${g1} ${g3}, ${g2} 100%)`;
+export const Gradient = (g1, g2, g3 = '0%') => css`radial-gradient(ellipse farthest-corner at top left, ${g1} ${g3}, ${g2} 100%)`;
 export const Shadow = {
   low: '0 2px 8px rgba(23,26,33, 0.15)',
   mid: '0 4px 12px rgba(23,26,33, 0.2)',
@@ -190,7 +190,7 @@ export const UnderlineInput = styled.input`
 
 export const H1 = styled.h1<any>`
   ${fontStack};
-  flex : ${(props : any) => props.flex ?props.flex : 'none' };
+  flex : ${(props: any) => props.flex ? props.flex : 'none'};
   color: ${({ theme }) => theme.text.default};
   font-weight: 900;
   font-size: 1.5rem;
@@ -200,7 +200,7 @@ export const H1 = styled.h1<any>`
 `;
 
 export const H2 = styled.h2<any>`
-  flex : ${(props : any) => props.flex ?props.flex : 'none' };
+  flex : ${(props: any) => props.flex ? props.flex : 'none'};
   color: ${({ theme }) => theme.text.default};
   ${fontStack};
   font-weight: 700;
@@ -211,7 +211,7 @@ export const H2 = styled.h2<any>`
 `;
 
 export const H3 = styled.h3<any>`
- flex : ${(props : any) => props.flex ?props.flex : 'none' };
+ flex : ${(props: any) => props.flex ? props.flex : 'none'};
   color: ${({ theme }) => theme.text.default};
   ${fontStack};
   font-weight: 500;
@@ -222,7 +222,7 @@ export const H3 = styled.h3<any>`
 `;
 
 export const H4 = styled.h4<any>`
- flex : ${(props : any) => props.flex ?props.flex : 'none' };
+ flex : ${(props: any) => props.flex ? props.flex : 'none'};
   color: ${({ theme }) => theme.text.default};
   ${fontStack};
   font-weight: 500;
@@ -233,7 +233,7 @@ export const H4 = styled.h4<any>`
 `;
 
 export const H5 = styled.h5<any>`
- flex : ${(props : any) => props.flex ?props.flex : 'none' };
+ flex : ${(props: any) => props.flex ? props.flex : 'none'};
   color: ${({ theme }) => theme.text.default};
   ${fontStack};
   font-weight: 500;
@@ -244,7 +244,7 @@ export const H5 = styled.h5<any>`
 `;
 
 export const H6 = styled.h6<any>`
- flex : ${(props : any) => props.flex ?props.flex : 'none' };
+ flex : ${(props: any) => props.flex ? props.flex : 'none'};
   color: ${({ theme }) => theme.text.default};
   ${fontStack};
   font-weight: 600;

@@ -32,8 +32,9 @@ function handleTypeNotification(type, data) {
     }
     return notification
 }
+const { useEffect } = React as any
 export default function Notification() {
-    const [data, setData] = React.useState([] as IdNotificationType[] ) 
+    const [data, setData] = React.useState([] as IdNotificationType[])
     const [offset, setOffset] = React.useState(0)
     const [open, setOpen] = React.useState(false)
     async function handleLoadMore(event) {
@@ -43,19 +44,19 @@ export default function Notification() {
         await setOffset(count)
         const allNotification = await getAllNotificationByIdUser(count, 10)
 
-        setData([...allNotification , ...data ])
+        setData([...allNotification, ...data])
     }
-    React.useEffect(async () => {
+    useEffect(async () => {
         const allNotification = await getAllNotificationByIdUser(0, 10)
         setData(allNotification)
-      return null
-    }, []) 
+        return null
+    }, [])
     return <><NavButton
-            onMouseDown={async (e) => { e.preventDefault(); await setOpen(!open) }}>
+        onMouseDown={async (e) => { e.preventDefault(); await setOpen(!open) }}>
         <Icon glyph="notification" />
-        {open && <><DropDown onMouseDown={(event) =>dieEvent(event)} onMouseLeave ={ () => setOpen(false) }  >
-          <div className="pduc-overflow">  {
-                data && data.length > 0 ? data.map((notifi , key) => {
+        {open && <><DropDown onMouseDown={(event) => dieEvent(event)} onMouseLeave={() => setOpen(false)}  >
+            <div className="pduc-overflow">  {
+                data && data.length > 0 ? data.map((notifi, key) => {
                     const { type, notificationData: { avatarLink, name }, time } = notifi
                     const view = handleTypeNotification(type, notifi.notificationData)
                     return <Card key={key} >
@@ -69,7 +70,7 @@ export default function Notification() {
             }</div>
             <StyledTextButton style={{ margin: 'auto' }} onMouseDown={handleLoadMore}>Load More</StyledTextButton>
         </DropDown>
-      
+
         </>}
     </NavButton>
     </>

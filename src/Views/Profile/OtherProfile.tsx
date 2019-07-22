@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { getAllInformationUser, IUsertype } from 'src/API/userAPI';
 import styled from 'styled-components';
-import srcImg from '../../image/9284571_300x300.jpeg';
+// import srcImg from '../../image/9284571_300x300.jpeg';
 import UILoading from '../../Components/UI/UILoading';
 import Article from '../Reuse/ArticleView/ArticleDetail';
 import followAllContainer from '../../Container/followContainer';
@@ -31,7 +31,7 @@ class ViewUserDetail extends React.Component<IViewUserDetail> {
         await followAllContainer.follow(idUser)
     }
     render() {
-        const { ownProfileId, dataUser } = this.state 
+        const { ownProfileId, dataUser } = this.state
         return <Subscribe to={[followAllContainer]}>
             {
                 followAll => {
@@ -41,7 +41,7 @@ class ViewUserDetail extends React.Component<IViewUserDetail> {
                     if (!item || !dataUser) {
                         return <UILoading />
                     }
-                    const { articles, avatarLink, name, idUser, location, biographical, birthday } = dataUser 
+                    const { articles, avatarLink, name, idUser, location, biographical, birthday } = dataUser
                     const { followContainer } = item
                     console.log('articlesarticlesarticles ', articles)
                     return <Subscribe to={[followContainer]}>
@@ -53,11 +53,11 @@ class ViewUserDetail extends React.Component<IViewUserDetail> {
                                     <Backgroud src='/background.jpg' >
                                         <WrapperAvatar>
                                             <AvatarImage size={200}
-                                                src={avatarLink ? avatarLink : srcImg} />
+                                                src={avatarLink ? avatarLink : 'srcImg'} />
                                             <H2 style={{ textAlign: 'center' }}>{name}</H2>
                                         </WrapperAvatar>
                                         <div className="md-contact-box">
-                                        {isFollow ? <StyledSolidButton
+                                            {isFollow ? <StyledSolidButton
                                                 hoverColor="text.placeholder"
                                                 color="text.alt"
                                                 onClick={async () => { await followAllContainer.unfollow(idUser) }}>
@@ -71,7 +71,7 @@ class ViewUserDetail extends React.Component<IViewUserDetail> {
                                                     Follow
                                                   </StyledSolidButton>
                                             }
-                                             <UIButton to={`/chatMessage/${ownProfileId}`}>Chat </UIButton>
+                                            <UIButton to={`/chatMessage/${ownProfileId}`}>Chat </UIButton>
                                         </div>
                                     </Backgroud>
 
@@ -83,7 +83,7 @@ class ViewUserDetail extends React.Component<IViewUserDetail> {
                                             <H3> Article Count : {articles.length}</H3>
                                         </$Author>
                                         <div className="md-listarticle">
-                                           
+
                                             <div className="md-listFollow">
                                                 {allUserFollow && allUserFollow.length > 0 ?
                                                     <>
@@ -94,7 +94,7 @@ class ViewUserDetail extends React.Component<IViewUserDetail> {
                                                                     return null
                                                                 }
                                                                 const { name } = item.userFollow
-                                                                return <AvatarImage key={key} data-tooltip={name} src={`${item.userFollow.avatarLink ? item.userFollow.avatarLink : srcImg}`} />
+                                                                return <AvatarImage key={key} data-tooltip={name} src={`${item.userFollow.avatarLink ? item.userFollow.avatarLink : 'srcImg'}`} />
                                                             })}
 
                                                     </> : <p><b>No user Follow :((</b></p>}
@@ -102,11 +102,11 @@ class ViewUserDetail extends React.Component<IViewUserDetail> {
                                                     {
                                                         articles && articles.length > 0 ? articles.map((item, key) => {
                                                             // const article = { ...item, ...{ user: { idUser, avatarLink, name } } }
-                                                            return <Article vectical key={key}  article={item} />
+                                                            return <Article vectical key={key} article={item} />
                                                         }) : <H2> NO Article  :), fuck own account stupid </H2>}
                                                 </UIFieldAlgin>
                                             </div>
-                                           
+
                                         </div>
                                     </UIFieldAlgin>
 
