@@ -3,11 +3,11 @@
     "baseUrl": ".",
     "outDir": "build/dist",
     "module": "esnext",
-    "target": "es2018",
+    "target": "es5",
     "lib": [
-      "es2018",
+      "es6",
       "dom",
-      "esnext.asynciterable"
+      "es5"
     ],
     "types": [
       "react",

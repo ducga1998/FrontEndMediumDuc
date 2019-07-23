@@ -16,14 +16,14 @@ import { timeDifference } from 'src/help/util';
 import UIButton from '../../../Components/UI/UIButton';
 
 interface IReadArticleType {
-    match: {params  : {id  : string}},
+    match: { params: { id: string } },
 }
 export const ArticleContext = React.createContext({})
 class ReadArticle extends React.Component<IReadArticleType> {
     state = {
         article: {
-            user : {}
-        } as IArticleType ,
+            user: {}
+        } as IArticleType,
     }
     async componentDidMount() {
         const { match: { params: { id } } } = this.props
@@ -34,7 +34,7 @@ class ReadArticle extends React.Component<IReadArticleType> {
         }
     }
     componentWillUnmount() {
-        const { user: { idUser } } = this.state.article 
+        const { user: { idUser } } = this.state.article
         if (idUser !== userContainer.state.dataUser.idUser) {
             notificationSocket.emit('leave', idUser)
         }
@@ -48,8 +48,8 @@ class ReadArticle extends React.Component<IReadArticleType> {
                 <WrapperReadArticle>
                     <div className="pb-duc-introduce-author" >
                         <H1> {renderHTML(titleArticle)} </H1>
-                        <Author idUser={idUser} avatarLink={avatarLink} totalFollow={10} name={name|| ''} totalArticle={213} />
-                        <P style={{color : '#b2b2b2'}}>{timeDifference(new Date(), new Date(createTime))}</P>
+                        <Author idUser={idUser} avatarLink={avatarLink} totalFollow={10} name={name || ''} totalArticle={213} />
+                        <P style={{ color: '#b2b2b2' }}>{timeDifference(new Date(), new Date(createTime))}</P>
                     </div>
                     <div className="pb-duc-content-article">
                         <P>{renderHTML(contentArticle)} </P>
@@ -64,7 +64,7 @@ class ReadArticle extends React.Component<IReadArticleType> {
                                 )
                             }
                         </Section>
-                        
+
                     </div>
                     <div className="pb-duc-comment">
                         <H2>All Comment Article</H2>

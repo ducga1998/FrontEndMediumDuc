@@ -34,9 +34,10 @@ const About = () => <div>
 </div>
 
 
-const { useEffect } = React as any as any
+const { useEffect } = React as any
 const AppRouter = () => {
     useEffect(async () => {
+        let flag = false
         if (localStorage.getItem('duc-app-medium-login')) {
             const dataCache = localStorage.getItem('duc-app-medium-login')
             // console.log(dataCache)
@@ -45,6 +46,8 @@ const AppRouter = () => {
                 await userContainer.setState({ dataUser, login: true })
             }
         }
+
+        return () => flag = true
     })
     const renderRoutes = (user: any) => {
 
@@ -62,7 +65,7 @@ const AppRouter = () => {
         // in request have info user => if it 's admin => allow 
 
 
-        return <Router  >
+        return <Router >
             <Switch>
                 <Layout>
                     <Route exact path="/about/" component={About} />
