@@ -47,12 +47,12 @@ class ReadArticle extends React.Component<IReadArticleType> {
                 <UIReaction idArticle={idArticle} idUseOwnArticler={idUser} titleArticle={titleArticle} />
                 <WrapperReadArticle>
                     <div className="pb-duc-introduce-author" >
-                        {/* <H1> {renderHTML(titleArticle)} </H1> */}
+                        <H1><div dangerouslySetInnerHTML={{__html: titleArticle}} /></H1>
                         <Author idUser={idUser} avatarLink={avatarLink} totalFollow={10} name={name || ''} totalArticle={213} />
                         <P style={{ color: '#b2b2b2' }}>{timeDifference(new Date(), new Date(createTime))}</P>
                     </div>
                     <div className="pb-duc-content-article">
-                        {/* <P>{renderHTML(contentArticle)} </P> */}
+                        <P><div dangerouslySetInnerHTML={{__html: contentArticle}} /> </P>
                         <Section>
                             {
                                 hashTagData && hashTagData.map((hashTag, key) =>
