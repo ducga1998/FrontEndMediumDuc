@@ -5,7 +5,7 @@ import articleContainer from '../../../Container/articleContainer';
 import userContainer from '../../../Container/userContainer';
 import Author from '../../Author';
 import MediumDraft from './mediumDraft';
-import { fontStack } from '../../../Components/styled/base';
+import { fontStack } from 'Components/styled/base';
 
 export const updateDataArticle = debouce(async (value, content) => {
     await articleContainer.setState({ isPublicArticle: true, [value]: content })

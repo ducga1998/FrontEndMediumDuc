@@ -1,11 +1,11 @@
 import * as React from 'react';
-import { getAllInformationUser, IUsertype } from 'src/API/userAPI';
+import { getAllInformationUser, IUsertype } from 'API/userAPI';
 import userContainer from '../../../Container/userContainer';
-import UILoading from '../../../Components/UI/UILoading';
+import UILoading from 'Components/UI/UILoading';
 import Article from '../../Reuse/ArticleView/ArticleDetail';
-import { H2 } from '../../../Components/styled/base';
-import UIFieldAlgin from '../../../Components/UI/UIFieldAlgin';
-import UIButton from '../../../Components/UI/UIButton';
+import { H2 } from 'Components/styled/base';
+import UIFieldAlgin from 'Components/UI/UIFieldAlgin';
+import UIButton from 'Components/UI/UIButton';
 interface IManagerArticles {
     match: any
 }
@@ -22,19 +22,19 @@ class ManagerArticles extends React.Component<IManagerArticles> {
         await this.setState({ dataUser })
     }
     render() {
-        const { dataUser } = this.state 
+        const { dataUser } = this.state
         if (!dataUser) {
             return <UILoading />
         }
-        const { articles, avatarLink, name, idUser } = dataUser ;
+        const { articles, avatarLink, name, idUser } = dataUser;
 
         return <UIFieldAlgin horizontal>
             {articles && articles.length > 0 ? articles.map((item, key) => {
                 // const article = { ...item, ...{ user: { idUser, avatarLink, name } } }
                 return <UIFieldAlgin key={key}>
-                    <Article style={{ pointerEvents : 'none'}} vectical key={key} typeArticle='store' article={item} />
+                    <Article style={{ pointerEvents: 'none' }} vectical key={key} typeArticle='store' article={item} />
                     <UIButton icon="delete" category="danger" onMouseDown={() => { }} >Delete</UIButton>
-                    <UIButton  icon ="edit" category="space" onMouseDown={() => { }} >Update Detail </UIButton>
+                    <UIButton icon="edit" category="space" onMouseDown={() => { }} >Update Detail </UIButton>
                 </UIFieldAlgin>
 
 

@@ -1,9 +1,9 @@
 import * as React from 'react';
-import { getAllInformationUser, IUsertype } from 'src/API/userAPI';
+import { getAllInformationUser, IUsertype } from 'API/userAPI';
 import userContainer from '../../../Container/userContainer';
-import UILoading from '../../../Components/UI/UILoading';
+import UILoading from 'Components/UI/UILoading';
 import Article from '../../Reuse/ArticleView/ArticleDetail';
-import { H2, H1, FlexRow } from '../../../Components/styled/base';;
+import { H2, H1, FlexRow } from 'Components/styled/base';;
 import styled from 'styled-components';
 class Stories extends React.Component {
     state = {

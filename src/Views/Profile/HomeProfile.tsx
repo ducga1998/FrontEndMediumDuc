@@ -1,17 +1,17 @@
-import UIEditer from '../../Components/UI/UIEditer';
+import UIEditer from 'Components/UI/UIEditer';
 import * as React from 'react';
-import { getAllInformationUser, IUsertype } from 'src/API/userAPI';
+import { getAllInformationUser, IUsertype } from 'API/userAPI';
 import styled from 'styled-components';
 import userContainer from '../../Container/userContainer';
 // import srcImg from '../../image/9284571_300x300.jpeg';
-import UILoading from '../../Components/UI/UILoading';
-import UIButton from '../../Components/UI/UIButton';
-import UIModal from '../../Components/UI/UIModal';
-import UIInput from '../../Components/UI/UIInput';
-import { H1, H4, FlexRow, FlexCol, H2 } from '../../Components/styled/base';
-import UIFieldAlgin from '../../Components/UI/UIFieldAlgin';
-import { AvatarImage } from '../../Components/styled/avatar';
-import Tabs from 'src/workspace/tabs';
+import UILoading from 'Components/UI/UILoading';
+import UIButton from 'Components/UI/UIButton';
+import UIModal from 'Components/UI/UIModal';
+import UIInput from 'Components/UI/UIInput';
+import { H1, H4, FlexRow, FlexCol, H2 } from 'Components/styled/base';
+import UIFieldAlgin from 'Components/UI/UIFieldAlgin';
+import { AvatarImage } from 'Components/styled/avatar';
+import Tabs from 'workspace/tabs';
 
 interface IViewUserCurrent {
     match: any
@@ -53,7 +53,7 @@ class ViewUserDetail extends React.Component<IViewUserCurrent> {
                             const value = item[info]
                             return <UIEditer onUpdateProfile={(value) => { userContainer.updateProfile({ [info]: value }) }} info={info} key={key} content={value} />
                         })}
-                        <H4> Article : {articles.length}</H4>
+                        <H4> Article : {articles && articles.length}</H4>
                         <UIButton onMouseDown={() => { this.setState({ isChangePass: true }) }}>Change password</UIButton>
                     </$Author>
 

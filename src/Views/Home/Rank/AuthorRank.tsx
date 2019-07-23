@@ -1,8 +1,8 @@
 import * as React from 'react';
 import { Link } from "react-router-dom";
 
-import { FlexRow, FlexCol, H2, P } from '../../../Components/styled/base';
-import { AvatarImage } from '../../../Components/styled/avatar';
+import { FlexRow, FlexCol, H2, P } from 'Components/styled/base';
+import { AvatarImage } from 'Components/styled/avatar';
 
 interface IAuthor {
     author: any,

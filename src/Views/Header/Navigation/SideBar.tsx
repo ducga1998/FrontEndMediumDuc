@@ -1,13 +1,13 @@
 import * as React from 'react'
 import styled from 'styled-components';
-import { OverLay } from '../../../Components/styled/overlay';
-import UIWidget from '../../../Components/UI/UIWidget';
-import UIButton from '../../../Components/UI/UIButton';
-import { FlexCol, H3, P, Gradient, H1, H2 } from '../../../Components/styled/base';
-import { AvatarImage } from '../../../Components/styled/avatar';
-import UIFieldAlgin from '../../../Components/UI/UIFieldAlgin';
-import { IconLink } from '../../../Components/styled/nav';
-import Icon from '../../../Components/Icon';
+import { OverLay } from 'Components/styled/overlay';
+import UIWidget from 'Components/UI/UIWidget';
+import UIButton from 'Components/UI/UIButton';
+import { FlexCol, H3, P, Gradient, H1, H2 } from 'Components/styled/base';
+import { AvatarImage } from 'Components/styled/avatar';
+import UIFieldAlgin from 'Components/UI/UIFieldAlgin';
+import { IconLink } from 'Components/styled/nav';
+import Icon from 'Components/Icon';
 import theme from '../../../theme';
 export default class SideBar extends React.Component<{ open: boolean, setOpen: any, user: any }> {
     handleMouseDown = (event) => {

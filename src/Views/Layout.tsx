@@ -22,7 +22,7 @@ const Body = styled.div`
   width: 100%;
   height: 100vh;
   background: ${props => {
-    if (location.pathname === '/login' || location.pathname === '/register') {
+    if (window.location.pathname === '/login' || window.location.pathname === '/register') {
       return props.theme.bg.reverse
     }
     return 'white'

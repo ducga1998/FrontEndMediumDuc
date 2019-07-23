@@ -10,11 +10,11 @@ export default class ManagerAccount extends React.Component<any> {
     }
     async componentDidMount() {
         // this is function get all data article, in have data user
-    
+
     }
 
 
     render() {
-        return  <div></div>
+        return <div></div>
     }
 }

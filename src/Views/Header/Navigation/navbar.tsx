@@ -1,15 +1,15 @@
 import * as React from 'react';
-import { Nav, LogoLink, IconLink, Label } from '../../../Components/styled/nav';
-import Icon from '../../../Components/Icon';
+import { Nav, LogoLink, IconLink, Label } from 'Components/styled/nav';
+import Icon from 'Components/Icon';
 import Search from '../Search/search';
 import ButtonArticle from '../ButtonWrite';
 import userContainer from '../../../Container/userContainer';
 import styled from 'styled-components';
-import UIPopUp from '../../../Components/UI/UIPopUp';
-import { Shadow, FlexCol } from '../../../Components/styled/base';
+import UIPopUp from 'Components/UI/UIPopUp';
+import { Shadow, FlexCol } from 'Components/styled/base';
 import SideBar from './SideBar';
 import Notification from './notification'
-import { AvatarImage } from 'src/Components/styled/avatar';
+import { AvatarImage } from 'Components/styled/avatar';
 class Navbar extends React.Component<any> {
     state = {
         sideBarOpen: false,
@@ -17,7 +17,7 @@ class Navbar extends React.Component<any> {
     }
     navRef: HTMLElement
     componentDidMount() {
-        window.addEventListener('scroll', (e : UIEvent) => {
+        window.addEventListener('scroll', (e: UIEvent) => {
             if (window.scrollY < 1) {
                 this.navRef.style.position = ''
             }
@@ -52,7 +52,7 @@ class Navbar extends React.Component<any> {
                 <IconLink to="/about" data-active={location.includes('about')}>
                     <i className="fas fa-info" /> <Label>About</Label>
                 </IconLink>
-              
+
             </Nav>
             <Nav>
                 <ButtonArticle />

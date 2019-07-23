@@ -1,17 +1,17 @@
 import * as React from 'react';
-import { getAllInformationUser, IUsertype } from 'src/API/userAPI';
+import { getAllInformationUser, IUsertype } from 'API/userAPI';
 import styled from 'styled-components';
 // import srcImg from '../../image/9284571_300x300.jpeg';
-import UILoading from '../../Components/UI/UILoading';
+import UILoading from 'Components/UI/UILoading';
 import Article from '../Reuse/ArticleView/ArticleDetail';
 import followAllContainer from '../../Container/followContainer';
 import { Subscribe } from 'unstated-x';
-import { H3, H1, FlexRow, FlexCol, H2 } from '../../Components/styled/base';
-import { StyledSolidButton } from '../../Components/styled/button';
+import { H3, H1, FlexRow, FlexCol, H2 } from 'Components/styled/base';
+import { StyledSolidButton } from 'Components/styled/button';
 import { socketNotication } from '../../socketClient/socket';
-import UIFieldAlgin from '../../Components/UI/UIFieldAlgin';
-import UIButton from 'src/Components/UI/UIButton';
-import { AvatarImage } from 'src/Components/styled/avatar';
+import UIFieldAlgin from 'Components/UI/UIFieldAlgin';
+import UIButton from 'Components/UI/UIButton';
+import { AvatarImage } from 'Components/styled/avatar';
 interface IViewUserDetail {
     match: any
 }

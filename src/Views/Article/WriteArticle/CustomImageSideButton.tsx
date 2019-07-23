@@ -1,7 +1,7 @@
 import { Block, ImageSideButton, addNewBlock } from 'medium-draft';
 import * as React from 'react'
 import articleContainer from '../../../Container/articleContainer';
-import { LINK_DEVELOPMENT } from 'src/help/help';
+import { LINK_DEVELOPMENT } from 'help/help';
 export default class CustomImageSideButton extends ImageSideButton<any, { images: string[] }>{
 
   props: any;

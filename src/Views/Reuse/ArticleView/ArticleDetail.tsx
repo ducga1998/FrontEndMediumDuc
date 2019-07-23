@@ -2,14 +2,14 @@ import * as React from 'react';
 import renderHTML from 'react-render-html';
 import styled from 'styled-components';
 import { filterStringHTML } from '../../../help/help';
-import { H1, FlexCol, P, H4, H3 } from '../../../Components/styled/base';
-import { Section } from '../../../Components/styled/nav';
-import { AvatarImage } from '../../../Components/styled/avatar';
-import UIFieldAlgin from '../../../Components/UI/UIFieldAlgin';
-import { timeDifference } from 'src/help/util';
-import Link from '../../../Components/Link';
-import UIButton from '../../../Components/UI/UIButton';
-import { IArticleType } from 'src/API/articleAPI';
+import { H1, FlexCol, P, H4, H3 } from 'Components/styled/base';
+import { Section } from 'Components/styled/nav';
+import { AvatarImage } from 'Components/styled/avatar';
+import UIFieldAlgin from 'Components/UI/UIFieldAlgin';
+import { timeDifference } from 'help/util';
+import Link from 'Components/Link';
+import UIButton from 'Components/UI/UIButton';
+import { IArticleType } from 'API/articleAPI';
 export interface IArticleDetail {
     typeArticle?: 'store' | 'view',
     article: IArticleType,

@@ -6,8 +6,8 @@ import Author from '../../Author';
 import { getArticleById, IArticleType } from '../../../API/articleAPI';
 import { updateDataArticle, updateContent } from '../WriteArticle';
 import MediumDraft from '../WriteArticle/mediumDraft';
-import { fontStack } from '../../../Components/styled/base';
-import UILoading from '../../../Components/UI/UILoading';
+import { fontStack } from 'Components/styled/base';
+import UILoading from 'Components/UI/UILoading';
 
 class WriteArticle extends React.Component<{match : { params : {id : string}}} , {dataArticle : IArticleType}> {
     state = {

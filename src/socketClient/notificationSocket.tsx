@@ -3,9 +3,9 @@ import { toast } from "react-toastify";
 import { filterStringHTML } from "../help/help";
 import * as React from 'react'
 import styled from "styled-components";
-import {  H3 } from "src/Components/styled/base";
-import { AvatarImage } from "../Components/styled/avatar";
-import { Label } from "../Components/styled/button";
+import { H3 } from "Components/styled/base";
+import { AvatarImage } from "Components/styled/avatar";
+import { Label } from "Components/styled/button";
 import { IUsertype } from "../API/userAPI";
 export function notificationFuncSocket(user: IUsertype) {
     if (user && user.idUser) {
@@ -14,29 +14,29 @@ export function notificationFuncSocket(user: IUsertype) {
         notificationSocket.on('notificationRun', (data) => {
             toast(<NotificationStyle {...data} />
                 , {
-                   position :  toast.POSITION.BOTTOM_LEFT
+                    position: toast.POSITION.BOTTOM_LEFT
                 })
         })
     }
 }
 const NotificationStyle = (props) => {
-    const { titleArticle, name, type, avatarLink } =  props
-    let  contentNotifi = ''
+    const { titleArticle, name, type, avatarLink } = props
+    let contentNotifi = ''
     if (type === 'Comment') {
-         contentNotifi = ` 😎${type} vào bài viết  : ${filterStringHTML(titleArticle)} của bạn `
+        contentNotifi = ` 😎${type} vào bài viết  : ${filterStringHTML(titleArticle)} của bạn `
     }
-    if(type === 'ReplyComment'){
-       contentNotifi = ` 😎trả lời bình luận của bạn tại bài viết${filterStringHTML(titleArticle)}`
+    if (type === 'ReplyComment') {
+        contentNotifi = ` 😎trả lời bình luận của bạn tại bài viết${filterStringHTML(titleArticle)}`
     }
     if (type === 'Follow') {
-      contentNotifi = ` 😎${type} bạn `
+        contentNotifi = ` 😎${type} bạn `
     }
-    if(type=== 'Bookmark'){
+    if (type === 'Bookmark') {
         contentNotifi = ` 😎bookmark bài viết ${filterStringHTML(titleArticle)} của bạn `
-      
+
     }
     return <WrapperNotification className="md-notification-wrapper">
-         <AvatarImage src={avatarLink} /><Label >{name} đã</Label> <H3>{contentNotifi}</H3>  😀😀
+        <AvatarImage src={avatarLink} /><Label >{name} đã</Label> <H3>{contentNotifi}</H3>  😀😀
     </WrapperNotification>
 }
 const WrapperNotification = styled.div`

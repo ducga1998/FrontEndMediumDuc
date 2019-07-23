@@ -2,31 +2,31 @@ import * as React from "react";
 import { Switch } from "react-router";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import { SubscribeOne } from "unstated-x";
-import WriteArticle from './Views//Article/WriteArticle';
-import ReadArticle from './Views/Article/ReadArticle';
+import WriteArticle from 'Views//Article/WriteArticle';
+import ReadArticle from 'Views/Article/ReadArticle';
 // import { BrowserRouter as Router, Route, Link } from "react-router-dom";
-import Login from './Views/Form/login';
-import Register from "./Views/Form/register";
-import Home from "./Views/Home";
-import Layout from './Views/Layout';
-import Profile from './Views/Profile/HomeProfile';
-import ViewUser from './Views/Profile/OtherProfile';
-import userContainer from "./Container/userContainer";
-import UILoading from "./Components/UI/UILoading";
-import ChatMessage from './Views/RoomChat/ChatAsDesign'
-import { logoutBackend } from './API/userAPI'
-import { notificationFuncSocket } from "./socketClient/notificationSocket";
-import Stories from "./Views/Article/Stories";
-import StoreDetail from "./Views/Article/Stories/Store";
-import ArticleBookMark from "./Views/Article/BookMarkArticle";
-import { H1 } from "./Components/styled/base";
-import ManagerAccount from './Views/User/Admin/ManagerAccount'
-import ManagerArticles from './Views/User/Admin/MangerArticle'
+import Login from 'Views/Form/login';
+import Register from "Views/Form/register";
+import Home from "Views/Home";
+import Layout from 'Views/Layout';
+import Profile from 'Views/Profile/HomeProfile';
+import ViewUser from 'Views/Profile/OtherProfile';
+import userContainer from "Container/userContainer";
+import UILoading from "Components/UI/UILoading";
+import ChatMessage from 'Views/RoomChat/ChatAsDesign'
+import { logoutBackend } from 'API/userAPI'
+import { notificationFuncSocket } from "socketClient/notificationSocket";
+import Stories from "Views/Article/Stories";
+import StoreDetail from "Views/Article/Stories/Store";
+import ArticleBookMark from "Views/Article/BookMarkArticle";
+import history from 'historyRoute'
+import { H1 } from "Components/styled/base";
+import ManagerAccount from 'Views/User/Admin/ManagerAccount'
+import ManagerArticles from 'Views/User/Admin/MangerArticle'
 
-import UIWidget, { Portal } from "src/Components/UI/UIWidget";
-import PageEditer from "./workspace/PageEditer";
-import HashTagView from "./Views/HashTagView";
-import Community from "src/Views/Community";
+import PageEditer from "workspace/PageEditer";
+import HashTagView from "Views/HashTagView";
+import Community from "Views/Community";
 const About = () => <div>
     Web design by Nguyen Minh duc
     <H1>Facebook : <a href="https://www.facebook.com/duc.ceh.cnna">https://www.facebook.com/duc.ceh.cnna</a></H1>
@@ -36,18 +36,15 @@ const About = () => <div>
 
 const { useEffect } = React as any
 const AppRouter = () => {
-    useEffect(async () => {
-        let flag = false
+    useEffect(() => {
         if (localStorage.getItem('duc-app-medium-login')) {
             const dataCache = localStorage.getItem('duc-app-medium-login')
             // console.log(dataCache)
             if (dataCache) {
                 const dataUser = JSON.parse(dataCache)
-                await userContainer.setState({ dataUser, login: true })
+                userContainer.setState({ dataUser, login: true })
             }
         }
-
-        return () => flag = true
     })
     const renderRoutes = (user: any) => {
 
@@ -65,7 +62,7 @@ const AppRouter = () => {
         // in request have info user => if it 's admin => allow 
 
 
-        return <Router >
+        return <Router history={history} >
             <Switch>
                 <Layout>
                     <Route exact path="/about/" component={About} />
@@ -125,11 +122,11 @@ export function redirect(location) {
     }
 }
 function logout({ history }) {
-    useEffect(async () => {
+    useEffect(() => {
         localStorage.clear()
-        await userContainer.setState({ dataUser: null, login: false })
+        userContainer.setState({ dataUser: null, login: false })
         history.push('/login')
-        await logoutBackend()
+        logoutBackend()
     })
     return null
 

@@ -3,17 +3,17 @@ import * as React from 'react';
 import renderHTML from 'react-render-html';
 import styled from 'styled-components';
 import { getArticleById, IArticleType } from '../../../API/articleAPI';
-import UILoading from '../../../Components/UI/UILoading';
+import UILoading from 'Components/UI/UILoading';
 import Author from '../../Author';
-import UIReaction from '../../../Components/UI/UIReaction';
-import { StyledSolidButton } from '../../../Components/styled/button';
-import { H2, H4, H1, P } from '../../../Components/styled/base';
-import { Section } from '../../../Components/styled/nav';
+import UIReaction from 'Components/UI/UIReaction';
+import { StyledSolidButton } from 'Components/styled/button';
+import { H2, H4, H1, P } from 'Components/styled/base';
+import { Section } from 'Components/styled/nav';
 import ViewComment from './ViewComment';
-import { notificationSocket } from 'src/socketClient/socket';
+import { notificationSocket } from 'socketClient/socket';
 import userContainer from '../../../Container/userContainer';
-import { timeDifference } from 'src/help/util';
-import UIButton from '../../../Components/UI/UIButton';
+import { timeDifference } from 'help/util';
+import UIButton from 'Components/UI/UIButton';
 
 interface IReadArticleType {
     match: { params: { id: string } },
@@ -47,12 +47,12 @@ class ReadArticle extends React.Component<IReadArticleType> {
                 <UIReaction idArticle={idArticle} idUseOwnArticler={idUser} titleArticle={titleArticle} />
                 <WrapperReadArticle>
                     <div className="pb-duc-introduce-author" >
-                        <H1> {renderHTML(titleArticle)} </H1>
+                        {/* <H1> {renderHTML(titleArticle)} </H1> */}
                         <Author idUser={idUser} avatarLink={avatarLink} totalFollow={10} name={name || ''} totalArticle={213} />
                         <P style={{ color: '#b2b2b2' }}>{timeDifference(new Date(), new Date(createTime))}</P>
                     </div>
                     <div className="pb-duc-content-article">
-                        <P>{renderHTML(contentArticle)} </P>
+                        {/* <P>{renderHTML(contentArticle)} </P> */}
                         <Section>
                             {
                                 hashTagData && hashTagData.map((hashTag, key) =>

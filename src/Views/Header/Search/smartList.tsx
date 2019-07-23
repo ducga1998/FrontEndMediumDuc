@@ -2,7 +2,7 @@ import * as React from 'react'
 import styled from 'styled-components';
 
 
-export default class SmartList extends React.Component<{smartList : {titleArticle : string ,idArticle  :string  }[] , close : () => void}> {
+export default class SmartList extends React.Component<{ smartList: { titleArticle: string, idArticle: string }[], close: () => void }> {
     render() {
         const { smartList } = this.props
         if (!smartList) {
@@ -12,7 +12,7 @@ export default class SmartList extends React.Component<{smartList : {titleArticl
             {smartList.map((item, key) =>
                 <Li key={key}>
                     <A onClick={() => {
-                        location.href = `/article/${item.idArticle}`
+                        // location.href = `/article/${item.idArticle}`
                         this.props.close();
 
                     }}>

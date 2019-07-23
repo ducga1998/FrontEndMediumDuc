@@ -1,9 +1,9 @@
 import * as React from 'react';
 import styled from 'styled-components';
 import ListArticle from '../Reuse/ArticleView/ListArticle';
-import { getAllHashTag, getArticleTagByNameHashTag, IHashtTagType } from 'src/API/hashtagAPI';
-import UIButton from '../../Components/UI/UIButton';
-import { H2, H1 } from 'src/Components/styled/base';
+import { getAllHashTag, getArticleTagByNameHashTag, IHashtTagType } from 'API/hashtagAPI';
+import UIButton from 'Components/UI/UIButton';
+import { H2, H1 } from 'Components/styled/base';
 export default class HashTagView extends React.Component<{match : {params : {name : string}}}> {
     state = {
         allHashtag: [] as IHashtTagType[],

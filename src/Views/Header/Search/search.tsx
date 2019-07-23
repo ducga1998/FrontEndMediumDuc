@@ -1,12 +1,12 @@
 import * as React from 'react'
-import UIInput from '../../../Components/UI/UIInput';
+import UIInput from 'Components/UI/UIInput';
 import styled from 'styled-components';
 // import buttonX from './buttonX.svg'
 import { getDataSearch } from '../../../API/articleAPI';
 import SmartList from './smartList';
-import { Input, fontStack } from '../../../Components/styled/base';
-import { OverLay } from 'src/Components/styled/overlay';
-import UIWidget from 'src/Components/UI/UIWidget';
+import { Input, fontStack } from 'Components/styled/base';
+import { OverLay } from 'Components/styled/overlay';
+import UIWidget from 'Components/UI/UIWidget';
 interface StateSearch {
     value: string
     afterData: any[]

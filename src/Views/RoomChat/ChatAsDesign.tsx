@@ -1,17 +1,17 @@
 
 import * as React from 'react';
 import styled from 'styled-components';
-import UIInput from '../../Components/UI/UIInput';
-import UIButton from '../../Components/UI/UIButton';;
-import { fontStack } from '../../Components/styled/base';
+import UIInput from 'Components/UI/UIInput';
+import UIButton from 'Components/UI/UIButton';;
+import { fontStack } from 'Components/styled/base';
 import { toast } from 'react-toastify';
 import uuid from 'uuid'
 import userContainer from '../../Container/userContainer';
 import { createRoom, getRoomById } from '../../API/roomAPI';
-import SocketMessageChat from 'src/socketClient/messageChatSocket';
+import SocketMessageChat from 'socketClient/messageChatSocket';
 import { getAllMessageByIdUserReceive } from '../../API/messageAPI';
-import { AvatarImage } from '../../Components/styled/avatar';
-import UIModal from '../../Components/UI/UIModal';
+import { AvatarImage } from 'Components/styled/avatar';
+import UIModal from 'Components/UI/UIModal';
 import { IUsertype } from '../../API/userAPI';
 
 interface IListRoom {

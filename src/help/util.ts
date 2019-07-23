@@ -1,3 +1,4 @@
+import escapeRegExp from 'lodash/escapeRegExp';
 export const convertTimestampToDate = (timestamp: Date) => {
     let monthNames = [
         'January',
@@ -187,7 +188,7 @@ function quick_Sort(origArray) {
         return newArray.concat(quick_Sort(left), pivot, quick_Sort(right));
     }
 }
-import escapeRegExp from 'lodash/escapeRegExp';
+
 export function buildRegExpFromDelimiters(delimiters) {
     const delimiterChars = delimiters
         .map((delimiter) => {

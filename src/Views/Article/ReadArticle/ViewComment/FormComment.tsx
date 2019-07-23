@@ -1,15 +1,15 @@
-import UIButton from 'src/Components/UI/UIButton';
+import UIButton from 'Components/UI/UIButton';
 import * as React from 'react'
-import { IMAGE_SOURCE_DEFAULT } from 'src/help/define';
+import { IMAGE_SOURCE_DEFAULT } from 'help/define';
 import styled, { DefaultTheme } from 'styled-components';
 import { toast } from 'react-toastify';
-import userContainer from 'src/Container/userContainer';
-import { socketNotication } from 'src/socketClient/socket';
-import { renderElement } from 'src/Core/renderElement';
-import { Input, FlexCol } from 'src/Components/styled/base';
-import { AvatarImage } from 'src/Components/styled/avatar';
-import { addComment, ICommentType } from 'src/API/commentAPI';
-import { IArticleType } from 'src/API/articleAPI';
+import userContainer from 'Container/userContainer';
+import { socketNotication } from 'socketClient/socket';
+import { renderElement } from 'Core/renderElement';
+import { Input, FlexCol } from 'Components/styled/base';
+import { AvatarImage } from 'Components/styled/avatar';
+import { addComment, ICommentType } from 'API/commentAPI';
+import { IArticleType } from 'API/articleAPI';
 interface IFormReply {
     context: IArticleType,
     idReply?: string,

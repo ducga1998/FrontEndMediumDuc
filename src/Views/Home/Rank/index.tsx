@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { FlexCol, H1 } from '../../../Components/styled/base';
+import { FlexCol, H1 } from 'Components/styled/base';
 import RankAuthor from './AuthorRank';
 import RankArticle from './ArticleRank'
 import { rankData, Irank } from '../../../API/fetchAPI';
@@ -8,16 +8,18 @@ const cachRank = new Map()
 const { useEffect, useState } = React as any
 export default function Rank() {
     const [rankState, setRankState] = useState({}) as [Irank, any]
-
-    useEffect(async () => {
-        if (cachRank.get('cache')) {
-            setRankState(cachRank.get('cache'))
-            return
-        }
+    const fetchAndSetRank = async () => {
         const fetchDataRank = await rankData()
         cachRank.set('cache', fetchDataRank)
 
         setRankState(fetchDataRank)
+    }
+    useEffect(() => {
+        if (cachRank.get('cache')) {
+            setRankState(cachRank.get('cache'))
+            return
+        }
+        fetchAndSetRank()
 
     }, [])
     if (!rankState) return null

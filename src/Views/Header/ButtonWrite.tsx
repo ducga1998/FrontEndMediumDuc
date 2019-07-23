@@ -4,11 +4,11 @@ import styled from 'styled-components';
 import { Subscribe } from 'unstated-x';
 import uuid from 'uuid';
 import articleContainer, { ArticleContainer } from '../../Container/articleContainer';
-import UIModal from '../../Components/UI/UIModal';
-import UIButton from '../../Components/UI/UIButton';
-import { IconLink } from '../../Components/styled/nav';
-import UIHashTagInput from '../../Components/UI/UIHashTagInput'
-import { hashTagData } from 'src/API/fetchAPI';
+import UIModal from 'Components/UI/UIModal';
+import UIButton from 'Components/UI/UIButton';
+import { IconLink } from 'Components/styled/nav';
+import UIHashTagInput from 'Components/UI/UIHashTagInput'
+import { hashTagData } from 'API/fetchAPI';
 const { useEffect } = React as any
 export default function ButtonArticle() {
     const [open, setOpen] = React.useState(false)
@@ -34,9 +34,12 @@ export default function ButtonArticle() {
         await articleContainer.setState({ arrHashTag })
 
     }
-    useEffect(async () => {
+    const fetchHashTag = async () => {
         const suggestion = await hashTagData()
         setSuggestion(suggestion.map(item => item.nameHashTag))
+    }
+    useEffect(() => {
+        fetchHashTag()
     }, [])
 
     if (window.location.pathname === "/writearticle" || window.location.pathname.match('store')) {

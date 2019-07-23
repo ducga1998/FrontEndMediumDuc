@@ -3,8 +3,8 @@ import { allArticleContainer } from '../Container/articleContainer';
 
 import { SubscribeOne } from 'unstated-x';
 import styled from 'styled-components';
-import UIButton from '../Components/UI/UIButton';
-import { Section } from '../Components/styled/nav';
+import UIButton from 'Components/UI/UIButton';
+import { Section } from 'Components/styled/nav';
 function renderButton() {
     const { count, first } = allArticleContainer.state
     const countButton = (count % first === 0 ? Math.round(count / first) : (Math.round(count / first) + 1))

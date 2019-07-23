@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { ArticleContext } from 'src/Views/Article/ReadArticle';
+import { ArticleContext } from 'Views/Article/ReadArticle';
 export const HistoryContext = React.createContext(null)
 export const renderElement = (Comp) => {
     return class extends React.Component<any> {

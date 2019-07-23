@@ -2,8 +2,8 @@ import * as React from 'react';
 import { Link } from "react-router-dom";
 import { Subscribe } from 'unstated-x';
 import userContainer from '../../Container/userContainer';
-import { FlexRow, FlexCol, P, H4 } from '../../Components/styled/base';
-import { AvatarImage } from '../../Components/styled/avatar';
+import { FlexRow, FlexCol, P, H4 } from 'Components/styled/base';
+import { AvatarImage } from 'Components/styled/avatar';
 import styled from 'styled-components';
 // import './index.css';
 interface IAuthor {

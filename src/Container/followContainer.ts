@@ -1,12 +1,13 @@
+//eslint-disable import/first
 import { Container } from 'unstated-x';;
 import { getAllInfomationUserFollowYour, follow, unFollow } from '../API/followAPI';
 import userContainer from './userContainer';
 interface IStateAllContainer {
-    userFollow : any
+    userFollow: any
 }
 class FollowAllContainer<State extends IStateAllContainer> extends Container<IStateAllContainer>{
 
-    constructor(data : State) {
+    constructor(data: State) {
         super(data)
     }
     // this function will call when me  into idUser other
@@ -75,8 +76,8 @@ class FollowAllContainer<State extends IStateAllContainer> extends Container<ISt
     }
 }
 interface IFollowState {
-    allUserFollow : any[],
-    isFollow : boolean
+    allUserFollow: any[],
+    isFollow: boolean
 }
 class FollowContainer<State extends object> extends Container<IFollowState> {
     constructor(state) {

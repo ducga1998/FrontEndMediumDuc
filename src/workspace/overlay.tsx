@@ -1,7 +1,7 @@
 import * as React from 'react'
 import styled from 'styled-components';
-import UIWidget from '../Components/UI/UIWidget';
-// import { Input } from '../Components/styled/base';
+import UIWidget from 'Components/UI/UIWidget';
+// import { Input } from 'Components/styled/base';
 
 export default function OverLay({ getRef, imgSrc }) {
     const [state, setState] = React.useState([0, 0, 0, 0])

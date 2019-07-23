@@ -3,13 +3,13 @@ import * as React from 'react';
 import { toast } from 'react-toastify';
 import styled from 'styled-components';
 import userContainer from '../../Container/userContainer';
-import UIButton from '../../Components/UI/UIButton';
+import UIButton from 'Components/UI/UIButton';
 
-import { Section } from '../../Components/styled/nav';
-import { Label } from '../../Components/styled/button';
-import UIInput from '../../Components/UI/UIInput';
-import { FlexCol, P, H3, H2, H1 } from '../../Components/styled/base';
-import { AvatarImage } from '../../Components/styled/avatar';
+import { Section } from 'Components/styled/nav';
+import { Label } from 'Components/styled/button';
+import UIInput from 'Components/UI/UIInput';
+import { FlexCol, P, H3, H2, H1 } from 'Components/styled/base';
+import { AvatarImage } from 'Components/styled/avatar';
 import { redirect } from '../../route';
 
 const { useState, useEffect, useRef } = React

@@ -4,11 +4,11 @@ import styled from 'styled-components';
 
 import uuid from 'uuid/v1';
 import { addUser } from '../../API/userAPI';
-import UIButton from '../../Components/UI/UIButton';
-import UIField from '../../Components/UI/UIField';
-import { H3, H1 } from 'src/Components/styled/base';
-import { AvatarImage } from 'src/Components/styled/avatar';
-import { Section } from '../../Components/styled/nav';
+import UIButton from 'Components/UI/UIButton';
+import UIField from 'Components/UI/UIField';
+import { H3, H1 } from 'Components/styled/base';
+import { AvatarImage } from 'Components/styled/avatar';
+import { Section } from 'Components/styled/nav';
 const { useState } = React
 export default function Register() {
     const [login, setValueLogin] = useState('')

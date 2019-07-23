@@ -1,12 +1,12 @@
 import * as React from 'react';
 import styled from 'styled-components';
-import { FlexCol, H2, H3, Gradient } from '../../../Components/styled/base';
+import { FlexCol, H2, H3, Gradient } from 'Components/styled/base';
 import { getAllUser, updateInfomation, deleteUserById } from '../../../API/userAPI';
-import { AvatarImage } from '../../../Components/styled/avatar';
-import UIButton from '../../../Components/UI/UIButton';
-import UIModal from '../../../Components/UI/UIModal';
-import UIFieldAlgin from '../../../Components/UI/UIFieldAlgin';
-import UIEditer from '../../../Components/UI/UIEditer';
+import { AvatarImage } from 'Components/styled/avatar';
+import UIButton from 'Components/UI/UIButton';
+import UIModal from 'Components/UI/UIModal';
+import UIFieldAlgin from 'Components/UI/UIFieldAlgin';
+import UIEditer from 'Components/UI/UIEditer';
 import omit from 'lodash/omit'
 export default class ManagerAccount extends React.Component<any> {
     state = {

@@ -1,6 +1,6 @@
 import * as React from 'react'
 import styled from 'styled-components';
-import INTERATION from 'src/reuse/interaction'
+import INTERATION from 'reuse/interaction'
 class PageEditer extends React.Component {
     refSel: HTMLElement
     flowRef: HTMLElement

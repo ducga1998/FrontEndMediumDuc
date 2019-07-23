@@ -8,7 +8,7 @@ export function filterStringHTML(str: any, flag: boolean = false , lengthString 
     return str.replace(/<\/?[^>]+(>|$)/g, "").substring(0, lengthString) + dot;
 }
 export function getVariableNam(variable) {
-    Object.keys({ variable })[0]
+    return Object.keys({ variable })[0]
 }
 
 export function convertDataToGraphQL(API: any) {

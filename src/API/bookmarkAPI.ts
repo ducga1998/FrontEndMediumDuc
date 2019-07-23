@@ -1,4 +1,4 @@
-import { IArticleType } from 'src/API/articleAPI';
+import { IArticleType } from 'API/articleAPI';
 import { IUsertype } from './userAPI';
 import gql from "graphql-tag";
 import { client } from "./client";

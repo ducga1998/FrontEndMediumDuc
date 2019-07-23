@@ -1,9 +1,9 @@
 import * as React from 'react'
-import { StyledOutlineButton } from '../Components/styled/button';
-import UIButton from '../Components/UI/UIButton';
+import { StyledOutlineButton } from 'Components/styled/button';
+import UIButton from 'Components/UI/UIButton';
 import styled from 'styled-components';
-import { FlexRow } from '../Components/styled/base';
-import { Nav } from '../Components/styled/nav';
+import { FlexRow } from 'Components/styled/base';
+import { Nav } from 'Components/styled/nav';
 interface ITabs {
     items: { name: string, component: any }[]
 }

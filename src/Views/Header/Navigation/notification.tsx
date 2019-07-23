@@ -1,15 +1,15 @@
 import styled from "styled-components";
-import { LogoLink } from "../../../Components/styled/nav";
-import { StyledCard } from "../../../Components/styled/card";
+import { LogoLink } from "Components/styled/nav";
+import { StyledCard } from "Components/styled/card";
 import * as React from 'react'
-import Icon from "../../../Components/Icon";
-import { H3, Shadow } from "../../../Components/styled/base";
-import { getAllNotificationByIdUser, IdNotificationType } from "../../../API/notificationAPI";
-import { AvatarImage } from "../../../Components/styled/avatar";
-import { filterStringHTML, dieEvent } from "../../../help/help";
-import UIFieldAlgin from "../../../Components/UI/UIFieldAlgin";
-import Link from "src/Components/Link";
-import { StyledTextButton } from "../../../Components/styled/button";
+import Icon from "Components/Icon";
+import { H3, Shadow } from "Components/styled/base";
+import { getAllNotificationByIdUser, IdNotificationType } from "API/notificationAPI";
+import { AvatarImage } from "Components/styled/avatar";
+import { filterStringHTML, dieEvent } from "help/help";
+import UIFieldAlgin from "Components/UI/UIFieldAlgin";
+import Link from "Components/Link";
+import { StyledTextButton } from "Components/styled/button";
 function handleTypeNotification(type, data) {
     let { name, titleArticle, idUser } = data
     titleArticle = filterStringHTML(titleArticle)
@@ -46,9 +46,12 @@ export default function Notification() {
 
         setData([...allNotification, ...data])
     }
-    useEffect(async () => {
+    const fetchAndSetNotification = async () => {
         const allNotification = await getAllNotificationByIdUser(0, 10)
         setData(allNotification)
+    }
+    useEffect(() => {
+        fetchAndSetNotification()
         return null
     }, [])
     return <><NavButton

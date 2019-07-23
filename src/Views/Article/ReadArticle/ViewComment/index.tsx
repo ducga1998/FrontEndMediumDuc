@@ -2,10 +2,10 @@ import * as React from 'react';
 
 import styled from 'styled-components';
 import FormComment from './FormComment';
-import { getAllCommentinArtcileCurrent } from 'src/API/commentAPI';
-import { StyledTextButton } from 'src/Components/styled/button';
-import ListCommentView from './ListCommentView';;
-import UIPlaceHolder from '../../../../Components/UI/UIPlaceholder';
+import { getAllCommentinArtcileCurrent } from 'API/commentAPI';
+import { StyledTextButton } from 'Components/styled/button';
+import ListCommentView from './ListCommentView';
+import UIPlaceHolder from 'Components/UI/UIPlaceholder';
 interface IViewComment {
     idArticle: string,
 
