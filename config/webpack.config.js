@@ -331,6 +331,11 @@ module.exports = function (webpackEnv) {
                 name: 'static/media/[name].[hash:8].[ext]',
               },
             },
+            // {
+            //   test: /\.(ttf|eot|svg|woff(2)?)(\?[a-z0-9=&.]+)?$/,
+            //   include: [Path.join(__dirname, "src/assets")],
+            //   loader: "file-loader?name=assets/[name].[ext]"
+            // },
             // Process application JS with Babel.
             // The preset includes JSX, Flow, TypeScript, and some ESnext features.
             {

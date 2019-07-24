@@ -4,17 +4,17 @@ import ListArticle from '../Reuse/ArticleView/ListArticle';
 import { getAllHashTag, getArticleTagByNameHashTag, IHashtTagType } from 'API/hashtagAPI';
 import UIButton from 'Components/UI/UIButton';
 import { H2, H1 } from 'Components/styled/base';
-export default class HashTagView extends React.Component<{match : {params : {name : string}}}> {
+export default class HashTagView extends React.Component<{ match: { params: { name: string } } }> {
     state = {
         allHashtag: [] as IHashtTagType[],
         listArticle: []
     }
     async componentDidMount() {
-        const { match: { params: { name } } } = this.props 
+        const { match: { params: { name } } } = this.props
         const allHashtag = await getAllHashTag()
-        const listArticle = await getArticleTagByNameHashTag(name) 
+        const listArticle = await getArticleTagByNameHashTag(name)
         await this.setState({ allHashtag, listArticle })
-    }
+    };
     async componentDidUpdate(prevProps, prevState) {
         if (prevProps.match.params.name !== this.props.match.params.name) {
             const listArticle = await getArticleTagByNameHashTag(this.props.match.params.name);
@@ -23,7 +23,7 @@ export default class HashTagView extends React.Component<{match : {params : {nam
     }
 
     render() {
-        const { match: { params: { name } } } = this.props 
+        const { match: { params: { name } } } = this.props
         const { listArticle, allHashtag } = this.state
         return <WrapperHome>
             <div className="md-list-article">
@@ -33,7 +33,7 @@ export default class HashTagView extends React.Component<{match : {params : {nam
             <div className="md-list-hashtag">
                 <H2>All Hash Tag</H2>
                 {allHashtag.map(article => {
-                    const { idHashTag, nameHashTag } = article 
+                    const { idHashTag, nameHashTag } = article
                     return <UIButton category={name === nameHashTag ? 'danger' : undefined}
                         style={{ display: 'inline-block' }}
                         key={idHashTag}

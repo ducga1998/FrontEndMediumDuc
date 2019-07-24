@@ -1,7 +1,7 @@
 import * as React from 'react'
 import UIInput from 'Components/UI/UIInput';
 import styled from 'styled-components';
-// import buttonX from './buttonX.svg'
+import buttonX from './buttonX'
 import { getDataSearch } from '../../../API/articleAPI';
 import SmartList from './smartList';
 import { Input, fontStack } from 'Components/styled/base';
@@ -64,7 +64,7 @@ export default class Search extends React.Component<{}, StateSearch>{
                                     onKeyPress={this.handleKeyPress}
                                 />
                                 <span onMouseDown={this.close} className="close">
-                                    {/* <span dangerouslySetInnerHTML={{ __html: buttonX }} /> */}
+                                    <span dangerouslySetInnerHTML={{ __html: buttonX }} />
                                 </span>
                             </div>
                             <SmartList smartList={smartList} close={this.close} />
