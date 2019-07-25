@@ -13,25 +13,31 @@ import { AvatarImage } from 'Components/styled/avatar';
 class Navbar extends React.Component<any> {
     state = {
         sideBarOpen: false,
-        notificationOpen: false
+        notificationOpen: false,
+        scroll: false
     }
     navRef: HTMLElement
+    navFake: HTMLElement
     componentDidMount() {
+        this.navFake.style.height = this.navRef.getBoundingClientRect().height + 'px'
         window.addEventListener('scroll', (e: UIEvent) => {
-            if (window.scrollY < 1) {
+            if (window.scrollY === 0) {
                 this.navRef.style.position = ''
+                this.navFake.style.display = 'none'
             }
             else {
                 this.navRef.style.position = 'fixed'
+                this.navFake.style.display = 'flex'
+
             }
         })
     }
     render() {
         const { dataUser } = userContainer.state
         const { avatarLink } = dataUser
-        const { sideBarOpen } = this.state
+        const { sideBarOpen, scroll } = this.state
         const location = window.location.href
-        return <Nav ref={e => this.navRef = e}>
+        return <> <Nav ref={e => this.navRef = e}>
             <Nav>
                 <NavButton to="/" onClick={async (e) => { e.preventDefault(); await this.setState({ sideBarOpen: true }) }}>
                     <Icon onClick={() => { this.setState({ sideBarOpen: true }) }} glyph="menu" />
@@ -74,6 +80,18 @@ class Navbar extends React.Component<any> {
                 </UIPopUp>
             </Nav>
         </Nav>
+            <Nav ref={e => this.navFake = e} style={{ display: 'none', opacity: 0 }} >
+                <Nav>
+                    <NavButton to="/" onClick={async (e) => { e.preventDefault(); await this.setState({ sideBarOpen: true }) }}>
+                        <Icon onClick={() => { this.setState({ sideBarOpen: true }) }} glyph="menu" />
+                        <SideBar user={dataUser} open={sideBarOpen} setOpen={() => { this.setState({ sideBarOpen: false }) }} />
+                    </NavButton>
+
+
+
+                </Nav>
+            </Nav>
+        </>
     }
 }
 

@@ -135,7 +135,8 @@ export default class ChatMessage extends React.Component<IListRoom> {
     }
     render() {
         const idUserCurrent = userContainer.state.dataUser.idUser
-        const { active, messages, valueChat, rooms, selectingRoom , open } = this.state 
+        const { active, messages, valueChat, rooms, selectingRoom , open } = this.state ;
+        console.log('selectingRoom',selectingRoom)
         return <$Wrapper>
             <PeasonList>
                 {
@@ -166,7 +167,7 @@ export default class ChatMessage extends React.Component<IListRoom> {
                 }
             </PeasonList>
             <ChatZone>
-                {selectingRoom ? <>
+                {Object.keys(selectingRoom)[0] && selectingRoom ? <>
                     <div className="md-title_chatZone">
                         <h1>{selectingRoom.ownerUserInfo.idUser === idUserCurrent?selectingRoom.ownerUserInfo.name:
                                     selectingRoom.clientInfo.name}</h1>

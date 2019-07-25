@@ -9,7 +9,8 @@ export default class SmartList extends React.Component<{ smartList: { titleArtic
             return null
         }
         return <ul>
-            {smartList.map((item, key) =>
+            {
+                smartList.map((item, key) =>
                 <Li key={key}>
                     <A onClick={() => {
                         // location.href = `/article/${item.idArticle}`

@@ -27,7 +27,6 @@ class ReadArticle extends React.Component<IReadArticleType> {
     async componentDidMount() {
         const { match: { params: { id } } } = this.props
         const article = await getArticleById(id)
-        console.log('article',article)
         if (article) {
             notificationSocket.emit('join', userContainer.state.dataUser.idUser)
             await this.setState({ article })
@@ -43,17 +42,17 @@ class ReadArticle extends React.Component<IReadArticleType> {
         const { article } = this.state
         if (article && article.idArticle) {
             const { user: { idUser, avatarLink, name }, idArticle, contentArticle, titleArticle, hashTagData, createTime } = article
-            console.log('article article ',article)
+            console.log('article article ', article)
             return <ArticleContext.Provider value={article}>
                 <UIReaction idArticle={idArticle} idUseOwnArticler={idUser} titleArticle={titleArticle} />
                 <WrapperReadArticle>
                     <div className="pb-duc-introduce-author" >
-                        <H1><div dangerouslySetInnerHTML={{__html: titleArticle}} /></H1>
+                        <H1><div dangerouslySetInnerHTML={{ __html: titleArticle }} /></H1>
                         <Author idUser={idUser} avatarLink={avatarLink} totalFollow={10} name={name || ''} totalArticle={213} />
                         <P style={{ color: '#b2b2b2' }}>{timeDifference(new Date(), new Date(createTime))}</P>
                     </div>
                     <div className="pb-duc-content-article">
-                        <P><div dangerouslySetInnerHTML={{__html: contentArticle}} /> </P>
+                        <P><div dangerouslySetInnerHTML={{ __html: contentArticle }} /> </P>
                         <Section>
                             {
                                 hashTagData && hashTagData.map((hashTag, key) =>
