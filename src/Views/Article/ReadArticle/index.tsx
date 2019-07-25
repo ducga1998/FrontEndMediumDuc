@@ -6,7 +6,6 @@ import { getArticleById, IArticleType } from '../../../API/articleAPI';
 import UILoading from 'Components/UI/UILoading';
 import Author from '../../Author';
 import UIReaction from 'Components/UI/UIReaction';
-import { StyledSolidButton } from 'Components/styled/button';
 import { H2, H4, H1, P } from 'Components/styled/base';
 import { Section } from 'Components/styled/nav';
 import ViewComment from './ViewComment';
@@ -28,6 +27,7 @@ class ReadArticle extends React.Component<IReadArticleType> {
     async componentDidMount() {
         const { match: { params: { id } } } = this.props
         const article = await getArticleById(id)
+        console.log('article',article)
         if (article) {
             notificationSocket.emit('join', userContainer.state.dataUser.idUser)
             await this.setState({ article })
@@ -41,8 +41,9 @@ class ReadArticle extends React.Component<IReadArticleType> {
     }
     render() {
         const { article } = this.state
-        if (article) {
+        if (article && article.idArticle) {
             const { user: { idUser, avatarLink, name }, idArticle, contentArticle, titleArticle, hashTagData, createTime } = article
+            console.log('article article ',article)
             return <ArticleContext.Provider value={article}>
                 <UIReaction idArticle={idArticle} idUseOwnArticler={idUser} titleArticle={titleArticle} />
                 <WrapperReadArticle>

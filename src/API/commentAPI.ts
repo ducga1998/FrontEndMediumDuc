@@ -5,23 +5,23 @@ import { IUsertype } from "./userAPI";
 import { IArticleType } from "./articleAPI";
 //QUERIES 
 export interface ICommentType {
-    idUser :string
-    idComment :string
-    idArticle :string
-    content :string
-    createdAt : string
-    idReply ?: string
-    userComment ?: IUsertype
-    articleComment ?:IArticleType
+    idUser: string
+    idComment: string
+    idArticle: string
+    content: string
+    createdAt: string
+    idReply?: string
+    userComment?: IUsertype
+    articleComment?: IArticleType
 }
-export function getAllCommentinArtcileCurrent(idUser: string , first :number , offset : number ): Promise<ICommentType[]>{
-    console.log('999', idUser)
+export function getAllCommentinArtcileCurrent(idArticle: string, first: number, offset: number): Promise<ICommentType[]> {
+    console.log('999', idArticle)
     return new Promise(async resolve => {
         const API = await client.query({
             query: gql`
                     query {
                         # add mechasim have idComment
-                        getAllCommentInTheArticle(id:"${idUser}", first: ${first} ,offset:${offset} ){
+                        getAllCommentInTheArticle(id:"${idArticle}", first: ${first} ,offset:${offset} ){
                             idUser
                             idComment
                             idArticle
@@ -48,7 +48,7 @@ export function getAllCommentinArtcileCurrent(idUser: string , first :number , o
 //MUATION 
 // this is function felp we add comment into a article , 
 // input : idArticle and  content comment ?  . Iam not sure  :v 
-export function addComment(input: { idComment : string ,  idUser: string,  content: string , idReply?: string }) :Promise<ICommentType>{
+export function addComment(input: { idComment: string, idUser: string, content: string, idReply?: string }): Promise<ICommentType> {
     return new Promise(async resolve => {
         const API = await client.mutate({
             mutation: gql`
@@ -73,15 +73,15 @@ export function addComment(input: { idComment : string ,  idUser: string,  conte
                 input
             }
         },
-        
-    )
+
+        )
         // const { data: { addCommentIntoArticle } } = API
         resolve(convertDataToGraphQL(API));
 
 
     })
-} 
-export function addReplyComment(input: { idUser: string, idArticle: string, content: string , idReply :string }) : Promise<ICommentType> {
+}
+export function addReplyComment(input: { idUser: string, idArticle: string, content: string, idReply: string }): Promise<ICommentType> {
     return new Promise(async resolve => {
         const API = await client.mutate({
             mutation: gql`

@@ -1,13 +1,39 @@
 import styled from "styled-components";
 import { IMAGE_SOURCE_DEFAULT } from "help/define";
+import FormComment from "./FormComment";
 import { timeDifference } from "../../../../help/util";
-import { AvatarImage } from "Components/styled/avatar";
+import { AvatarImage } from "../../../../Components/styled/avatar";
 import renderHTML from 'react-render-html';
 import * as React from "react";
 import { renderElement } from "Core/renderElement";
 import { H5, H2, H3, FlexRow } from "Components/styled/base";
-import { renderComment } from "./renderComment";
-export const NormalComment = ({ idComment, avatarLink, content, createdAt, replys, setOpen, open, name }) => {
+export default renderElement(
+    function renderComment({ normalComment, context, replyComments }) {
+        const [open, setOpen] = React.useState(false)
+        const [replys, setReplys] = React.useState(replyComments ? replyComments : [])
+        const { user: { avatarLink, name } } = context
+        const { createdAt, content, idComment } = normalComment
+        function addCommentReply(reply) {
+            replys.push(reply);
+            setReplys(replys)
+        }
+        return <>
+            <NormalComment {...{ idComment, avatarLink, content, createdAt, replys, setOpen, open, name }} />
+            {
+                open && <WrapperReply>
+                    {
+                        replys.length > 0 ? replys.map(item => <NormalComment {...{ ...item, ...{ avatarLink, setOpen, open, name } }} />)
+                            : null
+                    }
+                    <FormComment
+                        onChange={addCommentReply}
+                        idReply={idComment} />
+                </WrapperReply>
+            }
+        </>
+    }
+)
+const NormalComment = ({ idComment, avatarLink, content, createdAt, replys, setOpen, open, name }) => {
     return <$Comment data-id={idComment}
         onMouseDown={() => setOpen(!open)}>
         <AvatarImage src={avatarLink ? avatarLink : IMAGE_SOURCE_DEFAULT} />
@@ -21,8 +47,7 @@ export const NormalComment = ({ idComment, avatarLink, content, createdAt, reply
         {replys && replys.length > 0 && <H2>{replys.length} Reply comment</H2>}
     </$Comment>
 }
-export default renderElement(renderComment)
-export const WrapperReply = styled.div`
+const WrapperReply = styled.div`
     padding  : 10px 0px 0px 40px;
 `
 const $Content = styled.div`
