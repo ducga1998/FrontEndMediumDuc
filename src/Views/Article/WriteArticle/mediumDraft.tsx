@@ -25,6 +25,7 @@ import {
   HANDLED,
   NOT_HANDLED
 } from 'medium-draft'
+import { stateToHTML } from 'draft-js-export-html';
 import {
   setRenderOptions,
   blockToHTML,
@@ -37,6 +38,7 @@ import './draft.css'
 import OverLay from '../../../workspace/overlay';
 import CustomImageSideButton from './CustomImageSideButton'
 import styled from 'styled-components';
+import { convertToHTML } from 'draft-convert'
 interface IMediumDraft {
   onChangeTitle: (e: any) => any,
   onChangeContent: (e: string) => any,
@@ -63,12 +65,16 @@ export default class MediumDraft extends React.Component<IMediumDraft> {
     // const domEditer =   document.querySelectorAll('[data-contents="true"]')[0]
     // console.log(domEditer.innerHTML)
     const currentContent = this.state.editorState.getCurrentContent();
-    // console.log('currentContent',currentContent)
+
+    console.log('currentContent', currentContent)
     const title = currentContent.getFirstBlock().text
-    const eHTML = this.exporter(currentContent);
+    const eHTML = stateToHTML(currentContent);
+    // const eHTML = this.exporter(currentContent);
     await this.props.onChangeTitle(title)
     await this.props.onChangeContent(eHTML)
-    // console.log('html',eHTML)
+    // console.log('editorState', html)
+    // const renderedHTML = mediumDraftExporter(editorState.getCurrentContent());
+    // console.log('html', renderedHTML)
     if (this.state.editorEnabled) {
       this.setState({ editorState }, () => {
         if (callback) {

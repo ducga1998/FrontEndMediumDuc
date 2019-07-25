@@ -8,15 +8,14 @@ import { updateDataArticle, updateContent } from '../WriteArticle';
 import MediumDraft from '../WriteArticle/mediumDraft';
 import { fontStack } from 'Components/styled/base';
 import UILoading from 'Components/UI/UILoading';
-
-class WriteArticle extends React.Component<{match : { params : {id : string}}} , {dataArticle : IArticleType}> {
+class WriteArticle extends React.Component<{ match: { params: { id: string } } }, { dataArticle: IArticleType }> {
     state = {
         dataArticle: {} as IArticleType
     }
     async componentDidMount() {
         const { params: { id } } = this.props.match
         await articleContainer.setState({ isUpdate: true, idArticleNeedUpdate: id })
-        const dataArticle = await getArticleById(id) 
+        const dataArticle = await getArticleById(id)
         // console.log('dataArticle', dataArticle)
         if (dataArticle) {
             console.log('data article to store ', dataArticle)
@@ -32,12 +31,12 @@ class WriteArticle extends React.Component<{match : { params : {id : string}}} ,
         if (!dataArticle) {
             return <UILoading />
         }
-        const { titleArticle, contentArticle } = dataArticle ;
+        const { titleArticle, contentArticle } = dataArticle;
         if (titleArticle === '' && contentArticle === '') {
             return null
         }
         return <$Align>
-            <div className= "width70">
+            <div className="width70">
                 <Author idUser={idUser} avatarLink={avatarLink} totalFollow={10} name={name} totalArticle={articles.length} />
                 <MediumDraft
                     onChangeTitle={value => updateDataArticle('titleArticle', value)}
