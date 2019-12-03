@@ -9,7 +9,6 @@ import {
   AtomicBlockUtils,
   Entity,
   EditorBlock,
-  OrderedSet
 } from 'draft-js';
 import {
   Editor,
@@ -179,7 +178,7 @@ export default class MediumDraft extends React.Component<IMediumDraft> {
     try {
       const blockData = JSON.parse(data);
       console.log(blockData);
-      this.onChange(EditorState.push(this.state.editorState, convertFromRaw(blockData)), this._editor.focus);
+      // this.onChange(EditorState.push(this.state.editorState, convertFromRaw(blockData)), this._editor.focus);
     } catch (e) {
       console.log(e);
     }
@@ -262,7 +261,7 @@ export default class MediumDraft extends React.Component<IMediumDraft> {
           rendererFn={this.rendererFn}
           blockRendererFn={this.blockRendererFn}
           customStyleMap={styleMap}
-          orderedSet={OrderedSet}
+          // orderedSet={OrderedSet}
         >
 
         </Editor>
@@ -330,18 +329,18 @@ const handleBeforeInput = (editorState, str, onChange) => {
     const contentState = editorState.getCurrentContent();
     const text = currentBlock.getText();
     const len = text.length;
-    if (selectionState.getAnchorOffset() === 0) {
-      onChange(EditorState.push(editorState, Modifier.insertText(contentState, selectionState, (str === '"' ? DQUOTE_START : SQUOTE_START)), 'transpose-characters'));
-      return HANDLED;
-    } else if (len > 0) {
-      const lastChar = text[len - 1];
-      if (lastChar !== ' ') {
-        onChange(EditorState.push(editorState, Modifier.insertText(contentState, selectionState, (str === '"' ? DQUOTE_END : SQUOTE_END)), 'transpose-characters'));
-      } else {
-        onChange(EditorState.push(editorState, Modifier.insertText(contentState, selectionState, (str === '"' ? DQUOTE_START : SQUOTE_START)), 'transpose-characters'));
-      }
-      return HANDLED;
-    }
+    // if (selectionState.getAnchorOffset() === 0) {
+    //   onChange(EditorState.push(editorState, Modifier.insertText(contentState, selectionState, (str === '"' ? DQUOTE_START : SQUOTE_START)), 'transpose-characters'));
+    //   return HANDLED;
+    // } else if (len > 0) {
+    //   const lastChar = text[len - 1];
+    //   if (lastChar !== ' ') {
+    //     onChange(EditorState.push(editorState, Modifier.insertText(contentState, selectionState, (str === '"' ? DQUOTE_END : SQUOTE_END)), 'transpose-characters'));
+    //   } else {
+    //     onChange(EditorState.push(editorState, Modifier.insertText(contentState, selectionState, (str === '"' ? DQUOTE_START : SQUOTE_START)), 'transpose-characters'));
+    //   }
+    //   return HANDLED;
+    // }
   }
   return beforeInput(editorState, str, onChange, newTypeMap);
 };

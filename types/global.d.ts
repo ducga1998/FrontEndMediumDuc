@@ -3,4 +3,6 @@ declare var __webpack_public_path__: string
 interface Window {
     [key: string]: any
 }
+declare module 'draft-js-export-html'
+declare module 'draft-js'
 
