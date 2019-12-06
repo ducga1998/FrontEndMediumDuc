@@ -28,15 +28,14 @@ export default function Article({ article, typeArticle, vectical, horizontal, st
     }
     console.log('hashTagData =====>', hashTagData)
     const { name, avatarLink, idUser } = user
-    const backgroundArticle = `http://localhost:4000/img/${imageArticle}`
     const linkSwitchArticle = typeArticle && typeArticle === 'store' ? `/store/${idArticle}` : `/article/${idArticle}`
     return <$Article style={style || undefined} vectical={vectical || undefined}>
         <Link to={linkSwitchArticle} TypeDom="div">
             {
                 vectical ?
-                    <AvatarImage size={80} radius="24px" src={`${imageArticle ? backgroundArticle : './backgroundDefault.jpg'}`} />
+                    <AvatarImage size={80} radius="24px" src={`${imageArticle ? imageArticle : './backgroundDefault.jpg'}`} />
                     : <WrapperImg>
-                        <SrcImage src={`${imageArticle ? backgroundArticle : './backgroundDefault.jpg'}`} />
+                        <SrcImage src={`${imageArticle ? imageArticle : './backgroundDefault.jpg'}`} />
                     </WrapperImg>
             }
         </Link>

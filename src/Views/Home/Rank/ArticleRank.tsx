@@ -15,7 +15,7 @@ function ArticleRank({ article, type }: IRankArticle) {
             return <FlexCol key={key}>
                 <FlexRow data-tooltip={filterStringHTML(titleArticle, true, 100)}   >
                     <Link to={`/article/${idArticle}`} >
-                        <AvatarImage plan sizeBorder="2px" radius={0} size={40} src={`${LINK_DEVELOPMENT}/img/${imageArticle}`} />
+                        <AvatarImage plan sizeBorder="2px" radius={0} size={40} src={imageArticle} />
                     </Link>
                     <Link className="name" to={`/article/${idArticle}`}   >
                         <H2 className="caption" >

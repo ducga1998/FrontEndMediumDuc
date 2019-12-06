@@ -34,7 +34,6 @@ class AllArticleContainer<State extends IAllArticleContainer> extends Container<
         const count = await countArticle() as number
         // console.log('dataFake', dataFake)
         if (allArticle) {
-            console.log('allArticle', allArticle)
             const listContainer = allArticle.map(item => {
                 // const data = omit(item, ['comment'])
                 const articleContainer = new Article(item) as Article

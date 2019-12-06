@@ -1,7 +1,7 @@
 const proxy = require('http-proxy-middleware')
 
 module.exports = function (app) {
-	app.use(proxy(['/shopify', '/graphql', '/image-proxy', '/api', '/help-center', '/ali-reviews-proxy'], {
+	app.use(proxy(['/shopify', '/graphql', '/image-proxy', '/api', '/help-center', '/ali-reviews-proxy','/img'], {
 		'target': 'http://localhost:4000/',
 		'secure': false,
 	}))
