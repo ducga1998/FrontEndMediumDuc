@@ -24,7 +24,7 @@ import {
   HANDLED,
   NOT_HANDLED
 } from 'medium-draft'
-import { stateToHTML } from 'draft-js-export-html';
+import { stateToHTML } from 'draft-js-export-html'; 
 import {
   setRenderOptions,
   blockToHTML,
@@ -57,7 +57,7 @@ export default class MediumDraft extends React.Component<IMediumDraft> {
   };
   _editor: any = React.createRef()
   wrapperEditer: any = React.createRef()
-  onChange = async (editorState, callback?: any) => {
+  onChange = async (editorState, callback?: any, a  = 0) => {
     // console.log(convertToRaw)
     console.log(editorState)
     //   // console.log('content', editorState)
@@ -69,6 +69,7 @@ export default class MediumDraft extends React.Component<IMediumDraft> {
     const title = currentContent.getFirstBlock().text
     const eHTML = stateToHTML(currentContent);
     // const eHTML = this.exporter(currentContent);
+    console.log("eHTML",eHTML)
     await this.props.onChangeTitle(title)
     await this.props.onChangeContent(eHTML)
     // console.log('editorState', html)
@@ -178,7 +179,7 @@ export default class MediumDraft extends React.Component<IMediumDraft> {
     try {
       const blockData = JSON.parse(data);
       console.log(blockData);
-      // this.onChange(EditorState.push(this.state.editorState, convertFromRaw(blockData)), this._editor.focus);
+      // this.onChange(EditorState.push(this.state.editorState, convertFromRaw(blockData)), );
     } catch (e) {
       console.log(e);
     }
@@ -215,21 +216,21 @@ export default class MediumDraft extends React.Component<IMediumDraft> {
   }
   handleMouseDown = (event) => {
     // event.stopPropagation()
-    console.log(event.target)
-    if (event.target.tagName === 'IMG') {
-      const { width, height, top, left } = event.target.getBoundingClientRect()
-      const view = event.target.ownerDocument.defaultView
-      const scrollTop = view.scrollY
-      const imgSrc = event.target.getAttribute('src')
-      this.setState({ imgSrc })
-      this.refOverLay.style.width = width + 'px'
-      this.refOverLay.style.height = height + 'px'
-      this.refOverLay.style.top = (top + scrollTop) + 'px'
+    // console.log(event.target)
+    // if (event.target.tagName === 'IMG') {
+    //   const { width, height, top, left } = event.target.getBoundingClientRect()
+    //   const view = event.target.ownerDocument.defaultView
+    //   const scrollTop = view.scrollY
+    //   const imgSrc = event.target.getAttribute('src')
+    //   this.setState({ imgSrc })
+    //   this.refOverLay.style.width = width + 'px'
+    //   this.refOverLay.style.height = height + 'px'
+    //   this.refOverLay.style.top = (top + scrollTop) + 'px'
 
-      this.refOverLay.style.left = (left) + 'px'
+    //   this.refOverLay.style.left = (left) + 'px'
 
-      console.log('nguyen inh duc', this.refOverLay)
-    }
+    //   console.log('nguyen inh duc', this.refOverLay)
+    // }
   }
   blockRendererFn = function (contentBlock) {
     const type = contentBlock.getType()

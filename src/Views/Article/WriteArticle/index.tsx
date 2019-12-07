@@ -6,9 +6,9 @@ import userContainer from '../../../Container/userContainer';
 import Author from '../../Author';
 import MediumDraft from './mediumDraft';
 import { fontStack } from 'Components/styled/base';
-
+import Editer from './Page'
 export const updateDataArticle = debouce(async (value, content) => {
-    await articleContainer.setState({ isPublicArticle: true, [value]: content })
+    await articleContainer.setState({ isPublicArticle: true, [value]: content })    
 }, 1000)
 export const updateContent = debouce(async (content ) => {
     await articleContainer.setState({ isPublicArticle: true, 'contentArticle': content })
@@ -22,10 +22,7 @@ const WriteArticle = () => {
     return <$Align>
         <Wrapper  >
             <Author idUser={idUser} avatarLink={avatarLink} totalFollow={10} name={name} totalArticle={articles.length} />
-            <MediumDraft
-                onChangeTitle={value => updateDataArticle('titleArticle', value)}
-                onChangeContent={value => updateContent(value)}
-             />
+         <Editer/>
         </Wrapper>  
     </$Align>
 }

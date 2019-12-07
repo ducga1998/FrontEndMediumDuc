@@ -14,6 +14,7 @@ export default function ButtonArticle() {
     const [open, setOpen] = React.useState(false)
     const [suggestion, setSuggestion] = React.useState([] as string[])
     let id = uuid()
+    
     const [idArticle, setIdArticle] = React.useState(id)
     const handleAddHashTag = async (tag) => {
         const { text: nameHashTag } = tag

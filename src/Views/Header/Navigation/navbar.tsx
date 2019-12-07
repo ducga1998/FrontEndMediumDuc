@@ -86,9 +86,6 @@ class Navbar extends React.Component<any> {
                         <Icon onClick={() => { this.setState({ sideBarOpen: true }) }} glyph="menu" />
                         <SideBar user={dataUser} open={sideBarOpen} setOpen={() => { this.setState({ sideBarOpen: false }) }} />
                     </NavButton>
-
-
-
                 </Nav>
             </Nav>
         </>

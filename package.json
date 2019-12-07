@@ -4,6 +4,8 @@
   "private": true,
   "dependencies": {
     "@babel/core": "7.4.3",
+    "@react-page/plugins-html5-video": "^0.16.4",
+    "@react-page/react-page": "^0.16.4",
     "@svgr/webpack": "4.1.0",
     "@types/draft-js": "^0.10.37",
     "@types/jest": "24.0.15",
