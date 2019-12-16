@@ -5135,10 +5135,12 @@ dotenv@6.2.0:
   version "6.2.0"
   resolved "https://registry.yarnpkg.com/dotenv/-/dotenv-6.2.0.tgz#941c0410535d942c8becf28d3f357dbd9d476064"
 
-draft-convert@^2.1.6:
-  version "2.1.6"
-  resolved "https://registry.yarnpkg.com/draft-convert/-/draft-convert-2.1.6.tgz#274716e7e194ac3ea60cd532b4caabe22b3cf1bd"
+draft-convert@^2.1.8:
+  version "2.1.8"
+  resolved "https://registry.yarnpkg.com/draft-convert/-/draft-convert-2.1.8.tgz#0508efafeea79e11e5793ba771948128ba151291"
+  integrity sha512-69etPa5JzZVELs4Lzobgxes1oka5IUyJC+NVIVnA9HPO5eOYLqAONFYxmav1vJjYyHsabq/20nSXj2MtIIQ4Fg==
   dependencies:
+    "@babel/runtime" "^7.5.5"
     immutable "~3.7.4"
     invariant "^2.2.1"
 

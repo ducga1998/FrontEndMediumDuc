@@ -6,9 +6,9 @@ import userContainer from '../../../Container/userContainer';
 import Author from '../../Author';
 import MediumDraft from './mediumDraft';
 import { fontStack } from 'Components/styled/base';
-import Editer from './Page'
+import './medium.css'
 export const updateDataArticle = debouce(async (value, content) => {
-    await articleContainer.setState({ isPublicArticle: true, [value]: content })    
+    await articleContainer.setState({ isPublicArticle: true, [value]: content })
 }, 1000)
 export const updateContent = debouce(async (content ) => {
     await articleContainer.setState({ isPublicArticle: true, 'contentArticle': content })
@@ -22,15 +22,18 @@ const WriteArticle = () => {
     return <$Align>
         <Wrapper  >
             <Author idUser={idUser} avatarLink={avatarLink} totalFollow={10} name={name} totalArticle={articles.length} />
-         <Editer/>
-        </Wrapper>  
+            <MediumDraft
+                onChangeTitle={value => updateDataArticle('titleArticle', value)}
+                onChangeContent={value => updateContent(value)}
+            />
+        </Wrapper>
     </$Align>
 }
 const Wrapper = styled.div`
     width : 70%;
     position : relative;
 `
-// scalable very good 
+// scalable very good
 const $Align = styled.div`
     ${fontStack}  
         display : flex;
@@ -40,4 +43,4 @@ const $Align = styled.div`
         justify-content : center;
         font-size : 1.5em;
 `
-export default WriteArticle 
+export default WriteArticle

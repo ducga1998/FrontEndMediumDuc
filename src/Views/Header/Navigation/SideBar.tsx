@@ -107,7 +107,6 @@ const TextCard = styled(IconLink)`
 
 `
 const WrapperSideBar = styled.div`
-    overflow : scroll;
     width: 400px;
     height : 100%;
     box-shadow: 2px -1px 20px 2px ${props => props.theme.brand.alt};

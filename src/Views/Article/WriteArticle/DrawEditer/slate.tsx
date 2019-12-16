@@ -22,3 +22,4 @@ export const reducedSlate = slate(def => ({
     emphasize: def.plugins.emphasize,
   }
 }));
+window['reducedSlate']= reducedSlate

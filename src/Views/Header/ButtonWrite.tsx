@@ -48,8 +48,7 @@ export default function ButtonArticle() {
             {
                 (container: ArticleContainer) => {
                     const { isPublicArticle, isUpdate, arrHashTag } = container.state
-                    return isPublicArticle ?
-                        (<UIModal open={open} openModal={() => {
+                    return (<UIModal open={open} openModal={() => {
                             setOpen(true)
                         }}
                             closeMoDal={() => {
@@ -99,7 +98,7 @@ export default function ButtonArticle() {
                                     toast.error(":( Error , just kidding me, FUCKING CODE FOR ME")
                                 }
                             }}> Public Article  </UIButton>}
-                        </UIModal>) : null
+                        </UIModal>)
                 }
             }
         </Subscribe>

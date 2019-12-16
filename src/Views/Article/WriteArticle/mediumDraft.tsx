@@ -24,20 +24,35 @@ import {
   HANDLED,
   NOT_HANDLED
 } from 'medium-draft'
-import { stateToHTML } from 'draft-js-export-html'; 
+import { stateToHTML } from 'draft-js-export-html';
+import 'isomorphic-fetch';
+import mediumDraftImporter from 'medium-draft/lib/importer';
+// import './draft.css'
+import OverLay from '../../../workspace/overlay';
+import CustomImageSideButton from './CustomImageSideButton'
+import styled from 'styled-components';
+
 import {
   setRenderOptions,
   blockToHTML,
   entityToHTML,
-  styleToHTML
-} from 'medium-draft/lib/exporter';
-import 'isomorphic-fetch';
-import mediumDraftImporter from 'medium-draft/lib/importer';
-import './draft.css'
-import OverLay from '../../../workspace/overlay';
-import CustomImageSideButton from './CustomImageSideButton'
-import styled from 'styled-components';
-import { convertToHTML } from 'draft-convert'
+  styleToHTML,
+} from './exporter';
+
+let options = {
+  entityStyleFn: (entity) => {
+    const entityType = entity.get('type').toLowerCase();
+    const data = entity.getData();
+    switch(entityType){
+      case 'image':
+        return {
+          element: 'img',
+          attributes: { src: data.src },
+          style: { maxWidth: '100%', height: 'auto' }
+        }
+    }
+  }
+};
 interface IMediumDraft {
   onChangeTitle: (e: any) => any,
   onChangeContent: (e: string) => any,
@@ -48,6 +63,38 @@ const styleMap = {
     textDecoration: 'line-through',
   },
 };
+
+const newBlockToHTML = (block) => {
+  const blockType = block.type;
+  if (block.type === Block.ATOMIC) {
+    if (block.text === 'E') {
+      return {
+        start: '<figure class="md-block-atomic md-block-atomic-embed">',
+        end: '</figure>',
+      };
+    } else if (block.text === '-') {
+      return <div className="md-block-atomic md-block-atomic-break"><hr/></div>;
+    }
+  }
+  return blockToHTML(block);
+};
+const newEntityToHTML = (entity, originalText) => {
+  if (entity.type === 'embed') {
+    return (
+        <div>
+          <a
+              className="embedly-card"
+              href={entity.data.url}
+              data-card-controls="0"
+              data-card-theme="dark"
+          >Embedded ― {entity.data.url}
+          </a>
+        </div>
+    );
+  }
+  return entityToHTML(entity, originalText);
+};
+
 export default class MediumDraft extends React.Component<IMediumDraft> {
   state = {
     editorState: createEditorState(),
@@ -64,14 +111,15 @@ export default class MediumDraft extends React.Component<IMediumDraft> {
     // const domEditer =   document.querySelectorAll('[data-contents="true"]')[0]
     // console.log(domEditer.innerHTML)
     const currentContent = this.state.editorState.getCurrentContent();
+    const ducccc = this.exporter(currentContent);
 
     console.log('currentContent', currentContent)
     const title = currentContent.getFirstBlock().text
-    const eHTML = stateToHTML(currentContent);
+    const eHTML = stateToHTML(currentContent,options);
     // const eHTML = this.exporter(currentContent);
-    console.log("eHTML",eHTML)
-    await this.props.onChangeTitle(title)
-    await this.props.onChangeContent(eHTML)
+    console.log("ducccc",ducccc)
+    // await this.props.onChangeTitle(title)
+    // await this.props.onChangeContent(eHTML)
     // console.log('editorState', html)
     // const renderedHTML = mediumDraftExporter(editorState.getCurrentContent());
     // console.log('html', renderedHTML)
@@ -83,6 +131,7 @@ export default class MediumDraft extends React.Component<IMediumDraft> {
       });
     }
   };
+  // tooklb
   sideButtons = [{
     title: 'Image',
     component: CustomImageSideButton,
@@ -192,13 +241,13 @@ export default class MediumDraft extends React.Component<IMediumDraft> {
       // window.ga('send', 'event', 'draftjs', 'toggle-edit', this.state.editorEnabled + '');
     });
   }
-  handleDroppedFiles = (selection, files) => {
+  handleDroppedFiles = async (selection, files) => {
     // window.ga('send', 'event', 'draftjs', 'filesdropped', files.length + ' files');
     const file = files[0];
     if (file.type.indexOf('image/') === 0) {
       // eslint-disable-next-line no-undef
       const src = URL.createObjectURL(file);
-      this.onChange(addNewBlockAt(
+     await  this.onChange(addNewBlockAt(
         this.state.editorState,
         selection.getAnchorKey(),
         Block.IMAGE, {
@@ -283,35 +332,7 @@ class Line extends React.Component<any> {
 }
 const EditerWrapper = styled.div`
 `
-const newBlockToHTML = (block) => {
-  if (block.type === Block.ATOMIC) {
-    if (block.text === 'E') {
-      return {
-        start: '<figure class="md-block-atomic md-block-atomic-embed">',
-        end: '</figure>',
-      };
-    } else if (block.text === '-') {
-      return <div className="md-block-atomic md-block-atomic-break"><hr /></div>;
-    }
-  }
-  return blockToHTML(block);
-};
-const newEntityToHTML = (entity, originalText) => {
-  if (entity.type === 'embed') {
-    return (
-      <div>
-        <a
-          className="embedly-card"
-          href={entity.data.url}
-          data-card-controls="0"
-          data-card-theme="dark"
-        >Embedded ― {entity.data.url}
-        </a>
-      </div>
-    );
-  }
-  return entityToHTML(entity, originalText);
-};
+
 const newTypeMap = StringToTypeMap;
 newTypeMap['2.'] = Block.OL;
 const { hasCommandModifier } = KeyBindingUtil;
