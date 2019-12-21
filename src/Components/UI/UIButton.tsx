@@ -37,7 +37,7 @@ export default function UIButton({ type , to,
         default:
             break;
     }
-    console.log('categoryButton',categoryButton)
+    // console.log('categoryButton',categoryButton)
     let Button 
         switch(type ){
         case 'soild' :

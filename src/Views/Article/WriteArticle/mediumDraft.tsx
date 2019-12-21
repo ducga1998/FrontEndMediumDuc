@@ -1,30 +1,28 @@
 import * as React from 'react';
-import * as ReactDOM from 'react-dom';
 import {
-  EditorState,
-  convertToRaw,
+  AtomicBlockUtils,
   convertFromRaw,
+  convertToRaw,
+  EditorBlock,
+  EditorState,
+  Entity,
   KeyBindingUtil,
   Modifier,
-  AtomicBlockUtils,
-  Entity,
-  EditorBlock,
 } from 'draft-js';
 import {
-  Editor,
-  StringToTypeMap,
-  Block,
-  keyBindingFn,
-  createEditorState,
   addNewBlockAt,
   beforeInput,
+  Block,
+  createEditorState,
+  Editor,
   getCurrentBlock,
-  ImageSideButton,
-  rendererFn,
   HANDLED,
-  NOT_HANDLED
+  keyBindingFn,
+  NOT_HANDLED,
+  rendererFn,
+  StringToTypeMap
 } from 'medium-draft'
-import { stateToHTML } from 'draft-js-export-html';
+import stateToHTML from './stateHTML';
 import 'isomorphic-fetch';
 import mediumDraftImporter from 'medium-draft/lib/importer';
 // import './draft.css'
@@ -32,17 +30,25 @@ import OverLay from '../../../workspace/overlay';
 import CustomImageSideButton from './CustomImageSideButton'
 import styled from 'styled-components';
 
-import {
-  setRenderOptions,
-  blockToHTML,
-  entityToHTML,
-  styleToHTML,
-} from './exporter';
+import {blockToHTML, entityToHTML, setRenderOptions, styleToHTML,} from './exporter';
+// import stateToHTML from "./stateHTML";
+
+// window['stateToHTML'] = stateToHTML
 
 let options = {
+  blockStyleFn: (entity) => {
+
+    if (entity.type === "atomic:image") {
+      console.log("entity", entity)
+     return {}
+
+    }
+    return null
+  },
   entityStyleFn: (entity) => {
     const entityType = entity.get('type').toLowerCase();
     const data = entity.getData();
+    console.log('entityType', entityType)
     switch(entityType){
       case 'image':
         return {
@@ -106,18 +112,19 @@ export default class MediumDraft extends React.Component<IMediumDraft> {
   wrapperEditer: any = React.createRef()
   onChange = async (editorState, callback?: any, a  = 0) => {
     // console.log(convertToRaw)
-    console.log(editorState)
+    // console.log(editorState)
     //   // console.log('content', editorState)
     // const domEditer =   document.querySelectorAll('[data-contents="true"]')[0]
     // console.log(domEditer.innerHTML)
-    const currentContent = this.state.editorState.getCurrentContent();
-    const ducccc = this.exporter(currentContent);
+    const currentContent = editorState.getCurrentContent();
+    // const ducccc = this.exporter(currentContent);
 
-    console.log('currentContent', currentContent)
+    // console.log('currentContent', currentContent)
     const title = currentContent.getFirstBlock().text
-    const eHTML = stateToHTML(currentContent,options);
-    // const eHTML = this.exporter(currentContent);
-    console.log("ducccc",ducccc)
+    const eHTML = stateToHTML(currentContent)
+    console.log("eHTML", eHTML)
+    // const duc = this.exporter(currentContent);
+    // console.log("ducccc", duc)
     // await this.props.onChangeTitle(title)
     // await this.props.onChangeContent(eHTML)
     // console.log('editorState', html)
@@ -228,7 +235,7 @@ export default class MediumDraft extends React.Component<IMediumDraft> {
     try {
       const blockData = JSON.parse(data);
       console.log(blockData);
-      // this.onChange(EditorState.push(this.state.editorState, convertFromRaw(blockData)), );
+      this.onChange(EditorState.push(this.state.editorState, convertFromRaw(blockData), "change-block-type"),);
     } catch (e) {
       console.log(e);
     }
@@ -351,18 +358,18 @@ const handleBeforeInput = (editorState, str, onChange) => {
     const contentState = editorState.getCurrentContent();
     const text = currentBlock.getText();
     const len = text.length;
-    // if (selectionState.getAnchorOffset() === 0) {
-    //   onChange(EditorState.push(editorState, Modifier.insertText(contentState, selectionState, (str === '"' ? DQUOTE_START : SQUOTE_START)), 'transpose-characters'));
-    //   return HANDLED;
-    // } else if (len > 0) {
-    //   const lastChar = text[len - 1];
-    //   if (lastChar !== ' ') {
-    //     onChange(EditorState.push(editorState, Modifier.insertText(contentState, selectionState, (str === '"' ? DQUOTE_END : SQUOTE_END)), 'transpose-characters'));
-    //   } else {
-    //     onChange(EditorState.push(editorState, Modifier.insertText(contentState, selectionState, (str === '"' ? DQUOTE_START : SQUOTE_START)), 'transpose-characters'));
-    //   }
-    //   return HANDLED;
-    // }
+    if (selectionState.getAnchorOffset() === 0) {
+      onChange(EditorState.push(editorState, Modifier.insertText(contentState, selectionState, (str === '"' ? DQUOTE_START : SQUOTE_START)), 'change-block-type'));
+      return HANDLED;
+    } else if (len > 0) {
+      const lastChar = text[len - 1];
+      if (lastChar !== ' ') {
+        onChange(EditorState.push(editorState, Modifier.insertText(contentState, selectionState, (str === '"' ? DQUOTE_END : SQUOTE_END)), 'change-block-type'));
+      } else {
+        onChange(EditorState.push(editorState, Modifier.insertText(contentState, selectionState, (str === '"' ? DQUOTE_START : SQUOTE_START)), 'change-block-type'));
+      }
+      return HANDLED;
+    }
   }
   return beforeInput(editorState, str, onChange, newTypeMap);
 };
@@ -402,7 +409,7 @@ interface EmbedSideButton {
   close: () => any
 }
 class EmbedSideButton extends React.Component<EmbedSideButton> {
-  x
+
   onClick = () => {
     const url = window.prompt('Enter a URL', 'https://www.youtube.com/watch?v=PMNFaAUs2mo');
     this.props.close();

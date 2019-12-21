@@ -117,7 +117,7 @@ export const entityToHTML = (entity, originalText) => {
                 className="md-inline-link"
                 href={entity.data.url}
                 target="_blank"
-                rel="noopener noreferrer"
+                // rel="noopener noreferrer"
             />
         );
     }
