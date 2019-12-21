@@ -1,61 +1,8 @@
-import {
-    styleToCSS
-} from 'draft-js-export-html/lib/helpers/combineOrderedStyles'
-import normalizeAttributes from './helps'
+import {styleToCSS} from 'draft-js-export-html/lib/helpers/combineOrderedStyles'
+import {combineOrderedStyles, normalizeAttributes} from './helps'
 import {BLOCK_TYPE, CharacterMetaList, ENTITY_TYPE, getEntityRanges, INLINE_STYLE,} from 'draft-js-utils';
-import {ContentBlock, ContentState, Entity, EntityInstance,} from 'draft-js';
-import {DraftInlineStyle} from 'draft-js/lib/DraftInlineStyle';
-type AttrMap = { [key: string]: string };
-type Attributes = { [key: string]: string };
-type StyleDescr = { [key: string]: number | string };
-
-type RenderConfig = {
-    element?: string;
-    attributes?: Attributes;
-    style?: StyleDescr;
-};
-type StyleOrder = Array<string>;
-type OrderedStyleMap = [StyleMap, StyleOrder];
-
-function combineOrderedStyles(
-    customMap?: any,
-    defaults?: OrderedStyleMap,
-): OrderedStyleMap {
-    if (customMap == null) {
-        return defaults;
-    }
-    let [defaultStyleMap, defaultStyleOrder] = defaults;
-    let styleMap = {...defaultStyleMap};
-    let styleOrder = [...defaultStyleOrder];
-    for (let styleName of Object.keys(customMap)) {
-        if (defaultStyleMap.hasOwnProperty(styleName)) {
-            let defaultStyles = defaultStyleMap[styleName];
-            styleMap[styleName] = {...defaultStyles, ...customMap[styleName]};
-        } else {
-            styleMap[styleName] = customMap[styleName];
-            styleOrder.push(styleName);
-        }
-    }
-    return [styleMap, styleOrder];
-}
-
-type BlockRenderer = (block: ContentBlock) => string;
-type BlockRendererMap = { [blockType: string]: BlockRenderer };
-
-type StyleMap = { [styleName: string]: RenderConfig };
-
-type BlockStyleFn = (block: ContentBlock) => RenderConfig;
-type EntityStyleFn = (entity: Entity) => RenderConfig;
-type InlineStyleFn = (style: DraftInlineStyle) => RenderConfig;
-
-type Options = {
-    inlineStyles?: StyleMap;
-    inlineStyleFn?: InlineStyleFn;
-    blockRenderers?: BlockRendererMap;
-    blockStyleFn?: BlockStyleFn;
-    entityStyleFn?: EntityStyleFn;
-    defaultBlockTag?: string;
-};
+import {ContentBlock, ContentState, EntityInstance,} from 'draft-js';
+import {Attributes, AttrMap, Options, StyleMap} from './helps/type';
 
 const {BOLD, CODE, ITALIC, STRIKETHROUGH, UNDERLINE} = INLINE_STYLE;
 
@@ -188,11 +135,10 @@ export class MarkupGenerator {
     // These are related to user-defined options.
     options: Options;
     inlineStyles: StyleMap;
-    inlineStyleFn?: InlineStyleFn;
+    inlineStyleFn?: any;
     styleOrder: Array<string>;
 
     constructor(contentState: any, options?: any) {
-        // console.log("contentState",contentState)
         if (options == null) {
             options = {};
         }
@@ -372,8 +318,8 @@ export class MarkupGenerator {
         let blockType = block.getType();
 
         if(blockType === 'atomic:image') {
-            console.log(' block.getCharacterList()', block)
-            const src = block.getData().get('src')
+            console.log(' block.getCharacterList()', block);
+            const src = block.getData().get('src');
             return `<img src="${src || undefined}"/>`
         }
         let text = block.getText();
@@ -419,7 +365,7 @@ export class MarkupGenerator {
                 let entity = entityKey ? this.contentState.getEntity(entityKey) : null;
                 // Note: The `toUpperCase` below is for compatability with some libraries that use lower-case for image blocks.
                 let entityType = entity == null ? null : entity.getType().toUpperCase();
-                console.log("stateToHTML",entityType,entityKey)
+                console.log("stateToHTML", entityType, entityKey);
                 let entityStyle;
                 if (
                     entity != null &&
@@ -452,7 +398,7 @@ export class MarkupGenerator {
                         ? DATA_TO_ATTR[entityType](entityType, entity)
                         : null;
                     let attrString = stringifyAttrs(attrs);
-                    console.log("<{attrString}/>",`<img${attrString}/>`)
+                    console.log("<{attrString}/>", `<img${attrString}/>`);
                     return `<img${attrString}/>`;
                 } else {
                     return content;

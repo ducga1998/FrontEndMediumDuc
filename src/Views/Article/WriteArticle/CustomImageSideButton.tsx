@@ -1,8 +1,7 @@
-import { Block, ImageSideButton, addNewBlock } from 'medium-draft';
+import {addNewBlock, Block, ImageSideButton} from 'medium-draft';
 import * as React from 'react'
 import articleContainer from '../../../Container/articleContainer';
-import { LINK_DEVELOPMENT } from 'help/help';
-import {stateToHTML} from "draft-js-export-html";
+
 export default class CustomImageSideButton extends ImageSideButton<any, { images: string[] }>{
 
     props: any;
@@ -30,7 +29,6 @@ export default class CustomImageSideButton extends ImageSideButton<any, { images
                                     src : linkImage
                                 }
                             ));
-                            console.log(" this.props.getEditorState(),",  stateToHTML( this.props.getEditorState()._immutable.currentContent))
                             this.props.close();
                         }
                     });
