@@ -1,8 +1,7 @@
 import {
-
-    normalizeAttributes,
     styleToCSS
 } from 'draft-js-export-html/lib/helpers/combineOrderedStyles'
+import normalizeAttributes from './helps'
 import {BLOCK_TYPE, CharacterMetaList, ENTITY_TYPE, getEntityRanges, INLINE_STYLE,} from 'draft-js-utils';
 import {ContentBlock, ContentState, Entity, EntityInstance,} from 'draft-js';
 import {DraftInlineStyle} from 'draft-js/lib/DraftInlineStyle';
@@ -193,7 +192,7 @@ export class MarkupGenerator {
     styleOrder: Array<string>;
 
     constructor(contentState: any, options?: any) {
-        console.log("contentState",contentState)
+        // console.log("contentState",contentState)
         if (options == null) {
             options = {};
         }
@@ -202,7 +201,7 @@ export class MarkupGenerator {
         let [
             inlineStyles,
             styleOrder,
-        ] = combineOrderedStyles(options.inlineStyles, [
+        ] = combineOrderedStyles(options.inlineStyles,  [
             DEFAULT_STYLE_MAP,
             DEFAULT_STYLE_ORDER,
         ]);
@@ -371,6 +370,12 @@ export class MarkupGenerator {
 
     renderBlockContent(block: ContentBlock): string {
         let blockType = block.getType();
+
+        if(blockType === 'atomic:image') {
+            console.log(' block.getCharacterList()', block)
+            const src = block.getData().get('src')
+            return `<img src="${src || undefined}"/>`
+        }
         let text = block.getText();
         if (text === '') {
             // Prevent element collapse if completely empty.
@@ -414,6 +419,7 @@ export class MarkupGenerator {
                 let entity = entityKey ? this.contentState.getEntity(entityKey) : null;
                 // Note: The `toUpperCase` below is for compatability with some libraries that use lower-case for image blocks.
                 let entityType = entity == null ? null : entity.getType().toUpperCase();
+                console.log("stateToHTML",entityType,entityKey)
                 let entityStyle;
                 if (
                     entity != null &&
@@ -446,6 +452,7 @@ export class MarkupGenerator {
                         ? DATA_TO_ATTR[entityType](entityType, entity)
                         : null;
                     let attrString = stringifyAttrs(attrs);
+                    console.log("<{attrString}/>",`<img${attrString}/>`)
                     return `<img${attrString}/>`;
                 } else {
                     return content;
