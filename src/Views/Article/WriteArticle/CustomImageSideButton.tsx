@@ -22,7 +22,7 @@ export default class CustomImageSideButton extends ImageSideButton<any, { images
                             if(articleContainer.state.imageArticle === ''){
                                 articleContainer.setState({ imageArticle : linkImage })
                             }
-
+                            console.log("linkImage", linkImage);
                             this.props.setEditorState(addNewBlock(
                                 this.props.getEditorState(),
                                 Block.IMAGE, {

@@ -1,3 +1,5 @@
+// this is file convert data drajs to string html
+
 import {styleToCSS} from 'draft-js-export-html/lib/helpers/combineOrderedStyles'
 import {combineOrderedStyles, normalizeAttributes} from './helps'
 import {BLOCK_TYPE, CharacterMetaList, ENTITY_TYPE, getEntityRanges, INLINE_STYLE,} from 'draft-js-utils';
@@ -5,7 +7,6 @@ import {ContentBlock, ContentState, EntityInstance,} from 'draft-js';
 import {Attributes, AttrMap, Options, StyleMap} from './helps/type';
 
 const {BOLD, CODE, ITALIC, STRIKETHROUGH, UNDERLINE} = INLINE_STYLE;
-
 const INDENT = '  ';
 const BREAK = '<br>';
 const DATA_ATTRIBUTE = /^data-([a-z0-9-]+)$/;
@@ -197,6 +198,12 @@ export class MarkupGenerator {
             this.currentBlock += 1;
             return;
         }
+        // let blockType = block.getType();
+
+        if (blockType === 'atomic:image') {
+            const src = block.getData().get('src');
+            this.output.push(`<img width="100%" src="${src || undefined}"/>`)
+        }
         this.writeStartTag(block, defaultBlockTag);
         this.output.push(this.renderBlockContent(block));
         // Look ahead and see if we will nest list.
@@ -317,11 +324,10 @@ export class MarkupGenerator {
     renderBlockContent(block: ContentBlock): string {
         let blockType = block.getType();
 
-        if(blockType === 'atomic:image') {
-            console.log(' block.getCharacterList()', block);
-            const src = block.getData().get('src');
-            return `<img src="${src || undefined}"/>`
-        }
+        // if(blockType === 'atomic:image') {
+        //     const src = block.getData().get('src');
+        //     return `<img src="${src || undefined}"/>`
+        // }
         let text = block.getText();
         if (text === '') {
             // Prevent element collapse if completely empty.
