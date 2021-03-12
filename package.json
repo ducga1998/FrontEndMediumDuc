@@ -78,7 +78,7 @@
     "react-apollo": "^2.5.8",
     "react-app-polyfill": "^1.0.1",
     "react-bootstrap": "^1.0.0-beta.9",
-    "react-dev-utils": "^9.0.1",
+    "react-dev-utils": "^11.0.4",
     "react-dom": "^16.8.6",
     "react-form": "^3.5.7",
     "react-hot-loader": "^4.12.8",
