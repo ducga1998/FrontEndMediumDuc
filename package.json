@@ -59,7 +59,7 @@
     "jest-environment-jsdom-fourteen": "0.1.0",
     "jest-resolve": "24.7.1",
     "jest-watch-typeahead": "0.3.0",
-    "lodash": "^4.17.15",
+    "lodash": "^4.17.21",
     "medium-draft": "^0.5.18",
     "medium-editor": "^5.23.3",
     "medium-style-confirm": "^0.4.6",
